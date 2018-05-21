@@ -1,14 +1,12 @@
 <template>
   <div id="app">
-    <el-container>
-  <el-header><main-header></main-header></el-header>
-  <el-container>
-    <el-aside width="200px"> <left></left></el-aside>
-    <el-main> <div class="right">
+        <main-header></main-header>
+        <div class="container">
+            <left></left>
+          <div class="right">
                 <router-view></router-view>  
-          </div></el-main>
-  </el-container>
-</el-container>
+          </div>
+        </div>
   </div>
 </template>
 <script>
@@ -36,15 +34,8 @@ body {
 .app {
   overflow: hidden;
 }
-.el-container {
-  min-height: 100%;
-}
-.el-header {
-  padding: 0;
-  height: 50px !important;
-}
-.el-main {
-  padding: 10px;
+.right {
+  margin: 0 0 0 210px;
 }
 </style>
 

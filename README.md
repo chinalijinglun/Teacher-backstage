@@ -44,3 +44,8 @@ npm run build --report
 |-- README.md                        // 说明
 
 ```
+
+老师和学生端原型：https://g80a7e.axshare.com
+后台原型：https://1cyujq.axshare.com
+
+接口：http://39.106.143.18:5000/swagger_ui/index.html#/Teacher/post_api_v1_teacher

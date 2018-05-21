@@ -3,8 +3,11 @@
     <div class="icon-img">
       <img src="../assets/logo.png" />
     </div>
-    <div class="logoin">
-      <el-menu class="el-menu-demo" mode="horizontal">
+    <div class="login">
+      <el-menu class="el-menu-demo" mode="horizontal"
+  background-color="#3c8dbc"
+  text-color="#fff"
+  active-text-color="#fff">
       <el-submenu index="2">
         <template slot="title">Kira</template>
         <el-menu-item index="2-1">修改密码</el-menu-item>
@@ -17,29 +20,27 @@
 
 <style lang="" scoped>
 .header {
-  background-color: #20a0ff;
+  background-color: #3c8dbc;
   width: 100%;
-  height: 60px;
+  height: 50px;
 }
-.icon-img{
-   width:110px;
-   height:40px;
-   margin: 10px;
-   float: left;
+.icon-img {
+  width: 40px;
+  height: 40px;
+  margin: 5px 0 0 10px;
+  float: left;
 }
-.icon-img img{
-  width: 100%;
-  height: 100%;
+.icon-img img {
+  width: 40px;
+  height: 40px;
 }
-.logoin{
+.login {
   width: 110px;
   float: right;
 }
-.logoin ul{
-  background-color: #20a0ff;
+.login ul {
+  background-color: #3c8dbc;
 }
-
-
 </style>
 
 

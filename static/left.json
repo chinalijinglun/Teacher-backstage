@@ -4,15 +4,19 @@
         "index": 1,
             "children":[
             {
+                "path":"/classification",
                 "name":"课程分类"
             },
             {
+                "path":"/",
                 "name":"试讲课"
             },
             {
+                "path":"/",
                 "name":"试听课"
             },
             {
+                "path":"/",
                 "name":"常规课程"
             }
         ]
@@ -21,15 +25,19 @@
         "index": 2,
             "children":[
             {
+                "path":"/",
                 "name":"教师用户"
             },
             {
+                "path":"/",
                 "name":"学生用户"
             },
             {
+                "path":"/",
                 "name":"员工用户"
             },
             {
+                "path":"/",
                 "name":"权限管理"
             }
         ]
@@ -39,15 +47,19 @@
         "index": 3,
             "children":[
             {
+                "path":"/",
                 "name":"教师审核"
             },
             {
+                "path":"/",
                 "name":"教师面试"
             },
             {
+                "path":"/",
                 "name":"教师签约"
             },
             {
+                "path":"/",
                 "name":"教师试讲"
             }
         ]
@@ -57,15 +69,19 @@
         "index": 4,
             "children":[
             {
+                "path":"/",
                 "name":"学生分配（售前）"
             },
             {
+                "path":"/",
                 "name":"学生售前服务"
             },
             {
+                "path":"/",
                 "name":"学生分配（售后）"
             },
             {
+                "path":"/",
                 "name":"学生成绩"
             }
         ]
