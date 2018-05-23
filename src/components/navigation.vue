@@ -48,4 +48,7 @@ export default {
   color: white;
   text-decoration: none;
 }
+.left .el-menu-item.is-active{
+  background-color: #3c8dbc;
+}
 </style>
