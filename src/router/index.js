@@ -3,6 +3,14 @@ import Router from 'vue-router'
 import Main from '@/components/index'
 import classification from '@/pages/courseManagement/classification'
 
+import course from './course';
+import employee from './employee';
+import order from './order';
+import partner from './partner';
+import price from './price';
+import student from './student';
+import teacher from './teacher';
+
 Vue.use(Router)
 
 export default new Router({
@@ -20,6 +28,48 @@ export default new Router({
       path: '/classification',
       name: 'classification',
       component: classification
-    }
+    },
+    ...course.map(item=>{
+      return {
+        ...item,
+        path: '/course'+item.path
+      }
+    }),
+    ...employee.map(item=>{
+      return {
+        ...item,
+        path: '/employee'+item.path
+      }
+    }),
+    ...order.map(item=>{
+      return {
+        ...item,
+        path: '/order'+item.path
+      }
+    }),
+    ...partner.map(item=>{
+      return {
+        ...item,
+        path: '/partner'+item.path
+      }
+    }),
+    ...price.map(item=>{
+      return {
+        ...item,
+        path: '/price'+item.path
+      }
+    }),
+    ...student.map(item=>{
+      return {
+        ...item,
+        path: '/student'+item.path
+      }
+    }),
+    ...teacher.map(item=>{
+      return {
+        ...item,
+        path: '/teacher'+item.path
+      }
+    })
   ]
 })

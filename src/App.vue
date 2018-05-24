@@ -3,10 +3,14 @@
     <el-container>
   <el-header><main-header></main-header></el-header>
   <el-container>
-    <el-aside style="width: 201px;"> <left></left></el-aside>
-    <el-main> <div class="right">
-                <router-view></router-view>  
-          </div></el-main>
+    <el-aside width="201px"> 
+      <left></left>
+    </el-aside>
+    <el-main> 
+      <div class="right">
+        <router-view></router-view>  
+      </div>
+    </el-main>
   </el-container>
 </el-container>
   </div>
@@ -45,6 +49,13 @@ body {
 }
 .el-main {
   padding: 10px;
+  min-width: 1200px;
+  font-size: 14px;
+}
+.el-tree-node__content {
+    line-height: 36px;
+    height: 36px;
+    cursor: pointer;
 }
 </style>
 
