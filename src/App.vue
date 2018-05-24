@@ -3,7 +3,7 @@
     <el-container>
   <el-header><main-header></main-header></el-header>
   <el-container>
-    <el-aside width="200px"> 
+    <el-aside width="201px"> 
       <left></left>
     </el-aside>
     <el-main> 
@@ -53,9 +53,25 @@ body {
   font-size: 14px;
 }
 .el-tree-node__content {
-    line-height: 36px;
-    height: 36px;
-    cursor: pointer;
+  line-height: 36px;
+  height: 36px;
+  cursor: pointer;
+}
+.createfication .el-textarea textarea {
+  height: 144px;
+}
+.createfication .el-upload-list {
+  width: 260px;
+  height: 200px;
+}
+.createfication .el-upload-list li {
+  width: 260px;
+  height: 200px;
+}
+.createfication .el-upload-list li img {
+  margin-left: -72px;
+  width: 220px;
+  height: 180px;
 }
 </style>
 

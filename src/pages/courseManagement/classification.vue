@@ -1,4 +1,5 @@
 <template>
+<!-- 课程分类 -->
     <div id="classification">
       <div class="top-select-condition">
         <div class="class-name">
@@ -30,7 +31,8 @@
       </div>
       <div class="table-list">
         <div class="operation">
-          <el-button type="primary">创建一级课程分类</el-button>
+          <router-link to="/createCourse"><el-button type="primary">创建一级课程分类</el-button></router-link>
+          
           <el-button type="primary" class="dels">删除</el-button>
         </div>
         <div class="main-table-title" style="display: inline-grid;position: relative;width:calc(100% - 50px);height:36px;line-height:36px;">
