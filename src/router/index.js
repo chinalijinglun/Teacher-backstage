@@ -1,7 +1,7 @@
 import Vue from 'vue'
 import Router from 'vue-router'
 import Main from '@/components/index'
-import classification from '@/pages/courseManagement/classification'
+
 
 import course from './course';
 import employee from './employee';
@@ -21,13 +21,6 @@ export default new Router({
       path: '/',
       name: 'Main',
       component: Main
-    },
-    {
-      // 课程分类
-      name:'课程分类',
-      path: '/classification',
-      name: 'classification',
-      component: classification
     },
     ...course.map(item=>{
       return {

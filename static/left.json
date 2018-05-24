@@ -2,10 +2,15 @@
     {
         "name":"课程管理",
         "index": 1,
+        "parent":"/course",
             "children":[
             {
                 "path":"/classification",
                 "name":"课程分类"
+            },
+            {
+                "path":"/couresPackage",
+                "name":"课程包"
             },
             {
                 "path":"/",
