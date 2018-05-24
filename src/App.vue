@@ -3,7 +3,7 @@
     <el-container>
   <el-header><main-header></main-header></el-header>
   <el-container>
-    <el-aside width="200px"> <left></left></el-aside>
+    <el-aside style="width: 201px;"> <left></left></el-aside>
     <el-main> <div class="right">
                 <router-view></router-view>  
           </div></el-main>
