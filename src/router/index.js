@@ -31,44 +31,44 @@ export default new Router({
     },
     ...course.map(item=>{
       return {
-        path: '/course'+item.path,
-        ...item
+        ...item,
+        path: '/course'+item.path
       }
     }),
     ...employee.map(item=>{
       return {
-        path: '/employee'+item.path,
-        ...item
+        ...item,
+        path: '/employee'+item.path
       }
     }),
     ...order.map(item=>{
       return {
-        path: '/order'+item.path,
-        ...item
+        ...item,
+        path: '/order'+item.path
       }
     }),
     ...partner.map(item=>{
       return {
-        path: '/partner'+item.path,
-        ...item
+        ...item,
+        path: '/partner'+item.path
       }
     }),
     ...price.map(item=>{
       return {
-        path: '/price'+item.path,
-        ...item
+        ...item,
+        path: '/price'+item.path
       }
     }),
     ...student.map(item=>{
       return {
-        path: '/student'+item.path,
-        ...item
+        ...item,
+        path: '/student'+item.path
       }
     }),
     ...teacher.map(item=>{
       return {
-        path: '/teacher'+item.path,
-        ...item
+        ...item,
+        path: '/teacher'+item.path
       }
     })
   ]
