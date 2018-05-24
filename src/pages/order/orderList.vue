@@ -1,16 +1,54 @@
 <template>
-  <div class="assign-conselor-list">
+  <div class="order-list">
     <el-row class="form-contain">
-      <el-form :inline="true" ref="form" :model="form" label-width="82px">
+      <el-form :inline="true" ref="form" :model="form" label-width="96px">
         <el-row>
-          <el-form-item label="学生姓名：">
+          <el-form-item label="分类：">
+            <el-select v-model="form.status" placeholder="请选择" size="mini">
+              <el-option label="所有状态" value=""></el-option>
+              <el-option label="待分配" value="1"></el-option>
+              <el-option label="已分配" value="1"></el-option>
+            </el-select>
+            <el-select v-model="form.status" placeholder="请选择" size="mini">
+              <el-option label="所有状态" value=""></el-option>
+              <el-option label="待分配" value="1"></el-option>
+              <el-option label="已分配" value="1"></el-option>
+            </el-select>
+            <el-select v-model="form.status" placeholder="请选择" size="mini">
+              <el-option label="所有状态" value=""></el-option>
+              <el-option label="待分配" value="1"></el-option>
+              <el-option label="已分配" value="1"></el-option>
+            </el-select>
+          </el-form-item>
+        </el-row>
+        <el-row>
+          <el-form-item label="课程包名称：">
             <el-input v-model="form.name" size="mini"></el-input>
           </el-form-item>
-          <el-form-item label="联系电话：">
+          <el-form-item label="课程包ID：">
             <el-input v-model="form.telphone" size="mini"></el-input>
           </el-form-item>
-          <el-form-item label="联系邮箱：">
+          <el-form-item label="操作人：">
             <el-input v-model="form.email" size="mini"></el-input>
+          </el-form-item>
+        </el-row>
+        <el-row>
+          <el-form-item label="创建时间：">    
+            <el-date-picker
+              v-model="dataRange"
+              type="daterange"
+              size="mini"
+              range-separator="至"
+              start-placeholder="开始日期"
+              end-placeholder="结束日期">
+            </el-date-picker>
+          </el-form-item>
+          <el-form-item label="类型：">
+            <el-select v-model="form.status" placeholder="请选择" size="mini">
+              <el-option label="所有状态" value=""></el-option>
+              <el-option label="待分配" value="1"></el-option>
+              <el-option label="已分配" value="1"></el-option>
+            </el-select>
           </el-form-item>
           <el-form-item label="状态：">
             <el-select v-model="form.status" placeholder="请选择" size="mini">
@@ -21,19 +59,12 @@
           </el-form-item>
         </el-row>
         <el-row>
-          <el-form-item label="学生来源：">
-            <el-input v-model="form.name" size="mini"></el-input>
-          </el-form-item>
-        </el-row>
-        <el-row>
           <el-button type="primary" size="mini">查询</el-button>
+          <el-button type="primary" size="mini">创建订单</el-button>
         </el-row>
       </el-form>
     </el-row>
     <el-row class="list-contain">
-      <el-row class="list-title">
-        <p>待分配学生</p>
-      </el-row>
       <el-row>
         <el-table
           :data="tableData"
@@ -65,21 +96,9 @@
             label="注册时间">
           </el-table-column>
           <el-table-column
-            prop="source"
-            label="来源">
-          </el-table-column>
-          <el-table-column
-            prop="status"
-            label="状态">
-          </el-table-column>
-          <el-table-column
-            prop="counsellor"
-            label="课程顾问">
-          </el-table-column>
-          <el-table-column
             label="操作">
             <template slot-scope="scope">
-              <el-button size="mini" @click="dialogVisible = true;">分配</el-button>
+              <el-button size="mini">查看</el-button>
             </template>
           </el-table-column>
         </el-table>
@@ -100,7 +119,7 @@
 <script>
   import assignConselorDialog from '@/components/students/dialog/assignConselorDialog';
   import paginationMix from '@/components/commons/mixins/paginationMix';
-  
+
   export default {
     data() {
       return {
@@ -108,12 +127,12 @@
         form: {
           name: '',
           telphone: '',
-          status: '',
           email: '',
-          source: '',
+          status: '',
           curPage: 1,
           pageSize: 10
         },
+        dataRange: [],
         totalCount: 100,
         tableData: [{
           id: '0001',
@@ -121,32 +140,28 @@
           studentsName: 'Kira Yuan',
           telphone: '1876543210',
           email: 'kira@gmail.com',
-          addtime: '2018-02-27 11:25:30',
-          source: '自有',
-          status: '待分配',
-          counsellor: '无'
+          addtime: '2018-02-27 11:25:30'
         },{
           id: '0002',
           loginName: 'kira@gmail.com',
           studentsName: 'Kira Yuan',
           telphone: '1876543210',
           email: 'kira@gmail.com',
-          addtime: '2018-02-27 11:25:30',
-          source: '自有',
-          status: '待分配',
-          counsellor: '无'
+          addtime: '2018-02-27 11:25:30'
         },{
           id: '0003',
           loginName: 'kira@gmail.com',
           studentsName: 'Kira Yuan',
           telphone: '1876543210',
           email: 'kira@gmail.com',
-          addtime: '2018-02-27 11:25:30',
-          source: '自有',
-          status: '待分配',
-          counsellor: '无'
+          addtime: '2018-02-27 11:25:30'
         }]
       };
+    },
+    methods: {
+      query() {
+        console.log(2);
+      }
     },
     mixins: [paginationMix],
     components: {
@@ -174,4 +189,3 @@
   margin-top: 30px;
 }
 </style>
-

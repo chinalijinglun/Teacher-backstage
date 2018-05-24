@@ -1,6 +1,6 @@
 <template>
   <el-dialog
-    title="课程顾问"
+    title="班主任"
     :visible.sync="dialogVisible"
     width="30%">
     <div class="conselor-list">

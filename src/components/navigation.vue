@@ -29,7 +29,7 @@ export default {
   },
   created(){
         var _that = this
-        this.axios.get('http://localhost:8080/static/left.json').then(function(data){
+        this.axios.get('/static/left.json').then(function(data){
             _that.menulist = data.data
         })  }
 

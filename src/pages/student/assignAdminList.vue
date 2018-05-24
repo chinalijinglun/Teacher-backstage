@@ -1,5 +1,5 @@
 <template>
-  <div class="assign-conselor-list">
+  <div class="assign-admin-list">
     <el-row class="form-contain">
       <el-form :inline="true" ref="form" :model="form" label-width="82px">
         <el-row>
@@ -18,11 +18,6 @@
               <el-option label="待分配" value="1"></el-option>
               <el-option label="已分配" value="1"></el-option>
             </el-select>
-          </el-form-item>
-        </el-row>
-        <el-row>
-          <el-form-item label="学生来源：">
-            <el-input v-model="form.name" size="mini"></el-input>
           </el-form-item>
         </el-row>
         <el-row>
@@ -65,16 +60,12 @@
             label="注册时间">
           </el-table-column>
           <el-table-column
-            prop="source"
-            label="来源">
-          </el-table-column>
-          <el-table-column
             prop="status"
             label="状态">
           </el-table-column>
           <el-table-column
-            prop="counsellor"
-            label="课程顾问">
+            prop="admin"
+            label="班主任">
           </el-table-column>
           <el-table-column
             label="操作">
@@ -94,13 +85,13 @@
         </el-pagination>
       </el-row>
     </el-row>
-    <assign-conselor-dialog :visible.sync="dialogVisible"></assign-conselor-dialog>
+    <assign-admin-dialog :visible.sync="dialogVisible"></assign-admin-dialog>
   </div>
 </template>
 <script>
-  import assignConselorDialog from '@/components/students/dialog/assignConselorDialog';
+  import assignAdminDialog from '@/components/students/dialog/assignAdminDialog';
   import paginationMix from '@/components/commons/mixins/paginationMix';
-  
+
   export default {
     data() {
       return {
@@ -110,7 +101,6 @@
           telphone: '',
           status: '',
           email: '',
-          source: '',
           curPage: 1,
           pageSize: 10
         },
@@ -122,9 +112,8 @@
           telphone: '1876543210',
           email: 'kira@gmail.com',
           addtime: '2018-02-27 11:25:30',
-          source: '自有',
           status: '待分配',
-          counsellor: '无'
+          admin: '无'
         },{
           id: '0002',
           loginName: 'kira@gmail.com',
@@ -132,9 +121,8 @@
           telphone: '1876543210',
           email: 'kira@gmail.com',
           addtime: '2018-02-27 11:25:30',
-          source: '自有',
           status: '待分配',
-          counsellor: '无'
+          admin: '无'
         },{
           id: '0003',
           loginName: 'kira@gmail.com',
@@ -142,15 +130,19 @@
           telphone: '1876543210',
           email: 'kira@gmail.com',
           addtime: '2018-02-27 11:25:30',
-          source: '自有',
           status: '待分配',
-          counsellor: '无'
+          admin: '无'
         }]
       };
     },
+    methods: {
+      query() {
+        console.log(2);
+      }
+    },
     mixins: [paginationMix],
     components: {
-      assignConselorDialog
+      assignAdminDialog
     }
   }
 </script>
@@ -174,4 +166,3 @@
   margin-top: 30px;
 }
 </style>
-

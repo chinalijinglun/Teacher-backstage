@@ -1,5 +1,5 @@
 <template>
-  <div class="assign-conselor-list">
+  <div class="student-list">
     <el-row class="form-contain">
       <el-form :inline="true" ref="form" :model="form" label-width="82px">
         <el-row>
@@ -11,18 +11,6 @@
           </el-form-item>
           <el-form-item label="联系邮箱：">
             <el-input v-model="form.email" size="mini"></el-input>
-          </el-form-item>
-          <el-form-item label="状态：">
-            <el-select v-model="form.status" placeholder="请选择" size="mini">
-              <el-option label="所有状态" value=""></el-option>
-              <el-option label="待分配" value="1"></el-option>
-              <el-option label="已分配" value="1"></el-option>
-            </el-select>
-          </el-form-item>
-        </el-row>
-        <el-row>
-          <el-form-item label="学生来源：">
-            <el-input v-model="form.name" size="mini"></el-input>
           </el-form-item>
         </el-row>
         <el-row>
@@ -65,21 +53,9 @@
             label="注册时间">
           </el-table-column>
           <el-table-column
-            prop="source"
-            label="来源">
-          </el-table-column>
-          <el-table-column
-            prop="status"
-            label="状态">
-          </el-table-column>
-          <el-table-column
-            prop="counsellor"
-            label="课程顾问">
-          </el-table-column>
-          <el-table-column
             label="操作">
             <template slot-scope="scope">
-              <el-button size="mini" @click="dialogVisible = true;">分配</el-button>
+              <el-button size="mini">查看</el-button>
             </template>
           </el-table-column>
         </el-table>
@@ -100,7 +76,7 @@
 <script>
   import assignConselorDialog from '@/components/students/dialog/assignConselorDialog';
   import paginationMix from '@/components/commons/mixins/paginationMix';
-  
+
   export default {
     data() {
       return {
@@ -108,9 +84,7 @@
         form: {
           name: '',
           telphone: '',
-          status: '',
           email: '',
-          source: '',
           curPage: 1,
           pageSize: 10
         },
@@ -121,32 +95,28 @@
           studentsName: 'Kira Yuan',
           telphone: '1876543210',
           email: 'kira@gmail.com',
-          addtime: '2018-02-27 11:25:30',
-          source: '自有',
-          status: '待分配',
-          counsellor: '无'
+          addtime: '2018-02-27 11:25:30'
         },{
           id: '0002',
           loginName: 'kira@gmail.com',
           studentsName: 'Kira Yuan',
           telphone: '1876543210',
           email: 'kira@gmail.com',
-          addtime: '2018-02-27 11:25:30',
-          source: '自有',
-          status: '待分配',
-          counsellor: '无'
+          addtime: '2018-02-27 11:25:30'
         },{
           id: '0003',
           loginName: 'kira@gmail.com',
           studentsName: 'Kira Yuan',
           telphone: '1876543210',
           email: 'kira@gmail.com',
-          addtime: '2018-02-27 11:25:30',
-          source: '自有',
-          status: '待分配',
-          counsellor: '无'
+          addtime: '2018-02-27 11:25:30'
         }]
       };
+    },
+    methods: {
+      query() {
+        console.log(2);
+      }
     },
     mixins: [paginationMix],
     components: {
@@ -174,4 +144,3 @@
   margin-top: 30px;
 }
 </style>
-
