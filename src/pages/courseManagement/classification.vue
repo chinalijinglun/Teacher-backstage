@@ -31,7 +31,7 @@
       </div>
       <div class="table-list">
         <div class="operation">
-          <router-link to="/createCourse"><el-button type="primary">创建一级课程分类</el-button></router-link>
+          <router-link to="/course/createCourse"><el-button type="primary">创建一级课程分类</el-button></router-link>
           
           <el-button type="primary" class="dels">删除</el-button>
         </div>
