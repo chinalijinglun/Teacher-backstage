@@ -4,6 +4,8 @@ import couresPackage from '@/pages/courseManagement/couresPackage'
 import createPackage from '@/pages/courseManagement/createPackage'
 import lecture from '@/pages/courseManagement/lecture'
 import dateClass from '@/pages/courseManagement/dateClass'
+import lectureInformation from '@/pages/courseManagement/lectureInformation'
+import enroll from '@/pages/courseManagement/enroll'
 
 export default [
     {
@@ -42,6 +44,18 @@ export default [
       path: '/dateClass',
       name: 'dateClass',
       component: dateClass
+    },
+    {
+      name: '试讲课信息',
+      path: '/lectureInformation',
+      name: 'lectureInformation',
+      component: lectureInformation
+    },
+    {
+      name: '报名',
+      path: '/enroll',
+      name: 'enroll',
+      component: enroll
     }
 
 ];

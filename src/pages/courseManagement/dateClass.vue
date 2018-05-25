@@ -1,4 +1,5 @@
 <template>
+<!-- 预约试讲 -->
     <div class="date-class">
         <div class="course-package-top">
             <div class="package-name">
@@ -25,52 +26,56 @@
         </div>
         <div class="table-list">
             <div class="operation">
-                <router-link to="/course/createPackage"><el-button type="primary">创建课程包</el-button></router-link>
-                <el-button type="primary" class="dels">删除</el-button>
+                <el-button type="primary">预约试讲</el-button>
             </div>
             <el-table :data="tableData" style="width: 100%;margin-top:20px;">
                 <el-table-column type="selection" width="55"></el-table-column>
-                <el-table-column fixed prop="zhname" label="中文名称" style="width: 15%;">
+                <el-table-column fixed prop="zhname" label="ID" style="width: 15%;">
                 </el-table-column>
-                <el-table-column prop="enname" label="英文名称" style="width: 15%;">
+                <el-table-column prop="enname" label="用户名" style="width: 15%;">
                 </el-table-column>
-                <el-table-column prop="province" label="课程包ID" style="width: 10%;">
+                <el-table-column prop="zip" label="教师姓名" style="width: 10%;">
                 </el-table-column>
-                <el-table-column prop="city" label="类型" style="width: 10%;">
+                <el-table-column prop="province" label="联系电话" style="width: 10%;">
                 </el-table-column>
-                <el-table-column prop="address" label="状态" style="width: 10%;">
+                <el-table-column prop="address" label="联系邮箱" style="width: 10%;">
                 </el-table-column>
-                <el-table-column prop="zip" label="创建人" style="width: 10%;">
+                <el-table-column prop="date" label="注册时间" style="width: 10%;">
                 </el-table-column>
-                <el-table-column prop="date" label="创建时间" style="width: 15%;">
+                <el-table-column prop="city" label="状态" style="width: 15%;">
                 </el-table-column>
                 <el-table-column fixed="right" label="操作" style="width: 15%;">
                 <template slot-scope="scope">
                     <button type="button" class="el-button el-button--default el-button--small">
-                        <span>编辑</span>
-                    </button>
-                    <button type="button" @click="handleClick(scope.row)" class="el-button el-button--default el-button--small">
-                        <span>删除</span>
+                        <span>预约试讲</span>
                     </button>
                 </template>
                 </el-table-column>
             </el-table>
+            <div class="block">
+                <el-pagination
+                @size-change="handleSizeChange"
+                @current-change="handleCurrentChange"
+                :current-page="currentPage4"
+                :page-sizes="[100, 200, 300, 400]"
+                :page-size="100"
+                layout="total, sizes, prev, pager, next, jumper"
+                :total="400">
+                </el-pagination>
+            </div>
         </div>
+        <dateAlert></dateAlert>
     </div>
 </template>
 
 <script>
+    import dateAlert from '@/pages/courseManagement/dateAlert'
     export default {
-         methods: {
-        handleClick(row) {
-            console.log(row);
-        }
+        components:{
+            dateAlert
         },
-
         data() {
             return {
-                startDate: null, //开始时间
-                endDate: null, //结束时间
                 tableData: [{
                 date: '2016-05-03 11:25:30',
                 zhname: 'AP课程',
@@ -95,16 +100,23 @@
                 city: '1 V 1',
                 address: '有效',
                 zip: 'Kira'
-                }]
+                }],
+                currentPage4: 4
             }
-        }
+        },
+        methods: {
+            handleSizeChange(val) {
+                console.log(`每页 ${val} 条`);
+            },
+            handleCurrentChange(val) {
+                console.log(`当前页: ${val}`);
+            }
+            
+        },
     }
 </script>
 
 <style scoped>
-    .date-class{
-        min-width: 1200px;
-    }
     .all-state select{
         background-color: #fff;
         background-image: none;
@@ -123,15 +135,8 @@
         transition: border-color 0.2s cubic-bezier(0.645, 0.045, 0.355, 1);
         width: 20%;
     }
-    .classify select{
-        margin-right: 20px;
-    }
     .all-state select{
         width: 40%;
-    }
-    .classify{
-        margin-left: 50px;
-        padding: 10px;
     }
     .package-name,.package-id,.operators{
         width: 24%;
@@ -162,16 +167,6 @@
         transition: border-color 0.2s cubic-bezier(0.645, 0.045, 0.355, 1);
         width: 70%;
     }
-    .create-time {
-        width: 60%;
-        float: left;
-        padding: 10px;
-        margin-left: 14px;
-    }
-    .create-time div {
-        width: 35%;
-        margin-right: 20px;
-    }
     .course-package-top button{
         float: left;
         margin: 20px;
@@ -182,9 +177,11 @@
     }
     .operation{
         margin-left: 20px;
-    }
-    .dels{
-        padding: 12px 50px;
         margin-left: 20px;
+    }
+    .block{
+        margin: 0 auto;
+        padding: 20px;
+        width: 600px;
     }
 </style>
