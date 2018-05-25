@@ -10,6 +10,7 @@ import auditions from '@/pages/courseManagement/auditions'
 import studentTrial from '@/pages/courseManagement/studentTrial'
 import date from '@/pages/courseManagement/date'
 import dateTeacher from '@/pages/courseManagement/dateTeacher'
+import generalCourse from '@/pages/courseManagement/generalCourse'
 
 export default [
     {
@@ -84,6 +85,12 @@ export default [
       path: '/dateTeacher',
       name: 'dateTeacher',
       component: dateTeacher
+    },
+    {
+      name: '普通课程',
+      path: '/generalCourse',
+      name: 'generalCourse',
+      component: generalCourse
     }
 
 ];
