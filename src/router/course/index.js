@@ -1,6 +1,9 @@
 import classification from '@/pages/courseManagement/classification'
 import createCourse from '@/pages/courseManagement/createCourse'
 import couresPackage from '@/pages/courseManagement/couresPackage'
+import createPackage from '@/pages/courseManagement/createPackage'
+import lecture from '@/pages/courseManagement/lecture'
+import dateClass from '@/pages/courseManagement/dateClass'
 
 export default [
     {
@@ -21,6 +24,24 @@ export default [
       path: '/couresPackage',
       name: 'couresPackage',
       component: couresPackage
+    },
+    {
+      name: '创建课程包',
+      path: '/createPackage',
+      name: 'createPackage',
+      component: createPackage
+    },
+    {
+      name: '试讲课',
+      path: '/lecture',
+      name: 'lecture',
+      component: lecture
+    },
+    {
+      name: '预约试讲课',
+      path: '/dateClass',
+      name: 'dateClass',
+      component: dateClass
     }
 
 ];

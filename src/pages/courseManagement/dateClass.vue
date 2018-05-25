@@ -1,48 +1,24 @@
 <template>
-    <div class="coures-package">
+    <div class="date-class">
         <div class="course-package-top">
-            <div class="classify">
-                分类：
-                <select name="" id="">
-                    <option value="">一级分类</option>
-                    <option value="">AP课程</option>
-                </select>
-                <select name="" id="">
-                    <option value="">二级分类</option>
-                    <option value="">AP课系统学习</option>
-                </select>
-                <select name="" id="">
-                    <option value="">三级分类</option>
-                    <option value="">AP心理学</option>
-                    <option value="">AP微积分</option>
-                </select>
-            </div>
             <div class="package-name">
-                课程包名称：
+                教师姓名：
                 <input placeholder="请输入中文名称/英文名称" type="text" class="placehold">
             </div>
             <div class="package-id">
-                课程包ID：
+                联系电话：
                 <input placeholder="请输入课程包ID" type="text" class="placehold">
             </div>
             <div class="operators">
-                操作人：
+                联系邮箱：
                 <input placeholder="请输入操作人账号" type="text" class="placehold">
             </div>
-            <div class="create-time">
-                创建时间：
-                <el-date-picker v-model="startDate" placeholder="请选择开始时间"></el-date-picker>
-                <el-date-picker v-model="endDate" placeholder="请选择结束时间"></el-date-picker>
-            </div>
             <div class="all-state">
-                类型：
+                状态：
                 <select name="" id="">
-                    <option value="所有类型">所有类型</option>
-                    <option value="在线课程">在线课程</option>
-                    <option value="免费课程">免费课程</option>
-                    <option value="精品公开课">精品公开课</option>
-                    <option value="赠送课程">赠送课程</option>
-                    <option value="补偿课程">补偿课程</option>
+                    <option value="所有状态">所有状态</option>
+                    <option value="待预约">待预约</option>
+                    <option value="待确认">待确认</option>
                 </select>
             </div>
             <el-button type="primary">查询</el-button>
@@ -126,7 +102,10 @@
 </script>
 
 <style scoped>
-    .classify select,.all-state select{
+    .date-class{
+        min-width: 1200px;
+    }
+    .all-state select{
         background-color: #fff;
         background-image: none;
         border-radius: 4px;
@@ -154,10 +133,15 @@
         margin-left: 50px;
         padding: 10px;
     }
-    .package-name,.package-id,.operators,.all-state{
-        width: 30%;
+    .package-name,.package-id,.operators{
+        width: 24%;
         float: left;
         padding: 10px;
+    }
+    .all-state{
+        width: 20%;
+        float: left;
+         padding: 10px;
     }
     .placehold {
         -webkit-appearance: none;
