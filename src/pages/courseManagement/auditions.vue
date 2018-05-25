@@ -1,21 +1,21 @@
 <template>
-<!-- 试讲课 -->
-    <div class="lecture">
+<!-- 试听课 -->
+    <div class="auditions">
         <div class="operation">
-            <router-link to=""><el-button type="primary">预约教师试讲</el-button></router-link>
-            <el-button type="primary">报名听试讲课</el-button>
+            <router-link to=""><el-button type="primary">学生试听报名</el-button></router-link>
+            <el-button type="primary">预约教师上课</el-button>
         </div>
         <div class="all-course">
-            <h3>所有试讲课程</h3>
+            <h3>所有试听课程</h3>
             <div class="course-package-top">
                 <div class="package-name">
                     教师姓名：
-                    <input placeholder="请输入中文名称/英文名称" type="text" class="placehold">
+                    <input placeholder="" type="text" class="placehold">
                 </div>
                 <div class="create-time">
                     上课时间：
-                    <el-date-picker v-model="startDate" placeholder="请选择开始时间"></el-date-picker>
-                    <el-date-picker v-model="endDate" placeholder="请选择结束时间"></el-date-picker>
+                    <el-date-picker v-model="startDate" placeholder="默认从今天开始"></el-date-picker>
+                    <el-date-picker v-model="endDate" placeholder="到之后一周内结束"></el-date-picker>
                 </div>
                 <div class="all-state">
                     状态：

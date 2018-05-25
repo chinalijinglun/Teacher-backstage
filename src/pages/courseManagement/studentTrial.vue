@@ -1,64 +1,44 @@
 <template>
-<!-- 试讲课 -->
-    <div class="lecture">
-        <div class="operation">
-            <router-link to=""><el-button type="primary">预约教师试讲</el-button></router-link>
-            <el-button type="primary">报名听试讲课</el-button>
-        </div>
-        <div class="all-course">
-            <h3>所有试讲课程</h3>
-            <div class="course-package-top">
-                <div class="package-name">
-                    教师姓名：
-                    <input placeholder="请输入中文名称/英文名称" type="text" class="placehold">
-                </div>
-                <div class="create-time">
-                    上课时间：
-                    <el-date-picker v-model="startDate" placeholder="请选择开始时间"></el-date-picker>
-                    <el-date-picker v-model="endDate" placeholder="请选择结束时间"></el-date-picker>
-                </div>
-                <div class="all-state">
-                    状态：
-                    <select name="" id="">
-                        <option value="所有状态">所有状态</option>
-                        <option value="待预约">待预约</option>
-                        <option value="待确认">待确认</option>
-                    </select>
-                </div>
-                <div class="all-state">
-                    课件：
-                    <select name="" id="">
-                        <option value="所有状态">所有状态</option>
-                        <option value="待预约">待预约</option>
-                        <option value="待确认">待确认</option>
-                    </select>
-                </div>
-                <el-button type="primary">查询</el-button>
+<!-- 学生试听课报名 -->
+    <div class="lecture-information">
+        <div class="course-package-top">
+            <div class="package-name">
+                学生姓名：
+                <input placeholder="请输入中文名称/英文名称" type="text" class="placehold">
             </div>
+            <div class="create-time">
+                上课时间：
+                <el-date-picker v-model="startDate" placeholder="请选择开始时间"></el-date-picker>
+                <el-date-picker v-model="endDate" placeholder="请选择结束时间"></el-date-picker>
+            </div>
+            <div class="all-state">
+                状态：
+                <select name="" id="">
+                    <option value="所有状态">所有状态</option>
+                    <option value="待预约">待预约</option>
+                    <option value="待确认">待确认</option>
+                </select>
+            </div>
+            <el-button type="primary">查询</el-button>
         </div>
         <div class="table-list">
-            
             <el-table :data="tableData" style="width: 100%;margin-top:20px;">
                 <el-table-column fixed prop="zhname" label="编号" style="width: 15%;">
                 </el-table-column>
-                <el-table-column prop="enname" label="试讲课程" style="width: 15%;">
+                <el-table-column prop="enname" label="报名时间" style="width: 15%;">
                 </el-table-column>
-                <el-table-column prop="zip" label="年纪" style="width: 10%;">
+                <el-table-column prop="zip" label="学生姓名" style="width: 10%;">
                 </el-table-column>
-                <el-table-column prop="province" label="教师姓名" style="width: 10%;">
+                <el-table-column prop="province" label="提报人" style="width: 10%;">
                 </el-table-column>
-                <el-table-column prop="address" label="学生" style="width: 10%;">
-                </el-table-column>
-                <el-table-column prop="date" label="上课时间" style="width: 10%;">
-                </el-table-column>
-                <el-table-column prop="zip" label="课件" style="width: 10%;">
+                <el-table-column prop="address" label="试听时间" style="width: 10%;">
                 </el-table-column>
                 <el-table-column prop="city" label="状态" style="width: 15%;">
                 </el-table-column>
                 <el-table-column fixed="right" label="操作" style="width: 15%;">
                 <template slot-scope="scope">
                     <button type="button" class="el-button el-button--default el-button--small">
-                        <span>报名</span>
+                        <span>预约</span>
                     </button>
                 </template>
                 </el-table-column>
@@ -75,7 +55,6 @@
                 </el-pagination>
             </div>
         </div>
-
     </div>
 </template>
 
@@ -125,13 +104,6 @@
 </script>
 
 <style scoped>
-    .operation button{
-        margin-right: 40px;
-    }
-    h3{
-        padding: 20px 0;
-        margin-left: 10px;
-    }
     .all-state select{
         background-color: #fff;
         background-image: none;
@@ -181,7 +153,7 @@
     }
     .course-package-top button{
         float: left;
-        margin: 10px;
+        margin: 20px;
         padding: 12px 30px;
     }
     .course-package-top{
@@ -191,6 +163,11 @@
         margin-left: 20px;
         margin-left: 20px;
     }
+    .block{
+        margin: 0 auto;
+        padding: 20px;
+        width: 600px;
+    }
     .create-time {
         width: 45%;
         float: left;
@@ -199,10 +176,5 @@
     .create-time div {
         width: 35%;
         margin-right: 20px;
-    }
-    .block{
-        margin: 0 auto;
-        padding: 20px;
-        width: 600px;
     }
 </style>
