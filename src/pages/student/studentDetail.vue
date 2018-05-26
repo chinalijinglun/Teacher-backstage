@@ -8,12 +8,14 @@
       </el-radio-group>
     </el-row>
     <el-row class="detail-body">
-      <studentInfoBlock></studentInfoBlock>
+      <student-info-block v-if="false"></student-info-block>
+      <student-course-block></student-course-block>
     </el-row>
   </div>
 </template>
 <script>
   import studentInfoBlock from '@/components/students/block/studentInfoBlock';
+  import studentCourseBlock from '@/components/students/block/studentCourseBlock';
 
   export default {
     name: 'studentDetail',
@@ -23,7 +25,8 @@
       }
     },
     components: {
-      studentInfoBlock
+      studentInfoBlock,
+      studentCourseBlock
     }
   }
 </script>
