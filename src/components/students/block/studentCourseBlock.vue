@@ -10,14 +10,14 @@
             <el-input v-model="form.studentsName" placeholder="学生名"></el-input>
           </el-form-item>
           <el-form-item label="上课时间：">
-            <dateRange 
+            <date-range 
               :start-date.sync="form.startDate" 
               :end-date.sync="form.endDate"
               size="mini"
               range-separator="-"
               start-placeholder="开始时间"
               end-placeholder="结束时间">
-            </dateRange>
+            </date-range>
           </el-form-item>
           <el-form-item label="课程状态：">
             <el-select v-model="form.status" placeholder="请选择" size="mini">

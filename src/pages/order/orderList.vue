@@ -34,14 +34,14 @@
         </el-row>
         <el-row>
           <el-form-item label="创建时间：">    
-            <el-date-picker
-              v-model="dataRange"
-              type="datetimerange"
+            <date-range 
+              :start-date.sync="form.startDate" 
+              :end-date.sync="form.endDate"
               size="mini"
               range-separator="-"
               start-placeholder="开始时间"
               end-placeholder="结束时间">
-            </el-date-picker>
+            </date-range>
           </el-form-item>
           <el-form-item label="类型：">
             <el-select v-model="form.status" placeholder="请选择" size="mini">
@@ -145,10 +145,11 @@
           telphone: '',
           email: '',
           status: '',
+          startDate: '',
+          endDate: '',
           curPage: 1,
           pageSize: 10
         },
-        dataRange: [],
         totalCount: 100,
         tableData: [{
           id: '0001',
