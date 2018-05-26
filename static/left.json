@@ -5,11 +5,11 @@
         "parent":"/course",
             "children":[
             {
-                "path":"/classification",
+                "path":"classification",
                 "name":"课程分类"
             },
             {
-                "path":"/couresPackage",
+                "path":"couresPackage",
                 "name":"课程包"
             },
             {

@@ -1,11 +1,11 @@
-import auditList from '@/pages/teacher/auditList';
+import price from '@/pages/price/price';
 
 export default [
   {
     // 教师审核列表
-    title:'教师审核列表',
-    path: '/auditList',
-    name: 'teacher-auditList',
-    component: auditList
+    title:'价格管理',
+    path: '/price',
+    name: 'price',
+    component: price
   }
 ];

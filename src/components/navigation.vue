@@ -7,7 +7,7 @@
         <template slot="title">{{item.name}}</template>
         <el-menu-item-group v-for="(items,subindex) in item.children" :key='subindex'>
           <el-menu-item :key='subindex' :index='subindex+""' >
-            <router-link :to='items.path' class="nav-link">
+            <router-link :to='item.parent+"/"+items.path' class="nav-link">
             {{items.name}}
             </router-link>
             </el-menu-item>
@@ -30,7 +30,7 @@ export default {
   created(){
         var _that = this
         this.axios.get('/static/left.json').then(function(data){
-            _that.menulist = data.data
+            _that.menulist = data.data;
         })  }
 
 }
