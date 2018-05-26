@@ -36,11 +36,11 @@
           <el-form-item label="创建时间：">    
             <el-date-picker
               v-model="dataRange"
-              type="daterange"
+              type="datetimerange"
               size="mini"
-              range-separator="至"
-              start-placeholder="开始日期"
-              end-placeholder="结束日期">
+              range-separator="-"
+              start-placeholder="开始时间"
+              end-placeholder="结束时间">
             </el-date-picker>
           </el-form-item>
           <el-form-item label="类型：">
@@ -71,29 +71,45 @@
           style="width: 100%">
           <el-table-column
             prop="id"
-            label="ID"
+            label="订单编号"
             width="60">
           </el-table-column>
           <el-table-column
             prop="loginName"
-            label="用户名"
+            label="课程包名称"
             width="180">
           </el-table-column>
           <el-table-column
             prop="studentsName"
-            label="学生姓名">
+            label="课节数">
           </el-table-column>
           <el-table-column
             prop="telphone"
-            label="联系电话">
+            label="订单类型">
           </el-table-column>
           <el-table-column
             prop="email"
-            label="联系邮箱">
+            label="状态">
           </el-table-column>
           <el-table-column
             prop="addtime"
-            label="注册时间">
+            label="下单人">
+          </el-table-column>
+          <el-table-column
+            prop="addtime"
+            label="下单时间">
+          </el-table-column>
+          <el-table-column
+            prop="addtime"
+            label="教师">
+          </el-table-column>
+          <el-table-column
+            prop="addtime"
+            label="学生">
+          </el-table-column>
+          <el-table-column
+            prop="addtime"
+            label="价格">
           </el-table-column>
           <el-table-column
             label="操作">
