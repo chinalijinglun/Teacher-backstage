@@ -9,13 +9,15 @@
     </el-row>
     <el-row class="detail-body">
       <student-info-block v-if="false"></student-info-block>
-      <student-course-block></student-course-block>
+      <student-course-block v-if="false"></student-course-block>
+      <course-detail-block></course-detail-block>
     </el-row>
   </div>
 </template>
 <script>
   import studentInfoBlock from '@/components/students/block/studentInfoBlock';
   import studentCourseBlock from '@/components/students/block/studentCourseBlock';
+  import courseDetailBlock from '@/components/students/block/courseDetailBlock';
 
   export default {
     name: 'studentDetail',
@@ -26,7 +28,8 @@
     },
     components: {
       studentInfoBlock,
-      studentCourseBlock
+      studentCourseBlock,
+      courseDetailBlock
     }
   }
 </script>

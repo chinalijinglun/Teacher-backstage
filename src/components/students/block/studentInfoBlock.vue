@@ -84,10 +84,6 @@
   </div>
 </template>
 <style scoped>
-  ul,li,ol {
-    list-style: none;
-  }
-
   .info-block-item {
     border-bottom: 1px solid #eee;
     margin-bottom: 20px;
