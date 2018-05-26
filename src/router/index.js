@@ -1,6 +1,6 @@
 import Vue from 'vue'
 import Router from 'vue-router'
-import Main from '@/components/index'
+import Main from '@/components/main'
 
 
 import course from './course';
