@@ -55,7 +55,7 @@
           <el-table-column
             label="操作">
             <template slot-scope="scope">
-              <el-button size="mini">查看</el-button>
+              <el-button size="mini" @click="toDetail">查看</el-button>
             </template>
           </el-table-column>
         </el-table>
@@ -116,6 +116,9 @@
     methods: {
       query() {
         console.log(2);
+      },
+      toDetail() {
+        this.$router.push('/student/studentDetail?blkname=info');
       }
     },
     mixins: [paginationMix],

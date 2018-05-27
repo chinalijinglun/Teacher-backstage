@@ -78,7 +78,7 @@
           <el-table-column
             label="操作">
             <template slot-scope="scope">
-              <el-button size="mini" @click="dialogVisible = true;">查看详情</el-button>
+              <el-button size="mini" @click="handlerClick">查看详情</el-button>
             </template>
           </el-table-column>
         </el-table>
@@ -145,6 +145,14 @@
     methods: {
       query() {
         console.log(this.form);
+      },
+      handlerClick() {
+        var { path } = this.$route;
+        const query = {
+          ...this.$route.query,
+          courseBlk: 'detail'
+        };
+        this.$router.push({ path, query });
       }
     }
   }
