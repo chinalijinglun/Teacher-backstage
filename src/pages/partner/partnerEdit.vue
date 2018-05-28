@@ -2,30 +2,41 @@
   <div class="partner-edit">
     <div class="form-container">
       <el-form ref="form" label-width="96px">
-          <el-form-item label="合作方名称：">
-            <el-input size="mini"></el-input>
-          </el-form-item>
-          <el-form-item label="合作方介绍：">
-            <el-input type="textarea" :rows="5" size="mini"></el-input>
-          </el-form-item>
-          <el-form-item label="联系人：">
-            <el-input size="mini"></el-input>
-          </el-form-item>
-          <el-form-item label="联系电话：">
-            <el-input size="mini"></el-input>
-          </el-form-item>
-          <el-form-item label="地址：">
-            <el-input size="mini"></el-input>
-          </el-form-item>
-          <el-form-item label="Logo：">
-            <el-upload
-              action="https://jsonplaceholder.typicode.com/posts/"
-              list-type="picture-card"
-              :on-preview="handlePictureCardPreview"
-              :on-remove="handleRemove">
-              <i class="el-icon-plus"></i>
-            </el-upload>
-          </el-form-item>
+          <el-row>
+            <el-form-item label="合作方名称：">
+              <el-input size="mini"></el-input>
+            </el-form-item>
+          </el-row>
+          <el-row>
+            <el-form-item label="合作方介绍：">
+              <el-input type="textarea" :rows="5" size="mini"></el-input>
+            </el-form-item>
+          </el-row>
+            <el-form-item label="联系人：">
+              <el-input size="mini"></el-input>
+            </el-form-item>
+          </el-row>
+          <el-row>
+            <el-form-item label="联系电话：">
+              <el-input size="mini"></el-input>
+            </el-form-item>
+          </el-row>
+          <el-row>
+            <el-form-item label="地址：">
+              <el-input size="mini"></el-input>
+            </el-form-item>
+          </el-row>
+          <el-row>
+            <el-form-item label="Logo：">
+              <el-upload
+                action="https://jsonplaceholder.typicode.com/posts/"
+                list-type="picture-card"
+                :on-preview="handlePictureCardPreview"
+                :on-remove="handleRemove">
+                <i class="el-icon-plus"></i>
+              </el-upload>
+            </el-form-item>
+          </el-row>
       </el-form>
     </div>
     <div class="btn-container">
@@ -64,6 +75,7 @@
   max-width: 500px;
 }
 .btn-container {
+  padding: 0 50px;
   max-width: 500px;
   text-align: center;
 }

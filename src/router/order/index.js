@@ -1,5 +1,6 @@
 import orderList from '@/pages/order/orderList';
 import auditOrderList from '@/pages/order/auditOrderList';
+import createOrder from '@/pages/order/createOrder';
 
 export default [
   {
@@ -15,5 +16,12 @@ export default [
     path: '/auditOrderList',
     name: 'order-auditOrderList',
     component: auditOrderList
+  },
+  {
+    // 创建订单
+    title:'创建订单',
+    path: '/createOrder',
+    name: 'order-createOrder',
+    component: createOrder
   }
 ];
