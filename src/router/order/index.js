@@ -1,6 +1,8 @@
 import orderList from '@/pages/order/orderList';
 import auditOrderList from '@/pages/order/auditOrderList';
 import createOrder from '@/pages/order/createOrder';
+import returnApply from '@/pages/order/returnApply';
+import subscribeCourses from '@/pages/order/subscribeCourses';
 
 export default [
   {
@@ -23,5 +25,19 @@ export default [
     path: '/createOrder',
     name: 'order-createOrder',
     component: createOrder
+  },
+  {
+    // 申请退款
+    title:'申请退款',
+    path: '/returnApply',
+    name: 'order-returnApply',
+    component: returnApply
+  },
+  {
+    // 约课
+    title:'约课',
+    path: '/subscribeCourses',
+    name: 'order-subscribeCourses',
+    component: subscribeCourses
   }
 ];
