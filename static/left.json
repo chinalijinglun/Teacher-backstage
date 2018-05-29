@@ -100,5 +100,13 @@
         "name":"合作方管理",
         "index": 6
         
+    },{
+        "name":"价格管理",
+        "index":"7",
+        "parent":"/price",
+        "children":[{
+            "path":"price",
+            "name":"价格管理"
+        }]
     }
 ]
