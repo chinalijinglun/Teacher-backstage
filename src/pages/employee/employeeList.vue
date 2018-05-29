@@ -1,66 +1,24 @@
 <template>
-  <div class="order-list">
-    <el-row class="form-contain">
+  <div class="employee-list">
+    <el-row class="form-container">
       <el-form :inline="true" ref="form" :model="form" label-width="96px">
         <el-row>
-          <el-form-item label="分类：">
-            <el-select v-model="form.status" placeholder="请选择" size="mini">
-              <el-option label="所有状态" value=""></el-option>
-              <el-option label="待分配" value="1"></el-option>
-              <el-option label="已分配" value="1"></el-option>
-            </el-select>
-            <el-select v-model="form.status" placeholder="请选择" size="mini">
-              <el-option label="所有状态" value=""></el-option>
-              <el-option label="待分配" value="1"></el-option>
-              <el-option label="已分配" value="1"></el-option>
-            </el-select>
-            <el-select v-model="form.status" placeholder="请选择" size="mini">
-              <el-option label="所有状态" value=""></el-option>
-              <el-option label="待分配" value="1"></el-option>
-              <el-option label="已分配" value="1"></el-option>
-            </el-select>
+          <el-form-item label="员工姓名：">
+            <el-input size="mini" placeholder="员工姓名"></el-input>
+          </el-form-item>
+          <el-form-item label="联系电话：">
+            <el-input size="mini" placeholder="联系电话"></el-input>
+          </el-form-item>
+          <el-form-item label="联系邮箱：">
+            <el-input size="mini" placeholder="联系邮箱"></el-input>
+          </el-form-item>
+          <el-form-item label="联系邮箱：">
+            <el-input size="mini" placeholder="联系邮箱"></el-input>
           </el-form-item>
         </el-row>
         <el-row>
-          <el-form-item label="课程包名称：">
-            <el-input v-model="form.name" size="mini"></el-input>
-          </el-form-item>
-          <el-form-item label="课程包ID：">
-            <el-input v-model="form.telphone" size="mini"></el-input>
-          </el-form-item>
-          <el-form-item label="操作人：">
-            <el-input v-model="form.email" size="mini"></el-input>
-          </el-form-item>
-        </el-row>
-        <el-row>
-          <el-form-item label="创建时间：">    
-            <date-range 
-              :start-date.sync="form.startDate" 
-              :end-date.sync="form.endDate"
-              size="mini"
-              range-separator="-"
-              start-placeholder="开始时间"
-              end-placeholder="结束时间">
-            </date-range>
-          </el-form-item>
-          <el-form-item label="类型：">
-            <el-select v-model="form.status" placeholder="请选择" size="mini">
-              <el-option label="所有状态" value=""></el-option>
-              <el-option label="待分配" value="1"></el-option>
-              <el-option label="已分配" value="1"></el-option>
-            </el-select>
-          </el-form-item>
-          <el-form-item label="状态：">
-            <el-select v-model="form.status" placeholder="请选择" size="mini">
-              <el-option label="所有状态" value=""></el-option>
-              <el-option label="待分配" value="1"></el-option>
-              <el-option label="已分配" value="1"></el-option>
-            </el-select>
-          </el-form-item>
-        </el-row>
-        <el-row>
-          <el-button type="primary" size="mini">查询</el-button>
-          <el-button type="primary" size="mini">创建订单</el-button>
+          <el-button size="mini" type="primary">查询</el-button>
+          <el-button size="mini" type="primary">添加员工</el-button>
         </el-row>
       </el-form>
     </el-row>
@@ -129,24 +87,15 @@
         </el-pagination>
       </el-row>
     </el-row>
-    <assign-conselor-dialog :visible.sync="dialogVisible"></assign-conselor-dialog>
   </div>
 </template>
 <script>
-  import assignConselorDialog from '@/components/students/dialog/assignConselorDialog';
   import paginationMix from '@/components/commons/mixins/paginationMix';
 
   export default {
     data() {
       return {
-        dialogVisible: false,
         form: {
-          name: '',
-          telphone: '',
-          email: '',
-          status: '',
-          startDate: '',
-          endDate: '',
           curPage: 1,
           pageSize: 10
         },
@@ -180,14 +129,11 @@
         console.log(2);
       }
     },
-    mixins: [paginationMix],
-    components: {
-      assignConselorDialog
-    }
+    mixins: [paginationMix]
   }
 </script>
 <style scoped>
-.form-contain {
+.form-container {
   padding: 15px;
   border: 1px solid #eee;
   border-radius: 3px;
@@ -206,3 +152,4 @@
   margin-top: 30px;
 }
 </style>
+

@@ -1,6 +1,7 @@
 import assignConselorList from '@/pages/student/assignConselorList';
 import assignAdminList from '@/pages/student/assignAdminList';
 import studentList from '@/pages/student/studentList';
+import studentDetail from '@/pages/student/studentDetail';
 
 export default [
   {
@@ -23,5 +24,12 @@ export default [
     path: '/studentList',
     name: 'student-studentList',
     component: studentList
+  },
+  {
+    // 学生详情
+    title:'学生详情',
+    path: '/studentDetail',
+    name: 'student-studentDetail',
+    component: studentDetail
   }
 ];
