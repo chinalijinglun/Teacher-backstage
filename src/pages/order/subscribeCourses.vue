@@ -7,7 +7,7 @@
           <el-form-item label="开课日期：">    
             <el-date-picker
               v-model="startTime"
-              type="datetime"
+              type="date"
               size="mini"
               placeholder="选择日期时间">
             </el-date-picker>
@@ -15,110 +15,115 @@
         </el-row>
         <el-row>
           <el-form-item label="每周上课时间：">
-            <el-checkbox-group v-model="checkList">
-              <el-row>
-                <el-checkbox :label="1">
-                  <span class="week-span">周一</span>
-                  <el-time-picker
-                    is-range
-                    size="mini"
-                    v-model="timeRange"
-                    range-separator="至"
-                    start-placeholder="开始时间"
-                    end-placeholder="结束时间"
-                    placeholder="选择时间范围">
-                  </el-time-picker>
-                </el-checkbox>
-              </el-row>
-              <el-row>
-                <el-checkbox :label="2">
-                  <span class="week-span">周二</span>
-                  <el-time-picker
-                    is-range
-                    size="mini"
-                    v-model="timeRange"
-                    range-separator="至"
-                    start-placeholder="开始时间"
-                    end-placeholder="结束时间"
-                    placeholder="选择时间范围">
-                  </el-time-picker>
-                </el-checkbox>
-              </el-row>
-              <el-row>
-                <el-checkbox :label="3">
-                  <span class="week-span">周三</span>
-                  <el-time-picker
-                    is-range
-                    size="mini"
-                    v-model="timeRange"
-                    range-separator="至"
-                    start-placeholder="开始时间"
-                    end-placeholder="结束时间"
-                    placeholder="选择时间范围">
-                  </el-time-picker>
-                </el-checkbox>
-              </el-row>
-              <el-row>
-                <el-checkbox :label="4">
-                  <span class="week-span">周四</span>
-                  <el-time-picker
-                    is-range
-                    size="mini"
-                    v-model="timeRange"
-                    range-separator="至"
-                    start-placeholder="开始时间"
-                    end-placeholder="结束时间"
-                    placeholder="选择时间范围">
-                  </el-time-picker>
-                </el-checkbox>
-              </el-row>
-              <el-row>
-                <el-checkbox :label="5">
-                  <span class="week-span">周五</span>
-                  <el-time-picker
-                    is-range
-                    size="mini"
-                    v-model="timeRange"
-                    range-separator="至"
-                    start-placeholder="开始时间"
-                    end-placeholder="结束时间"
-                    placeholder="选择时间范围">
-                  </el-time-picker>
-                </el-checkbox>
-              </el-row>
-              <el-row>
-                <el-checkbox :label="6">
-                  <span class="week-span">周六</span>
-                  <el-time-picker
-                    is-range
-                    size="mini"
-                    v-model="timeRange"
-                    range-separator="至"
-                    start-placeholder="开始时间"
-                    end-placeholder="结束时间"
-                    placeholder="选择时间范围">
-                  </el-time-picker>
-                </el-checkbox>
-              </el-row>
-              <el-row>
-                <el-checkbox :label="7">
-                  <span class="week-span">周日</span>
-                  <el-time-picker
-                    is-range
-                    size="mini"
-                    v-model="timeRange"
-                    range-separator="至"
-                    start-placeholder="开始时间"
-                    end-placeholder="结束时间"
-                    placeholder="选择时间范围">
-                  </el-time-picker>
-                </el-checkbox>
-              </el-row>
-            </el-checkbox-group>
+            <el-row>
+              <el-checkbox v-model="dayChose[0].check">
+                <span class="week-span">周一</span>
+                <el-time-picker
+                  is-range
+                  format="HH:mm"
+                  size="mini"
+                  v-model="dayChose[0].timeRange"
+                  range-separator="至"
+                  start-placeholder="开始时间"
+                  end-placeholder="结束时间"
+                  placeholder="选择时间范围">
+                </el-time-picker>
+              </el-checkbox>
+            </el-row>
+            <el-row>
+              <el-checkbox v-model="dayChose[1].check">
+                <span class="week-span">周二</span>
+                <el-time-picker
+                  is-range
+                  format="HH:mm"
+                  size="mini"
+                  v-model="dayChose[1].timeRange"
+                  range-separator="至"
+                  start-placeholder="开始时间"
+                  end-placeholder="结束时间"
+                  placeholder="选择时间范围">
+                </el-time-picker>
+              </el-checkbox>
+            </el-row>
+            <el-row>
+              <el-checkbox v-model="dayChose[2].check">
+                <span class="week-span">周三</span>
+                <el-time-picker
+                  is-range
+                  format="HH:mm"
+                  size="mini"
+                  v-model="dayChose[2].timeRange"
+                  range-separator="至"
+                  start-placeholder="开始时间"
+                  end-placeholder="结束时间"
+                  placeholder="选择时间范围">
+                </el-time-picker>
+              </el-checkbox>
+            </el-row>
+            <el-row>
+              <el-checkbox v-model="dayChose[3].check">
+                <span class="week-span">周四</span>
+                <el-time-picker
+                  is-range
+                  format="HH:mm"
+                  size="mini"
+                  v-model="dayChose[3].timeRange"
+                  range-separator="至"
+                  start-placeholder="开始时间"
+                  end-placeholder="结束时间"
+                  placeholder="选择时间范围">
+                </el-time-picker>
+              </el-checkbox>
+            </el-row>
+            <el-row>
+              <el-checkbox v-model="dayChose[4].check">
+                <span class="week-span">周五</span>
+                <el-time-picker
+                  is-range
+                  format="HH:mm"
+                  size="mini"
+                  v-model="dayChose[4].timeRange"
+                  range-separator="至"
+                  start-placeholder="开始时间"
+                  end-placeholder="结束时间"
+                  placeholder="选择时间范围">
+                </el-time-picker>
+              </el-checkbox>
+            </el-row>
+            <el-row>
+              <el-checkbox v-model="dayChose[5].check">
+                <span class="week-span">周六</span>
+                <el-time-picker
+                  is-range
+                  format="HH:mm"
+                  size="mini"
+                  v-model="dayChose[5].timeRange"
+                  range-separator="至"
+                  start-placeholder="开始时间"
+                  end-placeholder="结束时间"
+                  placeholder="选择时间范围">
+                </el-time-picker>
+              </el-checkbox>
+            </el-row>
+            <el-row>
+              <el-checkbox v-model="dayChose[6].check">
+                <span class="week-span">周日</span>
+                <el-time-picker
+                  is-range
+                  format="HH:mm"
+                  size="mini"
+                  v-model="dayChose[6].timeRange"
+                  range-separator="至"
+                  start-placeholder="开始时间"
+                  end-placeholder="结束时间"
+                  placeholder="选择时间范围">
+                </el-time-picker>
+              </el-checkbox>
+            </el-row>
           </el-form-item>
         </el-row>
       </el-form>
-      <el-button type="primary">确定</el-button>
+      <el-button type="primary" @click="getSchedule">确定</el-button>
     </el-row>
     <el-row class="subscribe-storey class-schedule">
       <p class="subscribe-storey-tltle">课程表：</p>
@@ -127,16 +132,16 @@
           :data="tableData"
           style="width: 100%">
           <el-table-column
-            prop="date"
-            label="日期">
+            type="index"
+            label="编号">
           </el-table-column>
           <el-table-column
             prop="name"
-            label="姓名">
+            label="课节名">
           </el-table-column>
           <el-table-column
-            prop="address"
-            label="地址">
+            prop="date"
+            label="上课时间">
           </el-table-column>
         </el-table>
       </div>
@@ -151,10 +156,82 @@
   export default {
     data() {
       return {
-        startTime: '',
-        timeRange: [],
-        checkList: [],
-        tableData: []
+        totleNum: 50,
+        startTime: new Date(),
+        tableData: [],
+        dayChose: [{
+          check: false,
+          day: 1,
+          timeRange: [new Date(2018, 5, 28, 0, 0), new Date(2018, 5, 28, 23, 59)]
+        },{
+          check: false,
+          day: 2,
+          timeRange: [new Date(2018, 5, 28, 0, 0), new Date(2018, 5, 28, 23, 59)]
+        },{
+          check: false,
+          day: 3,
+          timeRange: [new Date(2018, 5, 28, 0, 0), new Date(2018, 5, 28, 23, 59)]
+        },{
+          check: false,
+          day: 4,
+          timeRange: [new Date(2018, 5, 28, 0, 0), new Date(2018, 5, 28, 23, 59)]
+        },{
+          check: false,
+          day: 5,
+          timeRange: [new Date(2018, 5, 28, 0, 0), new Date(2018, 5, 28, 23, 59)]
+        },{
+          check: false,
+          day: 6,
+          timeRange: [new Date(2018, 5, 28, 0, 0), new Date(2018, 5, 28, 23, 59)]
+        },{
+          check: false,
+          day: 7,
+          timeRange: [new Date(2018, 5, 28, 0, 0), new Date(2018, 5, 28, 23, 59)]
+        }]
+      }
+    },
+    methods: {
+      getSchedule() {
+        const startTime = this.$dateFactory(this.startTime);
+        const dayChose = this.dayChose.filter(item=>{
+          return item.check;
+        });
+        // 给一个初始值 排除当天
+        let dateTmp = this.$dateFactory(startTime.getDayStart().getTime()+1);
+        let list = [];
+        let totalNum = this.totleNum;
+        let tmpNum = this.totleNum;
+        while(totalNum>0) {
+          dayChose.forEach(item => {
+            const dateByDay = dateTmp.getThisWeekDateByDay(item.day);
+            if(dateByDay >= dateTmp ) {
+              list.push({
+                name: 'class '+(this.totleNum-totalNum+1),
+                date: this.fmtScheduleTimeRange(dateByDay, item.timeRange)
+              });
+              totalNum--;
+            }
+          });
+          dateTmp = this.$dateFactory(dateTmp.getThisWeekDateByDay(1).getTime()+7*24*60*60*1000);
+        }
+        list.length = this.totleNum;
+        this.tableData = list;
+      },
+      fmtScheduleTimeRange(date, timeRange) {
+        const startTime = new Date(timeRange[0]);
+        const endTime = new Date(timeRange[1]);
+        const year = this.formatNumber(date.getFullYear());
+        const month = this.formatNumber(date.getMonth());
+        const day = this.formatNumber(date.getDate());
+        const hourStart = this.formatNumber(startTime.getHours());
+        const minutesStart = this.formatNumber(startTime.getMinutes());
+        const hourEnd = this.formatNumber(endTime.getHours());
+        const minutesEnd = this.formatNumber(endTime.getMinutes());
+        return `${year}.${month}.${day} ${hourStart}:${minutesStart}-${hourEnd}:${minutesEnd}`
+      },
+      formatNumber(n) {
+        n = n.toString()
+        return n[1] ? n : '0' + n
       }
     }
   }
