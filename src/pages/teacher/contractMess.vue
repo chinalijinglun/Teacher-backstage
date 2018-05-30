@@ -28,9 +28,9 @@
             </div>
         </div>
         <div class="btn-box">
-            <el-button type="primary">预览合同</el-button>
-            <el-button type="primary">发送合同</el-button>
-            <el-button>合同已发送，等待教师回复</el-button>
+            <el-button type="primary" size="mini">预览合同</el-button>
+            <el-button type="primary" size="mini">发送合同</el-button>
+            <el-button size="mini">合同已发送，等待教师回复</el-button>
             
         </div>
     </div>

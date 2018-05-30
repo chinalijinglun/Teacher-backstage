@@ -2,27 +2,29 @@
 <!-- 面试结果 -->
     <div class="date-class">
         <div class="course-package-top">
-            <div class="package-name">
-                教师姓名：
-                <input placeholder="请输入中文名称/英文名称" type="text" class="placehold">
-            </div>
-            <div class="package-id">
-                联系电话：
-                <input placeholder="请输入课程包ID" type="text" class="placehold">
-            </div>
-            <div class="operators">
-                联系邮箱：
-                <input placeholder="请输入操作人账号" type="text" class="placehold">
-            </div>
-            <div class="all-state">
-                状态：
-                <select name="" id="">
-                    <option value="所有状态">所有状态</option>
-                    <option value="待预约">待预约</option>
-                    <option value="待确认">待确认</option>
-                </select>
-            </div>
-            <el-button type="primary">查询</el-button>
+            <el-form ref="form" label-width="96px">
+                <div class="inps">
+                    <el-row>
+                        <el-form-item label="教师姓名：">
+                            <el-input size="mini"></el-input>
+                        </el-form-item>
+                        <el-form-item label="联系电话：">
+                            <el-input size="mini"></el-input>
+                        </el-form-item>
+                        <el-form-item label="联系邮箱：">
+                            <el-input size="mini"></el-input>
+                        </el-form-item>
+                        <el-form-item label="状态：">
+                            <el-select v-model="form.status" placeholder="请选择" size="mini">
+                            <el-option label="所有状态" value=""></el-option>
+                            <el-option label="有效" value="1"></el-option>
+                            <el-option label="无效" value="1"></el-option>
+                            </el-select>
+                        </el-form-item>
+                    </el-row>
+                </div>
+                <el-button type="primary" size="mini">查询</el-button>
+            </el-form>
         </div>
         <div class="table-list">
             <el-table :data="tableData" style="width: 100%;margin-top:20px;">
@@ -71,17 +73,11 @@
         },
         data() {
             return {
-                tableData: [{
-                date: '2016-05-03 11:25:30',
-                zhname: '0001',
-                enname: 'kira@gmail.com',
-                province: '1-876543210',
-                city: '未答复',
-                address: 'kira@gmail.com',
-                zip: 'Kira Yuan',
-                classtime: '2016-05-03 11:25:30'
-                }],
-                currentPage4: 4
+                tableData: [],
+                currentPage4: 4,
+                form:{
+                    status: ''
+                }
             }
         },
         methods: {
@@ -97,60 +93,19 @@
 </script>
 
 <style scoped>
-    .all-state select{
-        background-color: #fff;
-        background-image: none;
-        border-radius: 4px;
-        border: 1px solid #dcdfe6;
-        -webkit-box-sizing: border-box;
-        box-sizing: border-box;
-        color: #606266;
-        display: inline-block;
-        font-size: inherit;
-        height: 40px;
-        line-height: 40px;
-        outline: 0;
-        padding: 0 15px;
-        -webkit-transition: border-color 0.2s cubic-bezier(0.645, 0.045, 0.355, 1);
-        transition: border-color 0.2s cubic-bezier(0.645, 0.045, 0.355, 1);
-        width: 20%;
-    }
-    .all-state select{
-        width: 40%;
-    }
-    .package-name,.package-id,.operators{
-        width: 24%;
-        float: left;
-        padding: 10px;
-    }
-    .all-state{
+    .inps .el-form-item {
         width: 20%;
         float: left;
-         padding: 10px;
     }
-    .placehold {
-        -webkit-appearance: none;
-        background-color: #fff;
-        background-image: none;
-        border-radius: 4px;
-        border: 1px solid #dcdfe6;
-        -webkit-box-sizing: border-box;
-        box-sizing: border-box;
-        color: #606266;
-        display: inline-block;
-        font-size: inherit;
-        height: 40px;
-        line-height: 40px;
-        outline: 0;
-        padding: 0 15px;
-        -webkit-transition: border-color 0.2s cubic-bezier(0.645, 0.045, 0.355, 1);
-        transition: border-color 0.2s cubic-bezier(0.645, 0.045, 0.355, 1);
-        width: 70%;
+    .el-input {
+        width: 95%;
+    }
+    .inps .select-time{
+        width: 35%;
     }
     .course-package-top button{
         float: left;
         margin: 20px;
-        padding: 12px 30px;
     }
     .course-package-top{
         overflow: hidden;

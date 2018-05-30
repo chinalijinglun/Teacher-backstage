@@ -2,15 +2,15 @@
 <!-- 面试报告 -->
     <div class="interview-report">
         <div class="reinterview">
-            <el-button type="primary">重新预约面试</el-button>
+            <el-button type="primary" size="mini">重新预约面试</el-button>
         </div>
         
         <div class="main-content">
             面试报告字段
         </div>
         <div class="btn-box">
-            <el-button type="primary">提交</el-button>
-            <el-button>取消</el-button>
+            <el-button type="primary" size="mini">提交</el-button>
+            <el-button size="mini">取消</el-button>
         </div>
     </div>
 </template>

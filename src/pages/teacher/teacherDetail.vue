@@ -2,8 +2,8 @@
 <!-- 教师详情 -->
     <div class="teacher-detail">
         <div class="slet-detail">
-            <el-button>教师资料</el-button>
-            <el-button type="primary">教师课程</el-button>
+            <el-button size="mini">教师资料</el-button>
+            <el-button type="primary" size="mini">教师课程</el-button>
         </div>
         <h4>基本信息</h4>
         <div class="teacher-mess">

@@ -1,7 +1,7 @@
 <template>
 <!-- 预约 -->
     <div class="date">
-        <el-button type="primary">学生信息</el-button>
+        <el-button type="primary" size="mini">学生信息</el-button>
         <div class="detail-content">
             详细信息内容
         </div>

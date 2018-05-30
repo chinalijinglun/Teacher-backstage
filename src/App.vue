@@ -76,11 +76,5 @@ ul,li,ol {
   width: 220px;
   height: 180px;
 }
-.create-package .el-form-item__label{
-    width: 80px!important;
-}
-.create-package .el-form-item__content{
-  margin-left: 84px!important; 
-}
 </style>
 

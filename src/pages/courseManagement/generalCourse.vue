@@ -4,32 +4,43 @@
         <div class="all-course">
             <h3>所有课程</h3>
             <div class="course-package-top">
-                <div class="package-name">
-                    教师姓名：
-                    <input placeholder="请输入中文名称/英文名称" type="text" class="placehold">
+                <el-form ref="form" label-width="96px">
+                <div class="inps">
+                    <el-row>
+                        <el-form-item label="教师姓名：">
+                            <el-input size="mini"></el-input>
+                        </el-form-item>
+                        <el-form-item class="select-time" label="上课时间：">    
+                            <date-range 
+                            :start-date.sync="form.startDate" 
+                            :end-date.sync="form.endDate"
+                            size="mini"
+                            range-separator="-"
+                            start-placeholder="开始时间"
+                            end-placeholder="结束时间">
+                            </date-range>
+                        </el-form-item>
+                        <el-form-item label="联系邮箱：">
+                            <el-input size="mini"></el-input>
+                        </el-form-item>
+                        <el-form-item label="状态：">
+                            <el-select v-model="form.status" placeholder="请选择" size="mini">
+                            <el-option label="所有状态" value=""></el-option>
+                            <el-option label="有效" value="1"></el-option>
+                            <el-option label="无效" value="1"></el-option>
+                            </el-select>
+                        </el-form-item>
+                        <el-form-item label="课件：">
+                            <el-select v-model="form.status" placeholder="请选择" size="mini">
+                            <el-option label="所有状态" value=""></el-option>
+                            <el-option label="有效" value="1"></el-option>
+                            <el-option label="无效" value="1"></el-option>
+                            </el-select>
+                        </el-form-item>
+                    </el-row>
                 </div>
-                <div class="create-time">
-                    上课时间：
-                    <el-date-picker v-model="startDate" placeholder="默认从今天开始"></el-date-picker>
-                    <el-date-picker v-model="endDate" placeholder="到之后一周内结束"></el-date-picker>
-                </div>
-                <div class="all-state">
-                    状态：
-                    <select name="" id="">
-                        <option value="所有状态">所有状态</option>
-                        <option value="待预约">待预约</option>
-                        <option value="待确认">待确认</option>
-                    </select>
-                </div>
-                <div class="all-state">
-                    课件：
-                    <select name="" id="">
-                        <option value="所有状态">所有状态</option>
-                        <option value="待预约">待预约</option>
-                        <option value="待确认">待确认</option>
-                    </select>
-                </div>
-                <el-button type="primary">查询</el-button>
+                <el-button type="primary" size="mini">查询</el-button>
+                </el-form>
             </div>
         </div>
         <div class="table-list">
@@ -93,6 +104,9 @@
                 currentPage4: 4,
                 startDate: null, //开始时间
                 endDate: null, //结束时间
+                form:{
+                    status: ''
+                }
             }
         },
         methods: {
@@ -107,6 +121,16 @@
 </script>
 
 <style scoped>
+    .inps .el-form-item {
+        width: 20%;
+        float: left;
+    }
+    .el-input {
+        width: 95%;
+    }
+    .inps .select-time{
+        width: 35%;
+    }
     .operation button{
         margin-right: 40px;
     }
@@ -114,57 +138,9 @@
         padding: 20px 0;
         margin-left: 10px;
     }
-    .all-state select{
-        background-color: #fff;
-        background-image: none;
-        border-radius: 4px;
-        border: 1px solid #dcdfe6;
-        -webkit-box-sizing: border-box;
-        box-sizing: border-box;
-        color: #606266;
-        display: inline-block;
-        font-size: inherit;
-        height: 40px;
-        line-height: 40px;
-        outline: 0;
-        padding: 0 15px;
-        -webkit-transition: border-color 0.2s cubic-bezier(0.645, 0.045, 0.355, 1);
-        transition: border-color 0.2s cubic-bezier(0.645, 0.045, 0.355, 1);
-        width: 40%;
-    }
-    .package-name,.package-id,.operators{
-        width: 24%;
-        float: left;
-        padding: 10px;
-    }
-    .all-state{
-        width: 20%;
-        float: left;
-         padding: 10px;
-    }
-    .placehold {
-        -webkit-appearance: none;
-        background-color: #fff;
-        background-image: none;
-        border-radius: 4px;
-        border: 1px solid #dcdfe6;
-        -webkit-box-sizing: border-box;
-        box-sizing: border-box;
-        color: #606266;
-        display: inline-block;
-        font-size: inherit;
-        height: 40px;
-        line-height: 40px;
-        outline: 0;
-        padding: 0 15px;
-        -webkit-transition: border-color 0.2s cubic-bezier(0.645, 0.045, 0.355, 1);
-        transition: border-color 0.2s cubic-bezier(0.645, 0.045, 0.355, 1);
-        width: 70%;
-    }
     .course-package-top button{
         float: left;
         margin: 10px;
-        padding: 12px 30px;
     }
     .course-package-top{
         overflow: hidden;
@@ -172,15 +148,6 @@
     .operation{
         margin-left: 20px;
         margin-left: 20px;
-    }
-    .create-time {
-        width: 45%;
-        float: left;
-        padding: 10px;
-    }
-    .create-time div {
-        width: 35%;
-        margin-right: 20px;
     }
     .block{
         margin: 0 auto;

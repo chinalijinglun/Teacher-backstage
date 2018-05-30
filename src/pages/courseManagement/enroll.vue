@@ -9,7 +9,7 @@
                 选择学生：
             </div>
             <div class="operation">
-                <el-button type="primary">报名</el-button>
+                <el-button type="primary" size="mini">报名</el-button>
             </div>
             <el-table :data="tableData" style="width: 100%;margin-top:20px;">
                 <el-table-column type="selection" width="55"></el-table-column>

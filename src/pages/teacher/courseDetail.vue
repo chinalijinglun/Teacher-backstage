@@ -2,8 +2,8 @@
 <!-- 课程详情 -->
     <div class="course-detail">   
         <div class="operation">
-            <el-button type="primary">教师资料</el-button>
-            <el-button>教师课程</el-button>
+            <el-button type="primary" size="mini">教师资料</el-button>
+            <el-button size="mini">教师课程</el-button>
         </div>
         <div class="people">
             <div class="teacher">

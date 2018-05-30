@@ -63,9 +63,9 @@
              </div>
          </div>
          <div class="btn-box">
-            <el-button type="primary">审核通过</el-button> 
-            <el-button type="primary">审核不通过</el-button> 
-            <el-button>返回</el-button>
+            <el-button type="primary" size="mini">审核通过</el-button> 
+            <el-button type="primary" size="mini">审核不通过</el-button> 
+            <el-button size="mini">返回</el-button>
          </div>
     </div>
 </template>

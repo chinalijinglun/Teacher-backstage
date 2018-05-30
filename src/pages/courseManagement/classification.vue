@@ -2,38 +2,47 @@
 <!-- 课程分类 -->
     <div id="classification">
       <div class="top-select-condition">
-        <div class="class-name">
-          课程名称：
-          <input placeholder="请输入中文名称/英文名称" type="text" class="placehold">
+        <el-form ref="form" label-width="96px">
+        <div class="inps">
+            <el-row>
+                <el-form-item label="课程包名称：">
+                    <el-input size="mini"></el-input>
+                </el-form-item>
+                <el-form-item label="课程包ID：">
+                    <el-input size="mini"></el-input>
+                </el-form-item>
+                <el-form-item label="操作人：">
+                    <el-input size="mini"></el-input>
+                </el-form-item>
+            </el-row>
         </div>
-        <div class="class-id">
-          课程ID：
-          <input placeholder="请输入课程ID" type="text" class="placehold">
-        </div>
-        <div class="operator">
-          操作人：
-          <input placeholder="请输入操作人账号" type="text" class="placehold">
-        </div>
-        <div class="create-time">
-          创建时间：
-          <el-date-picker v-model="startDate" placeholder="请选择开始时间"></el-date-picker>
-          <el-date-picker v-model="endDate" placeholder="请选择结束时间"></el-date-picker>
-        </div>
-        <div class="all-state">
-          状态：
-          <select name="" id="">
-            <option value="所有状态">所有状态</option>
-            <option value="有效">有效</option>
-            <option value="无效">无效</option>
-          </select>
-        </div>
-        <el-button type="primary">查询</el-button>
+         <el-row class="state-createTime">
+            <el-form-item label="创建时间：">    
+                <date-range 
+                :start-date.sync="form.startDate" 
+                :end-date.sync="form.endDate"
+                size="mini"
+                range-separator="-"
+                start-placeholder="开始时间"
+                end-placeholder="结束时间">
+                </date-range>
+            </el-form-item>
+            <el-form-item label="状态：">
+                <el-select v-model="form.status" placeholder="请选择" size="mini">
+                <el-option label="所有状态" value=""></el-option>
+                <el-option label="有效" value="1"></el-option>
+                <el-option label="无效" value="1"></el-option>
+                </el-select>
+            </el-form-item>
+        </el-row>
+        <el-button type="primary" size="mini">查询</el-button>
+        </el-form>
       </div>
       <div class="table-list">
         <div class="operation">
-          <router-link to="/course/createCourse"><el-button type="primary">创建一级课程分类</el-button></router-link>
+          <router-link to="/course/createCourse"><el-button type="primary"  size="mini">创建一级课程分类</el-button></router-link>
           
-          <el-button type="primary" class="dels">删除</el-button>
+          <el-button type="primary" size="mini">删除</el-button>
         </div>
         <div class="main-table-title" style="display: inline-grid;position: relative;width:calc(100% - 50px);height:36px;line-height:36px;">
             <div style="display:inline-block;">
@@ -71,6 +80,11 @@ export default {
         creator: "creator",
         createTime: "createTime",
         state: "state"
+      },
+      form: {
+        status: "",
+        status2: "",
+        status3: ""
       }
     };
   },
@@ -138,68 +152,24 @@ export default {
 };
 </script>
 <style scoped>
+.inps .el-form-item {
+  width: 25%;
+  float: left;
+}
+.el-input {
+  width: 75%;
+}
+
+.state-createTime .el-form-item {
+  float: left;
+}
 .top-select-condition {
   width: 100%;
   overflow: hidden;
   margin-bottom: 10px;
 }
-.class-name,
-.class-id,
-.operator,
-.all-state {
-  width: 30%;
-  padding: 10px;
-  float: left;
-}
-.create-time {
-  width: 60%;
-  float: left;
-  padding: 10px;
-}
-.create-time div {
-  width: 35%;
-  margin-right: 20px;
-}
-.all-state {
-  width: 35%;
-}
-.all-state select {
-  background-color: #fff;
-  background-image: none;
-  border-radius: 4px;
-  border: 1px solid #dcdfe6;
-  -webkit-box-sizing: border-box;
-  box-sizing: border-box;
-  color: #606266;
-  display: inline-block;
-  font-size: inherit;
-  height: 40px;
-  line-height: 40px;
-  outline: 0;
-  padding: 0 15px;
-  -webkit-transition: border-color 0.2s cubic-bezier(0.645, 0.045, 0.355, 1);
-  transition: border-color 0.2s cubic-bezier(0.645, 0.045, 0.355, 1);
-  width: 40%;
-}
-.placehold {
-  -webkit-appearance: none;
-  background-color: #fff;
-  background-image: none;
-  border-radius: 4px;
-  border: 1px solid #dcdfe6;
-  -webkit-box-sizing: border-box;
-  box-sizing: border-box;
-  color: #606266;
-  display: inline-block;
-  font-size: inherit;
-  height: 40px;
-  line-height: 40px;
-  outline: 0;
-  padding: 0 15px;
-  -webkit-transition: border-color 0.2s cubic-bezier(0.645, 0.045, 0.355, 1);
-  transition: border-color 0.2s cubic-bezier(0.645, 0.045, 0.355, 1);
-  width: 70%;
-}
+
+
 .top-select-condition button {
   float: left;
   margin: 10px;

@@ -4,26 +4,20 @@
         <h4>新增课程分类</h4>
         <el-form  label-width="100px" class="demo-ruleForm">
             <el-form-item label="分类ID" prop="name">
-                <el-input></el-input>
+                <el-input size="mini"></el-input>
             </el-form-item>
             <el-form-item label="上级分类" prop="name">
-                <el-input></el-input>
+                <el-input size="mini"></el-input>
             </el-form-item>
             <el-form-item label="中文名称" prop="name">
-                <el-input></el-input>
+                <el-input size="mini"></el-input>
             </el-form-item>
             <el-form-item label="英文名称" prop="name">
-                <el-input></el-input>
+                <el-input size="mini"></el-input>
             </el-form-item>
             <div class="chi-bebal">
                 <el-form-item label="中文介绍" prop="desc" style="width:65%" class="zh-desc">
                     <el-input type="textarea" v-model="ruleForm.desc"></el-input>
-                </el-form-item>
-                <el-form-item label="状态" prop="region" class="activity-state">
-                    <el-select v-model="ruleForm.region" placeholder="所有状态">
-                    <el-option label="有效" value="有效"></el-option>
-                    <el-option label="失效" value="失效"></el-option>
-                    </el-select>
                 </el-form-item>
             </div>
             <el-form-item label="英文介绍" prop="desc">
@@ -42,7 +36,7 @@
                 </el-upload>
             </el-form-item>
             <el-form-item label="价格" prop="desc">
-              <el-input class="price"></el-input>&nbsp;&nbsp;/节课 （只在创建三级分类时显示，显示价格字段）
+              <el-input class="price" size="mini"></el-input>&nbsp;&nbsp;/节课 （只在创建三级分类时显示，显示价格字段）
             </el-form-item>
             <el-form-item label="状态">
               <el-radio-group v-model="ruleForm.resource">
@@ -51,8 +45,8 @@
               </el-radio-group>
             </el-form-item>
             <el-form-item>
-                <el-button class="submit-button" type="primary" @click="submitForm('ruleForm')">提交</el-button>
-                <el-button @click="resetForm('ruleForm')">取消</el-button>
+                <el-button size="mini" class="submit-button" type="primary" @click="submitForm('ruleForm')">提交</el-button>
+                <el-button size="mini" @click="resetForm('ruleForm')">取消</el-button>
             </el-form-item>
         </el-form>
     </div>
@@ -139,7 +133,7 @@ export default {
 </script>
 <style scoped>
   .createfication .el-input{
-      width: 432px;
+      width: 250px;
   }
   .createfication .el-textarea{
       width: 800px;
