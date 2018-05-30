@@ -1,5 +1,21 @@
 <template>
-  <router-view></router-view>
+  <div id="app">
+    <el-container>
+      <el-header>
+        <main-header></main-header>
+      </el-header>
+      <el-container>
+        <el-aside width="201px"> 
+          <navigation></navigation>
+        </el-aside>
+        <el-main> 
+          <div class="right">
+            <router-view></router-view>  
+          </div>
+        </el-main>
+      </el-container>
+    </el-container>
+  </div>
 </template>
 <script>
 export default {

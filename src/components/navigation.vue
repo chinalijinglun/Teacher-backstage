@@ -24,15 +24,15 @@ export default {
   name: 'navigation',
   data(){
     return {
-        menulist: "",
+      menulist: "",
     }
   },
   created(){
-        var _that = this
-        this.axios.get('/static/left.json').then(function(data){
-            _that.menulist = data.data;
-        })  }
-
+    var _that = this
+    this.$axios.get('/static/left.json').then(function(data){
+      _that.menulist = data.data;
+    })  
+  }
 }
 </script>
 

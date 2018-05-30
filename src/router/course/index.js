@@ -16,79 +16,79 @@ export default [
     {
       // 课程分类
       name:'课程分类',
-      path: '/classification',
+      path: 'classification',
       name: 'classification',
       component: classification
     },
     {
       name: '创建分类',
-      path: '/createCourse',
+      path: 'createCourse',
       name: 'createCourse',
       component: createCourse
     },
     {
       name: '课程包',
-      path: '/couresPackage',
+      path: 'couresPackage',
       name: 'couresPackage',
       component: couresPackage
     },
     {
       name: '创建课程包',
-      path: '/createPackage',
+      path: 'createPackage',
       name: 'createPackage',
       component: createPackage
     },
     {
       name: '试讲课',
-      path: '/lecture',
+      path: 'lecture',
       name: 'lecture',
       component: lecture
     },
     {
       name: '预约试讲课',
-      path: '/dateClass',
+      path: 'dateClass',
       name: 'dateClass',
       component: dateClass
     },
     {
       name: '试讲课信息',
-      path: '/lectureInformation',
+      path: 'lectureInformation',
       name: 'lectureInformation',
       component: lectureInformation
     },
     {
       name: '报名',
-      path: '/enroll',
+      path: 'enroll',
       name: 'enroll',
       component: enroll
     },
     {
       name: '试听课',
-      path: '/auditions',
+      path: 'auditions',
       name: 'auditions',
       component: auditions
     },
     {
       name: '学生试听报名',
-      path: '/studentTrial',
+      path: 'studentTrial',
       name: 'studentTrial',
       component: studentTrial
     },
     {
       name: '预约',
-      path: '/date',
+      path: 'date',
       name: 'date',
       component: date
     },
     {
       name: '预约教师上课',
-      path: '/dateTeacher',
+      path: 'dateTeacher',
       name: 'dateTeacher',
       component: dateTeacher
     },
     {
       name: '普通课程',
-      path: '/generalCourse',
+      path: 'generalCourse',
       name: 'generalCourse',
       component: generalCourse
     }

@@ -20,104 +20,104 @@ import courseAuditPage from '@/pages/teacher/courseAuditPage';
 export default [
   {
     title:'教师在线审核',
-    path: '/onlineAudit',
+    path: 'onlineAudit',
     name: 'onlineAudit',
     component: onlineAudit
   },
   {
     title: '审核页面',
-    path: '/auditPage',
+    path: 'auditPage',
     name: 'auditPage',
     component: auditPage
   },
   {
     title: '教师面试',
-    path: '/interview',
+    path: 'interview',
     name: 'interview',
     component: interview
   },
   {
     title: '预约面试',
-    path: '/dateInterview',
+    path: 'dateInterview',
     name: 'dateInterview',
     component: dateInterview
   },
   {
     title: '面试结果',
-    path: '/interviewResult',
+    path: 'interviewResult',
     name: 'interviewResult',
     component: interviewResult
 
   },
   {
     title: '面试报告',
-    path: '/interviewReport',
+    path: 'interviewReport',
     name: 'interviewReport',
     component: interviewReport
   },
   {
     title: '教师签约',
-    path: '/contract',
+    path: 'contract',
     name: 'contract',
     component: contract
   },
   {
     title: '签约',
-    path: '/contractMess',
+    path: 'contractMess',
     name: 'contractMess',
     component: contractMess
   },
   {
     title: '查看签约',
-    path: '/lookContract',
+    path: 'lookContract',
     name: 'lookContract',
     component: lookContract
   },
   {
     title: '教师用户',
-    path: '/teacherUser',
+    path: 'teacherUser',
     name: 'teacherUser',
     component: teacherUser
   },
   {
     title: '教师详情',
-    path: '/teacherDetail',
+    path: 'teacherDetail',
     name: 'teacherDetail',
     component: teacherDetail
   },
   {
     title: '教师课程',
-    path: '/teacherCourse',
+    path: 'teacherCourse',
     name: 'teacherCourse',
     component: teacherCourse
   },
   {
     title: '课程详情',
-    path: '/courseDetail',
+    path: 'courseDetail',
     name: 'courseDetail',
     component: courseDetail
   },
   {
     title: '作业',
-    path: '/homework',
+    path: 'homework',
     name: 'homework',
     component: homework
   },
   {
     title: '评价',
-    path: '/evaluate',
+    path: 'evaluate',
     name: 'evaluate',
     component: evaluate
   },
   {
     title: '课件审核',
-    path: '/coursewareAudit',
+    path: 'coursewareAudit',
     name: 'coursewareAudit',
     component: coursewareAudit
   },
   {
     title: '课件审核页面',
-    path: '/courseAuditPage',
+    path: 'courseAuditPage',
     name: 'courseAuditPage',
     component: courseAuditPage
   }

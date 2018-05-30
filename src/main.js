@@ -15,12 +15,10 @@ Vue.use(ElementUI);
 Vue.use(selfComponents);
 Vue.use(utils);
 
-Vue.prototype.axios = axios;
-
 /* eslint-disable no-new */
 new Vue({
   el: '#app',
   router,
   components: { App },
   template: '<App/>'
-})
+});

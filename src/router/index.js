@@ -1,7 +1,9 @@
-import Vue from 'vue'
-import Router from 'vue-router'
-import Main from '@/components/main'
-
+import Vue from 'vue';
+import Router from 'vue-router';
+import hello from '@/pages/hello';
+import regist from '@/pages/regist';
+import login from '@/pages/login';
+import main from '@/pages/main';
 
 import course from './course';
 import employee from './employee';
@@ -17,52 +19,71 @@ export default new Router({
   routes: [
     {
       // 首页
-      name:'首页',
+      title:'首页',
       path: '/',
-      name: 'Main',
-      component: Main
+      name: 'hello',
+      component: hello
     },
-    ...course.map(item=>{
-      return {
-        ...item,
-        path: '/course'+item.path
-      }
-    }),
-    ...employee.map(item=>{
-      return {
-        ...item,
-        path: '/employee'+item.path
-      }
-    }),
-    ...order.map(item=>{
-      return {
-        ...item,
-        path: '/order'+item.path
-      }
-    }),
-    ...partner.map(item=>{
-      return {
-        ...item,
-        path: '/partner'+item.path
-      }
-    }),
-    ...price.map(item=>{
-      return {
-        ...item,
-        path: '/price'+item.path
-      }
-    }),
-    ...student.map(item=>{
-      return {
-        ...item,
-        path: '/student'+item.path
-      }
-    }),
-    ...teacher.map(item=>{
-      return {
-        ...item,
-        path: '/teacher'+item.path
-      }
-    })
+    {
+      title:'注册页',
+      path: '/regist',
+      name: 'regist',
+      component: regist
+    },
+    {
+      title:'登录页',
+      path: '/login',
+      name: 'login',
+      component: login
+    },
+    {
+      title: '课程',
+      path: '/course',
+      name: 'course',
+      component: main,
+      children: course
+    },
+    {
+      title: '员工',
+      path: '/employee',
+      component: main,
+      name: 'employee',
+      children: employee
+    },
+    {
+      title: '订单',
+      path: '/order',
+      name: 'order',
+      component: main,
+      children: order
+    },
+    {
+      title: '合作方',
+      path: '/partner',
+      name: 'partner',
+      component: main,
+      children: partner
+    },
+    {
+      title: '价格',
+      path: '/price',
+      name: 'price',
+      component: main,
+      children: price
+    },
+    {
+      title: '学生',
+      path: '/student',
+      name: 'student',
+      component: main,
+      children: student
+    },
+    {
+      title: '教师',
+      path: '/teacher',
+      name: 'teacher',
+      component: main,
+      children: teacher
+    }
   ]
 })

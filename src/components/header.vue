@@ -17,7 +17,11 @@
     </div>
   </div>
 </template>
-
+<script>
+  export default {
+    name: 'header'
+  }
+</script>
 <style lang="" scoped>
 .header {
   background-color: #3c8dbc;
