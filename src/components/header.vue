@@ -19,7 +19,7 @@
 </template>
 <script>
   export default {
-    name: 'header'
+    name: 'mainHeader'
   }
 </script>
 <style lang="" scoped>
