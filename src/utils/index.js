@@ -9,6 +9,10 @@ import {
   baseAxios, 
   baseApiUrl 
 } from './axios';
+import { 
+  MOBILE_REG_EXP,
+  EMAIL_REG_EXP
+} from './regExp';
 
 const install = (Vue) => {
   Vue.prototype.$dateFmt = dateFmt;
@@ -18,6 +22,8 @@ const install = (Vue) => {
   Vue.prototype.$axios = axios;
   Vue.prototype.$baseAxios = baseAxios;
   Vue.prototype.$baseApiUrl = baseApiUrl;
+  Vue.prototype.$MOBILE_REG_EXP = MOBILE_REG_EXP;
+  Vue.prototype.$EMAIL_REG_EXP = EMAIL_REG_EXP;
 }
 
 export default {
@@ -28,5 +34,7 @@ export default {
   dateFactory,
   axios,
   baseAxios,
-  baseApiUrl
+  baseApiUrl,
+  MOBILE_REG_EXP,
+  EMAIL_REG_EXP
 }
