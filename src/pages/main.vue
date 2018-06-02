@@ -18,7 +18,15 @@
   </div>
 </template>
 <script>
+import {
+  apiMenuGet
+} from '@/api/menu';
 export default {
+  created() {
+    apiMenuGet().then(resp => {
+      console.log(resp);
+    });
+  }
 };
 </script>
 <style>

@@ -1,4 +1,3 @@
-import auditList from '@/pages/teacher/auditList';
 import onlineAudit from '@/pages/teacher/onlineAudit';
 import auditPage from '@/pages/teacher/auditPage';
 import interview from '@/pages/teacher/interview';
@@ -23,12 +22,6 @@ export default [
     path: 'onlineAudit',
     name: 'onlineAudit',
     component: onlineAudit
-  },
-  {
-    title: '审核页面',
-    path: 'auditPage',
-    name: 'auditPage',
-    component: auditPage
   },
   {
     title: '教师面试',

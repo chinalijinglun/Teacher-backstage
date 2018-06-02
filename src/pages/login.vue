@@ -149,7 +149,11 @@ export default {
 			this.$refs.loginForm.validate(valid => {
 				if(valid) {
 					authLoginPost(this.loginForm).then(resp => {
-						console.log(resp);
+						this.$message({
+							message: '登录成功！',
+							type: 'success'
+						})
+						this.$router.push('/main');
 					});
 				}
 			});

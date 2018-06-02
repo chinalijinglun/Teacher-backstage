@@ -1,9 +1,9 @@
 import Vue from 'vue';
 import Router from 'vue-router';
 import hello from '@/pages/hello';
+import main from '@/pages/main';
 import regist from '@/pages/regist';
 import login from '@/pages/login';
-import main from '@/pages/main';
 import reset from '@/pages/reset';
 
 import course from './course';
@@ -21,9 +21,15 @@ export default new Router({
     {
       // 首页
       title:'首页',
-      path: '/',
+      path: '/main',
       name: 'hello',
-      component: hello
+      component: main,
+      children: [
+        {
+          path: '',
+          component: hello
+        }
+      ]
     },
     {
       title:'注册页',

@@ -214,11 +214,10 @@ export default {
 					const { username, password, verify_code} = this.resetForm;
 					authResetpasswordPost({ username, password, verify_code}).then(resp=>{
 						this.$message({
-							showClose: true,
 							message: '密码更新成功，请重新登录！',
 							type: 'success'
 						});
-						this.$router.push('/login')
+						this.$router.push('/login');
 					});
 				}
 			});

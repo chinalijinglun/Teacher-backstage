@@ -69,7 +69,7 @@
 </template>
 
 <script>
-    import dateAlert from '@/pages/courseManagement/dateAlert'
+    import dateAlert from '@/pages/course/dateAlert'
     export default {
         components:{
             dateAlert

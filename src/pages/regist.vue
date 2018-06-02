@@ -226,7 +226,11 @@ export default {
 				if(valid) {
 					const { username, password, usertype, verify_code} = this.registForm;
 					authRegisterPost({ username, password, usertype, verify_code}).then(resp=>{
-						console.log(resp);
+						this.$message({
+							message: '注册成功，请重新登录！',
+							type: 'success'
+						})
+						this.$router.push('/login');
 					})
 				}
 			});
