@@ -39,8 +39,9 @@
 				</el-form-item>
 				<el-form-item prop="usertype">
 					<el-select v-model="registForm.usertype">
-						<el-option :value="'01'" label="type1"></el-option>
-						<el-option :value="'02'" label="type2"></el-option>
+						<el-option :value="'Student'" label="学生"></el-option>
+						<el-option :value="'Teacher'" label="老师"></el-option>
+						<el-option :value="'SysUser'" label="管理员"></el-option>
 					</el-select>
 				</el-form-item>
 				<el-form-item>
