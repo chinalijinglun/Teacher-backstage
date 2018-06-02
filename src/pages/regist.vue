@@ -205,7 +205,7 @@ export default {
 				this.verifyBtn.text = `${count}S`;
 				setTimeout(() => {
 					this.countDown(--count);
-				}, 1000)
+				}, 1000);
 			}
 		},
 		regist() {

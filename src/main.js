@@ -8,6 +8,7 @@ import router from './router';
 import axios from 'axios';
 import selfComponents from './components';
 import utils from './utils';
+import store from './store';
 
 Vue.config.productionTip = false;
 
@@ -19,6 +20,7 @@ Vue.use(utils);
 new Vue({
   el: '#app',
   router,
+  store,
   components: { App },
   template: '<App/>'
 });
