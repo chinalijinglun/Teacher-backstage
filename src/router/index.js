@@ -4,6 +4,7 @@ import hello from '@/pages/hello';
 import regist from '@/pages/regist';
 import login from '@/pages/login';
 import main from '@/pages/main';
+import reset from '@/pages/reset';
 
 import course from './course';
 import employee from './employee';
@@ -35,6 +36,12 @@ export default new Router({
       path: '/login',
       name: 'login',
       component: login
+    },
+    {
+      title: '重置密码',
+      path: '/reset',
+      name: 'reset',
+      component: reset
     },
     {
       title: '课程',

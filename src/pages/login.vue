@@ -30,6 +30,10 @@
 				<el-button type="primary" @click="onLogin">登录</el-button>
 			</el-form-item>
 		</el-form>
+		<el-row>
+			<p class="flt-left link-p"><router-link to="/regist">新用户？点击注册</router-link></p>
+			<p class="flt-right link-p"><router-link to="/reset">忘记密码</router-link></p>
+		</el-row>
 	</div>  
 </div>
 </template>
@@ -93,6 +97,15 @@ input {
 }
 .el-button {
 	width: 100%;
+}
+.flt-left {
+	float: left;
+}
+.flt-right {
+	float: right;
+}
+.link-p a{
+	color: #FFF;
 }
 </style>
 <script>

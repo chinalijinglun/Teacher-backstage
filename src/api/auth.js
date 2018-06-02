@@ -15,4 +15,7 @@ export const authRegisterPost = form => baseAxios.post('/auth/register',form).th
   return resp;
 });
 
-export const authResetpasswordPost = form => baseAxios.post('/auth/resetpassword',form);
+export const authResetpasswordPost = form => baseAxios.post('/auth/resetpassword',form).then(resp => {
+  store.commit('auth/setAuthorization', '');
+  return resp;
+});
