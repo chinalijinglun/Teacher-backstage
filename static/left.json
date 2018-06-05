@@ -3,103 +3,115 @@
         "name":"课程管理",
         "index": 1,
         "parent":"/course",
-            "children":[
-            {
-                "path":"classification",
-                "name":"课程分类"
-            },
-            {
-                "path":"couresPackage",
-                "name":"课程包"
-            },
-            {
-                "path":"/",
-                "name":"试讲课"
-            },
-            {
-                "path":"/",
-                "name":"试听课"
-            },
-            {
-                "path":"/",
-                "name":"常规课程"
-            }
-        ]
+        "children":[
+        {
+            "path":"classification",
+            "name":"课程分类"
+        },
+        {
+            "path":"couresPackage",
+            "name":"课程包"
+        },
+        {
+            "path":"lecture",
+            "name":"试讲课"
+        },
+        {
+            "path":"auditions",
+            "name":"试听课"
+        },
+        {
+            "path":"generalCourse",
+            "name":"常规课程"
+        }
+    ]
     },
-    {"name":"用户管理",
+    {
+        "name":"员工管理",
         "index": 2,
-            "children":[
+        "parent":"/employee",
+        "children":[
             {
-                "path":"/",
-                "name":"教师用户"
+                "path":"employeeList",
+                "name":"员工列表"
             },
             {
-                "path":"/",
-                "name":"学生用户"
-            },
-            {
-                "path":"/",
-                "name":"员工用户"
-            },
-            {
-                "path":"/",
+                "path":"limitManage",
                 "name":"权限管理"
             }
         ]
     },
     {
         "name":"教师管理",
+        "parent":"/teacher",
         "index": 3,
-            "children":[
+        "children":[
             {
-                "path":"/",
+                "path":"onlineAudit",
                 "name":"教师审核"
             },
             {
-                "path":"/",
+                "path":"interview",
                 "name":"教师面试"
             },
             {
-                "path":"/",
+                "path":"contract",
                 "name":"教师签约"
             },
             {
-                "path":"/",
-                "name":"教师试讲"
+                "path":"teacherUser",
+                "name":"签约教师列表"
+            },
+            {
+                "path":"coursewareAudit",
+                "name":"课件审核"
             }
         ]
     },
     {
         "name":"学生管理",
         "index": 4,
-            "children":[
+        "parent":"/student",
+        "children":[
             {
-                "path":"/",
-                "name":"学生分配（售前）"
+                "path":"assignConselorList",
+                "name":"学生分配（课程顾问）"
             },
             {
-                "path":"/",
-                "name":"学生售前服务"
+                "path":"assignAdminList",
+                "name":"学生分配（班主任）"
             },
             {
-                "path":"/",
-                "name":"学生分配（售后）"
-            },
-            {
-                "path":"/",
-                "name":"学生成绩"
+                "path":"studentList",
+                "name":"学生列表"
             }
         ]
     },
     {
         "name":"订单管理",
-        "index": 5
-        
+        "index": 5,
+        "parent":"/order",
+        "children":[
+            {
+                "path":"orderList",
+                "name":"订单列表"
+            },
+            {
+                "path":"auditOrderList",
+                "name":"退款订单审核"
+            }
+        ]
     },
     {
         "name":"合作方管理",
-        "index": 6
-        
+        "parent":"/partner",
+        "index": 6,
+        "children":[
+            {
+                "path":"partnerList",
+                "name":"合作方列表"
+            }
+        ]
     },{
         "name":"价格管理",
         "index":"7",

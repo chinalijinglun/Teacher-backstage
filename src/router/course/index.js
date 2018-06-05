@@ -1,16 +1,16 @@
-import classification from '@/pages/course/classification'
-import createCourse from '@/pages/course/createCourse'
-import couresPackage from '@/pages/course/couresPackage'
-import createPackage from '@/pages/course/createPackage'
-import lecture from '@/pages/course/lecture'
-import dateClass from '@/pages/course/dateClass'
-import lectureInformation from '@/pages/course/lectureInformation'
-import enroll from '@/pages/course/enroll'
-import auditions from '@/pages/course/auditions'
-import studentTrial from '@/pages/course/studentTrial'
-import date from '@/pages/course/date'
-import dateTeacher from '@/pages/course/dateTeacher'
-import generalCourse from '@/pages/course/generalCourse'
+import classification from '@/pages/course/classification';
+import createCourse from '@/pages/course/createCourse';
+import couresPackage from '@/pages/course/couresPackage';
+import createPackage from '@/pages/course/createPackage';
+import lecture from '@/pages/course/lecture';
+import dateClass from '@/pages/course/dateClass';
+import lectureInformation from '@/pages/course/lectureInformation';
+import enroll from '@/pages/course/enroll';
+import auditions from '@/pages/course/auditions';
+import studentTrial from '@/pages/course/studentTrial';
+import date from '@/pages/course/date';
+import dateTeacher from '@/pages/course/dateTeacher';
+import generalCourse from '@/pages/course/generalCourse';
 
 export default [
     {
@@ -87,7 +87,7 @@ export default [
       component: dateTeacher
     },
     {
-      name: '普通课程',
+      name: '常规课程',
       path: 'generalCourse',
       name: 'generalCourse',
       component: generalCourse

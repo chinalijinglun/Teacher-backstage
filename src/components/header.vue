@@ -5,9 +5,9 @@
     </div>
     <div class="login">
       <el-menu class="el-menu-demo" mode="horizontal"
-  background-color="#3c8dbc"
-  text-color="#fff"
-  active-text-color="#fff">
+      background-color="#3c8dbc"
+      text-color="#fff"
+      active-text-color="#fff">
       <el-submenu index="2">
         <template slot="title">Kira</template>
         <el-menu-item index="2-1">修改密码</el-menu-item>

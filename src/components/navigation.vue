@@ -6,11 +6,9 @@
       <el-submenu v-for="(item,index) in menulist" :index='index+""' :key='index'>
         <template slot="title">{{item.name}}</template>
         <el-menu-item-group v-for="(items,subindex) in item.children" :key='subindex'>
-          <el-menu-item :key='subindex' :index='subindex+""' >
-            <router-link :to='item.parent+"/"+items.path' class="nav-link">
-            {{items.name}}
-            </router-link>
-            </el-menu-item>
+          <router-link :key='subindex' :index='subindex+""' :to='item.parent+"/"+items.path'>
+            <el-menu-item class="nav-link">{{items.name}}</el-menu-item>
+          </router-link>
         </el-menu-item-group>
       </el-submenu>
       
