@@ -37,13 +37,6 @@
 					v-model="registForm.repass"
 					></el-input>
 				</el-form-item>
-				<el-form-item prop="usertype">
-					<el-select v-model="registForm.usertype">
-						<el-option :value="'Student'" label="学生"></el-option>
-						<el-option :value="'Teacher'" label="老师"></el-option>
-						<el-option :value="'SysUser'" label="管理员"></el-option>
-					</el-select>
-				</el-form-item>
 				<el-form-item>
 					<el-button type="primary" @click="regist">注册</el-button>    
 				</el-form-item> 
@@ -144,9 +137,6 @@ export default {
 				{ required: true, message: '请再次输入密码！', trigger: 'blur' },
 				{ validator: isSamePassWord, trigger: "blur" }
 			],
-			usertype: [
-				{ required: true, message: '请选择用户类型！', trigger: 'change' }
-			],
 			verify_code: [
 				{ required: true, message: '请输入验证码！', trigger: 'change' }
 			]
@@ -157,7 +147,7 @@ export default {
         password: '',
         verify_code: '',
         repass: '',
-        usertype: ''
+        usertype: 'SysUser'
       },
       // 0=不符合规则 1=手机号 2=邮箱
 			nameType: 0,

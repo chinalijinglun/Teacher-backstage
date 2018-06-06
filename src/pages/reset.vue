@@ -144,7 +144,7 @@ export default {
         password: '',
         verify_code: '',
         repass: '',
-        usertype: ''
+        usertype: 'SysUser'
       },
       // 0=不符合规则 1=手机号 2=邮箱
 			nameType: 0,

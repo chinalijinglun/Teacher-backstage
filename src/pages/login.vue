@@ -19,13 +19,6 @@
 					auto-complete="off"
 				></el-input>
 			</el-form-item>
-			<el-form-item prop="usertype">
-				<el-select v-model="loginForm.usertype">
-					<el-option :value="'Student'" label="学生"></el-option>
-					<el-option :value="'Teacher'" label="老师"></el-option>
-					<el-option :value="'SysUser'" label="管理员"></el-option>
-				</el-select>
-			</el-form-item>
 			<el-form-item>
 				<el-button type="primary" @click="onLogin">登录</el-button>
 			</el-form-item>
@@ -130,16 +123,13 @@ export default {
 			],
 			password: [
 				{ required: true, message: '请输入密码！', trigger: 'blur' }
-			],
-			usertype: [
-				{ required: true, message: '请选择用户类型！', trigger: 'change' }
 			]
 		};
     return {
 			loginForm: {
 				username: '',
 				password: '',
-				usertype: ''
+				usertype: 'SysUser'
 			},
 			rules
 		};
