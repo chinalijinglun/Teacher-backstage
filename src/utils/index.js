@@ -14,6 +14,12 @@ import {
   EMAIL_REG_EXP
 } from './regExp';
 
+import { 
+  setLocalStorage,
+  getLocalStorage,
+  deleteLocalStorage
+} from './localStorage';
+
 const install = (Vue) => {
   Vue.prototype.$dateFmt = dateFmt;
   Vue.prototype.$DATE_FMT_DEFAULT = DATE_FMT_DEFAULT;
@@ -24,6 +30,9 @@ const install = (Vue) => {
   Vue.prototype.$baseApiUrl = baseApiUrl;
   Vue.prototype.$MOBILE_REG_EXP = MOBILE_REG_EXP;
   Vue.prototype.$EMAIL_REG_EXP = EMAIL_REG_EXP;
+  Vue.prototype.$setLocalStorage = setLocalStorage;
+  Vue.prototype.$getLocalStorage = getLocalStorage;
+  Vue.prototype.$deleteLocalStorage = deleteLocalStorage;
 }
 
 export default {

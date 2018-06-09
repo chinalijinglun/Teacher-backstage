@@ -6,13 +6,13 @@
         <div class="inps">
             <el-row>
                 <el-form-item label="课程包名称：">
-                    <el-input size="mini"></el-input>
+                    <el-input size="mini" v-model="form.course_name"></el-input>
                 </el-form-item>
                 <el-form-item label="课程包ID：">
-                    <el-input size="mini"></el-input>
+                    <el-input size="mini" v-model="form.id"></el-input>
                 </el-form-item>
                 <el-form-item label="操作人：">
-                    <el-input size="mini"></el-input>
+                    <el-input size="mini" v-model="form.updated_by"></el-input>
                 </el-form-item>
             </el-row>
         </div>
@@ -41,7 +41,6 @@
       <div class="table-list">
         <div class="operation">
           <router-link to="/course/createCourse"><el-button type="primary"  size="mini">创建一级课程分类</el-button></router-link>
-          
           <el-button type="primary" size="mini">删除</el-button>
         </div>
         <div class="main-table-title" style="display: inline-grid;position: relative;width:calc(100% - 50px);height:36px;line-height:36px;">
@@ -65,6 +64,10 @@
     </div>
 </template>
 <script>
+import {
+  subjectCategoryGet
+} from '@/api/subject_category';
+
 export default {
   name: "classification",
   data() {
@@ -82,7 +85,9 @@ export default {
         state: "state"
       },
       form: {
-        status: "",
+        subject_name: '',
+        id: '',
+        updated_by: "",
         status2: "",
         status3: ""
       }
@@ -143,11 +148,14 @@ export default {
   },
   created() {
     var _that = this;
-    this.axios
-      .get("http://localhost:8080/static/listTree.json")
-      .then(function(data) {
-        _that.data2 = data.data;
-      });
+    subjectCategoryGet().then(resp => {
+      console.log(resp);
+    });
+    // this.axios
+    //   .get("/static/listTree.json")
+    //   .then(function(data) {
+    //     _that.data2 = data.data;
+    //   });
   }
 };
 </script>

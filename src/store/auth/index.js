@@ -1,9 +1,16 @@
+import { 
+  setLocalStorage,
+  getLocalStorage,
+  deleteLocalStorage
+} from '@/utils/localStorage';
+
 const state = {
-  authorization: ''
+  authorization: getLocalStorage('authorization')
 };
 
 const mutations = {
   setAuthorization(state, v) {
+    setLocalStorage('authorization', v);
     state.authorization = v;
   }
 }
