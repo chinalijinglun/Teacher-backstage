@@ -27,10 +27,10 @@ function json2filter(json) {
       case '[object Array]': 
         filters.push({ name, op: 'in', val: json[name] });
         return;
-      case '[object Number]': 
       case '[object String]': 
         filters.push({ name, op: 'like', val: `%${json[name]}%` });
         return;
+      case '[object Number]': 
       case '[object Boolean]': 
         filters.push({ name, op: 'eq', val: json[name] });
         return;
