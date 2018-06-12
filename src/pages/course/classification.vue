@@ -6,7 +6,7 @@
         <div class="inps">
             <el-row>
                 <el-form-item label="课程包名称：">
-                    <el-input size="mini" v-model="form.course_name"></el-input>
+                    <el-input size="mini" v-model="form.full_name"></el-input>
                 </el-form-item>
                 <el-form-item label="课程包ID：">
                     <el-input size="mini" v-model="form.id"></el-input>
@@ -28,10 +28,10 @@
                 </date-range>
             </el-form-item>
             <el-form-item label="状态：">
-                <el-select v-model="form.status" placeholder="请选择" size="mini">
+                <el-select v-model="form.delete_flag" placeholder="请选择" size="mini">
                 <el-option label="所有状态" value=""></el-option>
-                <el-option label="有效" value="1"></el-option>
-                <el-option label="无效" value="1"></el-option>
+                <el-option label="有效" :value="$VALID_ENUM.IN_FORCE"></el-option>
+                <el-option label="无效" :value="$VALID_ENUM.DELETED"></el-option>
                 </el-select>
             </el-form-item>
         </el-row>
@@ -58,7 +58,7 @@
               <span>操作</span>
             </div>
         </div>
-        <el-tree :data="data2" :props="defaultProps" show-checkbox node-key="id" default-expand-all :expand-on-click-node="false" :render-content="renderContent" accordion ref="tree">
+        <el-tree :data="tableData" :props="defaultProps" show-checkbox node-key="id" default-expand-all :expand-on-click-node="false" :render-content="renderContent" accordion ref="tree">
         </el-tree>
       </div>
     </div>
@@ -67,6 +67,9 @@
 import {
   subjectCategoryGet
 } from '@/api/subject_category';
+import {
+  curriculumGet
+} from '@/api/curriculum';
 
 export default {
   name: "classification",
@@ -74,7 +77,7 @@ export default {
     return {
       startDate: null, //开始时间
       endDate: null, //结束时间
-      data2: [],
+      tableData: [],
       defaultProps: {
         children: "children",
         classNameZh: "classNameZh",
@@ -85,11 +88,12 @@ export default {
         state: "state"
       },
       form: {
-        subject_name: '',
+        full_name: '',
         id: '',
-        updated_by: "",
-        status2: "",
-        status3: ""
+        updated_by: '',
+        delete_flag: '',
+        startDate: '',
+        endDate: ''
       }
     };
   },
@@ -144,13 +148,24 @@ export default {
           </div>
         </span>
       );
+    },
+    queryCurriculum() {
+      const {
+        full_name,
+        id,
+        updated_by,
+        delete_flag,
+        startDate,
+        endDate
+      } = this.form;
+      
+      return curriculumGet().then(resp => {
+        console.log(resp);
+      });
     }
   },
   created() {
     var _that = this;
-    subjectCategoryGet().then(resp => {
-      console.log(resp);
-    });
     // this.axios
     //   .get("/static/listTree.json")
     //   .then(function(data) {

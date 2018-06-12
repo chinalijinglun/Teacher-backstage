@@ -7,13 +7,12 @@ import router from '@/router';
 const baseAxios = axios.create({
   baseURL: baseApiUrl,
   headers: {
-    Accept: 'application/json; charset=utf-8',
-    'Content-Type': 'application/json'
+    Accept: 'application/json; charset=utf-8'
   }
 });
 
 baseAxios.interceptors.request.use(config => {
-  config.headers['authorization'] = store.state.auth.authorization;
+  // config.headers['authorization'] = store.state.auth.authorization;
   return config;
 }, error => {
   return Promise.reject(error);

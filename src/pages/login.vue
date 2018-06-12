@@ -129,7 +129,7 @@ export default {
 			loginForm: {
 				username: '',
 				password: '',
-				usertype: 'SysUser'
+				usertype: this.$store.auth.userType
 			},
 			rules
 		};

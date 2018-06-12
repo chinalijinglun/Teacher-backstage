@@ -147,7 +147,7 @@ export default {
         password: '',
         verify_code: '',
         repass: '',
-        usertype: 'SysUser'
+        usertype: this.$store.auth.userType
       },
       // 0=不符合规则 1=手机号 2=邮箱
 			nameType: 0,

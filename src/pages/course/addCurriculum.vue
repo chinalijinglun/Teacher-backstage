@@ -31,8 +31,8 @@
       </el-form-item>
       <el-form-item label="状态">
         <el-radio-group v-model="form.delete_flag">
-          <el-radio label="IN_FORCE">有效</el-radio>
-          <el-radio label="DELETED">无效</el-radio>
+          <el-radio :label="$VALID_ENUM.IN_FORCE">有效</el-radio>
+          <el-radio :label="$VALID_ENUM.DELETED">无效</el-radio>
         </el-radio-group>
       </el-form-item>
       <el-form-item>
@@ -44,9 +44,15 @@
 </template>
 <script>
   import { curriculumPost } from '@/api/curriculum';
+  import { mapState } from 'vuex'
 
   export default {
     name: "addCurriculum",
+    computed: {
+      ...mapState({
+        userName: store=>store.auth.userName
+      })
+    },
     data() {
       return {
         form: {
@@ -55,7 +61,7 @@
           desc: '',
           desc_zh: '',
           cover_url: '',
-          delete_flag: 'IN_FORCE',
+          delete_flag: this.$VALID_ENUM.IN_FORCE,
           file_list: []
         },
         rules: {
@@ -81,9 +87,29 @@
       submitForm(formName) {
         this.$refs.form.validate(valid => {
           if (valid) {
-            alert("submit!");
-            curriculumPost(this.form).then(resp => {
-              console.log(resp);
+            const { 
+              full_name,
+              full_name_zh,
+              desc,
+              desc_zh,
+              cover_url,
+              delete_flag 
+            } = this.form;
+
+            curriculumPost({
+              full_name,
+              full_name_zh,
+              desc,
+              desc_zh,
+              cover_url,
+              delete_flag,
+              created_at: new Date(),
+              updated_at: new Date(),
+              created_by: this.userName,
+              updated_by: this.userName
+            }).then(resp => {
+              this.$message('创建成功！');
+              this.$router.push('/course/classification')
             });
           } else {
             console.log("error submit!!");

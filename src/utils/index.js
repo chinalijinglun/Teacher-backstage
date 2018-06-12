@@ -20,6 +20,11 @@ import {
   deleteLocalStorage
 } from './localStorage';
 
+import {
+  VALID_ENUM
+} from './enums';
+import json2filter from './json2filter';
+
 const install = (Vue) => {
   Vue.prototype.$dateFmt = dateFmt;
   Vue.prototype.$DATE_FMT_DEFAULT = DATE_FMT_DEFAULT;
@@ -33,6 +38,8 @@ const install = (Vue) => {
   Vue.prototype.$setLocalStorage = setLocalStorage;
   Vue.prototype.$getLocalStorage = getLocalStorage;
   Vue.prototype.$deleteLocalStorage = deleteLocalStorage;
+  Vue.prototype.$VALID_ENUM = VALID_ENUM;
+  Vue.prototype.$json2filter = json2filter;
 }
 
 export default {
