@@ -6,7 +6,10 @@ import router from '@/router';
 
 const baseAxios = axios.create({
   baseURL: baseApiUrl,
-  headers: { Accept: 'application/json; charset=utf-8' }
+  headers: {
+    Accept: 'application/json; charset=utf-8',
+    'Content-Type': 'application/json'
+  }
 });
 
 baseAxios.interceptors.request.use(config => {

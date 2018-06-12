@@ -19,6 +19,10 @@ Vue.use(Router)
 export default new Router({
   routes: [
     {
+      path: '/',
+      redirect: '/main'
+    },
+    {
       // 首页
       title:'首页',
       path: '/main',

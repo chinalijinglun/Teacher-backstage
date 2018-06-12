@@ -3,17 +3,11 @@
     <div class="createfication">
         <h4>新增课程分类</h4>
         <el-form  label-width="100px" class="demo-ruleForm">
-            <el-form-item label="分类ID" prop="name">
-                <el-input size="mini"></el-input>
-            </el-form-item>
-            <el-form-item label="上级分类" prop="name">
-                <el-input size="mini"></el-input>
-            </el-form-item>
             <el-form-item label="中文名称" prop="name">
-                <el-input size="mini"></el-input>
+                <el-input size="mini" v-model="form.subject_category_zh"></el-input>
             </el-form-item>
             <el-form-item label="英文名称" prop="name">
-                <el-input size="mini"></el-input>
+                <el-input size="mini" v-model="form.subject_category"></el-input>
             </el-form-item>
             <div class="chi-bebal">
                 <el-form-item label="中文介绍" prop="desc" style="width:65%" class="zh-desc">
@@ -56,8 +50,9 @@ export default {
   name: "createCourse",
   data() {
     return {
-      ruleForm: {
-        name: "",
+      form: {
+        subject_category: '',
+        subject_category_zh: '',
         region: "",
         date1: "",
         date2: "",
@@ -65,7 +60,7 @@ export default {
         type: [],
         resource: "",
         desc: "",
-        
+
       },
       rules: {
         name: [

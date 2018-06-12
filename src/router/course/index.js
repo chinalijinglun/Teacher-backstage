@@ -11,6 +11,7 @@ import studentTrial from '@/pages/course/studentTrial';
 import date from '@/pages/course/date';
 import dateTeacher from '@/pages/course/dateTeacher';
 import generalCourse from '@/pages/course/generalCourse';
+import addCurriculum from '@/pages/course/addCurriculum';
 
 export default [
     {
@@ -25,6 +26,12 @@ export default [
       path: 'createCourse',
       name: 'createCourse',
       component: createCourse
+    },
+    {
+      name: '创建一级分类',
+      path: 'addCurriculum',
+      name: 'addCurriculum',
+      component: addCurriculum
     },
     {
       name: '课程包',
