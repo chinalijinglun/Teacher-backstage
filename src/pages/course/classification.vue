@@ -19,8 +19,8 @@
          <el-row class="state-createTime">
             <el-form-item label="创建时间：">    
                 <date-range 
-                :start-date.sync="form.startDate" 
-                :end-date.sync="form.endDate"
+                :start-date.sync="form.update_at.gt" 
+                :end-date.sync="form.update_at.lt"
                 size="mini"
                 range-separator="-"
                 start-placeholder="开始时间"
@@ -92,8 +92,10 @@ export default {
         id: '',
         updated_by: '',
         delete_flag: '',
-        startDate: '',
-        endDate: ''
+        update_at: {
+          gt: '',
+          lt: ''
+        }
       }
     };
   },
@@ -155,10 +157,10 @@ export default {
         id,
         updated_by,
         delete_flag,
-        startDate,
-        endDate
+        update_at
       } = this.form;
-      
+      const filter = this.$json2filter(this.form);
+      console.log(this.filter);
       return curriculumGet().then(resp => {
         console.log(resp);
       });
@@ -166,6 +168,7 @@ export default {
   },
   created() {
     var _that = this;
+    this.queryCurriculum();
     // this.axios
     //   .get("/static/listTree.json")
     //   .then(function(data) {
