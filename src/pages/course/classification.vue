@@ -19,8 +19,8 @@
          <el-row class="state-createTime">
             <el-form-item label="创建时间：">    
                 <date-range 
-                :start-date.sync="form.update_at.gt" 
-                :end-date.sync="form.update_at.lt"
+                :start-date.sync="form.updated_at.gt" 
+                :end-date.sync="form.updated_at.lt"
                 size="mini"
                 range-separator="-"
                 start-placeholder="开始时间"
@@ -28,14 +28,14 @@
                 </date-range>
             </el-form-item>
             <el-form-item label="状态：">
-                <el-select v-model="form.delete_flag" placeholder="请选择" size="mini">
+                <el-select v-model="form.delete_flag[0]" placeholder="请选择" size="mini">
                 <el-option label="所有状态" value=""></el-option>
                 <el-option label="有效" :value="$VALID_ENUM.IN_FORCE"></el-option>
                 <el-option label="无效" :value="$VALID_ENUM.DELETED"></el-option>
                 </el-select>
             </el-form-item>
         </el-row>
-        <el-button type="primary" size="mini">查询</el-button>
+        <el-button type="primary" size="mini" @click="queryCurriculum">查询</el-button>
         </el-form>
       </div>
       <div class="table-list">
@@ -58,7 +58,16 @@
               <span>操作</span>
             </div>
         </div>
-        <el-tree :data="tableData" :props="defaultProps" show-checkbox node-key="id" default-expand-all :expand-on-click-node="false" :render-content="renderContent" accordion ref="tree">
+        <el-tree 
+          :data="tableData" 
+          :props="defaultProps" 
+          node-key="id" 
+          default-expand-all 
+          :expand-on-click-node="false" 
+          :render-content="renderContent" 
+          accordion 
+          ref="tree"
+        >
         </el-tree>
       </div>
     </div>
@@ -91,8 +100,8 @@ export default {
         full_name: '',
         id: '',
         updated_by: '',
-        delete_flag: '',
-        update_at: {
+        delete_flag: [''],
+        updated_at: {
           gt: '',
           lt: ''
         }
@@ -160,20 +169,29 @@ export default {
         update_at
       } = this.form;
       const filter = this.$json2filter(this.form);
-      console.log(this.filter);
-      return curriculumGet().then(resp => {
+      console.log(filter);
+      return curriculumGet(filter).then(resp => {
         console.log(resp);
+        this.tableData = resp.data.objects.map(item => {
+          return {
+            children: [],
+            classNameZh: item.full_name_zh,
+            classNameEn: item.full_name,
+            classId: item.id,
+            creator: item.created_by,
+            createTime: item.created_at,
+            state: {
+              [this.$VALID_ENUM.IN_FORCE]: '有效',
+              [this.$VALID_ENUM.DELETED]: '无效'
+            }[item.delete_flag]
+          }
+        });
       });
     }
   },
   created() {
     var _that = this;
     this.queryCurriculum();
-    // this.axios
-    //   .get("/static/listTree.json")
-    //   .then(function(data) {
-    //     _that.data2 = data.data;
-    //   });
   }
 };
 </script>

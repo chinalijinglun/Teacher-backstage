@@ -21,14 +21,22 @@
  */
 function json2filter(json) {
   const keySet = Object.keys(json);
+
+  console.log(json)
   const filters = [];
   keySet.forEach(name => {
     switch(Object.prototype.toString.call(json[name])) {
-      case '[object Array]': 
-        filters.push({ name, op: 'in', val: json[name] });
-        return;
+      case '[object Array]': {
+          const ar = json[name].filter(item => item !== '');
+          if(ar.length === 1) {
+            filters.push({ name, op: 'eq', val: json[name][0] });
+          } else if( ar.length ) {
+            filters.push({ name, op: 'in', val: json[name] });
+          }
+          return;
+        }
       case '[object String]': 
-        filters.push({ name, op: 'like', val: `%${json[name]}%` });
+        json[name]&&filters.push({ name, op: 'like', val: `%${json[name]}%` });
         return;
       case '[object Number]': 
       case '[object Boolean]': 
@@ -45,7 +53,9 @@ function json2filter(json) {
       }
     }
   });
-  return filters;
+  return {
+    filters
+  };
 }
 
 export default json2filter;

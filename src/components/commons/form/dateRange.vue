@@ -54,8 +54,8 @@
     },
     watch: {
       dateRange(v, ov) {
-        const startDate = v[0] ? this.$dateFmt(v[0], this.dateFmt) : '';
-        const endDate = v[1] ? this.$dateFmt(v[1], this.dateFmt) : '';
+        const startDate = JSON.stringify(v[0]).replace(/"/g,'');
+        const endDate = JSON.stringify(v[1]).replace(/"/g,'');
         this.$emit('update:startDate', startDate);
         this.$emit('update:endDate', endDate);
       }

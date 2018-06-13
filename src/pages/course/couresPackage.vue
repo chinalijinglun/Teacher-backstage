@@ -5,15 +5,17 @@
 			<div class="classify">
 				<el-row>
 					<el-form-item label="分类：">
-						<el-select v-model="form.status" placeholder="一级分类" size="mini">
-							<el-option label="AP课程" value=""></el-option>
+						<el-select v-model="form.status" placeholder="一级分类" size="mini" @change="getSubjectCategory">
+							<el-option label="全部" value=""></el-option>
+							<el-option v-for="(item,index) in curriculumLs" :key="index" :label="item.full_name" :value="item.id"></el-option>
 						</el-select>
 						<el-select v-model="form.status2" placeholder="二级分类" size="mini">
-							<el-option label="AP课系统学习" value=""></el-option>
+							<el-option label="全部" value=""></el-option>
+							<el-option v-for="(item,index) in subjectCategoryLs" :key="index" :label="item.subject_category" :value="item.id"></el-option>
 						</el-select>
 						<el-select v-model="form.status3" placeholder="三级分类" size="mini">
-							<el-option label="AP心理学" value=""></el-option>
-							<el-option label="AP微积分" value=""></el-option>
+							<el-option label="全部" value=""></el-option>
+							<el-option v-for="(item,index) in subjectLs" :key="index" :label="item.subject_category" :value="item.id"></el-option>
 						</el-select>
 					</el-form-item>
 				</el-row>
@@ -96,21 +98,31 @@
 import {
 	courseGet
 } from '@/api/course';
+import {
+  curriculumGet
+} from '@/api/curriculum';
+import {
+	subjectCategoryGet
+} from '@/api/subject_category';
+
 export default {
   created() {
 		this.query();
+		this.getCurriculumLs();
 	},
   data() {
     return {
-      tableData: [],
+			tableData: [],
+			curriculumLs: [],
+			subjectCategoryLs: [],
+			subjectLs: [],
       form: {
         course_name: "",
 				id: "",
 				startDate: '',
 				endDate: '',
 				updated_by: "",
-				page: "",
-
+				page: ""
       }
     };
   },
@@ -122,6 +134,17 @@ export default {
 			courseGet({}).then(resp => {
 				this.tableData = resp.data.objects;
 			});
+		},
+		getCurriculumLs() {
+			curriculumGet().then(resp=> {
+				this.curriculumLs = resp.data.objects;
+			});
+		},
+		getSubjectCategory(curriculum_id) {
+			const filters = this.$json2filter({curriculum_id: [curriculum_id]});
+			subjectCategoryGet().then(resp => {
+				
+			})
 		}
   },
 };

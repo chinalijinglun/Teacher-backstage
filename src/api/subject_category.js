@@ -1,6 +1,6 @@
 import { baseAxios } from '@/utils/axios';
 
-export const subjectCategoryGet = (params) => baseAxios.get('/api/v1/subject_category', { q: JSON.stringify(params) });
+export const subjectCategoryGet = (params) => baseAxios.get('/api/v1/subject_category', { params: { q: JSON.stringify(params) } });
 
 export const subjectCategoryPost = (form) => baseAxios.post('/api/v1/subject_category', form);
 
