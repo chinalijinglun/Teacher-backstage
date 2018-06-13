@@ -1,20 +1,20 @@
 <template>
   <div class="bckg">
-    <div class="reset">  
-			<h1>Reset PassWord</h1>  
+    <div class="reset">
+			<h1>Reset PassWord</h1>
 			<el-form ref="resetForm" :model="resetForm" :rules="rules" :validate-on-rule-change="false">
 				<el-form-item prop="username">
-					<el-input 
-					type="text" 
-					placeholder="请输入邮箱/手机号" 
+					<el-input
+					type="text"
+					placeholder="请输入邮箱/手机号"
 					v-model="resetForm.username"
 					auto-complete="off"
 					></el-input>
 				</el-form-item>
 				<el-form-item prop="verify_code">
-					<el-input 
-					type="text" 
-					placeholder="请输入验证码" 
+					<el-input
+					type="text"
+					placeholder="请输入验证码"
 					v-model="resetForm.verify_code"
 					auto-complete="off"
 					>
@@ -22,26 +22,26 @@
 					</el-input>
 				</el-form-item>
 				<el-form-item prop="password">
-					<el-input 
-					type="password" 
-					placeholder="请输入密码" 
+					<el-input
+					type="password"
+					placeholder="请输入密码"
 					v-model="resetForm.password"
 					auto-complete="off"
 					></el-input>
 				</el-form-item>
 				<el-form-item prop="repass">
-					<el-input 
-					type="password" 
-					placeholder="请再次输入密码" 
+					<el-input
+					type="password"
+					placeholder="请再次输入密码"
 					auto-complete="off"
 					v-model="resetForm.repass"
 					></el-input>
 				</el-form-item>
 				<el-form-item>
-					<el-button type="primary" @click="reset">重置密码</el-button>    
-				</el-form-item> 
+					<el-button type="primary" @click="reset">重置密码</el-button>
+				</el-form-item>
 			</el-form>
-    </div>  
+    </div>
   </div>
 </template>
 <style scoped>
@@ -144,7 +144,7 @@ export default {
         password: '',
         verify_code: '',
         repass: '',
-        usertype: this.$store.auth.userType
+        usertype: this.$store.state.auth.userType
       },
       // 0=不符合规则 1=手机号 2=邮箱
 			nameType: 0,
@@ -165,15 +165,15 @@ export default {
 					if(valid) {
 						this.countDown(60);
 						switch(this.nameType) {
-							case 1: 
+							case 1:
 								return this.getPhoneVerifyCode().then(resp => {
 									console.log(resp);
 								});
-							case 2: 
+							case 2:
 								return this.getEmailVerifyCode().then(resp => {
 									console.log(resp);
 								});
-							default: 
+							default:
 								return;
 						}
 					}

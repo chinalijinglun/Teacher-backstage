@@ -1,20 +1,20 @@
 <template>
   <div class="bckg">
-    <div class="regist">  
-			<h1>Regist</h1>  
+    <div class="regist">
+			<h1>Regist</h1>
 			<el-form ref="registForm" :model="registForm" :rules="rules" :validate-on-rule-change="false">
 				<el-form-item prop="username">
-					<el-input 
-					type="text" 
-					placeholder="请输入邮箱/手机号" 
+					<el-input
+					type="text"
+					placeholder="请输入邮箱/手机号"
 					v-model="registForm.username"
 					auto-complete="off"
 					></el-input>
 				</el-form-item>
 				<el-form-item prop="verify_code">
-					<el-input 
-					type="text" 
-					placeholder="验证码" 
+					<el-input
+					type="text"
+					placeholder="验证码"
 					v-model="registForm.verify_code"
 					auto-complete="off"
 					>
@@ -22,29 +22,29 @@
 					</el-input>
 				</el-form-item>
 				<el-form-item prop="password">
-					<el-input 
-					type="password" 
-					placeholder="密码" 
+					<el-input
+					type="password"
+					placeholder="密码"
 					v-model="registForm.password"
 					auto-complete="off"
 					></el-input>
 				</el-form-item>
 				<el-form-item prop="repass">
-					<el-input 
-					type="password" 
-					placeholder="密码" 
+					<el-input
+					type="password"
+					placeholder="密码"
 					auto-complete="off"
 					v-model="registForm.repass"
 					></el-input>
 				</el-form-item>
 				<el-form-item>
-					<el-button type="primary" @click="regist">注册</el-button>    
-				</el-form-item> 
+					<el-button type="primary" @click="regist">注册</el-button>
+				</el-form-item>
 			</el-form>
 			<el-row>
 				<p class="flt-left link-p"><router-link to="/login">已有账号？点击登陆</router-link></p>
 			</el-row>
-    </div>  
+    </div>
   </div>
 </template>
 <style scoped>
@@ -102,7 +102,7 @@ import {
 	authSmsverifyPost,
 	authEmailverifyPost,
 	authRegisterPost
-} from '@/api/auth'
+} from '@/api/auth';
 
 export default {
   data() {
@@ -147,7 +147,7 @@ export default {
         password: '',
         verify_code: '',
         repass: '',
-        usertype: this.$store.auth.userType
+        usertype: this.$store.state.auth.userType
       },
       // 0=不符合规则 1=手机号 2=邮箱
 			nameType: 0,
@@ -168,15 +168,15 @@ export default {
 					if(valid) {
 						this.countDown(60);
 						switch(this.nameType) {
-							case 1: 
+							case 1:
 								return this.getPhoneVerifyCode().then(resp => {
 									console.log(resp);
 								});
-							case 2: 
+							case 2:
 								return this.getEmailVerifyCode().then(resp => {
 									console.log(resp);
 								});
-							default: 
+							default:
 								return;
 						}
 					}

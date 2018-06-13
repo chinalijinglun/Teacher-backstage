@@ -1,20 +1,20 @@
 <template>
 <div class="bckg">
-	<div class="login">  
-		<h1>Login</h1>  
+	<div class="login">
+		<h1>Login</h1>
 		<el-form ref="loginForm" :model="loginForm" :rules="rules">
 			<el-form-item prop="username">
-				<el-input 
-					type="text" 
-					placeholder="请输入邮箱/手机号" 
+				<el-input
+					type="text"
+					placeholder="请输入邮箱/手机号"
 					v-model="loginForm.username"
 					auto-complete="off"
 				></el-input>
 			</el-form-item>
 			<el-form-item prop="password">
-				<el-input 
-					type="password" 
-					placeholder="密码" 
+				<el-input
+					type="password"
+					placeholder="密码"
 					v-model="loginForm.password"
 					auto-complete="off"
 				></el-input>
@@ -27,7 +27,7 @@
 			<p class="flt-left link-p"><router-link to="/regist">新用户？点击注册</router-link></p>
 			<p class="flt-right link-p"><router-link to="/reset">忘记密码</router-link></p>
 		</el-row>
-	</div>  
+	</div>
 </div>
 </template>
 <style scoped>
@@ -129,7 +129,7 @@ export default {
 			loginForm: {
 				username: '',
 				password: '',
-				usertype: this.$store.auth.userType
+				usertype: this.$store.state.auth.userType
 			},
 			rules
 		};
