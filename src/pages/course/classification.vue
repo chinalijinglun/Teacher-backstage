@@ -17,9 +17,9 @@
             </el-row>
         </div>
          <el-row class="state-createTime">
-            <el-form-item label="创建时间：">    
-                <date-range 
-                :start-date.sync="form.updated_at.gt" 
+            <el-form-item label="创建时间：">
+                <date-range
+                :start-date.sync="form.updated_at.gt"
                 :end-date.sync="form.updated_at.lt"
                 size="mini"
                 range-separator="-"
@@ -58,14 +58,14 @@
               <span>操作</span>
             </div>
         </div>
-        <el-tree 
-          :data="tableData" 
-          :props="defaultProps" 
-          node-key="id" 
-          default-expand-all 
-          :expand-on-click-node="false" 
-          :render-content="renderContent" 
-          accordion 
+        <el-tree
+          :data="tableData"
+          :props="defaultProps"
+          node-key="id"
+          default-expand-all
+          :expand-on-click-node="false"
+          :render-content="renderContent"
+          accordion
           ref="tree"
         >
         </el-tree>
@@ -79,6 +79,9 @@ import {
 import {
   curriculumGet
 } from '@/api/curriculum';
+import {
+  subjectGet
+} from '@/api/subject';
 
 export default {
   name: "classification",

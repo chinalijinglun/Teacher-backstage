@@ -7,7 +7,7 @@
         <el-input size="mini" v-model="form.full_name_zh"></el-input>
       </el-form-item>
       <el-form-item label="英文名称" prop="full_name">
-        <el-input size="mini" v-model="form.full_name"></el-input>
+        <el-input size="mini" v-model="form.subject_name"></el-input>
       </el-form-item>
       <div class="chi-bebal">
         <el-form-item label="中文介绍" prop="desc_zh" style="width:65%" class="zh-desc">
@@ -43,11 +43,11 @@
   </div>
 </template>
 <script>
-  import { curriculumPost } from '@/api/curriculum';
+  import { subjectPost } from '@/api/subject';
   import { mapState } from 'vuex'
 
   export default {
-    name: "addCurriculum",
+    name: "addSubject",
     computed: {
       ...mapState({
         userName: store=>store.auth.userName
@@ -56,10 +56,10 @@
     data() {
       return {
         form: {
-          full_name: '',
-          full_name_zh: '',
-          desc: '',
-          desc_zh: '',
+          subject_name: '',
+          subject_name_zh: '',
+          subject_desc: '',
+          subject_desc_zh: '',
           cover_url: '',
           status: this.$VALID_ENUM.IN_FORCE,
           file_list: []
@@ -88,19 +88,19 @@
         this.$refs.form.validate(valid => {
           if (valid) {
             const {
-              full_name,
-              full_name_zh,
-              desc,
-              desc_zh,
+              subject_name,
+              subject_name_zh,
+              subject_desc,
+              subject_desc_zh,
               cover_url,
               status
             } = this.form;
 
-            curriculumPost({
-              full_name,
-              full_name_zh,
-              desc,
-              desc_zh,
+            subjectPost({
+              subject_name,
+              subject_name_zh,
+              subject_desc,
+              subject_desc_zh,
               cover_url,
               status,
               created_at: new Date(),

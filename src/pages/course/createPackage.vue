@@ -25,7 +25,6 @@
                     </el-select>
                 </el-form-item>
             </el-row>
-
             <el-row>
                 <el-form-item label="班型">
                     <el-select v-model="form.status" placeholder="所有班型" size="mini">
