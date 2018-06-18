@@ -5,16 +5,7 @@
     <el-form  label-width="100px" class="demo-ruleForm">
       <el-row>
         <el-form-item label="课程分类">
-          <el-select v-model="type.curriculum_id" placeholder="一级分类" size="mini">
-            <el-option label="AP课程" value=""></el-option>
-          </el-select>
-          <el-select v-model="type.subject_category_id" placeholder="二级分类" size="mini">
-            <el-option label="AP课系统学习" value=""></el-option>
-          </el-select>
-          <el-select v-model="type.subject_id" placeholder="三级分类" size="mini">
-            <el-option label="AP心理学" value=""></el-option>
-            <el-option label="AP微积分" value=""></el-option>
-          </el-select>
+          <curriculum-select v-model="form.classLs"></curriculum-select>
         </el-form-item>
       </el-row>
       <el-row>
@@ -74,23 +65,25 @@
 </template>
 
 <script>
-export default {
-  data(){
-    return{
-      resource:'',
-      type: {
-        curriculum_id: '',
-        subject_category_id: '',
-        subject_id: ''
-      },
-      form: {
-        status: "",
-        status2: "",
-        status3: ""
+
+  export default {
+    data(){
+      return{
+        resource:'',
+        type: {
+          curriculum_id: '',
+          subject_category_id: '',
+          subject_id: ''
+        },
+        form: {
+          status: "",
+          status2: "",
+          status3: "",
+          classLs: []
+        }
       }
     }
   }
-}
 </script>
 
 <style scoped>

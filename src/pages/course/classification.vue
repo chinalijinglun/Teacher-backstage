@@ -219,6 +219,13 @@ export default {
       });
     },
     querySubject(subject_category_id) {
+      const {
+        full_name,
+        id,
+        updated_by,
+        state,
+        updated_at
+      } = this.form;
       const filter = this.$json2filter({
         'subject_name|subject_name_zh': full_name,
         id,
