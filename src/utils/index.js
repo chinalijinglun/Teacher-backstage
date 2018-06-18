@@ -48,6 +48,8 @@ const install = (Vue) => {
 
   // 默认每页分页条数
   Vue.prototype.$DEFAULT_LIMIT = 10;
+  // 默认每页分页条数
+  Vue.prototype.$MINI_LIMIT = 5;
   // 不需要分页的时候的最大数据条数
   Vue.prototype.$NO_PAGE_LIMIT = 100;
 }

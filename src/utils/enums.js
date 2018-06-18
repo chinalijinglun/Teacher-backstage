@@ -16,14 +16,6 @@ export const COURSE_TYPE = {
 
 export const CLASS_TYPE = {
   '1v1': '1 v 1',
-  '1V4': '1 v 4',
-  '1VN': '1 v n'
+  '1v4': '1 v 4',
+  '1vn': '1 v n'
 };
-
-export const PROJECT_TYPE = {
-  ALL: 1,
-  MEI_GAO: 2,
-  XUE_FEN: 3,
-  AP: 4,
-  OTHERS: 5
-}
