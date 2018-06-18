@@ -30,9 +30,9 @@
         </el-upload>
       </el-form-item>
       <el-form-item label="状态">
-        <el-radio-group v-model="form.status">
-          <el-radio :label="$VALID_ENUM.IN_FORCE">有效</el-radio>
-          <el-radio :label="$VALID_ENUM.DELETED">无效</el-radio>
+        <el-radio-group v-model="form.state">
+          <el-radio :label="$VALID_ENUM.VALID">有效</el-radio>
+          <el-radio :label="$VALID_ENUM.INVALID">无效</el-radio>
         </el-radio-group>
       </el-form-item>
       <el-form-item>
@@ -43,7 +43,7 @@
   </div>
 </template>
 <script>
-  import { curriculumPost } from '@/api/curriculum';
+  import { curriculumPost, curriculumGetByCurriculumidBare, curriculumPutByCurriculumid } from '@/api/curriculum';
   import { mapState } from 'vuex'
 
   export default {
@@ -53,15 +53,22 @@
         userName: store=>store.auth.userName
       })
     },
+    created() {
+      this.form.id = this.$route.query.id;
+      if(this.form.id) {
+        this.queryInfo(this.form.id);
+      }
+    },
     data() {
       return {
         form: {
+          id: '',
           full_name: '',
           full_name_zh: '',
           desc: '',
           desc_zh: '',
           cover_url: '',
-          status: this.$VALID_ENUM.IN_FORCE,
+          state: this.$VALID_ENUM.VALID,
           file_list: []
         },
         rules: {
@@ -84,33 +91,60 @@
       };
     },
     methods: {
+      updateCurriculum(id, form) {
+        curriculumPutByCurriculumid(id, {
+          ...form,
+          created_at: new Date(),
+          updated_at: new Date(),
+          updated_by: this.userName
+        }).then(resp => {
+          this.$message('更新成功！');
+          this.$router.push('/course/classification')
+        });
+      },
+      addCurriculum(form) {
+        curriculumPost({
+          ...form,
+          created_at: new Date(),
+          updated_at: new Date(),
+          updated_by: this.userName
+        }).then(resp => {
+          this.$message('创建成功！');
+          this.$router.push('/course/classification')
+        });
+      },
       submitForm() {
         this.$refs.form.validate(valid => {
           if (valid) {
             const {
+              id,
               full_name,
               full_name_zh,
               desc,
               desc_zh,
               cover_url,
-              status
+              state
             } = this.form;
-
-            curriculumPost({
-              full_name,
-              full_name_zh,
-              desc,
-              desc_zh,
-              cover_url,
-              status,
-              created_at: new Date(),
-              updated_at: new Date(),
-              created_by: this.userName,
-              updated_by: this.userName
-            }).then(resp => {
-              this.$message('创建成功！');
-              this.$router.push('/course/classification')
-            });
+            if(id) {
+              this.updateCurriculum(id, {
+                id,
+                full_name,
+                full_name_zh,
+                desc,
+                desc_zh,
+                cover_url,
+                state
+              });
+            } else {
+              this.addCurriculum({
+                full_name,
+                full_name_zh,
+                desc,
+                desc_zh,
+                cover_url,
+                state
+              });
+            }
           } else {
             console.log("error submit!!");
             return false;
@@ -122,6 +156,17 @@
       },
       onUploadSuccess(e) {
         this.form.cover_url = e[0].download_file;
+      },
+      queryInfo(id) {
+        return curriculumGetByCurriculumidBare(id).then(resp => {
+          for(let key in this.form) {
+            this.form[key] = resp.data[key];
+          }
+          this.form.file_list = [{
+            name: 'cover_img',
+            url: this.$baseApiUrl + resp.data.cover_url
+          }];
+        });
       }
     }
   };

@@ -6,12 +6,12 @@
       <el-submenu v-for="(item,index) in menulist" :index='index+""' :key='index'>
         <template slot="title">{{item.name}}</template>
         <el-menu-item-group v-for="(items,subindex) in item.children" :key='subindex'>
-          <router-link :key='subindex' :index='subindex+""' :to='item.parent+"/"+items.path'>
-            <el-menu-item class="nav-link">{{items.name}}</el-menu-item>
+          <router-link :to='item.parent+"/"+items.path'>
+            <el-menu-item :index='subindex+""' class="nav-link">{{items.name}}</el-menu-item>
           </router-link>
         </el-menu-item-group>
       </el-submenu>
-      
+
     </el-menu>
   </el-aside>
   </div>
@@ -29,7 +29,7 @@ export default {
     var _that = this
     this.$axios.get('/static/left.json').then(function(data){
       _that.menulist = data.data;
-    })  
+    })
   }
 }
 </script>

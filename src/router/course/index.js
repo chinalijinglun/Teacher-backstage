@@ -12,6 +12,8 @@ import date from '@/pages/course/date';
 import dateTeacher from '@/pages/course/dateTeacher';
 import generalCourse from '@/pages/course/generalCourse';
 import addCurriculum from '@/pages/course/addCurriculum';
+import addSubject from '@/pages/course/addSubject';
+import addSubjectCategory from '@/pages/course/addSubjectCategory';
 
 export default [
     {
@@ -32,6 +34,18 @@ export default [
       path: 'addCurriculum',
       name: 'addCurriculum',
       component: addCurriculum
+    },
+    {
+      name: '创建二级分类',
+      path: 'addSubjectCategory',
+      name: 'addSubjectCategory',
+      component: addSubjectCategory
+    },
+    {
+      name: '创建三级分类',
+      path: 'addSubject',
+      name: 'addSubject',
+      component: addSubject
     },
     {
       name: '课程包',

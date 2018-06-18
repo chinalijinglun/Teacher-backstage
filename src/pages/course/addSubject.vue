@@ -3,19 +3,19 @@
   <div class="createfication">
     <h4>新增课程分类</h4>
     <el-form  label-width="100px" ref="form" :rules="rules" :model="form" class="demo-ruleForm">
-      <el-form-item label="中文名称" prop="full_name_zh">
-        <el-input size="mini" v-model="form.full_name_zh"></el-input>
+      <el-form-item label="中文名称" prop="subject_name_zh">
+        <el-input size="mini" v-model="form.subject_name_zh"></el-input>
       </el-form-item>
-      <el-form-item label="英文名称" prop="full_name">
+      <el-form-item label="英文名称" prop="subject_name">
         <el-input size="mini" v-model="form.subject_name"></el-input>
       </el-form-item>
       <div class="chi-bebal">
-        <el-form-item label="中文介绍" prop="desc_zh" style="width:65%" class="zh-desc">
-          <el-input type="textarea" v-model="form.desc_zh"></el-input>
+        <el-form-item label="中文介绍" prop="subject_desc_zh" style="width:65%" class="zh-desc">
+          <el-input type="textarea" v-model="form.subject_desc_zh"></el-input>
         </el-form-item>
       </div>
-      <el-form-item label="英文介绍" prop="desc">
-        <el-input type="textarea" v-model="form.desc"></el-input>
+      <el-form-item label="英文介绍" prop="subject_desc">
+        <el-input type="textarea" v-model="form.subject_desc"></el-input>
       </el-form-item>
       <el-form-item label="课程封面" prop="file_list">
         <el-upload
@@ -30,9 +30,9 @@
         </el-upload>
       </el-form-item>
       <el-form-item label="状态">
-        <el-radio-group v-model="form.status">
-          <el-radio :label="$VALID_ENUM.IN_FORCE">有效</el-radio>
-          <el-radio :label="$VALID_ENUM.DELETED">无效</el-radio>
+        <el-radio-group v-model="form.state">
+          <el-radio :label="$VALID_ENUM.VALID">有效</el-radio>
+          <el-radio :label="$VALID_ENUM.INVALID">无效</el-radio>
         </el-radio-group>
       </el-form-item>
       <el-form-item>
@@ -43,7 +43,11 @@
   </div>
 </template>
 <script>
-  import { subjectPost } from '@/api/subject';
+  import {
+    subjectPost,
+    subjectGetBySubjectid,
+    subjectPutBySubjectid
+  } from '@/api/subject';
   import { mapState } from 'vuex'
 
   export default {
@@ -53,9 +57,18 @@
         userName: store=>store.auth.userName
       })
     },
+    created() {
+      this.form.curriculum_id = this.$route.query.curriculum_id;
+      this.form.subject_category_id = this.$route.query.subject_category_id;
+      this.form.id = this.$route.query.id;
+      if(this.form.id) {
+        this.querySubject(this.form.id);
+      }
+    },
     data() {
       return {
         form: {
+          id: '',
           curriculum_id: '',
           subject_category_id: '',
           subject_name: '',
@@ -63,20 +76,20 @@
           subject_desc: '',
           subject_desc_zh: '',
           cover_url: '',
-          status: this.$VALID_ENUM.IN_FORCE,
+          state: this.$VALID_ENUM.VALID,
           file_list: []
         },
         rules: {
-          full_name: [
+          subject_name: [
             { required: true, message: "请输入英文名称", trigger: "blur" }
           ],
-          full_name_zh: [
+          subject_name_zh: [
             { required: true, message: "请输入中文名称", trigger: "blur" }
           ],
-          desc: [
+          subject_desc: [
             { required: true, message: "请输入英文介绍", trigger: "blur" }
           ],
-          desc_zh: [
+          subject_desc_zh: [
             { required: true, message: "请输入中文介绍", trigger: "blur" }
           ],
           cover_url: [
@@ -86,33 +99,66 @@
       };
     },
     methods: {
+      addSubject(form){
+        return subjectPost({
+          ...form,
+          created_at: new Date(),
+          updated_at: new Date(),
+          updated_by: this.userName
+        }).then(resp => {
+          this.$message('创建成功！');
+          this.$router.push('/course/classification')
+        });
+      },
+      updateSubject(id, form) {
+        return subjectPutBySubjectid(id, {
+          ...form,
+          created_at: new Date(),
+          updated_at: new Date(),
+          updated_by: this.userName
+        }).then(resp => {
+          this.$message('更新成功！');
+          this.$router.push('/course/classification')
+        });
+      },
       submitForm() {
         this.$refs.form.validate(valid => {
           if (valid) {
             const {
+              id,
+              curriculum_id,
+              subject_category_id,
               subject_name,
               subject_name_zh,
               subject_desc,
               subject_desc_zh,
               cover_url,
-              status
+              state
             } = this.form;
-
-            subjectPost({
-              subject_name,
-              subject_name_zh,
-              subject_desc,
-              subject_desc_zh,
-              cover_url,
-              status,
-              created_at: new Date(),
-              updated_at: new Date(),
-              created_by: this.userName,
-              updated_by: this.userName
-            }).then(resp => {
-              this.$message('创建成功！');
-              this.$router.push('/course/classification')
-            });
+            if(id) {
+              this.updateSubject(id, {
+                id,
+                curriculum_id,
+                subject_category_id,
+                subject_name,
+                subject_name_zh,
+                subject_desc,
+                subject_desc_zh,
+                cover_url,
+                state
+              });
+            } else {
+              this.addSubject({
+                curriculum_id,
+                subject_category_id,
+                subject_name,
+                subject_name_zh,
+                subject_desc,
+                subject_desc_zh,
+                cover_url,
+                state
+              });
+            }
           } else {
             console.log("error submit!!");
             return false;
@@ -124,6 +170,17 @@
       },
       onUploadSuccess(e) {
         this.form.cover_url = e[0].download_file;
+      },
+      querySubject(id) {
+        return subjectGetBySubjectid(id).then(resp => {
+          for(let key in this.form) {
+            this.form[key] = resp.data[key];
+          }
+          this.form.file_list = [{
+            name: 'cover_img',
+            url: this.$baseApiUrl + resp.data.cover_url
+          }];
+        });
       }
     }
   };

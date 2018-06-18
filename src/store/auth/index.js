@@ -1,4 +1,4 @@
-import { 
+import {
   setLocalStorage,
   getLocalStorage,
   deleteLocalStorage
@@ -6,7 +6,7 @@ import {
 
 const state = {
   authorization: getLocalStorage('authorization'),
-  userName: '',
+  userName: getLocalStorage('userName'),
   userType: 'SysUser'
 };
 

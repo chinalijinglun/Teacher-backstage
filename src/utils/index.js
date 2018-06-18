@@ -4,25 +4,23 @@ import {
   dateFmt,
   dateFactory
 } from './date';
-import { 
-  axios, 
-  baseAxios, 
-  baseApiUrl 
+import {
+  axios,
+  baseAxios,
+  baseApiUrl
 } from './axios';
-import { 
+import {
   MOBILE_REG_EXP,
   EMAIL_REG_EXP
 } from './regExp';
 
-import { 
+import {
   setLocalStorage,
   getLocalStorage,
   deleteLocalStorage
 } from './localStorage';
 
-import {
-  VALID_ENUM
-} from './enums';
+import * as enums from './enums';
 import json2filter from './json2filter';
 
 const install = (Vue) => {
@@ -38,8 +36,20 @@ const install = (Vue) => {
   Vue.prototype.$setLocalStorage = setLocalStorage;
   Vue.prototype.$getLocalStorage = getLocalStorage;
   Vue.prototype.$deleteLocalStorage = deleteLocalStorage;
-  Vue.prototype.$VALID_ENUM = VALID_ENUM;
   Vue.prototype.$json2filter = json2filter;
+
+  // enum start
+  // 有效状态
+  for(let key in enums) {
+    Vue.prototype[`$${key}`] = enums[key];
+  }
+
+  // enum end
+
+  // 默认每页分页条数
+  Vue.prototype.$DEFAULT_LIMIT = 10;
+  // 不需要分页的时候的最大数据条数
+  Vue.prototype.$NO_PAGE_LIMIT = 100;
 }
 
 export default {

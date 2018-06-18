@@ -3,11 +3,11 @@
   <div class="createfication">
     <h4>新增课程分类</h4>
     <el-form  label-width="100px" ref="form" :rules="rules" :model="form" class="demo-ruleForm">
-      <el-form-item label="中文名称" prop="full_name_zh">
-        <el-input size="mini" v-model="form.full_name_zh"></el-input>
+      <el-form-item label="中文名称" prop="subject_category_zh">
+        <el-input size="mini" v-model="form.subject_category_zh"></el-input>
       </el-form-item>
-      <el-form-item label="英文名称" prop="full_name">
-        <el-input size="mini" v-model="form.subject_name"></el-input>
+      <el-form-item label="英文名称" prop="subject_category">
+        <el-input size="mini" v-model="form.subject_category"></el-input>
       </el-form-item>
       <div class="chi-bebal">
         <el-form-item label="中文介绍" prop="desc_zh" style="width:65%" class="zh-desc">
@@ -30,9 +30,9 @@
         </el-upload>
       </el-form-item>
       <el-form-item label="状态">
-        <el-radio-group v-model="form.status">
-          <el-radio :label="$VALID_ENUM.IN_FORCE">有效</el-radio>
-          <el-radio :label="$VALID_ENUM.DELETED">无效</el-radio>
+        <el-radio-group v-model="form.state">
+          <el-radio :label="$VALID_ENUM.VALID">有效</el-radio>
+          <el-radio :label="$VALID_ENUM.INVALID">无效</el-radio>
         </el-radio-group>
       </el-form-item>
       <el-form-item>
@@ -43,32 +43,45 @@
   </div>
 </template>
 <script>
-  import { subjectPost } from '@/api/subject';
+  import {
+    subjectCategoryPost,
+    subjectCategoryGetBySubjectcategoryId,
+    subjectCategoryPutBySubjectcategoryId
+  } from '@/api/subject_category';
   import { mapState } from 'vuex'
 
   export default {
-    name: "addSubject",
+    name: "addSubjectCategory",
     computed: {
       ...mapState({
         userName: store=>store.auth.userName
       })
     },
+    created() {
+      this.form.curriculum_id = this.$route.query.curriculum_id;
+      this.form.id = this.$route.query.id;
+      if(this.form.id) {
+        this.querySubjectCategory(this.form.id);
+      }
+    },
     data() {
       return {
         form: {
-          subject_name: '',
-          subject_name_zh: '',
-          subject_desc: '',
-          subject_desc_zh: '',
+          id: '',
+          curriculum_id: '',
+          subject_category: '',
+          subject_category_zh: '',
+          desc: '',
+          desc_zh: '',
           cover_url: '',
-          status: this.$VALID_ENUM.IN_FORCE,
+          state: this.$VALID_ENUM.VALID,
           file_list: []
         },
         rules: {
-          full_name: [
+          subject_category: [
             { required: true, message: "请输入英文名称", trigger: "blur" }
           ],
-          full_name_zh: [
+          subject_category_zh: [
             { required: true, message: "请输入中文名称", trigger: "blur" }
           ],
           desc: [
@@ -84,33 +97,65 @@
       };
     },
     methods: {
+      addSubjectCategory(form) {
+
+        subjectCategoryPost({
+          ...form,
+          created_at: new Date(),
+          updated_at: new Date(),
+          updated_by: this.userName
+        }).then(resp => {
+          this.$message('创建成功！');
+          this.$router.push('/course/classification')
+        });
+      },
+      updateSubjectCategory(id, form) {
+
+        subjectCategoryPutBySubjectcategoryId(id, {
+          ...form,
+          created_at: new Date(),
+          updated_at: new Date(),
+          updated_by: this.userName
+        }).then(resp => {
+          this.$message('更新成功！');
+          this.$router.push('/course/classification')
+        });
+      },
       submitForm() {
         this.$refs.form.validate(valid => {
           if (valid) {
             const {
-              subject_name,
-              subject_name_zh,
-              subject_desc,
-              subject_desc_zh,
+              id,
+              curriculum_id,
+              subject_category,
+              subject_category_zh,
+              desc,
+              desc_zh,
               cover_url,
-              status
+              state
             } = this.form;
-
-            subjectPost({
-              subject_name,
-              subject_name_zh,
-              subject_desc,
-              subject_desc_zh,
-              cover_url,
-              status,
-              created_at: new Date(),
-              updated_at: new Date(),
-              created_by: this.userName,
-              updated_by: this.userName
-            }).then(resp => {
-              this.$message('创建成功！');
-              this.$router.push('/course/classification')
-            });
+            if(id) {
+              this.updateSubjectCategory(id, {
+                id,
+                curriculum_id,
+                subject_category,
+                subject_category_zh,
+                desc,
+                desc_zh,
+                cover_url,
+                state
+              });
+            } else {
+              this.addSubjectCategory({
+                curriculum_id,
+                subject_category,
+                subject_category_zh,
+                desc,
+                desc_zh,
+                cover_url,
+                state
+              });
+            }
           } else {
             console.log("error submit!!");
             return false;
@@ -122,6 +167,17 @@
       },
       onUploadSuccess(e) {
         this.form.cover_url = e[0].download_file;
+      },
+      querySubjectCategory(id) {
+        return subjectCategoryGetBySubjectcategoryId(id).then(resp => {
+          for(let key in this.form) {
+            this.form[key] = resp.data[key];
+          }
+          this.form.file_list = [{
+            name: 'cover_img',
+            url: this.$baseApiUrl + resp.data.cover_url
+          }];
+        });
       }
     }
   };
