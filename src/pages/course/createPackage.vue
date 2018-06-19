@@ -61,7 +61,7 @@
       </el-form-item>
       <el-form-item class="submit-button">
         <el-button type="primary" @click="handlerSubmit" size="mini">提交</el-button>
-        <el-button size="mini" @click="resetForm('ruleForm')">返回</el-button>
+        <el-button size="mini" @click="$router.back()">返回</el-button>
       </el-form-item>
     </el-form>
     <teacher-dialog :visible.sync="showTeacherDialog" @chose="handlerChoseTeacher"></teacher-dialog>
@@ -71,7 +71,8 @@
 <script>
   import {
     coursePost,
-    coursePutByCourseId
+    coursePutByCourseId,
+    courseBareGetByCourseId
   } from "@/api/course";
   import { mapState } from 'vuex'
 
@@ -94,12 +95,25 @@
         }
       }
     },
+    created() {
+      this.form.id = this.$route.query.id;
+      if(this.form.id) {
+        this.getCourseById(this.form.id);
+      }
+    },
     computed: {
       ...mapState({
         userName: store=>store.auth.userName
       })
     },
     methods: {
+      getCourseById(id) {
+        courseBareGetByCourseId(id).then(resp=> {
+          for(let key in this.form) {
+            resp.data[key]&&(this.form[key] = resp.data[key]);
+          }
+        })
+      },
       valid() {
         if(!this.form.classLs[2]) {
           this.$message.error('请选择课程分类！');

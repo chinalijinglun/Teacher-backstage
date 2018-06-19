@@ -12,13 +12,13 @@
 			<div class="inps">
 				<el-row>
 					<el-form-item label="课程包名称：">
-						<el-input size="mini"></el-input>
+						<el-input size="mini" v-model="form.course_name"></el-input>
 					</el-form-item>
 					<el-form-item label="课程包ID：">
-						<el-input size="mini"></el-input>
+						<el-input size="mini" v-model="form.id"></el-input>
 					</el-form-item>
 					<el-form-item label="操作人：">
-						<el-input size="mini"></el-input>
+						<el-input size="mini" v-model="form.updated_by"></el-input>
 					</el-form-item>
 				</el-row>
 			</div>
@@ -45,17 +45,15 @@
 					</el-select>
 				</el-form-item>
 			</el-row>
-				<el-button type="primary" size="mini">查询</el-button>
+				<el-button type="primary" size="mini" @click="query">查询</el-button>
+				<router-link to="/course/createPackage"><el-button type="primary" size="mini">创建课程包</el-button></router-link>
+				<el-button type="primary" class="dels" size="mini">删除</el-button>
 			</el-form>
 		</div>
 		<div class="table-list">
-			<div class="operation">
-				<router-link to="/course/createPackage"><el-button type="primary" size="mini">创建课程包</el-button></router-link>
-				<el-button type="primary" class="dels" size="mini">删除</el-button>
-			</div>
 			<el-table :data="tableData" style="width: 100%;margin-top:20px;">
 				<el-table-column type="selection" width="55"></el-table-column>
-				<el-table-column fixed prop="zhname" label="中文名称" style="width: 15%;">
+				<el-table-column fixed prop="course_name_zh" label="中文名称" style="width: 15%;">
 				</el-table-column>
 				<el-table-column prop="course_name" label="英文名称" style="width: 15%;">
 				</el-table-column>
@@ -67,11 +65,11 @@
 				</el-table-column>
 				<el-table-column prop="updated_by" label="创建人" style="width: 10%;">
 				</el-table-column>
-				<el-table-column prop="updated_at" label="创建时间" style="width: 15%;">
+				<el-table-column prop="created_at" label="创建时间" style="width: 15%;">
 				</el-table-column>
 				<el-table-column fixed="right" label="操作" style="width: 15%;">
 				<template slot-scope="scope">
-					<button type="button" class="el-button el-button--default el-button--small">
+					<button @click="$router.push({path: '/course/createPackage', query: { id: scope.row.id}})" type="button" class="el-button el-button--default el-button--small">
 						<span>编辑</span>
 					</button>
 					<button type="button" @click="handleClick(scope.row)" class="el-button el-button--default el-button--small">
@@ -81,32 +79,35 @@
 				</el-table-column>
 			</el-table>
 		</div>
+		<el-row style="text-align: right">
+			<el-pagination
+				@current-change="handleCurrentChange"
+				:current-page="form.page"
+				:page-size="10"
+				layout="total, prev, pager, next, jumper"
+				:total="totalCount">
+			</el-pagination>
+		</el-row>
 	</div>
 </template>
 <script>
 import {
-	courseGet
+	courseGet,
+	courseBareGet
 } from '@/api/course';
-import {
-  curriculumGet
-} from '@/api/curriculum';
-import {
-	subjectCategoryGet
-} from '@/api/subject_category';
+import paginationMix from '@/components/commons/mixins/paginationMix'
 
 export default {
   created() {
 		this.query();
-		this.getCurriculumLs();
 	},
+	mixins: [paginationMix],
   data() {
     return {
 			tableData: [],
-			curriculumLs: [],
-			subjectCategoryLs: [],
-			subjectLs: [],
+			totalCount: 0,
       form: {
-        classLs: '',
+        classLs: [],
         course_name: "",
 				id: "",
 				startDate: '',
@@ -115,7 +116,7 @@ export default {
           lt: ''
         },
 				updated_by: "",
-				page: ""
+				page: 1
       }
     };
   },
@@ -133,26 +134,16 @@ export default {
         page
       } = this.form;
       const filter = this.$json2filter({
-        subject_id: classLs[2],
+        subject_id: [classLs[2]],
         'course_name|course_name_zh': course_name,
         id,
         created_at,
         updated_by
       });
-			courseGet(filter,{page}).then(resp => {
+			courseBareGet(filter,{page}).then(resp => {
 				this.tableData = resp.data.objects;
+				this.totalCount = resp.data.num_results;
 			});
-		},
-		getCurriculumLs() {
-			curriculumGet().then(resp=> {
-				this.curriculumLs = resp.data.objects;
-			});
-		},
-		getSubjectCategory(curriculum_id) {
-			const filters = this.$json2filter({curriculum_id: [curriculum_id]});
-			subjectCategoryGet().then(resp => {
-
-			})
 		}
   },
 };
