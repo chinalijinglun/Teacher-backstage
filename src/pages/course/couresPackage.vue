@@ -5,18 +5,7 @@
 			<div class="classify">
 				<el-row>
 					<el-form-item label="分类：">
-						<el-select v-model="form.status" placeholder="一级分类" size="mini" @change="getSubjectCategory">
-							<el-option label="全部" value=""></el-option>
-							<el-option v-for="(item,index) in curriculumLs" :key="index" :label="item.full_name" :value="item.id"></el-option>
-						</el-select>
-						<el-select v-model="form.status2" placeholder="二级分类" size="mini">
-							<el-option label="全部" value=""></el-option>
-							<el-option v-for="(item,index) in subjectCategoryLs" :key="index" :label="item.subject_category" :value="item.id"></el-option>
-						</el-select>
-						<el-select v-model="form.status3" placeholder="三级分类" size="mini">
-							<el-option label="全部" value=""></el-option>
-							<el-option v-for="(item,index) in subjectLs" :key="index" :label="item.subject_category" :value="item.id"></el-option>
-						</el-select>
+            <curriculum-select v-model="form.classLs"></curriculum-select>
 					</el-form-item>
 				</el-row>
 			</div>
@@ -33,12 +22,12 @@
 					</el-form-item>
 				</el-row>
 			</div>
-				
+
 			<el-row class="state-createTime">
-				<el-form-item label="创建时间：">    
-					<date-range 
-					:start-date.sync="form.startDate" 
-					:end-date.sync="form.endDate"
+				<el-form-item label="创建时间：">
+					<date-range
+					:start-date.sync="form.created_at.gt"
+					:end-date.sync="form.created_at.lt"
 					size="mini"
 					range-separator="-"
 					start-placeholder="开始时间"
@@ -117,10 +106,14 @@ export default {
 			subjectCategoryLs: [],
 			subjectLs: [],
       form: {
+        classLs: '',
         course_name: "",
 				id: "",
 				startDate: '',
-				endDate: '',
+				created_at: {
+          gt: '',
+          lt: ''
+        },
 				updated_by: "",
 				page: ""
       }
@@ -131,7 +124,22 @@ export default {
       console.log(row);
 		},
 		query() {
-			courseGet({}).then(resp => {
+      const {
+        classLs,
+        course_name,
+        id,
+        created_at,
+        updated_by,
+        page
+      } = this.form;
+      const filter = this.$json2filter({
+        subject_id: classLs[2],
+        'course_name|course_name_zh': course_name,
+        id,
+        created_at,
+        updated_by
+      });
+			courseGet(filter,{page}).then(resp => {
 				this.tableData = resp.data.objects;
 			});
 		},
@@ -143,7 +151,7 @@ export default {
 		getSubjectCategory(curriculum_id) {
 			const filters = this.$json2filter({curriculum_id: [curriculum_id]});
 			subjectCategoryGet().then(resp => {
-				
+
 			})
 		}
   },

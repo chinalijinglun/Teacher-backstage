@@ -15,7 +15,7 @@ export const COURSE_TYPE = {
 };
 
 export const CLASS_TYPE = {
-  '1v1': '1 v 1',
-  '1v4': '1 v 4',
-  '1vn': '1 v n'
+  '1 v 1': 1,
+  '1 v 4': 2,
+  '1 v n': 3
 };
