@@ -1,5 +1,4 @@
 import classification from '@/pages/course/classification';
-import createCourse from '@/pages/course/createCourse';
 import couresPackage from '@/pages/course/couresPackage';
 import createPackage from '@/pages/course/createPackage';
 import lecture from '@/pages/course/lecture';
@@ -22,12 +21,6 @@ export default [
       path: 'classification',
       name: 'classification',
       component: classification
-    },
-    {
-      name: '创建分类',
-      path: 'createCourse',
-      name: 'createCourse',
-      component: createCourse
     },
     {
       name: '创建一级分类',
