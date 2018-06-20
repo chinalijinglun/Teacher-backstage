@@ -1,4 +1,4 @@
-<template>    
+<template>
   <el-date-picker
     v-model="dateRange"
     type="datetimerange"
@@ -54,8 +54,8 @@
     },
     watch: {
       dateRange(v, ov) {
-        const startDate = JSON.stringify(v[0]).replace(/"/g,'');
-        const endDate = JSON.stringify(v[1]).replace(/"/g,'');
+        const startDate = this.$dateFmt(v[0]);
+        const endDate = this.$dateFmt(v[1]);
         this.$emit('update:startDate', startDate);
         this.$emit('update:endDate', endDate);
       }
