@@ -12,8 +12,8 @@ const baseAxios = axios.create({
 });
 
 baseAxios.interceptors.request.use(config => {
-  config.headers['authorization'] = store.state.auth.authorization;
-  config.headers['lang'] = 1000000;
+  // config.headers['authorization'] = store.state.auth.authorization;
+  // config.headers['lang'] = 1000000;
   return config;
 }, error => {
   return Promise.reject(error);
