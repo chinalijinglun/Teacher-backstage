@@ -73,54 +73,54 @@
 </template>
 
 <script>
-    export default {
-        data() {
-            return {
-                tableData: [],
-                currentPage4: 4,
-                startDate: null, //开始时间
-                endDate: null, //结束时间
-                form:{
-                    status: ''
-                }
-            }
-        },
-        methods: {
-            handleSizeChange(val) {
-                console.log(`每页 ${val} 条`);
-            },
-            handleCurrentChange(val) {
-                console.log(`当前页: ${val}`);
-            },
-        },
+export default {
+  data() {
+    return {
+      tableData: [],
+      currentPage4: 4,
+      startDate: null, //开始时间
+      endDate: null, //结束时间
+      form: {
+        status: ""
+      }
+    };
+  },
+  methods: {
+    handleSizeChange(val) {
+      console.log(`每页 ${val} 条`);
+    },
+    handleCurrentChange(val) {
+      console.log(`当前页: ${val}`);
     }
+  }
+};
 </script>
 
 <style scoped>
-    .inps .el-form-item {
-        width: 20%;
-        float: left;
-    }
-    .el-input {
-        width: 95%;
-    }
-    .inps .select-time{
-        width: 35%;
-    }
-    .course-package-top button{
-        float: left;
-        margin: 20px;
-    }
-    .course-package-top{
-        overflow: hidden;
-    }
-    .operation{
-        margin-left: 20px;
-        margin-left: 20px;
-    }
-    .block{
-        margin: 0 auto;
-        padding: 20px;
-        width: 600px;
-    }
+.inps .el-form-item {
+  width: 20%;
+  float: left;
+}
+.el-input {
+  width: 95%;
+}
+.inps .select-time {
+  width: 35%;
+}
+.course-package-top button {
+  float: left;
+  margin: 20px;
+}
+.course-package-top {
+  overflow: hidden;
+}
+.operation {
+  margin-left: 20px;
+  margin-left: 20px;
+}
+.block {
+  margin: 0 auto;
+  padding: 20px;
+  width: 600px;
+}
 </style>
