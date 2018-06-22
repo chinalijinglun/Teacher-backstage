@@ -1,4 +1,4 @@
-const DATE_FMT_DEFAULT = 'yyyy-MM-ddThh:mm:ss:SZ';
+const DATE_FMT_DEFAULT = 'yyyy-MM-ddThh:mm:ss.SZ';
 const DATE_NO_TIME_FMT = 'yyyy-MM-dd';
 
 function dateFmt(date, fmt = DATE_FMT_DEFAULT){

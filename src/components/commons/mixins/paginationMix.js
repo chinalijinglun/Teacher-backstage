@@ -18,10 +18,6 @@ export default {
     handleCurrentChange(e) {
       this.form.page = e;
       this.query();
-    },
-    handleSizeChange(e) {
-      this.form.curPage = e;
-      this.query();
     }
   }
 }

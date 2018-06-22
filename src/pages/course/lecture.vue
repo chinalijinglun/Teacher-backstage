@@ -42,7 +42,7 @@
 					</el-row>
 				</div>
 				<el-button type="primary" size="mini">查询</el-button>
-				<router-link to=""><el-button type="primary" size="mini">预约教师试讲</el-button></router-link>
+				<router-link to="/course/dateClass"><el-button type="primary" size="mini">预约教师试讲</el-button></router-link>
 				<el-button type="primary" size="mini">报名听试讲课</el-button>
 				</el-form>
 			</div>

@@ -1,6 +1,7 @@
 <template>
-<!-- 预约试讲弹窗 -->
-<div class="date-alert">
+<!-- 确认时间 -->
+<el-dialog title="预约试讲" :visible.sync="visible">
+<div>
 	<div class="teacher-say">
 		老师回复：
 	</div>
@@ -16,37 +17,22 @@
 		</div>
 	</div>
 	<div class="select-button">
-		<el-button type="primary">&nbsp;&nbsp;同意&nbsp;&nbsp;</el-button>
+		<el-button type="primary">同意</el-button>
 		<el-button type="primary">重新预约</el-button>
-		<el-button plain>&nbsp;&nbsp;关闭&nbsp;&nbsp;</el-button>
+		<el-button plain>关闭</el-button>
 	</div>
 </div>
+</el-dialog>
 </template>
 
 <script>
 export default {
-  name: "dateAlert",
-  data() {
-    return {};
-  }
+  name: "sureTimeDialog",
+  props: ["visible"]
 };
 </script>
 
 <style scoped>
-.date-alert {
-  width: 397px;
-  height: 378px;
-  border: 1px solid #999;
-  position: absolute;
-  top: 50%;
-  left: 50%;
-  background-color: #fff;
-  margin-left: -218px;
-  margin-top: -209px;
-  padding: 20px;
-  text-align: left;
-  z-index: 5;
-}
 .teacher-say {
   padding-bottom: 20px;
 }

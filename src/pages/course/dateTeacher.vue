@@ -69,63 +69,60 @@
 </template>
 
 <script>
-    import dateAlert from '@/pages/course/dateAlert'
-    export default {
-        components:{
-            dateAlert
-        },
-        data() {
-            return {
-                tableData: [{
-                date: '2016-05-03 11:25:30',
-                zhname: '0001',
-                enname: 'kira@gmail.com',
-                province: '1-876543210',
-                city: '未答复',
-                address: 'kira@gmail.com',
-                zip: 'Kira Yuan',
-                classtime: '2016-05-03 11:25:30'
-                }],
-                currentPage4: 4,
-                form:{
-                    status: ''
-                }
-            }
-        },
-        methods: {
-            handleSizeChange(val) {
-                console.log(`每页 ${val} 条`);
-            },
-            handleCurrentChange(val) {
-                console.log(`当前页: ${val}`);
-            }
-            
-        },
+export default {
+  data() {
+    return {
+      tableData: [
+        {
+          date: "2016-05-03 11:25:30",
+          zhname: "0001",
+          enname: "kira@gmail.com",
+          province: "1-876543210",
+          city: "未答复",
+          address: "kira@gmail.com",
+          zip: "Kira Yuan",
+          classtime: "2016-05-03 11:25:30"
+        }
+      ],
+      currentPage4: 4,
+      form: {
+        status: ""
+      }
+    };
+  },
+  methods: {
+    handleSizeChange(val) {
+      console.log(`每页 ${val} 条`);
+    },
+    handleCurrentChange(val) {
+      console.log(`当前页: ${val}`);
     }
+  }
+};
 </script>
 
 <style scoped>
-    .inps .el-form-item {
-        width: 20%;
-        float: left;
-    }
-    .el-input {
-        width: 95%;
-    }
-    .course-package-top button{
-        float: left;
-        margin: 20px;
-    }
-    .course-package-top{
-        overflow: hidden;
-    }
-    .operation{
-        margin-left: 20px;
-        margin-left: 20px;
-    }
-    .block{
-        margin: 0 auto;
-        padding: 20px;
-        width: 600px;
-    }
+.inps .el-form-item {
+  width: 20%;
+  float: left;
+}
+.el-input {
+  width: 95%;
+}
+.course-package-top button {
+  float: left;
+  margin: 20px;
+}
+.course-package-top {
+  overflow: hidden;
+}
+.operation {
+  margin-left: 20px;
+  margin-left: 20px;
+}
+.block {
+  margin: 0 auto;
+  padding: 20px;
+  width: 600px;
+}
 </style>

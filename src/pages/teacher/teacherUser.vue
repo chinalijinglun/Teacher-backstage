@@ -66,11 +66,7 @@
 </template>
 
 <script>
-    import dateAlert from '@/pages/course/dateAlert'
     export default {
-        components:{
-            dateAlert
-        },
         data() {
             return {
                 tableData: [],

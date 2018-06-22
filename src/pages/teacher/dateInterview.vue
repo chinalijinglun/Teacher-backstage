@@ -66,16 +66,11 @@
                 </el-pagination>
             </div>
         </div>
-        <dateAlert></dateAlert>
     </div>
 </template>
 
 <script>
-    import dateAlert from '@/pages/course/dateAlert'
     export default {
-        components:{
-            dateAlert
-        },
         data() {
             return {
                 tableData: [],
