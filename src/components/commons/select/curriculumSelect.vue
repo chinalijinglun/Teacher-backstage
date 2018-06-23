@@ -56,6 +56,7 @@
           subject_category_id: '',
           subject_id: ''
         };
+        console.log(this.value);
         const [curriculum_id, subject_category_id, subject_id] = this.value;
         this.getCurriculum().then(curriculumLs => {
           this.curriculumLs = curriculumLs;

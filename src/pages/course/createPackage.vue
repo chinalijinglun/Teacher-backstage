@@ -1,3 +1,4 @@
+import {curriculumGet} from "../../api/curriculum";
 <template>
 <!-- 创建课程包 -->
   <div class="create-package">
@@ -5,7 +6,7 @@
     <el-form  label-width="100px" class="demo-ruleForm">
       <el-row>
         <el-form-item prop="classLs" label="课程分类">
-          <curriculum-select v-model="form.classLs"></curriculum-select>
+          <curriculum-select ref="curriculum_select" v-model="form.classLs"></curriculum-select>
         </el-form-item>
       </el-row>
       <el-row>
@@ -74,6 +75,9 @@
     coursePutByCourseId,
     courseBareGetByCourseId
   } from "@/api/course";
+  import {
+    subjectGetBySubjectid
+  } from "@/api/subject";
   import { mapState } from 'vuex'
 
   export default {
@@ -98,7 +102,7 @@
     created() {
       this.form.id = this.$route.query.id;
       if(this.form.id) {
-        this.getCourseById(this.form.id);
+        this.getCourseById(this.form.id)
       }
     },
     computed: {
@@ -112,6 +116,21 @@
           for(let key in this.form) {
             resp.data[key]&&(this.form[key] = resp.data[key]);
           }
+          this.getSubjectById(resp.data.subject_id).then(subject => {
+            const a = [];
+            a[0] = subject.curriculum_id;
+            a[1] = subject.subject_category_id;
+            a[2] = resp.data.subject_id;
+            this.form.classLs = a;
+            this.$nextTick(_=>{
+              this.$refs.curriculum_select.onInit();
+            })
+          })
+        })
+      },
+      getSubjectById(id) {
+        return subjectGetBySubjectid(id).then(resp => {
+          return resp.data
         })
       },
       valid() {

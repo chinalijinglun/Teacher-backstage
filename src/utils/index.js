@@ -21,7 +21,11 @@ import {
 } from './localStorage';
 
 import * as enums from './enums';
-import json2filter from './json2filter';
+import {
+  json2filter,
+  getNopageQueryParams,
+  getQueryParams
+} from './json2filter';
 
 const install = (Vue) => {
   Vue.prototype.$dateFmt = dateFmt;
@@ -37,6 +41,8 @@ const install = (Vue) => {
   Vue.prototype.$getLocalStorage = getLocalStorage;
   Vue.prototype.$deleteLocalStorage = deleteLocalStorage;
   Vue.prototype.$json2filter = json2filter;
+  Vue.prototype.$getQueryParams = getQueryParams;
+  Vue.prototype.$getNopageQueryParams = getNopageQueryParams;
 
   // enum start
   // 有效状态

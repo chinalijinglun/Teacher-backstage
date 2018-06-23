@@ -35,23 +35,20 @@
 					</date-range>
 				</el-form-item>
 				<el-form-item label="状态：">
-					<el-select v-model="form.status" placeholder="请选择" size="mini">
-					<el-option label="所有类型" value=""></el-option>
-					<el-option label="在线课程" value="1"></el-option>
-					<el-option label="免费课程" value="1"></el-option>
-					<el-option label="精品公开课" value="1"></el-option>
-					<el-option label="赠送课程" value="1"></el-option>
-					<el-option label="补偿课程" value="1"></el-option>
+					<el-select v-model="form.state" placeholder="请选择" size="mini">
+					<el-option label="全部" value=""></el-option>
+					<el-option label="有效" value="98"></el-option>
+					<el-option label="无效" value="99"></el-option>
 					</el-select>
 				</el-form-item>
 			</el-row>
 				<el-button type="primary" size="mini" @click="query">查询</el-button>
 				<router-link to="/course/createPackage"><el-button type="primary" size="mini">创建课程包</el-button></router-link>
-				<el-button type="primary" class="dels" size="mini">删除</el-button>
+				<el-button type="primary" class="dels" size="mini" @click="batchDelete">删除</el-button>
 			</el-form>
 		</div>
 		<div class="table-list">
-			<el-table :data="tableData" style="width: 100%;margin-top:20px;">
+			<el-table :data="tableData" style="width: 100%;margin-top:20px;" @selection-change="handlerSelectionChange">
 				<el-table-column type="selection" width="55"></el-table-column>
 				<el-table-column fixed prop="course_name_zh" label="中文名称" style="width: 15%;">
 				</el-table-column>
@@ -59,23 +56,29 @@
 				</el-table-column>
 				<el-table-column prop="id" label="课程包ID" style="width: 10%;">
 				</el-table-column>
-				<el-table-column prop="course_type" label="类型" style="width: 10%;">
+				<el-table-column label="类型" style="width: 10%;">
+          <template slot-scope="scope">
+            {{{1:'全部',2:'线上课程',3:'公开课'}[scope.row.course_type]}}
+          </template>
 				</el-table-column>
-				<el-table-column prop="state" label="状态" style="width: 10%;">
+				<el-table-column label="状态" style="width: 10%;">
+          <template slot-scope="scope">
+            {{{98: '有效', 99: '无效'}[scope.row.state]}}
+          </template>
 				</el-table-column>
 				<el-table-column prop="updated_by" label="创建人" style="width: 10%;">
 				</el-table-column>
 				<el-table-column prop="created_at" label="创建时间" style="width: 15%;">
 				</el-table-column>
-				<el-table-column fixed="right" label="操作" style="width: 15%;">
-				<template slot-scope="scope">
-					<button @click="$router.push({path: '/course/createPackage', query: { id: scope.row.id}})" type="button" class="el-button el-button--default el-button--small">
-						<span>编辑</span>
-					</button>
-					<button type="button" @click="handleClick(scope.row)" class="el-button el-button--default el-button--small">
-						<span>删除</span>
-					</button>
-				</template>
+				<el-table-column fixed="right" width="200" label="操作">
+          <template slot-scope="scope">
+            <button @click="$router.push({path: '/course/createPackage', query: { id: scope.row.id}})" type="button" class="el-button el-button--default el-button--small">
+              <span>编辑</span>
+            </button>
+            <button type="button" @click="deleteRow(scope.row)" class="el-button el-button--default el-button--small">
+              <span>删除</span>
+            </button>
+          </template>
 				</el-table-column>
 			</el-table>
 		</div>
@@ -92,8 +95,8 @@
 </template>
 <script>
 import {
-	courseGet,
-	courseBareGet
+  courseBareGet,
+  courseDeleteByCourseId
 } from '@/api/course';
 import paginationMix from '@/components/commons/mixins/paginationMix'
 
@@ -115,15 +118,48 @@ export default {
           gt: '',
           lt: ''
         },
+        state: [''],
 				updated_by: "",
 				page: 1
-      }
+      },
+      choseIdLs: []
     };
   },
   methods: {
-    handleClick(row) {
-      console.log(row);
+    handlerSelectionChange(rows) {
+      this.choseIdLs = rows.map(row=>row.id);
+    },
+    deleteRow(row) {
+      this.$confirm('确认删除？').then(_ => {
+        this.deleteFn(row.id).then(resp => {
+          this.$message.success('删除成功！');
+          this.query();
+        })
+      }).catch(_ => {
+
+      });
 		},
+    deleteFn(id) {
+      return courseDeleteByCourseId(id)
+    },
+    batchDelete() {
+      if(!this.choseIdLs.length) {
+        this.$message.error('请选择要删除的行！');
+        return;
+      }
+      this.$confirm('确认删除？').then(_ => {
+        const pArr = [];
+        this.choseIdLs.forEach(id => {
+          pArr.push(this.deleteFn(id));
+        });
+        Promise.all(pArr).then(_=> {
+          this.$message.success('删除成功！');
+          this.query();
+        });
+      }).catch(_ => {
+
+      });
+    },
 		query() {
       const {
         classLs,
@@ -131,16 +167,18 @@ export default {
         id,
         created_at,
         updated_by,
-        page
+        page,
+        state
       } = this.form;
       const filter = this.$json2filter({
         subject_id: [classLs[2]],
         'course_name|course_name_zh': course_name,
         id,
+        state,
         created_at,
         updated_by
       });
-			courseBareGet(filter,{page}).then(resp => {
+      courseBareGet(filter, {page}).then(resp => {
 				this.tableData = resp.data.objects;
 				this.totalCount = resp.data.num_results;
 			});

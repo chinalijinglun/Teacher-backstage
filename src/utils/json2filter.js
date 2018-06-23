@@ -81,4 +81,28 @@ function json2filter(json) {
   };
 }
 
-export default json2filter;
+function getQueryParams(filterForm, options) {
+  return {
+    q: json2filter(filterForm),
+    page: 1,
+    results_per_page: 10,
+    ...options
+  }
+}
+
+function getNopageQueryParams(filterForm, options) {
+
+  return {
+    q: json2filter(filterForm),
+    ...options,
+    page: 1,
+    results_per_page: 1000
+  }
+}
+
+
+export {
+  json2filter,
+  getQueryParams,
+  getNopageQueryParams
+};

@@ -1,7 +1,7 @@
 import { baseAxios } from '@/utils/axios';
 import { DELETE_FLAG } from "../utils/enums";
 
-export const teacherGet = (params, options) => baseAxios.get('/api/v1/teacher', { params: { q: JSON.stringify(params),page:1,results_per_page: 10,...options } });
+export const teacherGet = (params, options) => baseAxios.get('/api/v1/teacher', { params: { q: JSON.stringify(params),results_per_page: 10,...options } });
 
 export const teacherPost = (form) => baseAxios.post('/api/v1/teacher', form);
 

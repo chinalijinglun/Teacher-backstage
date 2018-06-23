@@ -82,7 +82,7 @@ export default {
 				name: '',
 				email: '',
 				mobile: '',
-        status: '',
+        state: '',
 				page: 1
 			},
 			curTeacher: '',
@@ -96,9 +96,7 @@ export default {
 	},
   methods: {
 		query() {
-
 			const filter = this.$json2filter({});
-
 			teacherGet(filter,{page:this.form.page}).then(res => {
 				this.total = res.data.num_results;
 				this.tableData = res.data.objects
