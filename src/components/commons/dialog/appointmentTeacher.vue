@@ -19,7 +19,7 @@
 	</div>
 	<div class="select-button">
 		<el-button type="primary" @click="submit">提交</el-button>
-		<el-button plain>取消</el-button>
+		<el-button plain @click="closeSelf">取消</el-button>
 	</div>
 </div>
 </el-dialog>
@@ -46,6 +46,9 @@ export default {
   },
   props: ["visible", "teacherId"],
   methods: {
+    closeSelf() {
+      this.$emit('update:visible', false);
+    },
     submit() {
       const {
         open_time_start,
@@ -58,6 +61,9 @@ export default {
         created_at: new Date(),
         updated_at: new Date(),
         updated_by: this.userName
+      }).then(resp=> {
+        this.$message.success('预约成功！');
+        this.closeSelf();
       })
     }
   }

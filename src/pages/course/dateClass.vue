@@ -6,19 +6,19 @@
 			<div class="inps">
 				<el-row>
 					<el-form-item label="教师姓名：">
-						<el-input size="mini"></el-input>
+						<el-input size="mini" v-model="form.name"></el-input>
 					</el-form-item>
 					<el-form-item label="联系电话：">
-						<el-input size="mini"></el-input>
+						<el-input size="mini" v-model="form.mobile"></el-input>
 					</el-form-item>
 					<el-form-item label="联系邮箱：">
-						<el-input size="mini"></el-input>
+						<el-input size="mini" v-model="form.email"></el-input>
 					</el-form-item>
 					<el-form-item label="状态：">
 						<el-select v-model="form.status" placeholder="请选择" size="mini">
 							<el-option label="所有状态" value=""></el-option>
-							<el-option label="有效" value="1"></el-option>
-							<el-option label="无效" value="1"></el-option>
+							<el-option label="有效" :value="$VALID_ENUM.VALID"></el-option>
+							<el-option label="无效" :value="$VALID_ENUM.INVALID"></el-option>
 						</el-select>
 					</el-form-item>
 				</el-row>
@@ -79,7 +79,10 @@ export default {
       tableData: [],
 			total: 0,
       form: {
-        status: "",
+				name: '',
+				email: '',
+				mobile: '',
+        status: '',
 				page: 1
 			},
 			curTeacher: '',
@@ -93,6 +96,7 @@ export default {
 	},
   methods: {
 		query() {
+
 			const filter = this.$json2filter({});
 
 			teacherGet(filter,{page:this.form.page}).then(res => {
