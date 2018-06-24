@@ -72,7 +72,8 @@
 
 <script>
 import { teacherGet } from '@/api/teacher';
-import { paginationMix } from '@/components'
+import { paginationMix } from '@/components';
+
 export default {
   data() {
     return {
@@ -96,7 +97,9 @@ export default {
 	},
   methods: {
 		query() {
-			const filter = this.$json2filter({});
+			const filter = this.$json2filter({
+				state: [10, 11, 12, 13, 14, 15]
+			});
 			teacherGet(filter,{page:this.form.page}).then(res => {
 				this.total = res.data.num_results;
 				this.tableData = res.data.objects

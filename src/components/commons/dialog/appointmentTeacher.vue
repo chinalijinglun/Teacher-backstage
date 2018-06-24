@@ -1,6 +1,6 @@
 <template>
 <!-- 确认时间 -->
-<el-dialog title="预约试讲" :visible.sync="visible">
+<el-dialog title="预约试讲" :visible.sync="visible" width="500px" @close="handlerClose">
 <div>
 	<div class="teacher-time">
 		<div class="tt-time">
@@ -46,6 +46,12 @@ export default {
   },
   props: ["visible", "teacherId"],
   methods: {
+    handlerClose() {
+      this.form = {
+        open_time_start: '',
+        open_time_end: ''
+      }
+    },
     closeSelf() {
       this.$emit('update:visible', false);
     },

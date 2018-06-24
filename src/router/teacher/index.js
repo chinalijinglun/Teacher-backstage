@@ -24,6 +24,12 @@ export default [
     component: onlineAudit
   },
   {
+    title:'教师在线审核',
+    path: 'auditPage',
+    name: 'auditPage',
+    component: auditPage
+  },
+  {
     title: '教师面试',
     path: 'interview',
     name: 'interview',
