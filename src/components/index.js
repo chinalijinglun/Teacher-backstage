@@ -3,6 +3,7 @@ import curriculumSelect from './commons/select/curriculumSelect';
 import teacherDialog from './commons/dialog/teacherDialog';
 import appointmentTeacher from './commons/dialog/appointmentTeacher';
 import sureTimeDialog from './commons/dialog/sureTimeDialog';
+import addSysUser from './commons/dialog/addSysUser';
 import header from './header';
 import navigation from './navigation';
 
@@ -13,6 +14,7 @@ const install = (Vue) => {
   Vue.component(curriculumSelect.name, curriculumSelect);
   Vue.component(teacherDialog.name, teacherDialog);
   Vue.component(sureTimeDialog.name, sureTimeDialog);
+  Vue.component(addSysUser.name, addSysUser);
   Vue.component(appointmentTeacher.name, appointmentTeacher);
   Vue.component(header.name, header);
   Vue.component(navigation.name, navigation);
