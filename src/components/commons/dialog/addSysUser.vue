@@ -53,7 +53,15 @@
 </el-dialog>
 </template>
 <script>
-import { courseAppointmentPost } from '@/api/course_appointment';
+import {
+  sysUserRolePost
+} from '@/api/sys_user_role';
+import {
+  sysUserPost
+} from '@/api/sys_user';
+import {
+  roleDefinitionBareGet
+} from '@/api/role_definition';
 import { mapState } from 'vuex';
 
 export default {
