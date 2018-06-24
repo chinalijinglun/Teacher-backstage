@@ -17,9 +17,9 @@
           </el-form-item>
         </el-row>
         <el-row>
-          <el-form-item label="创建时间：">    
-            <date-range 
-              :start-date.sync="form.startDate" 
+          <el-form-item label="创建时间：">
+            <date-range
+              :start-date.sync="form.startDate"
               :end-date.sync="form.endDate"
               size="mini"
               range-separator="-"
@@ -47,45 +47,30 @@
           style="width: 100%">
           <el-table-column
             prop="id"
-            label="订单编号"
-            width="60">
+            label="合作方ID">
           </el-table-column>
           <el-table-column
             prop="loginName"
-            label="课程包名称"
-            width="180">
+            label="合作方名称">
           </el-table-column>
           <el-table-column
             prop="studentsName"
-            label="课节数">
+            label="联系人">
           </el-table-column>
           <el-table-column
             prop="telphone"
-            label="订单类型">
+            label="联系电话">
           </el-table-column>
           <el-table-column
             prop="email"
+            label="加入时间">
+          </el-table-column>
+          <el-table-column
+            prop="addtime"
             label="状态">
-          </el-table-column>
-          <el-table-column
-            prop="addtime"
-            label="下单人">
-          </el-table-column>
-          <el-table-column
-            prop="addtime"
-            label="下单时间">
-          </el-table-column>
-          <el-table-column
-            prop="addtime"
-            label="教师">
-          </el-table-column>
-          <el-table-column
-            prop="addtime"
-            label="学生">
-          </el-table-column>
-          <el-table-column
-            prop="addtime"
-            label="价格">
+            <template slot-scope="scope">
+              {{{98:'有效',99:'无效'}[state]}}
+            </template>
           </el-table-column>
           <el-table-column
             label="操作">

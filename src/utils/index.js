@@ -27,6 +27,16 @@ import {
   getQueryParams
 } from './json2filter';
 
+function deleteEmptyProps(form) {
+  const f = {...form};
+  for(let key in form){
+    if(f[key] === '') {
+      f[key] = undefined;
+    }
+  }
+  return f;
+}
+
 const install = (Vue) => {
   Vue.prototype.$dateFmt = dateFmt;
   Vue.prototype.$DATE_FMT_DEFAULT = DATE_FMT_DEFAULT;
@@ -43,6 +53,7 @@ const install = (Vue) => {
   Vue.prototype.$json2filter = json2filter;
   Vue.prototype.$getQueryParams = getQueryParams;
   Vue.prototype.$getNopageQueryParams = getNopageQueryParams;
+  Vue.prototype.$deleteEmptyProps = deleteEmptyProps;
 
   // enum start
   // 有效状态

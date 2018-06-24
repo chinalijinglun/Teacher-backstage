@@ -4,20 +4,35 @@
       <el-form :inline="true" ref="form" :model="form" label-width="96px">
         <el-row>
           <el-form-item label="员工姓名：">
-            <el-input size="mini" placeholder="员工姓名"></el-input>
+            <el-input size="mini" v-model="form.username" placeholder="员工姓名"></el-input>
           </el-form-item>
           <el-form-item label="联系电话：">
-            <el-input size="mini" placeholder="联系电话"></el-input>
+            <el-input size="mini" v-model="form.mobile" placeholder="联系电话"></el-input>
           </el-form-item>
           <el-form-item label="联系邮箱：">
-            <el-input size="mini" placeholder="联系邮箱"></el-input>
+            <el-input size="mini" v-model="form.email" placeholder="联系邮箱"></el-input>
           </el-form-item>
-          <el-form-item label="联系邮箱：">
-            <el-input size="mini" placeholder="联系邮箱"></el-input>
+          <el-form-item label="角色：">
+            <el-select v-model="form.role_id" size="mini" placeholder="请选择">
+              <el-option label="全部" value=""></el-option>
+              <el-option
+                v-for="item in roleLs"
+                :key="item.id"
+                :label="item.role_name"
+                :value="item.id">
+              </el-option>
+            </el-select>
+          </el-form-item>
+          <el-form-item label="状态：">
+            <el-select v-model="form.state" size="mini" placeholder="请选择">
+              <el-option label="全部" value=""></el-option>
+              <el-option label="正常" value="TRAINING"></el-option>
+              <el-option label="注销" value="WORKING"></el-option>
+            </el-select>
           </el-form-item>
         </el-row>
         <el-row>
-          <el-button size="mini" type="primary">查询</el-button>
+          <el-button size="mini" type="primary" @click="query">查询</el-button>
           <el-button size="mini" type="primary" @click="addSysUser">添加员工</el-button>
         </el-row>
       </el-form>
@@ -28,10 +43,8 @@
           :data="tableData"
           style="width: 100%">
           <el-table-column
+            prop="username"
             label="员工姓名">
-            <template slot-scope="scope">
-              {{`${scope.row.given_name || ''} ${scope.row.family_name || ''}`}}
-            </template>
           </el-table-column>
           <el-table-column
             prop="mobile"
@@ -46,18 +59,19 @@
             label="添加时间">
           </el-table-column>
           <el-table-column
-            prop="user_type"
+            prop="role_name"
             label="角色">
           </el-table-column>
           <el-table-column
             prop="state"
             label="状态">
+            <template slot-scope="scope">{{{'TRAINING': '正常','WORKING': '注销'}[scope.row.state]}}</template>
           </el-table-column>
           <el-table-column
             label="操作">
             <template slot-scope="scope">
-              <el-button size="mini">编辑</el-button>
-              <el-button size="mini">注销</el-button>
+              <el-button size="mini" @click="update(scope.row.id)">编辑</el-button>
+              <el-button size="mini" @click="logout(scope.row)" >{{ scope.row.state===1?'注销':'激活' }}</el-button>
             </template>
           </el-table-column>
         </el-table>
@@ -65,48 +79,105 @@
       <el-row class="pagination-container">
         <el-pagination
           @current-change="handleCurrentChange"
-          :current-page="form.curPage"
+          :current-page="form.page"
           :page-size="10"
           layout="total, prev, pager, next, jumper"
-          :total="totalCount">
+          :total="total">
         </el-pagination>
       </el-row>
     </el-row>
-    <add-sys-user :visible="showDialog"></add-sys-user>
+    <add-sys-user :visible.sync="showDialog" :sys-user-id="choseId" @onClose="handlerDialogClose"></add-sys-user>
   </div>
 </template>
 <script>
   import { paginationMix } from '@/components';
   import {
-    sysUserBareGet
-  } from '@/api/sys_user.js'
+    sysUserBareGet,
+    sysUserPutById,
+    mangerStaffQuery
+  } from '@/api/sys_user.js';
+  import {
+    roleDefinitionBareGet
+  } from '@/api/role_definition';
 
   export default {
     data() {
       return {
         form: {
-          curPage: 1,
-          pageSize: 10
+          username: '',
+          email: '',
+          mobile: '',
+          role_id: '',
+          state: '',
+          page: 1
         },
         showDialog: false,
-        totalCount: 100,
-        tableData: []
+        total: 0,
+        tableData: [],
+        roleLs: [],
+        choseId: ''
       };
     },
     created() {
-      this.query()
+      this.query();
+      this.getRoleLs();
     },
     methods: {
       query() {
         const {
-          page
+          username: user_name,
+          email,
+          mobile,
+          role_id,
+          state: user_state,
+          page: page_no
         } = this.form;
-        sysUserBareGet({},{page}).then(resp => {
+        const qf = this.$deleteEmptyProps({
+          user_name,
+          email,
+          mobile,
+          role_id,
+          user_state
+        })
+        mangerStaffQuery({
+          page_no,
+          page_limit: 10,
+          ...qf
+        }).then(resp => {
           this.tableData = resp.data.objects;
+          this.total = resp.data.num_results;
         })
       },
       addSysUser() {
         this.showDialog = true;
+      },
+      getRoleLs() {
+        const filter = this.$json2filter({});
+        return roleDefinitionBareGet(filter,{results_per_page: 1000, page: 1}).then(resp => {
+          this.roleLs = resp.data.objects;
+        });
+      },
+      handlerDialogClose() {
+        this.choseId = '';
+        this.query();
+      },
+      logout(row) {
+        const s = row.state===2 ? '激活':'注销';
+        const state = row.state===1 ? 2 : 1;
+        this.$confirm(`确定${s}？`).then(_=>{
+          sysUserPutById(row.id, {state}).then(resp => {
+            this.query();
+            this.$message.success(`${s}成功！`);
+          });
+        }).catch(_=>{
+
+        });
+      },
+      update(id) {
+        this.choseId = id;
+        this.$nextTick(_=>{
+          this.showDialog = true;
+        });
       }
     },
     mixins: [paginationMix]

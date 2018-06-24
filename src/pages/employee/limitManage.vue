@@ -3,22 +3,23 @@
       <el-col :span="12">
         <div class="list-container">
           <el-table
-            :data="tableData"
+            :data="roleLs"
             border
             style="width: 100%">
             <el-table-column
-              prop="date"
+              type="index"
               label="序号"
-              width="180">
+              width="80">
             </el-table-column>
             <el-table-column
-              prop="name"
-              label="姓名"
-              width="180">
+              prop="role_name"
+              label="角色名称">
             </el-table-column>
             <el-table-column
-              prop="address"
-              label="地址">
+              label="查看成员">
+              <template slot-scope="scope">
+                <el-button size="mini" @click="getRoleUserLs(scope.row.id)">查看成员</el-button>
+              </template>
             </el-table-column>
           </el-table>
         </div>
@@ -34,14 +35,14 @@
                 <el-input size="mini" placeholder="联系电话"></el-input>
               </el-form-item>
               <el-form-item>
-                <el-button size="mini" type="primary">查询</el-button>
+                <el-button size="mini" type="primary" @click="queryUsers">查询</el-button>
               </el-form-item>
             </el-row>
           </el-form>
         </div>
         <div class="list-container">
           <el-table
-            :data="tableData"
+            :data="roleUserLs"
             border
             style="width: 100%">
             <el-table-column
@@ -59,35 +60,72 @@
               label="地址">
             </el-table-column>
           </el-table>
+          <el-row style="text-align: right">
+            <el-pagination
+              layout="prev, pager, next"
+              :current-page = "form.page_no"
+              :page-size="10"
+              @current-change="handlePageChange"
+              :total="1000">
+            </el-pagination>
+          </el-row>
         </div>
       </el-col>
   </el-row>
 </template>
 <script>
+  import {
+    mangerStaffQuery
+  } from '@/api/sys_user'
+  import {
+    roleDefinitionBareGet
+  } from '@/api/role_definition';
   export default {
     data() {
       return {
         form: {
-          
+          user_name: '',
+          mobile: '',
+          role_id: ''
         },
-        tableData: [{
-          date: '2016-05-02',
-          name: '王小虎',
-          address: '上海市普陀区金沙江路 1518 弄'
-        }, {
-          date: '2016-05-04',
-          name: '王小虎',
-          address: '上海市普陀区金沙江路 1517 弄'
-        }, {
-          date: '2016-05-01',
-          name: '王小虎',
-          address: '上海市普陀区金沙江路 1519 弄'
-        }, {
-          date: '2016-05-03',
-          name: '王小虎',
-          address: '上海市普陀区金沙江路 1516 弄'
-        }]
+        roleLs: [],
+        roleUserLs: [],
+        roleUserTotal: 0
       };
+    },
+    created() {
+      this.getRoleLs();
+    },
+    methods: {
+      queryUsers(role_id){
+        this.form = {
+          user_name: '',
+          mobile: '',
+          role_id: '',
+          page_no: 1
+        };
+        this.form.role_id = role_id;
+        return this.getRoleUserLs();
+      },
+      getRoleLs() {
+        const filter = this.$json2filter({});
+        roleDefinitionBareGet(filter, {page: 1}).then(resp => {
+          this.roleLs = resp.data.objects;
+        })
+      },
+      getRoleUserLs() {
+        const form = {
+          ...this.form
+        }
+        mangerStaffQuery(form).then(resp => {
+          this.roleUserLs = resp.data.objects;
+          this.roleUserTotal = resp.num_results;
+        })
+      },
+      handlePageChange(e) {
+        this.form.page_no = e
+        this.getRoleLs();
+      }
     }
   }
 </script>

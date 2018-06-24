@@ -9,6 +9,6 @@ export const roleDefinitionGetById = (id) => baseAxios.get(`/api/v1/role_definit
 
 export const roleDefinitionPutById = (id, form) => baseAxios.put(`/api/v1/role_definition/${id}`, form);
 
-export const roleDefinitionBareGet = (params, others) => baseAxios.get('/api/v1/_bare/role_definition', { params: { q: JSON.stringify(params), results_per_page: 10, ...others } });
+export const roleDefinitionBareGet = (params, others) => baseAxios.get('/api/v1/_bare/role_definition', { params: { q: JSON.stringify(params), results_per_page: 1000, ...others } });
 
 export const roleDefinitionBareGetById = (id) => baseAxios.get(`/api/v1/_bare/role_definition/${id}`);
