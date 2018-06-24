@@ -4,17 +4,17 @@
       <el-form :inline="true" ref="form" :model="form" label-width="82px">
         <el-row>
           <el-form-item label="学生姓名：">
-            <el-input v-model="form.name" size="mini"></el-input>
+            <el-input v-model="form.username" size="mini"></el-input>
           </el-form-item>
           <el-form-item label="联系电话：">
-            <el-input v-model="form.telphone" size="mini"></el-input>
+            <el-input v-model="form.mobile" size="mini"></el-input>
           </el-form-item>
           <el-form-item label="联系邮箱：">
             <el-input v-model="form.email" size="mini"></el-input>
           </el-form-item>
         </el-row>
         <el-row>
-          <el-button type="primary" size="mini">查询</el-button>
+          <el-button type="primary" size="mini" @click="query">查询</el-button>
         </el-row>
       </el-form>
     </el-row>
@@ -32,16 +32,18 @@
             width="60">
           </el-table-column>
           <el-table-column
-            prop="loginName"
+            prop="username"
             label="用户名"
             width="180">
           </el-table-column>
           <el-table-column
-            prop="studentsName"
             label="学生姓名">
+            <template slot-scope="scope">
+              {{`${scope.row.given_name || ''} ${scope.row.family_name || ''}`}}
+            </template>
           </el-table-column>
           <el-table-column
-            prop="telphone"
+            prop="mobile"
             label="联系电话">
           </el-table-column>
           <el-table-column
@@ -49,13 +51,13 @@
             label="联系邮箱">
           </el-table-column>
           <el-table-column
-            prop="addtime"
+            prop="created_at"
             label="注册时间">
           </el-table-column>
           <el-table-column
             label="操作">
             <template slot-scope="scope">
-              <el-button size="mini" @click="toDetail">查看</el-button>
+              <el-button size="mini" @click="toDetail(scope.row.id)">查看</el-button>
             </template>
           </el-table-column>
         </el-table>
@@ -63,8 +65,8 @@
       <el-row class="pagination-container">
         <el-pagination
           @current-change="handleCurrentChange"
-          :current-page="form.curPage"
-          :page-size="form.pageSize"
+          :current-page="form.page"
+          :page-size="10"
           layout="total, prev, pager, next, jumper"
           :total="totalCount">
         </el-pagination>
@@ -76,49 +78,47 @@
 <script>
   import assignConselorDialog from '@/components/students/dialog/assignConselorDialog';
   import paginationMix from '@/components/commons/mixins/paginationMix';
+  import {
+    studentBareGet
+  } from '@/api/student'
 
   export default {
     data() {
       return {
         dialogVisible: false,
         form: {
-          name: '',
-          telphone: '',
+          username: '',
+          mobile: '',
           email: '',
-          curPage: 1,
-          pageSize: 10
+          page: 1
         },
-        totalCount: 100,
-        tableData: [{
-          id: '0001',
-          loginName: 'kira@gmail.com',
-          studentsName: 'Kira Yuan',
-          telphone: '1876543210',
-          email: 'kira@gmail.com',
-          addtime: '2018-02-27 11:25:30'
-        },{
-          id: '0002',
-          loginName: 'kira@gmail.com',
-          studentsName: 'Kira Yuan',
-          telphone: '1876543210',
-          email: 'kira@gmail.com',
-          addtime: '2018-02-27 11:25:30'
-        },{
-          id: '0003',
-          loginName: 'kira@gmail.com',
-          studentsName: 'Kira Yuan',
-          telphone: '1876543210',
-          email: 'kira@gmail.com',
-          addtime: '2018-02-27 11:25:30'
-        }]
+        totalCount: 0,
+        tableData: []
       };
+    },
+    created() {
+      this.query();
     },
     methods: {
       query() {
-        console.log(2);
+        const {
+          username,
+          mobile,
+          email,
+          page
+        } = this.form;
+        const filter = this.$json2filter({
+          username,
+          mobile,
+          email
+        })
+        studentBareGet(filter,{page}).then(resp => {
+          this.tableData = resp.data.objects;
+          this.totalCount = resp.data.num_results;
+        })
       },
-      toDetail() {
-        this.$router.push('/student/studentDetail?blkname=info');
+      toDetail(id) {
+        this.$router.push(`/student/studentDetail?id=${id}&blkname=info`);
       }
     },
     mixins: [paginationMix],

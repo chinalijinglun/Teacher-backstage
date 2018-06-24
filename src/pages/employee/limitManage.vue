@@ -46,18 +46,22 @@
             border
             style="width: 100%">
             <el-table-column
-              prop="date"
-              label="序号"
-              width="180">
+              type="index"
+              label="序号">
             </el-table-column>
             <el-table-column
-              prop="name"
-              label="姓名"
-              width="180">
+              prop="username"
+              label="姓名">
             </el-table-column>
             <el-table-column
-              prop="address"
-              label="地址">
+              prop="mobile"
+              label="联系电话">
+            </el-table-column>
+            <el-table-column
+              label="查看成员">
+              <template slot-scope="scope">
+                <el-button size="mini" @click="deleteRoleUser(scope.row.id)">删除</el-button>
+              </template>
             </el-table-column>
           </el-table>
           <el-row style="text-align: right">
@@ -66,7 +70,7 @@
               :current-page = "form.page_no"
               :page-size="10"
               @current-change="handlePageChange"
-              :total="1000">
+              :total="roleUserTotal">
             </el-pagination>
           </el-row>
         </div>
@@ -86,7 +90,9 @@
         form: {
           user_name: '',
           mobile: '',
-          role_id: ''
+          role_id: '',
+          page_limit: 10,
+          page_no: 1
         },
         roleLs: [],
         roleUserLs: [],
@@ -101,10 +107,10 @@
         this.form = {
           user_name: '',
           mobile: '',
-          role_id: '',
+          role_id: role_id,
+          page_limit: 10,
           page_no: 1
         };
-        this.form.role_id = role_id;
         return this.getRoleUserLs();
       },
       getRoleLs() {
@@ -114,17 +120,18 @@
         })
       },
       getRoleUserLs() {
-        const form = {
-          ...this.form
-        }
+        const form = this.$deleteEmptyProps(this.form)
         mangerStaffQuery(form).then(resp => {
           this.roleUserLs = resp.data.objects;
-          this.roleUserTotal = resp.num_results;
+          this.roleUserTotal = resp.data.num_results;
         })
       },
       handlePageChange(e) {
         this.form.page_no = e
-        this.getRoleLs();
+        this.getRoleUserLs();
+      },
+      deleteRoleUser(id) {
+        
       }
     }
   }

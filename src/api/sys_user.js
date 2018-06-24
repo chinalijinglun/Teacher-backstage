@@ -13,5 +13,4 @@ export const sysUserBareGet = (params, others) => baseAxios.get('/api/v1/_bare/s
 
 export const sysUserBareGetById = (id) => baseAxios.get(`/api/v1/_bare/sys_user/${id}`);
 
-
 export const mangerStaffQuery = form => baseAxios.post('/manger/staff_query', form);

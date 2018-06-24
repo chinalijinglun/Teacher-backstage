@@ -4,16 +4,18 @@
       <p class="title">基本信息</p>
       <ul>
         <li class="info-item">
-          <span class="info-key">教师姓名</span>
-          <span class="info-value">Kira Yuan</span>
+          <span class="info-key">学生姓名</span>
+          <span class="info-value">
+            {{`${detail.given_name || ''} ${detail.family_name || ''}`}}
+          </span>
         </li>
         <li class="info-item">
           <span class="info-key">联系电话</span>
-          <span class="info-value">1876543210</span>
+          <span class="info-value">{{ detail.mobile }}</span>
         </li>
         <li class="info-item">
           <span class="info-key">联系邮箱</span>
-          <span class="info-value">kira@gmail.com</span>
+          <span class="info-value">{{ detail.email }}</span>
         </li>
       </ul>
     </div>
@@ -21,29 +23,38 @@
       <p class="title">详细信息</p>
       <ul>
         <li class="info-item">
-          <span class="info-key">教师姓名</span>
-          <span class="info-value">Kira Yuan</span>
+          <span class="info-key">学生id</span>
+          <span class="info-value">{{ detail.id }}</span>
         </li>
         <li class="info-item">
-          <span class="info-key">联系电话</span>
-          <span class="info-value">1876543210</span>
+          <span class="info-key">用户名</span>
+          <span class="info-value">{{ detail.username }}</span>
         </li>
         <li class="info-item">
-          <span class="info-key">联系邮箱</span>
-          <span class="info-value">kira@gmail.com</span>
+          <span class="info-key">生日</span>
+          <span class="info-value">{{ detail.birth }}</span>
         </li>
       </ul>
     </div>
     <div class="info-block-item">
       <p class="title">学生需求</p>
       <div class="info-requirement">
+        <p class="title">中文</p>
         <el-input
           type="textarea"
           :rows="3"
+          v-model="form.requirements_zh"
+          placeholder="请输入内容">
+        </el-input>
+        <p class="title">英文</p>
+        <el-input
+          type="textarea"
+          :rows="3"
+          v-model="form.requirements"
           placeholder="请输入内容">
         </el-input>
         <div class="btn-contain">
-          <el-button type="primary" size="small">保存</el-button>
+          <el-button type="primary" size="small" @click="putRequirements">保存</el-button>
         </div>
       </div>
     </div>
@@ -51,38 +62,101 @@
       <p class="title">历史需求</p>
       <div class="info-requirement">
         <ul class="history-require">
-          <li class="history-li">
+          <li class="history-li" v-for="(item,index) in requirementsLs" :key="index">
             <p class="history-title">
-              <span class="history-time">2018-02-27 11:25:30</span>
-              <span class="history-user">添加人</span>
+              <span class="history-time">{{item.update_at}}</span>
+              <span class="history-user">{{item.update_by}}</span>
             </p>
-            <p class="history-content">
-              Lorem ipsum dolor sit amet, consectetur adipiscing elit. Aenean euismod bibendum laoreet. Proin gravida dolor sit amet lacus accumsan et viverra justo commodo. Proin sodales pulvinar tempor. Cum sociis natoque penatibus et magnis dis parturient montes, nascetur ridiculus mus. Nam fermentum, nulla luctus pharetra vulputate, felis tellus mollis orci, sed rhoncus sapien nunc eget.
-            </p>
-          </li>
-          <li class="history-li">
-            <p class="history-title">
-              <span class="history-time">2018-02-27 11:25:30</span>
-              <span class="history-user">添加人</span>
-            </p>
-            <p class="history-content">
-              Lorem ipsum dolor sit amet, consectetur adipiscing elit. Aenean euismod bibendum laoreet. Proin gravida dolor sit amet lacus accumsan et viverra justo commodo. Proin sodales pulvinar tempor. Cum sociis natoque penatibus et magnis dis parturient montes, nascetur ridiculus mus. Nam fermentum, nulla luctus pharetra vulputate, felis tellus mollis orci, sed rhoncus sapien nunc eget.
-            </p>
-          </li>
-          <li class="history-li">
-            <p class="history-title">
-              <span class="history-time">2018-02-27 11:25:30</span>
-              <span class="history-user">添加人</span>
-            </p>
-            <p class="history-content">
-              Lorem ipsum dolor sit amet, consectetur adipiscing elit. Aenean euismod bibendum laoreet. Proin gravida dolor sit amet lacus accumsan et viverra justo commodo. Proin sodales pulvinar tempor. Cum sociis natoque penatibus et magnis dis parturient montes, nascetur ridiculus mus. Nam fermentum, nulla luctus pharetra vulputate, felis tellus mollis orci, sed rhoncus sapien nunc eget.
-            </p>
+            <p class="history-content">{{item.str}}</p>
           </li>
         </ul>
       </div>
     </div>
   </div>
 </template>
+<script>
+  import {
+    studentBareGetById,
+    studentPutById
+  } from '@/api/student';
+  import { mapState } from 'vuex';
+
+// requirementsStr
+// [{update_by: '',update_at: '', str: }]
+  export default {
+    data() {
+      return {
+        form: {
+          requirements: '',
+          requirements_zh: ''
+        },
+        requirementsLs: [],
+        requiermentsZHLs: []
+      }
+    },
+    props: ['detail'],
+    computed: {
+      ...mapState({
+        userName: state=>state.auth.userName
+      })
+    },
+    watch: {
+      detail:{
+        handler(v) {
+          this.requirementsLs = this.parseRequirements(v.requirements);
+          this.requiermentsZHLs = this.parseRequirements(v.requirements_zh);
+        },
+        deep: true
+      }
+    },
+    methods: {
+      getStudentDetail(id) {
+        this.requirementsLs = this.parseRequirements(resp.data.requirements);
+        this.requiermentsZHLs = this.parseRequirements(resp.data.requirements_zh);
+      },
+      parseRequirements(requirementsStr) {
+        if(requirementsStr) {
+          return JSON.parse(requirementsStr);
+        }
+        return [];
+      },
+      putRequirements() {
+        const {
+          requirements,
+          requirements_zh
+        } = this.form;
+        const requirementsLs = [...this.requirementsLs];
+        const requiermentsZHLs = [...this.requiermentsZHLs];
+        if(!requirements) {
+          this.$message.error('请输入需求！');
+          return false;
+        }
+        if(!requirements_zh) {
+          this.$message.error('请输入中文需求！');
+          return false;
+        }
+        requirementsLs.push({
+          update_by: this.userName,
+          update_at: new Date(), 
+          str: requirements
+        })
+        requiermentsZHLs.push({
+          update_by: this.userName,
+          update_at: new Date(), 
+          str: requirements_zh
+        });
+        studentPutById(this.detail.id, {
+          requirements: JSON.stringify(requirementsLs),
+          requirements_zh: JSON.stringify(requiermentsZHLs)
+        }).then(resp => {
+          this.$message.success('添加成功！');
+          this.requirementsLs = this.parseRequirements(resp.data.requirements);
+          this.requiermentsZHLs = this.parseRequirements(resp.data.requirements_zh);
+        })
+      }
+    }
+  }
+</script>
 <style scoped>
   .info-block-item {
     border-bottom: 1px solid #eee;

@@ -39,7 +39,7 @@
       </el-row>
       <el-row>
         <el-table
-          :data="tableData"
+          :data="detail"
           style="width: 100%">
           <el-table-column
             prop="id"
@@ -97,7 +97,6 @@
 </template>
 <script>
   import paginationMix from '@/components/commons/mixins/paginationMix';
-
   export default {
     data() {
       return {
@@ -142,6 +141,7 @@
       };
     },
     mixins: [paginationMix],
+    props: ['detail'],
     methods: {
       query() {
         console.log(this.form);
