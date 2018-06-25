@@ -13,5 +13,10 @@ export default {
       this.dialogVisible = v;
     }
   },
-  props: ['visible']
+  props: ['visible'],
+  methods: {
+    toClose(){
+      this.dialogVisible = false;
+    }
+  }
 };

@@ -71,7 +71,7 @@
             label="操作">
             <template slot-scope="scope">
               <el-button size="mini" @click="update(scope.row.id)">编辑</el-button>
-              <el-button size="mini" @click="logout(scope.row)" >{{ scope.row.state===1?'注销':'激活' }}</el-button>
+              <el-button size="mini" @click="logout(scope.row)" >{{ scope.row.state!==1?'注销':'激活' }}</el-button>
             </template>
           </el-table-column>
         </el-table>

@@ -3,37 +3,18 @@
     <el-row class="form-contain">
       <el-form :inline="true" ref="form" :model="form" label-width="96px">
         <el-row>
-          <el-form-item label="分类：">
-            <el-select v-model="form.status" placeholder="请选择" size="mini">
-              <el-option label="所有状态" value=""></el-option>
-              <el-option label="待分配" value="1"></el-option>
-              <el-option label="已分配" value="1"></el-option>
-            </el-select>
-            <el-select v-model="form.status" placeholder="请选择" size="mini">
-              <el-option label="所有状态" value=""></el-option>
-              <el-option label="待分配" value="1"></el-option>
-              <el-option label="已分配" value="1"></el-option>
-            </el-select>
-            <el-select v-model="form.status" placeholder="请选择" size="mini">
-              <el-option label="所有状态" value=""></el-option>
-              <el-option label="待分配" value="1"></el-option>
-              <el-option label="已分配" value="1"></el-option>
-            </el-select>
-          </el-form-item>
-        </el-row>
-        <el-row>
-          <el-form-item label="课程包名称：">
+          <el-form-item label="订单编号：">
             <el-input v-model="form.name" size="mini"></el-input>
           </el-form-item>
-          <el-form-item label="课程包ID：">
+          <el-form-item label="课程包名称：">
             <el-input v-model="form.telphone" size="mini"></el-input>
           </el-form-item>
-          <el-form-item label="操作人：">
+          <el-form-item label="下单人：">
             <el-input v-model="form.email" size="mini"></el-input>
           </el-form-item>
         </el-row>
         <el-row>
-          <el-form-item label="创建时间：">    
+          <el-form-item label="下单时间：">    
             <date-range 
               :start-date.sync="form.startDate" 
               :end-date.sync="form.endDate"
@@ -43,14 +24,14 @@
               end-placeholder="结束时间">
             </date-range>
           </el-form-item>
-          <el-form-item label="类型：">
+          <el-form-item label="订单类型：">
             <el-select v-model="form.status" placeholder="请选择" size="mini">
               <el-option label="所有状态" value=""></el-option>
               <el-option label="待分配" value="1"></el-option>
               <el-option label="已分配" value="1"></el-option>
             </el-select>
           </el-form-item>
-          <el-form-item label="状态：">
+          <el-form-item label="订单状态：">
             <el-select v-model="form.status" placeholder="请选择" size="mini">
               <el-option label="所有状态" value=""></el-option>
               <el-option label="待分配" value="1"></el-option>

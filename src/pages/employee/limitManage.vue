@@ -18,7 +18,7 @@
             <el-table-column
               label="查看成员">
               <template slot-scope="scope">
-                <el-button size="mini" @click="getRoleUserLs(scope.row.id)">查看成员</el-button>
+                <el-button size="mini" @click="queryUsers(scope.row.id)">查看成员</el-button>
               </template>
             </el-table-column>
           </el-table>

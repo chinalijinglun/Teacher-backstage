@@ -25,7 +25,7 @@
 			</el-table-column>
 			<el-table-column prop="username" label="用户名" style="width: 15%;">
 			</el-table-column>
-			<el-table-column prop="zip" label="教师姓名" style="width: 10%;">
+			<el-table-column label="教师姓名" style="width: 10%;">
 				<template slot-scope="scope">
 					{{`${scope.row.given_name || ''} ${scope.row.family_name || ''}`}}
 				</template>

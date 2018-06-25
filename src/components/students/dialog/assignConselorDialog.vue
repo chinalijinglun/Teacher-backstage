@@ -1,31 +1,67 @@
 <template>
   <el-dialog
-    title="课程顾问"
+    title="班主任"
     :visible.sync="dialogVisible"
+    @open="handlerOpen"
+    @close="handlerClose"
     width="30%">
     <div class="conselor-list">
       <ul class="conselor-ul">
-        <li><el-radio v-model="radio" label="1">亨利（已分配学生数0）</el-radio></li>
-        <li><el-radio v-model="radio" label="2">亨利（已分配学生数10）</el-radio></li>
-        <li><el-radio v-model="radio" label="3">亨利（已分配学生数0）</el-radio></li>
-        <li><el-radio v-model="radio" label="4">亨利（已分配学生数9）</el-radio></li>
-        <li><el-radio v-model="radio" label="5">亨利（已分配学生数0）</el-radio></li>
+        <li v-for="(item,index) in sysLs" :key="index"><el-radio v-model="radio" :label="item.id">{{`${item.username}（已分配学生数0）`}}</el-radio></li>
       </ul>
     </div>
     <div class="btn-container">
-      <el-button type="primary" size="mini">提交</el-button>
-      <el-button size="mini">取消</el-button>
+      <el-button type="primary" size="mini" @click="onSubmit">提交</el-button>
+      <el-button size="mini" @click="toClose">取消</el-button>
     </div>
   </el-dialog>
 </template>
 <script>
+  import {
+    mangerStaffQuery
+  } from '@/api/sys_user';
+  import {
+    studentPutById
+  } from '@/api/student';
   import dialogContainer from '@/components/commons/mixins/dialogContainer'
   export default {
     name: 'assignConselorDialog',
     data() {
       return {
-        radio: '1'
+        radio: '',
+        sysLs: []
       };
+    },
+    props: ['studentId', 'helperId'],
+    created() {
+      this.query();
+    },
+    methods: {
+      query() {
+        return mangerStaffQuery({
+          page_limit: 1000,
+          page_no: 1,
+          role_id: 5
+        }).then(resp => {
+          this.sysLs = resp.data.objects;
+        })
+      },
+      handlerOpen() {
+        console.log(this.helperId)
+        this.radio = this.helperId || '';
+      },
+      handlerClose() {
+        this.radio = '';
+        this.$emit('onClose')
+      },
+      onSubmit() {
+        studentPutById(this.studentId, {
+          consultant_id: this.radio
+        }).then(resp => {
+          this.$message.success('分配成功！');
+          this.toClose();
+        })
+      }
     },
     mixins: [dialogContainer]
   }
