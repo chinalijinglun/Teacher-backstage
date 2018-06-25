@@ -3,21 +3,26 @@
   <div class="createfication">
     <h4>合作方编辑</h4>
     <el-form  label-width="100px" ref="form" :rules="rules" :model="form" class="demo-ruleForm">
-      <el-form-item label="中文名称" prop="full_name_zh">
-        <el-input size="mini" v-model="form.full_name_zh"></el-input>
-      </el-form-item>
-      <el-form-item label="英文名称" prop="full_name">
-        <el-input size="mini" v-model="form.full_name"></el-input>
+      <el-form-item label="合作方名称" prop="channel_name">
+        <el-input size="mini" v-model="form.channel_name"></el-input>
       </el-form-item>
       <div class="chi-bebal">
-        <el-form-item label="中文介绍" prop="desc_zh" style="width:65%" class="zh-desc">
-          <el-input type="textarea" v-model="form.desc_zh"></el-input>
+        <el-form-item label="合作方介绍" prop="channel_desc" style="width:65%" class="zh-desc">
+          <el-input type="textarea" v-model="form.channel_desc"></el-input>
         </el-form-item>
       </div>
-      <el-form-item label="英文介绍" prop="desc">
-        <el-input type="textarea" v-model="form.desc"></el-input>
+      <el-form-item label="联系人" prop="channel_name">
+        <el-input size="mini" v-model="form.channel_name"></el-input>
       </el-form-item>
-      <el-form-item label="课程封面" prop="file_list">
+      <el-form-item label="联系人电话" prop="contact_tel">
+        <el-input size="mini" v-model="form.contact_tel"></el-input>
+      </el-form-item>
+      <el-form-item label="地址" prop="contact_tel">
+        <el-input size="mini" v-model="form.domain_address">
+          <template slot="append">.vipustutor.com</template>
+        </el-input>
+      </el-form-item>
+      <el-form-item label="logo" prop="file_list">
         <el-upload
           class="upload-demo"
           :action="$baseApiUrl + '/upload'"
@@ -26,7 +31,7 @@
           :on-success="onUploadSuccess"
           list-type="picture">
           <el-button size="small" type="primary">点击上传</el-button>
-          <div slot="tip" class="el-upload__tip">封面尺寸：XXX*XXX ；图片格式：PNG，JIF,JPG</div>
+          <div slot="tip" class="el-upload__tip">尺寸：XXX*XXX ；图片格式：PNG，JIF,JPG</div>
         </el-upload>
       </el-form-item>
       <el-form-item label="状态">
@@ -43,11 +48,15 @@
   </div>
 </template>
 <script>
-  import { curriculumPost, curriculumGetByCurriculumidBare, curriculumPutByCurriculumid } from '@/api/curriculum';
+  import {
+    channelPost,
+    channelBareGetById,
+    channelPutById
+  } from '@/api/curriculum';
   import { mapState } from 'vuex'
 
   export default {
-    name: "addCurriculum",
+    name: "addParter",
     computed: {
       ...mapState({
         userName: store=>store.auth.userName
@@ -63,30 +72,12 @@
       return {
         form: {
           id: '',
-          full_name: '',
-          full_name_zh: '',
-          desc: '',
-          desc_zh: '',
-          cover_url: '',
-          state: this.$VALID_ENUM.VALID,
+          channel_name: '',
+          channel_desc: '',
+          contact_tel: '',
+          domain_address: '',
+          logo_url: '',
           file_list: []
-        },
-        rules: {
-          full_name: [
-            { required: true, message: "请输入英文名称", trigger: "blur" }
-          ],
-          full_name_zh: [
-            { required: true, message: "请输入中文名称", trigger: "blur" }
-          ],
-          desc: [
-            { required: true, message: "请输入英文介绍", trigger: "blur" }
-          ],
-          desc_zh: [
-            { required: true, message: "请输入中文介绍", trigger: "blur" }
-          ],
-          cover_url: [
-            { required: true, message: "请上传封面图片", trigger: "change"}
-          ]
         }
       };
     },
@@ -102,8 +93,8 @@
           this.$router.push('/course/classification')
         });
       },
-      addCurriculum(form) {
-        curriculumPost({
+      addChannel(form) {
+        channelPost({
           ...form,
           created_at: new Date(),
           updated_at: new Date(),
@@ -136,7 +127,7 @@
                 state
               });
             } else {
-              this.addCurriculum({
+              this.addChannel({
                 full_name,
                 full_name_zh,
                 desc,
@@ -155,7 +146,7 @@
         this.$refs[formName].resetFields();
       },
       onUploadSuccess(e) {
-        this.form.cover_url = e[0].download_file;
+        this.form.logo_url = e[0].download_file;
       },
       queryInfo(id) {
         return curriculumGetByCurriculumidBare(id).then(resp => {

@@ -4,23 +4,23 @@
       <el-form :inline="true" ref="form" :model="form" label-width="96px">
         <el-row>
           <el-form-item label="合作方名称：">
-            <el-input v-model="form.name" size="mini"></el-input>
+            <el-input v-model="form.channel_name" size="mini"></el-input>
           </el-form-item>
           <el-form-item label="合作方ID：">
-            <el-input v-model="form.name" size="mini"></el-input>
+            <el-input v-model="form.id" size="mini"></el-input>
           </el-form-item>
           <el-form-item label="联系人：">
-            <el-input v-model="form.name" size="mini"></el-input>
+            <el-input v-model="form.contact_name" size="mini"></el-input>
           </el-form-item>
           <el-form-item label="联系电话：">
-            <el-input v-model="form.name" size="mini"></el-input>
+            <el-input v-model="form.contact_tel" size="mini"></el-input>
           </el-form-item>
         </el-row>
         <el-row>
           <el-form-item label="创建时间：">
             <date-range
-              :start-date.sync="form.startDate"
-              :end-date.sync="form.endDate"
+              :start-date.sync="form.created_at.gt"
+              :end-date.sync="form.created_at.lt"
               size="mini"
               range-separator="-"
               start-placeholder="开始时间"
@@ -28,16 +28,16 @@
             </date-range>
           </el-form-item>
           <el-form-item label="状态：">
-            <el-select v-model="form.status" placeholder="请选择" size="mini">
+            <el-select v-model="form.state[0]" placeholder="请选择" size="mini">
               <el-option label="所有状态" value=""></el-option>
-              <el-option label="待分配" value="1"></el-option>
-              <el-option label="已分配" value="1"></el-option>
+              <el-option label="有效" value="98"></el-option>
+              <el-option label="无效" value="99"></el-option>
             </el-select>
           </el-form-item>
         </el-row>
         <el-row>
-          <el-button type="primary" size="mini">查询</el-button>
-          <el-button type="primary" size="mini">增加合作方</el-button>
+          <el-button type="primary" size="mini" @click="query">查询</el-button>
+          <el-button type="primary" size="mini" @click="toAddParter">增加合作方</el-button>
         </el-row>
       </el-form>
     </el-row>
@@ -54,22 +54,21 @@
             label="合作方名称">
           </el-table-column>
           <el-table-column
-            prop="studentsName"
+            prop="contact_name"
             label="联系人">
           </el-table-column>
           <el-table-column
-            prop="telphone"
+            prop="contact_tel"
             label="联系电话">
           </el-table-column>
           <el-table-column
-            prop="email"
+            prop="created_at"
             label="加入时间">
           </el-table-column>
           <el-table-column
-            prop="addtime"
             label="状态">
             <template slot-scope="scope">
-              {{{98:'有效',99:'无效'}[state]}}
+              {{{98:'有效',99:'无效'}[scope.row.state]}}
             </template>
           </el-table-column>
           <el-table-column
@@ -81,19 +80,75 @@
           </el-table-column>
         </el-table>
     </el-row>
+    <el-row style="text-align: right">
+      <el-pagination
+        @current-change="handleCurrentChange"
+        :current-page="form.page"
+        :page-size="10"
+        layout="total, prev, pager, next, jumper"
+        :total="total">
+      </el-pagination>
+    </el-row>
   </div>
 </template>
 <script>
+  import {
+    channelBareGet,
+    channelPutById
+  } from '@/api/channel';
+  import {
+    paginationMix
+  } from '@/components';
+
   export default {
     data() {
       return {
         form: {
-          name: '',
-          startDate: '',
-          endDate: '',
-          status: '',
+          channel_name: '',
+          contact_tel: '',
+          contact_name: '',
+          id: '',
+          page: 1,
+          state: [''],
+          created_at: {
+            gt: '',
+            lt: ''
+          }
         },
+        total: 0,
         tableData: []
+      }
+    },
+    mixins: [paginationMix],
+    created() {
+      this.query();
+    },
+    methods: {
+      query(){
+        const {
+          channel_name,
+          contact_tel,
+          contact_name,
+          id,
+          created_at,
+          page,
+          state
+        } = this.form;
+        const filter = this.$json2filter({
+          channel_name,
+          contact_tel,
+          contact_name,
+          id,
+          state,
+          created_at
+        });
+        channelBareGet(filter, {page}).then(resp => {
+          this.tableData = resp.data.objects;
+          this.total = resp.data.num_results;
+        })
+      },
+      toAddParter() {
+
       }
     }
   }
