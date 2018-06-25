@@ -11,7 +11,8 @@ import {
 } from './axios';
 import {
   MOBILE_REG_EXP,
-  EMAIL_REG_EXP
+  EMAIL_REG_EXP,
+  MOBILE_REG_EXP_NATIONAL
 } from './regExp';
 
 import {
@@ -47,6 +48,7 @@ const install = (Vue) => {
   Vue.prototype.$baseApiUrl = baseApiUrl;
   Vue.prototype.$MOBILE_REG_EXP = MOBILE_REG_EXP;
   Vue.prototype.$EMAIL_REG_EXP = EMAIL_REG_EXP;
+  Vue.prototype.$MOBILE_REG_EXP_NATIONAL = MOBILE_REG_EXP_NATIONAL;
   Vue.prototype.$setLocalStorage = setLocalStorage;
   Vue.prototype.$getLocalStorage = getLocalStorage;
   Vue.prototype.$deleteLocalStorage = deleteLocalStorage;

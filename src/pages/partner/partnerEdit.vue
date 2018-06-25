@@ -2,7 +2,7 @@
   <!-- 创建分类 -->
   <div class="createfication">
     <h4>合作方编辑</h4>
-    <el-form  label-width="100px" ref="form" :rules="rules" :model="form" class="demo-ruleForm">
+    <el-form  label-width="100px" ref="form" :model="form" class="demo-ruleForm">
       <el-form-item label="合作方名称" prop="channel_name">
         <el-input size="mini" v-model="form.channel_name"></el-input>
       </el-form-item>
@@ -11,8 +11,8 @@
           <el-input type="textarea" v-model="form.channel_desc"></el-input>
         </el-form-item>
       </div>
-      <el-form-item label="联系人" prop="channel_name">
-        <el-input size="mini" v-model="form.channel_name"></el-input>
+      <el-form-item label="联系人" prop="contact_name">
+        <el-input size="mini" v-model="form.contact_name"></el-input>
       </el-form-item>
       <el-form-item label="联系人电话" prop="contact_tel">
         <el-input size="mini" v-model="form.contact_tel"></el-input>
@@ -52,7 +52,7 @@
     channelPost,
     channelBareGetById,
     channelPutById
-  } from '@/api/curriculum';
+  } from '@/api/channel';
   import { mapState } from 'vuex'
 
   export default {
@@ -75,15 +75,47 @@
           channel_name: '',
           channel_desc: '',
           contact_tel: '',
+          contact_name: '',
           domain_address: '',
           logo_url: '',
+          state: 98,
           file_list: []
         }
       };
     },
     methods: {
-      updateCurriculum(id, form) {
-        curriculumPutByCurriculumid(id, {
+      valid() {
+        if(!this.form.channel_name){
+          this.$message.error('请输入合作方名称！');
+          return false;
+        }
+        if(!this.form.channel_desc){
+          this.$message.error('请输入合作方描述！');
+          return false;
+        }
+        if(!this.form.contact_name){
+          this.$message.error('请输入联系人！');
+          return false;
+        }
+        if(!this.form.contact_tel){
+          this.$message.error('请输入联系人电话！');
+          return false;
+        }else if(!this.$MOBILE_REG_EXP_NATIONAL.test(this.form.contact_tel)) {
+          this.$message.error('电话只能为数字！');
+          return false;
+        }
+        if(!this.form.domain_address){
+          this.$message.error('请输入合作方主页地址！');
+          return false;
+        }
+        if(!this.form.logo_url){
+          this.$message.error('请上传logo图！');
+          return false;
+        }
+        return true;
+      },
+      updateChannel(id, form) {
+        channelPutById(id, {
           ...form,
           created_at: new Date(),
           updated_at: new Date(),
@@ -100,62 +132,60 @@
           updated_at: new Date(),
           updated_by: this.userName
         }).then(resp => {
-          this.$message('创建成功！');
-          this.$router.push('/course/classification')
+          this.$message.success('创建成功！');
+          this.$router.back();
         });
       },
       submitForm() {
-        this.$refs.form.validate(valid => {
-          if (valid) {
-            const {
+        if (this.valid()) {
+          const {
+            id,
+            channel_name,
+            channel_desc,
+            contact_name,
+            contact_tel,
+            domain_address,
+            logo_url,
+            state
+          } = this.form;
+          if(id) {
+            this.updateChannel(id, {
               id,
-              full_name,
-              full_name_zh,
-              desc,
-              desc_zh,
-              cover_url,
+              channel_name,
+              contact_name,
+              channel_desc,
+              contact_tel,
+              domain_address,
+              logo_url,
               state
-            } = this.form;
-            if(id) {
-              this.updateCurriculum(id, {
-                id,
-                full_name,
-                full_name_zh,
-                desc,
-                desc_zh,
-                cover_url,
-                state
-              });
-            } else {
-              this.addChannel({
-                full_name,
-                full_name_zh,
-                desc,
-                desc_zh,
-                cover_url,
-                state
-              });
-            }
+            });
           } else {
-            console.log("error submit!!");
-            return false;
+            this.addChannel({
+              channel_name,
+              contact_name,
+              channel_desc,
+              contact_tel,
+              domain_address,
+              logo_url,
+              state
+            });
           }
-        });
+        }
       },
       resetForm(formName) {
-        this.$refs[formName].resetFields();
+        this.$router.back();
       },
       onUploadSuccess(e) {
         this.form.logo_url = e[0].download_file;
       },
       queryInfo(id) {
-        return curriculumGetByCurriculumidBare(id).then(resp => {
+        return channelBareGetById(id).then(resp => {
           for(let key in this.form) {
             this.form[key] = resp.data[key];
           }
           this.form.file_list = [{
             name: 'cover_img',
-            url: this.$baseApiUrl + resp.data.cover_url
+            url: this.$baseApiUrl + resp.data.logo_url
           }];
         });
       }

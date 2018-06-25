@@ -37,7 +37,7 @@
         </el-row>
         <el-row>
           <el-button type="primary" size="mini" @click="query">查询</el-button>
-          <el-button type="primary" size="mini" @click="toAddParter">增加合作方</el-button>
+          <el-button type="primary" size="mini" @click="toAddParter()">增加合作方</el-button>
         </el-row>
       </el-form>
     </el-row>
@@ -74,8 +74,8 @@
           <el-table-column
             label="操作">
             <template slot-scope="scope">
-              <el-button size="mini">编辑</el-button>
-              <el-button size="mini">注销</el-button>
+              <el-button size="mini" @click="toAddParter(scope.row.id)">编辑</el-button>
+              <el-button size="mini" @click="setInValid(scope.row)">{{scope.row.state === 99? '生效':'注销'}}</el-button>
             </template>
           </el-table-column>
         </el-table>
@@ -147,8 +147,19 @@
           this.total = resp.data.num_results;
         })
       },
-      toAddParter() {
+      toAddParter(id) {
+        this.$router.push({path:'/partner/partnerEdit', query: {id}})
+      },
+      setInValid({state, id}) {
+        const s = state === 99? '生效':'注销';
+        this.$confirm(`确定${s}`).then(_=>{
+          channelPutById(id,{state: 99}).then(resp=> {
+            this.$message.success(`${s}成功！`);
+            this.query();
+          })
+        }).catch(_=>{
 
+        })
       }
     }
   }
