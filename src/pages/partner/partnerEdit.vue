@@ -122,7 +122,7 @@
           updated_by: this.userName
         }).then(resp => {
           this.$message('更新成功！');
-          this.$router.push('/course/classification')
+          this.$router.back();
         });
       },
       addChannel(form) {

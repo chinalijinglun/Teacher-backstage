@@ -50,7 +50,7 @@
             label="合作方ID">
           </el-table-column>
           <el-table-column
-            prop="loginName"
+            prop="channel_name"
             label="合作方名称">
           </el-table-column>
           <el-table-column
