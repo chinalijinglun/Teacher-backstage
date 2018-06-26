@@ -19,9 +19,6 @@
       </el-form>
     </el-row>
     <el-row class="list-contain">
-      <el-row class="list-title">
-        <p>待分配学生</p>
-      </el-row>
       <el-row>
         <el-table
           :data="tableData"

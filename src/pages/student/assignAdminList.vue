@@ -65,8 +65,10 @@
             </template>
           </el-table-column>
           <el-table-column
-            prop="student_helper_id"
             label="班主任">
+            <template slot-scope="scope">
+              {{scope.row.student_helpers?scope.row.student_helpers.username:''}}
+            </template>
           </el-table-column>
           <el-table-column
             label="操作">
@@ -93,7 +95,7 @@
 </template>
 <script>
   import {
-    studentBareGet
+    studentGet
   } from '@/api/student'
   import assignAdminDialog from '@/components/students/dialog/assignAdminDialog';
   import paginationMix from '@/components/commons/mixins/paginationMix';
@@ -144,7 +146,7 @@
         } else if(status === 2){
           filter.filters.push({name: 'student_helper_id', op:'is_not_null'})
         }
-        studentBareGet(filter, {page}).then(resp => {
+        studentGet(filter, {page}).then(resp => {
           this.tableData = resp.data.objects;
           this.totalCount = resp.data.num_results;
         });

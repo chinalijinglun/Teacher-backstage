@@ -4,6 +4,7 @@ import teacherDialog from './commons/dialog/teacherDialog';
 import appointmentTeacher from './commons/dialog/appointmentTeacher';
 import sureTimeDialog from './commons/dialog/sureTimeDialog';
 import addSysUser from './commons/dialog/addSysUser';
+import flatFeild from './commons/field/field';
 import header from './header';
 import navigation from './navigation';
 
@@ -18,6 +19,7 @@ const install = (Vue) => {
   Vue.component(appointmentTeacher.name, appointmentTeacher);
   Vue.component(header.name, header);
   Vue.component(navigation.name, navigation);
+  Vue.component(flatFeild.name, flatFeild);
 }
 export {
   paginationMix

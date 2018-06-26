@@ -69,7 +69,6 @@
               this.detail[key] = resp.data[key]
             }
           }
-          this.study_courses = resp.data.study_courses;
           this.study_results = resp.data.study_results;
         })
       }

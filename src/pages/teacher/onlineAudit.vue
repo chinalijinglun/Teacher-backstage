@@ -99,7 +99,7 @@ export default {
 				email,
 				mobile,
 				username,
-				state: [1]
+				state: [1,3,4,5]
 			})
 			teacherGetBare(filter, {page}).then(resp => {
 				this.tableData = resp.data.objects;
@@ -107,15 +107,9 @@ export default {
 			})
 		},
 		audit(id) {
-			this.$confirm('确定审核？').then(_=> {
-				teacherPutByTeacherid(id, {
-					state: 4
-				}).then(resp => {
-					this.$message.success('审核通过！');
-					this.query();
-				})
-			}).catch(_=> {
-
+			this.$router.push({
+				path: '/teacher/auditPage',
+				query: {id}
 			})
 		}
   }

@@ -4,32 +4,29 @@
       <el-form :inline="true" :model="form">
         <el-row class="form-row">
           <el-form-item label="课程名：">
-            <el-input v-model="form.courseName" size="mini" placeholder="课程名"></el-input>
+            <el-input v-model="form.course_name" size="mini" placeholder="课程名"></el-input>
           </el-form-item>
           <el-form-item label="学生名：">
-            <el-input v-model="form.studentsName" size="mini" placeholder="学生名"></el-input>
+            <el-input v-model="form.student_name" size="mini" placeholder="学生名"></el-input>
           </el-form-item>
           <el-form-item label="上课时间：">
-            <date-range 
-              :start-date.sync="form.startDate" 
-              :end-date.sync="form.endDate"
-              size="mini"
-              range-separator="-"
-              start-placeholder="开始时间"
-              end-placeholder="结束时间">
-            </date-range>
+            <el-date-picker
+              v-model="form.course_time"
+              type="datetime"
+              placeholder="选择日期时间">
+            </el-date-picker>
           </el-form-item>
           <el-form-item label="课程状态：">
-            <el-select v-model="form.status" placeholder="请选择" size="mini">
+            <el-select v-model="form.course_status" placeholder="请选择" size="mini">
               <el-option label="所有状态" value=""></el-option>
-              <el-option label="待分配" value="1"></el-option>
-              <el-option label="已分配" value="1"></el-option>
+              <el-option label="已完成" value="1"></el-option>
+              <el-option label="进行中" value="2"></el-option>
             </el-select>
           </el-form-item>
         </el-row>
         <el-row>
           <el-button @click="query" size="mini" type="primary">查询</el-button>
-          <el-button @click="query" size="mini" type="primary">申请试听</el-button>
+          <el-button @click="toApplyFree" size="mini" type="primary">申请试听</el-button>
         </el-row>
       </el-form>
     </el-row>
@@ -39,41 +36,35 @@
       </el-row>
       <el-row>
         <el-table
-          :data="detail"
+          :data="tableData"
           style="width: 100%">
           <el-table-column
-            prop="id"
-            label="ID"
-            width="60">
+            prop="course_name"
+            label="课程名称">
           </el-table-column>
           <el-table-column
-            prop="loginName"
-            label="用户名"
-            width="180">
+            label="课程进度">
+            <template slot-scope="scope">
+              {{ `${scope.row.finish}/${scope.row.classes_number}` }}
+            </template>
           </el-table-column>
           <el-table-column
-            prop="studentsName"
-            label="学生姓名">
+            prop="teacher_name"
+            label="教师名称">
           </el-table-column>
           <el-table-column
-            prop="telphone"
-            label="联系电话">
+            label="上课时间">
+            <template slot-scope="scope">
+              {{ 
+              `${$dateFmt(new Date(scope.row.start), 'yyyy-MM-dd')} — ${$dateFmt(new Date(scope.row.end), 'MM-dd')}` 
+              }}
+            </template>
           </el-table-column>
           <el-table-column
-            prop="email"
-            label="联系邮箱">
-          </el-table-column>
-          <el-table-column
-            prop="addtime"
-            label="注册时间">
-          </el-table-column>
-          <el-table-column
-            prop="status"
             label="状态">
-          </el-table-column>
-          <el-table-column
-            prop="admin"
-            label="班主任">
+            <template slot-scope="scope">
+              {{ scope.row.finish/scope.row.classes_number>1?'已完成':'未完成' }}
+            </template>
           </el-table-column>
           <el-table-column
             label="操作">
@@ -86,8 +77,8 @@
       <el-row class="pagination-container">
         <el-pagination
           @current-change="handleCurrentChange"
-          :current-page="form.curPage"
-          :page-size="form.pageSize"
+          :current-page="form.page"
+          :page-size="10"
           layout="total, prev, pager, next, jumper"
           :total="totalCount">
         </el-pagination>
@@ -96,55 +87,56 @@
   </div>
 </template>
 <script>
+  import {
+    studentCoursePost
+  } from '@/api/student'
   import paginationMix from '@/components/commons/mixins/paginationMix';
   export default {
     data() {
       return {
         form: {
-          courseName: '',
-          studentsName: '',
-          courseStatus: '',
-          startDate: '',
-          endDate: '',
-          curPage: 1,
-          pageSize: 10
+          student_id: '',
+          student_name: '',
+          course_name: '',
+          course_status: '',
+          course_time: '',
+          page: 1
         },
-        totalCount: 100,
-        tableData: [{
-          id: '0001',
-          loginName: 'kira@gmail.com',
-          studentsName: 'Kira Yuan',
-          telphone: '1876543210',
-          email: 'kira@gmail.com',
-          addtime: '2018-02-27 11:25:30',
-          status: '待分配',
-          admin: '无'
-        },{
-          id: '0002',
-          loginName: 'kira@gmail.com',
-          studentsName: 'Kira Yuan',
-          telphone: '1876543210',
-          email: 'kira@gmail.com',
-          addtime: '2018-02-27 11:25:30',
-          status: '待分配',
-          admin: '无'
-        },{
-          id: '0003',
-          loginName: 'kira@gmail.com',
-          studentsName: 'Kira Yuan',
-          telphone: '1876543210',
-          email: 'kira@gmail.com',
-          addtime: '2018-02-27 11:25:30',
-          status: '待分配',
-          admin: '无'
-        }]
+        totalCount: 0,
+        tableData: []
       };
     },
     mixins: [paginationMix],
-    props: ['detail'],
+    created() {
+      this.form.student_id = this.$route.query.id;
+      this.query();
+    },
     methods: {
       query() {
-        console.log(this.form);
+        const {
+          student_id,
+          student_name,
+          course_name,
+          course_status,
+          course_time,
+          page: page_no
+        } = this.form
+        const f = this.$deleteEmptyProps({
+          student_id,
+          student_name,
+          course_name,
+          course_status,
+          course_time,
+          page_no
+        });
+
+        studentCoursePost({ 
+          ...f,
+          page_limit: 10
+        }).then(res => {
+          this.tableData = res.data.objects;
+          this.totalCount = res.data.num_results;
+        })
       },
       handlerClick() {
         var { path } = this.$route;
@@ -153,6 +145,9 @@
           courseBlk: 'detail'
         };
         this.$router.push({ path, query });
+      },
+      toApplyFree() {
+        this.$router.push('/course/auditions');
       }
     }
   }

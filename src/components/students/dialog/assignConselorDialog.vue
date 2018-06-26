@@ -55,12 +55,16 @@
         this.$emit('onClose')
       },
       onSubmit() {
-        studentPutById(this.studentId, {
-          consultant_id: this.radio
-        }).then(resp => {
-          this.$message.success('分配成功！');
-          this.toClose();
-        })
+        if(this.radio) {
+          studentPutById(this.studentId, {
+            consultant_id: this.radio
+          }).then(resp => {
+            this.$message.success('分配成功！');
+            this.toClose();
+          })
+        } else {
+          this.$message.error('请选择课程顾问！');
+        }
       }
     },
     mixins: [dialogContainer]

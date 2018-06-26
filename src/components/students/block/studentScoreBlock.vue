@@ -3,7 +3,7 @@
     <p class="title-info">成绩单：</p>
     <div class="score-table">
       <el-table
-        :data="tableData"
+        :data="detail"
         border
         style="width: 100%">
         <el-table-column
@@ -11,7 +11,7 @@
           label="课程">
         </el-table-column>
         <el-table-column
-          prop="updateTime"
+          prop="created_at"
           label="上传时间">
         </el-table-column>
         <el-table-column
@@ -34,25 +34,10 @@
     name: 'studentScoreBlock',
     data() {
       return {
-        tableData: [{
-          className: 'ESL英语综合提升中级',
-          updateTime: '2018-02-27 11:25:30',
-          teacherName: 'Kira Yuan'
-        },{
-          className: 'ESL英语综合提升中级',
-          updateTime: '2018-02-27 11:25:30',
-          teacherName: 'Kira Yuan'
-        },{
-          className: 'ESL英语综合提升中级',
-          updateTime: '2018-02-27 11:25:30',
-          teacherName: 'Kira Yuan'
-        },{
-          className: 'ESL英语综合提升中级',
-          updateTime: '2018-02-27 11:25:30',
-          teacherName: 'Kira Yuan'
-        }]
+        tableData: []
       };
-    }
+    },
+    props: ['detail']
   }
 </script>
 <style scoped>

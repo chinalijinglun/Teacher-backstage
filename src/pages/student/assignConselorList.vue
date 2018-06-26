@@ -67,6 +67,9 @@
           <el-table-column
             prop="consultant_id"
             label="课程顾问">
+            <template slot-scope="scope">
+              {{scope.row.consultants?scope.row.consultants.username:''}}
+            </template>
           </el-table-column>
           <el-table-column
             label="操作">
@@ -93,7 +96,7 @@
 </template>
 <script>
   import {
-    studentBareGet
+    studentGet
   } from '@/api/student'
   import assignConselorDialog from '@/components/students/dialog/assignConselorDialog';
   import paginationMix from '@/components/commons/mixins/paginationMix';
@@ -144,7 +147,7 @@
         } else if(status === 2){
           filter.filters.push({name: 'consultant_id', op:'is_not_null'})
         }
-        studentBareGet(filter, {page}).then(resp => {
+        studentGet(filter, {page}).then(resp => {
           this.tableData = resp.data.objects;
           this.totalCount = resp.data.num_results;
         });
