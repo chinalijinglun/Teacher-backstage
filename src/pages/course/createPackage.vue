@@ -1,4 +1,3 @@
-import {curriculumGet} from "../../api/curriculum";
 <template>
 <!-- 创建课程包 -->
   <div class="create-package">
@@ -30,9 +29,7 @@ import {curriculumGet} from "../../api/curriculum";
       <el-row>
         <el-form-item prop="class_type" label="班型">
           <el-select v-model="form.class_type" placeholder="所有班型" size="mini">
-            <el-option label="1 v 1" :value="$CLASS_TYPE['1 v 1']"></el-option>
-            <el-option label="1 v 4" :value="$CLASS_TYPE['1 v 4']"></el-option>
-            <el-option label="1 v n" :value="$CLASS_TYPE['1 v n']"></el-option>
+            <el-option v-for="(name, key) in $CLASS_TYPE" :label="name" :value="key" :key="key"></el-option>
           </el-select>
         </el-form-item>
       </el-row>

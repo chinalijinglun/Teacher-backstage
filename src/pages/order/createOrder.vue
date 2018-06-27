@@ -4,61 +4,54 @@
     <div class="form-container">
       <el-form class="demo-form-inline" label-width="110px">
         <el-row>
+          <el-form-item label="订单类型">
+            <el-select placeholder="订单类型" size="mini" v-model="form.order_type">
+              <el-option v-for="(name, key) in $ORDER_TYPE" :label="name" :value="key" :key="key"></el-option>
+            </el-select>
+          </el-form-item>
+        </el-row>
+        <el-row>
           <el-form-item label="是否已有课程包">  
-            <el-radio-group>
+            <el-radio-group v-model="form.have_course">
               <el-radio :label="1">是</el-radio>
               <el-radio :label="0">否</el-radio>
             </el-radio-group>
           </el-form-item>
         </el-row>
         <el-row>
-          <el-form-item label="课程类型">
-            <el-select placeholder="课程类型" size="mini">
-              <el-option label="区域一" value="shanghai"></el-option>
-              <el-option label="区域二" value="beijing"></el-option>
-            </el-select>
+          <el-form-item label="课程包">  
+            <el-input size="mini" placeholder="输入课程包ID" v-model="form.course_id"></el-input>
+            <el-button size="mini" type="primary" @click="validCourse">验证</el-button>
           </el-form-item>
         </el-row>
         <el-row>
-          <el-form-item label="班型">
-            <el-select placeholder="班型" size="mini">
-              <el-option label="1v1" value="shanghai"></el-option>
-              <el-option label="1v2" value="beijing"></el-option>
-            </el-select>
+          <el-form-item label="课程包名称">  
+            <el-input size="mini" :disabled="true" :value="course.course_name"></el-input>
           </el-form-item>
         </el-row>
         <el-row>
-          <el-form-item label="课程">
-            <el-select placeholder="课程" size="mini">
-              <el-option label="1v1" value="shanghai"></el-option>
-              <el-option label="1v2" value="beijing"></el-option>
-            </el-select>
-            <el-select placeholder="课程" size="mini">
-              <el-option label="1v1" value="shanghai"></el-option>
-              <el-option label="1v2" value="beijing"></el-option>
-            </el-select>
-            <el-select placeholder="课程" size="mini">
-              <el-option label="1v1" value="shanghai"></el-option>
-              <el-option label="1v2" value="beijing"></el-option>
-            </el-select>
+          <el-form-item label="课程包类型">  
+            <el-input size="mini" :disabled="true" :value="course.course_type_name"></el-input>
           </el-form-item>
         </el-row>
         <el-row>
-          <el-form-item label="项目">
-            <el-select placeholder="项目" size="mini">
-              <el-option label="1v1" value="shanghai"></el-option>
-              <el-option label="1v2" value="beijing"></el-option>
-            </el-select>
+          <el-form-item label="班型">  
+            <el-input size="mini" :disabled="true" :value="course.class_type_name"></el-input>
           </el-form-item>
         </el-row>
         <el-row>
-          <el-form-item label="课节数">
-            <el-input size="mini"></el-input>
+          <el-form-item label="教师">  
+            <el-input size="mini" :disabled="true" :value="course.teacher"></el-input>
           </el-form-item>
         </el-row>
         <el-row>
-          <el-form-item label="教师">
-            <el-input size="mini"></el-input>
+          <el-form-item label="课节数">  
+            <el-input size="mini" :disabled="true" :value="course.classes_number"></el-input>
+          </el-form-item>
+        </el-row>
+        <el-row>
+          <el-form-item label="基本价格">  
+            <el-input size="mini" :disabled="true" :value="course.price"></el-input>
           </el-form-item>
         </el-row>
         <el-row>
@@ -94,7 +87,48 @@
     </div>
   </div>
 </template>
-
+<script>
+  import {
+    courseGetByCourseId
+  } from '@/api/course'
+  export default {
+    data() {
+      return {
+        form: {
+          have_course: 1,
+          class_type: '',
+          course_type: '',
+          classLs: []
+        },
+        course: {
+          course_name: '',
+          course_type_name: '',
+          class_type_name: '',
+          teacher: '',
+          classes_number: '',
+          price: ''
+        }
+      }
+    },
+    methods: {
+      validCourse() {
+        if(!this.form.course_id) {
+          return this.$message.error('请输入课程包id');
+        }
+        courseGetByCourseId(this.form.course_id).then(resp => {
+          for(let key in this.course) {
+            if(resp.data[key]!==undefined) {
+              this.course[key] = resp.data[key];
+            }
+          }
+          this.course.course_type_name = this.$COURSE_TYPE_MAP[resp.data.course_type]
+          this.course.class_type_name = this.$CLASS_TYPE[resp.data.class_type]
+          this.course.teacher = resp.data.assist_teacher.username;
+        })
+      }
+    }
+  }
+</script>
 <style scoped>
 .create-order {
   padding: 0 50px;

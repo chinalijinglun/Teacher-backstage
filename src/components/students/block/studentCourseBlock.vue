@@ -31,9 +31,6 @@
       </el-form>
     </el-row>
     <el-row class="list-container">
-      <el-row class="list-title">
-        <p>学生名称 Vivian</p>
-      </el-row>
       <el-row>
         <el-table
           :data="tableData"

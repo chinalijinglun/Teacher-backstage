@@ -15,11 +15,20 @@ export const COURSE_TYPE = {
 };
 
 export const CLASS_TYPE = {
-  '1 v 1': 1,
-  '1 v 4': 2,
-  '1 v n': 3
+  1: '1 v 1',
+  2: '1 v 4',
+  3: '1 v n' 
 };
 
+export const ORDER_TYPE = {
+  1: '普通课订单',
+  2: '赠送课订单'
+}
+
+export const COURSE_TYPE_MAP = {
+  1: '公共',
+  2: '在线'
+}
 // RECRUIT:新用户，
 // BASIC_INFO:填写基本信息，
 // WAIT_FOR_CHECK:待审核，
