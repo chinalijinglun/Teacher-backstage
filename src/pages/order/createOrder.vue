@@ -18,42 +18,47 @@
             </el-radio-group>
           </el-form-item>
         </el-row>
-        <el-row>
-          <el-form-item label="课程包">  
-            <el-input size="mini" placeholder="输入课程包ID" v-model="form.course_id"></el-input>
-            <el-button size="mini" type="primary" @click="validCourse">验证</el-button>
-          </el-form-item>
-        </el-row>
-        <el-row>
-          <el-form-item label="课程包名称">  
-            <el-input size="mini" :disabled="true" :value="course.course_name"></el-input>
-          </el-form-item>
-        </el-row>
-        <el-row>
-          <el-form-item label="课程包类型">  
-            <el-input size="mini" :disabled="true" :value="course.course_type_name"></el-input>
-          </el-form-item>
-        </el-row>
-        <el-row>
-          <el-form-item label="班型">  
-            <el-input size="mini" :disabled="true" :value="course.class_type_name"></el-input>
-          </el-form-item>
-        </el-row>
-        <el-row>
-          <el-form-item label="教师">  
-            <el-input size="mini" :disabled="true" :value="course.teacher"></el-input>
-          </el-form-item>
-        </el-row>
-        <el-row>
-          <el-form-item label="课节数">  
-            <el-input size="mini" :disabled="true" :value="course.classes_number"></el-input>
-          </el-form-item>
-        </el-row>
-        <el-row>
-          <el-form-item label="基本价格">  
-            <el-input size="mini" :disabled="true" :value="course.price"></el-input>
-          </el-form-item>
-        </el-row>
+        <template v-if="form.have_course === 1">
+          <el-row>
+            <el-form-item label="课程包">  
+              <el-input size="mini" placeholder="输入课程包ID" v-model="form.course_id"></el-input>
+              <el-button size="mini" type="primary" @click="validCourse">验证</el-button>
+            </el-form-item>
+          </el-row>
+          <el-row>
+            <el-form-item label="课程包名称">  
+              <el-input size="mini" :disabled="true" :value="course.course_name"></el-input>
+            </el-form-item>
+          </el-row>
+          <el-row>
+            <el-form-item label="课程包类型">  
+              <el-input size="mini" :disabled="true" :value="course.course_type_name"></el-input>
+            </el-form-item>
+          </el-row>
+          <el-row>
+            <el-form-item label="班型">  
+              <el-input size="mini" :disabled="true" :value="course.class_type_name"></el-input>
+            </el-form-item>
+          </el-row>
+          <el-row>
+            <el-form-item label="教师">  
+              <el-input size="mini" :disabled="true" :value="course.teacher"></el-input>
+            </el-form-item>
+          </el-row>
+          <el-row>
+            <el-form-item label="课节数">  
+              <el-input size="mini" :disabled="true" :value="course.classes_number"></el-input>
+            </el-form-item>
+          </el-row>
+          <el-row>
+            <el-form-item label="基本价格">  
+              <el-input size="mini" :disabled="true" :value="course.price"></el-input>
+            </el-form-item>
+          </el-row>
+        </template>
+        <template>
+          
+        </template>
         <el-row>
           <el-form-item label="学生">
             <el-input size="mini"></el-input>
