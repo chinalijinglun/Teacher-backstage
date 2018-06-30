@@ -4,19 +4,19 @@
       <el-form :inline="true" ref="form" :model="form" label-width="96px">
         <el-row>
           <el-form-item label="订单编号：">
-            <el-input v-model="form.course_id" size="mini"></el-input>
+            <el-input v-model="form.order_id" size="mini"></el-input>
           </el-form-item>
           <el-form-item label="课程包名称：">
-            <el-input v-model="form.course_name" size="mini"></el-input>
+            <el-input v-model="form.subject_name" size="mini"></el-input>
           </el-form-item>
           <el-form-item label="下单人：">
             <el-input v-model="form.updated_by" size="mini"></el-input>
           </el-form-item>
         </el-row>
         <el-row>
-          <el-form-item label="下单时间：">    
-            <date-range 
-              :start-date.sync="form.created_at_start" 
+          <el-form-item label="下单时间：">
+            <date-range
+              :start-date.sync="form.created_at_start"
               :end-date.sync="form.created_at_end"
               size="mini"
               range-separator="-"
@@ -48,14 +48,16 @@
     <el-row class="list-contain">
       <el-row>
         <el-table
-          :data="tableData"
-          style="width: 100%">
+          :data="tableData">
           <el-table-column
             prop="id"
             label="订单编号">
+            <template slot-scope="scope">
+              <el-button size="mini" type="text" @click="toDetail(scope.row.id)">{{scope.row.id}}</el-button>
+            </template>
           </el-table-column>
           <el-table-column
-            prop="course_name"
+            prop="subject_name"
             label="课程包名称">
           </el-table-column>
           <el-table-column
@@ -63,12 +65,16 @@
             label="课节数">
           </el-table-column>
           <el-table-column
-            prop="order_type"
             label="订单类型">
+            <template slot-scope="scope">
+              {{ $ORDER_TYPE[scope.row.order_type] }}
+            </template>
           </el-table-column>
           <el-table-column
-            prop="order_state"
             label="状态">
+            <template slot-scope="scope">
+              {{ $PAYMENT_STATE[scope.row.order_state] }}
+            </template>
           </el-table-column>
           <el-table-column
             prop="updated_by"
@@ -91,9 +97,13 @@
             label="价格">
           </el-table-column>
           <el-table-column
-            label="操作">
+            fixed="right"
+            label="操作"
+            width="200">
             <template slot-scope="scope">
-              <el-button size="mini">查看</el-button>
+              <el-button size="mini" @click="toPayed(scope.row.id)" v-if="scope.row.order_state === 1">确认付款</el-button>
+              <el-button size="mini" @click="toCancel(scope.row.id)" v-if="scope.row.order_state === 1">取消订单</el-button>
+              <el-button size="mini" @click="toRefund(scope.row.id)" v-if="scope.row.order_state === 2">申请退款</el-button>
             </template>
           </el-table-column>
         </el-table>
@@ -113,7 +123,8 @@
 </template>
 <script>
   import {
-    orderMainQuery
+    mangeOrders,
+    orderPutById
   } from '@/api/order'
   import assignConselorDialog from '@/components/students/dialog/assignConselorDialog';
   import paginationMix from '@/components/commons/mixins/paginationMix';
@@ -125,8 +136,8 @@
         form: {
           order_state: '',
           order_type: '',
-          course_name: '',
-          course_id: '',
+          subject_name: '',
+          order_id: '',
           status: '',
           created_at_start: '',
           created_at_end: '',
@@ -141,12 +152,34 @@
       this.query()
     },
     methods: {
+      toDetail(id) {
+        this.$router.push({path: '/order/orderDetail', query: {id}})
+      },
+      toPayed(id) {
+        return this.toUpdate(id, 2, '确认此订单客户已付款？');
+      },
+      toCancel(id) {
+        return this.toUpdate(id, 3, '确认取消订单？');
+      },
+      toRefund(id) {
+        return this.$router.push({path: '/order/returnApply', query: {id}})
+      },
+      toUpdate(id, state, confirm) {
+        return this.$confirm(confirm || '确认更改状态？').then(_=>{
+          orderPutById(id, {
+            state: state
+          }).then(resp => {
+            this.$message.success('状态更新成功！');
+            this.query();
+          })
+        }).catch(_=>{})
+      },
       query() {
         const {
           order_state,
           order_type,
-          course_name,
-          course_id,
+          subject_name,
+          order_id,
           status,
           created_at_start,
           created_at_end,
@@ -156,15 +189,15 @@
         const f = this.$deleteEmptyProps({
           order_state,
           order_type,
-          course_name,
-          course_id,
+          subject_name,
+          order_id,
           status,
           created_at_start,
           created_at_end,
           updated_by,
           page_no
         })
-        orderMainQuery({  
+        mangeOrders({
           ...f,
           page_limit: 10
         }).then(resp => {

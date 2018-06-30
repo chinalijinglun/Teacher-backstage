@@ -1,11 +1,8 @@
 <template>
   <div class="return-apply">
-    <div class="apply-storey">
-
-    </div>
     <el-form label-width="90px" label-position="top">
       <div class="apply-storey apply-reason">
-        <el-form-item label="申请退款：">
+        <el-form-item label="退款原因：">
           <el-input type="textarea" size="mini" :rows="5"></el-input>
         </el-form-item>
       </div>
@@ -47,6 +44,7 @@
   </div>
 </template>
 <script>
+
   export default {
     data() {
       return {

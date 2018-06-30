@@ -2,6 +2,7 @@ import assignConselorList from '@/pages/student/assignConselorList';
 import assignAdminList from '@/pages/student/assignAdminList';
 import studentList from '@/pages/student/studentList';
 import studentDetail from '@/pages/student/studentDetail';
+import scheduleEvaluate from '@/pages/student/scheduleEvaluate';
 
 export default [
   {
@@ -31,5 +32,12 @@ export default [
     path: 'studentDetail',
     name: 'student-studentDetail',
     component: studentDetail
+  },
+  {
+    // 学生详情
+    title:'评价',
+    path: 'scheduleEvaluate',
+    name: 'student-scheduleEvaluate',
+    component: scheduleEvaluate
   }
 ];

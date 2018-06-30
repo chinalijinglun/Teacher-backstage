@@ -18,3 +18,5 @@ export const orderMainQuery = (form) => baseAxios.post('/order/main_query',form)
 export const orderRefund = (form) => baseAxios.post('/order/refund',form);
 
 export const orderEstablish = (form) => baseAxios.post('/order/establish',form);
+
+export const mangeOrders = (form) => baseAxios.post('/manger/orders', form);

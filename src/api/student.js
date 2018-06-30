@@ -16,3 +16,5 @@ export const studentBareGet = (params, others) => baseAxios.get('/api/v1/_bare/s
 export const studentBareGetById = (id) => baseAxios.get(`/api/v1/_bare/student/${id}`);
 
 export const studentCoursePost = (form) => baseAxios.post('/manger/student_course', form);
+
+export const studentSchedule = (form) => baseAxios.post('/student/schedule', form);

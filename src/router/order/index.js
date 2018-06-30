@@ -1,4 +1,5 @@
 import orderList from '@/pages/order/orderList';
+import orderDetail from '@/pages/order/orderDetail';
 import auditOrderList from '@/pages/order/auditOrderList';
 import createOrder from '@/pages/order/createOrder';
 import returnApply from '@/pages/order/returnApply';
@@ -11,6 +12,13 @@ export default [
     path: 'orderList',
     name: 'order-orderList',
     component: orderList
+  },
+  {
+    // 订单详情
+    title:'订单详情',
+    path: 'orderDetail',
+    name: 'order-orderDetail',
+    component: orderDetail
   },
   {
     // 退款审核订单列表

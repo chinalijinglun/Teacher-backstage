@@ -17,12 +17,24 @@ export const COURSE_TYPE = {
 export const CLASS_TYPE = {
   1: '1 v 1',
   2: '1 v 4',
-  3: '1 v n' 
+  3: '1 v n'
 };
 
 export const ORDER_TYPE = {
   1: '普通课订单',
-  2: '赠送课订单'
+  2: '赠送课订单',
+  3: '补偿订单',
+  4: '免费订单',
+  5: '退款订单'
+}
+
+export const PAYMENT_STATE = {
+  1: '未付款',
+  2: '已付款',
+  3: '取消',
+  4: '申请退款',
+  5: '退款',
+  6: '已经使用'
 }
 
 export const COURSE_TYPE_MAP = {
