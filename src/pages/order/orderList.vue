@@ -73,7 +73,7 @@
           <el-table-column
             label="状态">
             <template slot-scope="scope">
-              {{ $PAYMENT_STATE[scope.row.order_state] }}
+              {{ $PAYMENT_STATE[scope.row.payment_state] }}
             </template>
           </el-table-column>
           <el-table-column
@@ -101,9 +101,9 @@
             label="操作"
             width="200">
             <template slot-scope="scope">
-              <el-button size="mini" @click="toPayed(scope.row.id)" v-if="scope.row.order_state === 1">确认付款</el-button>
-              <el-button size="mini" @click="toCancel(scope.row.id)" v-if="scope.row.order_state === 1">取消订单</el-button>
-              <el-button size="mini" @click="toRefund(scope.row.id)" v-if="scope.row.order_state === 2">申请退款</el-button>
+              <el-button size="mini" @click="toPayed(scope.row.id)" v-if="scope.row.payment_state === 1">确认付款</el-button>
+              <el-button size="mini" @click="toCancel(scope.row.id)" v-if="scope.row.payment_state === 1">取消订单</el-button>
+              <el-button size="mini" @click="toRefund(scope.row.id)" v-if="scope.row.payment_state === 2">申请退款</el-button>
             </template>
           </el-table-column>
         </el-table>
@@ -167,7 +167,7 @@
       toUpdate(id, state, confirm) {
         return this.$confirm(confirm || '确认更改状态？').then(_=>{
           orderPutById(id, {
-            state: state
+            payment_state: state
           }).then(resp => {
             this.$message.success('状态更新成功！');
             this.query();
