@@ -4,7 +4,7 @@
     <el-row class="subscribe-storey">
       <el-form label-width="110px">
         <el-row>
-          <el-form-item label="开课日期：">    
+          <el-form-item label="开课日期：">
             <el-date-picker
               v-model="startTime"
               type="date"
@@ -142,20 +142,46 @@
           <el-table-column
             prop="date"
             label="上课时间">
+            <template slot-scope="scope">
+              <p v-if="!scope.row.edit">{{scope.row.date}}</p>
+              <p class="time-edit" v-else>
+                <input style="width: 75px;" v-model="dateEdit.date" type="text">
+                <input style="width: 40px;" v-model="dateEdit.start" type="text">
+                <input style="width: 40px;" v-model="dateEdit.end" type="text">
+              </p>
+            </template>
+          </el-table-column>
+          <el-table-column
+            label="上课时间">
+            <template slot-scope="scope">
+              <el-button size="mini" @click="save(scope.$index)" v-if="scope.row.edit">保存</el-button>
+              <el-button size="mini" @click="edit(scope.$index)" v-else>编辑</el-button>
+            </template>
           </el-table-column>
         </el-table>
       </div>
     </el-row>
     <el-row class="subscribe-storey btn-container">
-      <el-button type="primary">提交</el-button>
-      <el-button>返回</el-button>
+      <el-button type="primary" @click="submit">提交</el-button>
+      <el-button @click="goBack">返回</el-button>
     </el-row>
   </div>
 </template>
 <script>
+  import {
+    courseBareGetByCourseId,
+    courseSchedule
+  } from '@/api/course'
   export default {
     data() {
       return {
+        dateEdit: {
+          date: '',
+          start: '',
+          end: ''
+        },
+        course_id: '',
+        className: '',
         totleNum: 50,
         startTime: new Date(),
         tableData: [],
@@ -190,7 +216,103 @@
         }]
       }
     },
+    created() {
+      this.course_id = this.$route.query.id;
+      this.getCourseInfo();
+    },
     methods: {
+      submit() {
+        if(!this.tableData.length) {
+          this.$message.error('请设置上课时间！');
+          return false;
+        }
+        const schedules = this.getScheduleTimes();
+        courseSchedule({
+          course_id: this.course_id,
+          class_at_start: schedules[0].start,
+          class_at_end: schedules[schedules.length-1].end,
+          schedules
+        }).then(resp => {
+          this.$message.success('课程安排成功！');
+          this.goBack();
+        })
+      },
+      goBack() {
+        this.$router.back()
+      },
+      getScheduleTimes() {
+        return this.tableData.map(item => {
+          const start = this.$dateFmt(
+            new Date(
+              item.dateDetail.year,
+              item.dateDetail.month,
+              item.dateDetail.day,
+              item.dateDetail.hourStart,
+              item.dateDetail.minutesStart
+            )
+          );
+          const end = this.$dateFmt(
+            new Date(
+              item.dateDetail.year,
+              item.dateDetail.month,
+              item.dateDetail.day,
+              item.dateDetail.hourEnd,
+              item.dateDetail.minutesEnd
+            )
+          );
+          const course_name = item.name;
+          return {
+            course_name,
+            start,
+            end
+          }
+        })
+      },
+      edit(index){
+        this.tableData.forEach((item, i) => {
+          if(i === index) {
+            this.dateEdit.date = this.fmtDate(item.dateDetail)
+            this.dateEdit.start = this.fmtTime({
+              hour: item.dateDetail.hourStart,
+              minutes: item.dateDetail.minutesStart
+            })
+            this.dateEdit.end = this.fmtTime({
+              hour: item.dateDetail.hourEnd,
+              minutes: item.dateDetail.minutesEnd
+            })
+            item.edit = true;
+          }else {
+            item.edit = false;
+          }
+        });
+      },
+      fmtDate({year, month, day}) {
+        return `${year}.${month}.${day}`
+      },
+      fmtTime({hour, minutes}) {
+        return `${hour}:${minutes}`
+      },
+      fmtRangeItem({year, month, day, hourStart, minutesStart, hourEnd, minutesEnd}) {
+        return `${year}.${month}.${day} ${hourStart}:${minutesStart}-${hourEnd}:${minutesEnd}`;
+      },
+      save(index){
+        const [year, month, day] = this.dateEdit.date.split('.');
+        const [hourStart, minutesStart] = this.dateEdit.start.split(':');
+        const [hourEnd, minutesEnd] = this.dateEdit.end.split(':');
+        const fmtStr = this.fmtRangeItem({year, month, day, hourStart, minutesStart, hourEnd, minutesEnd});
+        this.tableData[index].edit = false;
+        this.tableData[index].date = fmtStr
+        this.tableData[index].datedetail = {fmtStr, year, month, day, hourStart, minutesStart, hourEnd, minutesEnd};
+        this.dateEdit.date = '';
+        this.dateEdit.start = '';
+        this.dateEdit.end = '';
+      },
+      getCourseInfo() {
+        courseBareGetByCourseId(this.course_id).then(resp => {
+          this.totleNum = resp.data.classes_number;
+          this.className = resp.data.course_name;
+        })
+      },
       getSchedule() {
         const startTime = this.$dateFactory(this.startTime);
         const dayChose = this.dayChose.filter(item=>{
@@ -205,9 +327,12 @@
           dayChose.forEach(item => {
             const dateByDay = dateTmp.getThisWeekDateByDay(item.day);
             if(dateByDay >= dateTmp ) {
+              const dateObj = this.fmtScheduleTimeRange(dateByDay, item.timeRange);
               list.push({
-                name: 'class '+(this.totleNum-totalNum+1),
-                date: this.fmtScheduleTimeRange(dateByDay, item.timeRange)
+                name: this.className + ' ' + (this.totleNum-totalNum+1),
+                date: dateObj.fmtStr,
+                dateDetail: dateObj,
+                edit: false
               });
               totalNum--;
             }
@@ -227,7 +352,16 @@
         const minutesStart = this.formatNumber(startTime.getMinutes());
         const hourEnd = this.formatNumber(endTime.getHours());
         const minutesEnd = this.formatNumber(endTime.getMinutes());
-        return `${year}.${month}.${day} ${hourStart}:${minutesStart}-${hourEnd}:${minutesEnd}`
+        return {
+          fmtStr: this.fmtRangeItem({year, month, day, hourStart, minutesStart, hourEnd, minutesEnd}),
+          year,
+          month,
+          day,
+          hourStart,
+          minutesStart,
+          hourEnd,
+          minutesEnd
+        }
       },
       formatNumber(n) {
         n = n.toString()
@@ -257,6 +391,9 @@
   }
   .subscribe-storey-tltle {
     color: #606266;
+  }
+  .time-edit input {
+    display: inline-block;
   }
 </style>
 

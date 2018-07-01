@@ -12,7 +12,7 @@
         </li>
         <li class="title-info-li">
           <span class="info-key">班主任/助教</span>
-          <span class="info-value">Lily</span>
+          <span class="info-value">{{`${student_helpers_name}/${consultants_name}`}}</span>
         </li>
       </ul>
     </div>
@@ -67,7 +67,8 @@
 </template>
 <script>
   import {
-    studentSchedule
+    studentSchedule,
+    studentGetById
   } from '@/api/student'
   import paginationMix from '@/components/commons/mixins/paginationMix';
 
@@ -80,6 +81,8 @@
           course_id: '',
           page: 1
         },
+        consultants_name: '',
+        student_helpers_name: '',
         course_name: '',
         student_name: '',
         teacher_name: '',
@@ -95,8 +98,16 @@
       this.teacher_name = decodeURI(this.$route.query.teacher_name);
       this.course_name = decodeURI(this.$route.query.course_name);
       this.query();
+      this.getCourseInfo();
     },
     methods: {
+      getCourseInfo() {
+        studentGetById(this.form.student_id).then(resp => {
+          console.log('res', resp)
+          this.student_helpers_name = resp.data.student_helpers.username;
+          this.consultants_name = resp.data.consultants.username;
+        });
+      },
       toEvaluate(row) {
         this.$router.push({
           path: '/student/scheduleEvaluate',

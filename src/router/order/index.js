@@ -3,7 +3,6 @@ import orderDetail from '@/pages/order/orderDetail';
 import auditOrderList from '@/pages/order/auditOrderList';
 import createOrder from '@/pages/order/createOrder';
 import returnApply from '@/pages/order/returnApply';
-import subscribeCourses from '@/pages/order/subscribeCourses';
 import auditOrder from '@/pages/order/auditOrder';
 
 export default [
@@ -41,13 +40,6 @@ export default [
     path: 'returnApply',
     name: 'order-returnApply',
     component: returnApply
-  },
-  {
-    // 约课
-    title:'约课',
-    path: 'subscribeCourses',
-    name: 'order-subscribeCourses',
-    component: subscribeCourses
   },
   {
     // 退款审核

@@ -27,17 +27,12 @@
 	<div class="essential-information">
 		<el-row>
 			<el-col :span="12">
-				<flat-feild name="教师ID：" value="chaos xu"></flat-feild>
-				<flat-feild name="昵称：" value="chaos xu"></flat-feild>
-				<flat-feild name="联系电话：" value="chaos xu"></flat-feild>
-				<flat-feild name="国家：" value="chaos xu"></flat-feild>
-				<flat-feild name="种族：" value="chaos xu"></flat-feild>
+				<flat-feild name="教师ID：" :value="teacher.id"></flat-feild>
+				<flat-feild name="昵称：" :value="teacher.nickname"></flat-feild>
+				<flat-feild name="联系电话：" :value="teacher.mobile"></flat-feild>
 			</el-col>
-			<el-col :span="12">
-				<flat-feild name="教师姓名：" value="chaos xu"></flat-feild>
-				<flat-feild name="性别：" value="chaos xu"></flat-feild>
-				<flat-feild name="联系邮箱：" value="chaos xu"></flat-feild>
-				<flat-feild name="所在城市：" value="chaos xu"></flat-feild>
+			<el-col :span="12">x
+				<flat-feild name="联系邮箱：" :value="teacher.id"></flat-feild>
 			</el-col>
 		</el-row>
 	</div>
@@ -55,7 +50,13 @@ import {
 } from '@/api/teacher'
 export default {
   data() {
-    return {};
+    return {
+      teacher: {
+        id: '',
+        nickname: '',
+        mobile: '',
+      }
+    };
 	},
 	created() {
 		const id = this.$route.query.id;

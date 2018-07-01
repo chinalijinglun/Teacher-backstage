@@ -10,3 +10,5 @@ export const courseAppointmentGetById = (id) => baseAxios.get(`/api/v1/course_ap
 export const courseAppointmentPutById = (id, form) => baseAxios.put(`/api/v1/course_appointment/${id}`, form);
 
 export const courseAppointmentDeleteById = (id) => courseAppointmentPutById(id, {delete_flag: DELETE_FLAG.DELETED});
+
+export const mangerThacherTryout = (form) => baseAxios.post('/manger/thacher_tryout', form)

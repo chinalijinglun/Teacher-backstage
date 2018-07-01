@@ -13,6 +13,7 @@ import generalCourse from '@/pages/course/generalCourse';
 import addCurriculum from '@/pages/course/addCurriculum';
 import addSubject from '@/pages/course/addSubject';
 import addSubjectCategory from '@/pages/course/addSubjectCategory';
+import subscribeCourses from '@/pages/course/subscribeCourses';
 
 export default [
     {
@@ -99,6 +100,13 @@ export default [
       path: 'dateTeacher',
       name: 'dateTeacher',
       component: dateTeacher
+    },
+    {
+      // 约课
+      title:'约课',
+      path: 'subscribeCourses',
+      name: 'order-subscribeCourses',
+      component: subscribeCourses
     },
     {
       name: '常规课程',

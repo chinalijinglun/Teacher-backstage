@@ -45,7 +45,10 @@
 			</el-table-column>
 			<el-table-column prop="created_at" label="注册时间" style="width: 10%;">
 			</el-table-column>
-			<el-table-column prop="state" label="状态" style="width: 15%;">
+			<el-table-column label="状态" style="width: 15%;">
+        <template slot-scope="scope">
+          {{$TEACHER_STATE_ZH[scope.row.state]}}
+        </template>
 			</el-table-column>
 			<el-table-column fixed="right" label="操作" style="width: 15%;">
 			<template slot-scope="scope">
@@ -97,9 +100,10 @@ export default {
 	},
   methods: {
 		query() {
-			const filter = this.$json2filter({
-				state: [10, 11, 12, 13, 14, 15]
-			});
+			// const filter = this.$json2filter({
+			// 	state: [10, 11, 12, 13, 14, 15]
+			// });
+      const filter = this.$json2filter({});
 			teacherGet(filter,{page:this.form.page}).then(res => {
 				this.total = res.data.num_results;
 				this.tableData = res.data.objects

@@ -44,7 +44,7 @@
     orderPutById
   } from '@/api/order';
   import {
-    studentSchedule
+    Schedule
   } from '@/api/student'
   export default {
     data() {
