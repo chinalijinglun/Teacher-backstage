@@ -133,7 +133,7 @@
           this.order.order_desc = resp.data.order_desc;
           this.order.order_type = this.$ORDER_TYPE[resp.data.order_type];
           this.order.course_id = resp.data.course_id;
-          this.payLog = resp.data.order_paylogs
+          this.payLog = resp.data.order_paylogs.filter(item=>item.state === 3);
         })
       }
     }

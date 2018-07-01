@@ -4,6 +4,7 @@ import auditOrderList from '@/pages/order/auditOrderList';
 import createOrder from '@/pages/order/createOrder';
 import returnApply from '@/pages/order/returnApply';
 import subscribeCourses from '@/pages/order/subscribeCourses';
+import auditOrder from '@/pages/order/auditOrder';
 
 export default [
   {
@@ -47,5 +48,12 @@ export default [
     path: 'subscribeCourses',
     name: 'order-subscribeCourses',
     component: subscribeCourses
+  },
+  {
+    // 退款审核
+    title:'退款审核',
+    path: 'auditOrder',
+    name: 'order-auditOrder',
+    component: auditOrder
   }
 ];

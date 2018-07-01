@@ -25,18 +25,17 @@
             </date-range>
           </el-form-item>
           <el-form-item label="状态：">
-            <el-select v-model="form.order_state" placeholder="请选择" size="mini">
+            <el-select v-model="form.payment_state" placeholder="请选择" size="mini">
               <el-option label="所有状态" value=""></el-option>
-              <el-option label="待审核" value="1"></el-option>
-              <el-option label="审核通过" value="2"></el-option>
-              <el-option label="审核驳回" value="3"></el-option>
-              <el-option label="已退款" value="4"></el-option>
+              <el-option label="待审核" value="4"></el-option>
+              <el-option label="审核通过" value="5"></el-option>
+              <el-option label="审核驳回" value="6"></el-option>
+              <el-option label="已退款" value="7"></el-option>
             </el-select>
           </el-form-item>
         </el-row>
         <el-row>
           <el-button type="primary" size="mini" @click="query">查询</el-button>
-          <el-button type="primary" size="mini" @click="$router.push('/order/createOrder')">创建订单</el-button>
         </el-row>
       </el-form>
     </el-row>
@@ -68,7 +67,7 @@
           <el-table-column
             label="状态">
             <template slot-scope="scope">
-              {{ $PAYMENT_STATE[scope.row.order_state] }}
+              {{ $PAYMENT_STATE[scope.row.payment_state] }}
             </template>
           </el-table-column>
           <el-table-column
@@ -96,9 +95,9 @@
             label="操作"
             width="200">
             <template slot-scope="scope">
-              <el-button size="mini" @click="toPayed(scope.row.id)" v-if="scope.row.order_state === 1">确认付款</el-button>
-              <el-button size="mini" @click="toCancel(scope.row.id)" v-if="scope.row.order_state === 1">取消订单</el-button>
-              <el-button size="mini" @click="toRefund(scope.row.id)" v-if="scope.row.order_state === 2">申请退款</el-button>
+              <el-button size="mini" @click="toAudit(scope.row.id)" v-if="scope.row.payment_state === 4">审核</el-button>
+              <el-button size="mini" @click="toRefundMoney(scope.row.id)" v-if="scope.row.payment_state === 5">确认退款</el-button>
+              <el-button size="mini" @click="toSeeReason(scope.row.id)" v-if="scope.row.payment_state === 6">查看原因</el-button>
             </template>
           </el-table-column>
         </el-table>
@@ -106,38 +105,39 @@
       <el-row class="pagination-container">
         <el-pagination
           @current-change="handleCurrentChange"
-          :current-page="form.curPage"
+          :current-page="form.page"
           :page-size="10"
           layout="total, prev, pager, next, jumper"
           :total="totalCount">
         </el-pagination>
       </el-row>
     </el-row>
-    <assign-conselor-dialog :visible.sync="dialogVisible"></assign-conselor-dialog>
+    <reason-review :visible.sync="visible" :order_id="order_id" :state="state"></reason-review>
   </div>
 </template>
 <script>
   import {
-    mangeOrders
+    mangeRefunds
   } from '@/api/order'
-  import assignConselorDialog from '@/components/students/dialog/assignConselorDialog';
   import paginationMix from '@/components/commons/mixins/paginationMix';
 
   export default {
     data() {
       return {
-        dialogVisible: true,
         form: {
           order_state: '',
           order_type: '',
           subject_name: '',
           order_id: '',
-          status: '',
+          payment_state: '',
           created_at_start: '',
           created_at_end: '',
           updated_by: '',
           page: 1
         },
+        state: 6,
+        visible: false,
+        order_id: '',
         totalCount: 0,
         tableData: []
       };
@@ -146,13 +146,33 @@
       this.query()
     },
     methods: {
+      toDetail(id) {
+        this.$router.push({path: '/order/orderDetail', query: {id}})
+      },
+      toAudit(id) {
+        this.$router.push({path: '/order/auditOrder', query: {id}})
+      },
+      toSeeReason(id) {
+        this.order_id = id;
+        this.visible = true;
+      },
+      toRefundMoney(id) {
+        this.$confirm('确认此订单已退款？').then(_=>{
+          orderPutById(id, {
+            payment_state: 7
+          }).then(resp => {
+            this.$message.success('已确认退款！');
+            this.query();
+          })
+        }).catch(_=>{});
+      },
       query() {
         const {
           order_state,
           order_type,
           subject_name,
           order_id,
-          status,
+          payment_state,
           created_at_start,
           created_at_end,
           updated_by,
@@ -163,13 +183,13 @@
           order_type,
           subject_name,
           order_id,
-          status,
+          payment_state,
           created_at_start,
           created_at_end,
           updated_by,
           page_no
         })
-        mangeOrders({
+        mangeRefunds({
           ...f,
           page_limit: 10
         }).then(resp => {
@@ -178,10 +198,7 @@
         })
       }
     },
-    mixins: [paginationMix],
-    components: {
-      assignConselorDialog
-    }
+    mixins: [paginationMix]
   }
 </script>
 <style scoped>
