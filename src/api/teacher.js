@@ -13,3 +13,5 @@ export const teacherPutByTeacherid = (teacherid, form) => baseAxios.put(`/api/v1
 export const teacherDeleteByTeacherid = (teacherid) => teacherPutByTeacherid(teacherid, {delete_flag: DELETE_FLAG.DELETED});
 
 export const mangerThacherCheck = (form) => baseAxios.post('/manger/thacher_check', form);
+
+export const mangerThacherInterview = (form) => baseAxios.post('/manger/thacher_interview', form);

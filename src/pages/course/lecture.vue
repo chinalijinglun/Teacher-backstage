@@ -135,9 +135,6 @@ h3 {
   width: 20%;
   float: left;
 }
-.el-input {
-  width: 95%;
-}
 .inps .select-time {
   width: 35%;
 }
