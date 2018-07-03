@@ -16,6 +16,7 @@ import evaluate from '@/pages/teacher/evaluate';
 import coursewareAudit from '@/pages/teacher/coursewareAudit';
 import courseAuditPage from '@/pages/teacher/courseAuditPage';
 import failed from '@/pages/teacher/failed';
+import agreement from '@/pages/teacher/agreement';
 
 export default [
   {
@@ -126,5 +127,11 @@ export default [
     path: 'failed',
     name: 'failed',
     component: failed
+  },
+  {
+    title: '发合同',
+    path: 'agreement',
+    name: 'agreement',
+    component: agreement
   }
 ];
