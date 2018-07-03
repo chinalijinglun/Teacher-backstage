@@ -1,6 +1,6 @@
 <template>
 <!-- 教师用户 -->
-    <div class="date-class">
+    <div class="date-classs">
         <div class="course-package-top">
             <el-form ref="form" label-width="96px">
                 <div class="inps">
@@ -14,7 +14,178 @@
                         <el-form-item label="联系邮箱：">
                             <el-input size="mini"></el-input>
                         </el-form-item>
-                        <el-form-item label="状态：">
+                        <el-form-item label="居住地区：" class="ele-itmes">
+                            <el-select size="mini" v-model="value8" filterable placeholder="国家列表">
+                                <el-option
+                                v-for="item in options"
+                                :key="item.value"
+                                :label="item.label"
+                                :value="item.value">
+                                </el-option>
+                            </el-select>
+                            <el-select size="mini" v-model="value8" filterable placeholder="州列表">
+                                <el-option
+                                v-for="item in options"
+                                :key="item.value"
+                                :label="item.label"
+                                :value="item.value">
+                                </el-option>
+                            </el-select>
+                        </el-form-item>
+                        <el-form-item label="时区：">
+                            <el-select size="mini" v-model="value8" filterable placeholder="时区列表">
+                                <el-option
+                                v-for="item in options"
+                                :key="item.value"
+                                :label="item.label"
+                                :value="item.value">
+                                </el-option>
+                            </el-select>
+                        </el-form-item>
+                        <el-form-item label="就职学校：">
+                            <el-input size="mini"></el-input>
+                        </el-form-item>
+                        <el-form-item label="当前教授科目：" class="ele-itme">
+                            <el-select size="mini" v-model="value8" filterable placeholder="一级课程分类">
+                                <el-option
+                                v-for="item in options"
+                                :key="item.value"
+                                :label="item.label"
+                                :value="item.value">
+                                </el-option>
+                            </el-select>
+                            <el-select size="mini" v-model="value8" filterable placeholder="二级课程分类">
+                                <el-option
+                                v-for="item in options"
+                                :key="item.value"
+                                :label="item.label"
+                                :value="item.value">
+                                </el-option>
+                            </el-select>
+                            <el-select size="mini" v-model="value8" filterable placeholder="三级课程分类">
+                                <el-option
+                                v-for="item in options"
+                                :key="item.value"
+                                :label="item.label"
+                                :value="item.value">
+                                </el-option>
+                            </el-select>
+                        </el-form-item>
+                        <el-form-item label="当前教授科目：">
+                            <el-select size="mini" v-model="value8" filterable placeholder="请选择">
+                                <el-option
+                                v-for="item in options"
+                                :key="item.value"
+                                :label="item.label"
+                                :value="item.value">
+                                </el-option>
+                            </el-select>
+                        </el-form-item>
+                        <el-form-item label="当前任职地区：">
+                            <el-select size="mini" v-model="value8" filterable placeholder="请选择">
+                                <el-option
+                                v-for="item in options"
+                                :key="item.value"
+                                :label="item.label"
+                                :value="item.value">
+                                </el-option>
+                            </el-select>
+                        </el-form-item>
+                        <el-form-item label="当前任职州：">
+                            <el-select size="mini" v-model="value8" filterable placeholder="州列表">
+                                <el-option
+                                v-for="item in options"
+                                :key="item.value"
+                                :label="item.label"
+                                :value="item.value">
+                                </el-option>
+                            </el-select>
+                        </el-form-item>
+                        <el-form-item label="可教授其他科目：" class="ele-itme">
+                            <el-select size="mini" v-model="value8" filterable placeholder="一级课程分类">
+                                <el-option
+                                v-for="item in options"
+                                :key="item.value"
+                                :label="item.label"
+                                :value="item.value">
+                                </el-option>
+                            </el-select>
+                            <el-select size="mini" v-model="value8" filterable placeholder="二级课程分类">
+                                <el-option
+                                v-for="item in options"
+                                :key="item.value"
+                                :label="item.label"
+                                :value="item.value">
+                                </el-option>
+                            </el-select>
+                            <el-select size="mini" v-model="value8" filterable placeholder="三级课程分类">
+                                <el-option
+                                v-for="item in options"
+                                :key="item.value"
+                                :label="item.label"
+                                :value="item.value">
+                                </el-option>
+                            </el-select>
+                        </el-form-item>
+                        <el-form-item label="可教授其他年级：">
+                            <el-select size="mini" v-model="value8" filterable placeholder="请选择">
+                                <el-option
+                                v-for="item in options"
+                                :key="item.value"
+                                :label="item.label"
+                                :value="item.value">
+                                </el-option>
+                            </el-select>
+                        </el-form-item>
+                        <el-form-item label="总教龄：">
+                            <el-select size="mini" v-model="value8" filterable placeholder="请选择">
+                                <el-option
+                                v-for="item in options"
+                                :key="item.value"
+                                :label="item.label"
+                                :value="item.value">
+                                </el-option>
+                            </el-select>
+                        </el-form-item>
+                        <el-form-item label="所获奖项：">
+                            <el-select size="mini" v-model="value8" filterable placeholder="请选择">
+                                <el-option
+                                v-for="item in options"
+                                :key="item.value"
+                                :label="item.label"
+                                :value="item.value">
+                                </el-option>
+                            </el-select>
+                        </el-form-item>
+                        <el-form-item label="执教资格证明：">
+                            <el-select size="mini" v-model="value8" filterable placeholder="请选择">
+                                <el-option
+                                v-for="item in options"
+                                :key="item.value"
+                                :label="item.label"
+                                :value="item.value">
+                                </el-option>
+                            </el-select>
+                        </el-form-item>
+                        <el-form-item label="可选授课时间：" class="ele-itme">
+                            <el-select size="mini" v-model="value8" filterable placeholder="请选择周">
+                                <el-option
+                                v-for="item in options"
+                                :key="item.value"
+                                :label="item.label"
+                                :value="item.value">
+                                </el-option>
+                            </el-select>
+                            <date-range 
+                            :start-date.sync="form.startDate" 
+                            :end-date.sync="form.endDate"
+                            size="mini"
+                            range-separator="-"
+                            start-placeholder="开始时间"
+                            end-placeholder="结束时间">
+                            </date-range>
+                        </el-form-item>
+                         <el-form-item label="教师状态：">
                             <el-select v-model="form.status" placeholder="请选择" size="mini">
                             <el-option label="所有状态" value=""></el-option>
                             <el-option label="有效" value="1"></el-option>
@@ -30,7 +201,7 @@
             <el-table :data="tableData" style="width: 100%;margin-top:20px;">
                 <el-table-column fixed prop="zhname" label="ID" style="width: 10%;">
                 </el-table-column>
-                <el-table-column prop="enname" label="用户名" style="width: 15%;">
+                <el-table-column prop="date" label="注册时间" style="width: 10%;">
                 </el-table-column>
                 <el-table-column prop="zip" label="教师姓名" style="width: 10%;">
                 </el-table-column>
@@ -38,7 +209,11 @@
                 </el-table-column>
                 <el-table-column prop="address" label="联系邮箱" style="width: 10%;">
                 </el-table-column>
-                <el-table-column prop="date" label="注册时间" style="width: 10%;">
+                <el-table-column prop="enname" label="国家" style="width: 15%;">
+                </el-table-column>
+                <el-table-column prop="enname" label="州" style="width: 15%;">
+                </el-table-column>
+                <el-table-column prop="enname" label="时区" style="width: 15%;">
                 </el-table-column>
                 <el-table-column prop="city" label="状态" style="width: 15%;">
                 </el-table-column>
@@ -73,7 +248,12 @@
                 currentPage4: 4,
                 form:{
                     status: ''
-                }
+                },
+                options: [{
+                    value: '选项1',
+                    label: '黄金糕'
+                }],
+                value8: ''
             }
         },
         methods: {
@@ -90,14 +270,18 @@
 
 <style scoped>
     .inps .el-form-item {
-        width: 20%;
+        width: 25%;
         float: left;
     }
-    .el-input {
-        width: 95%;
+    .inps .ele-itmes{
+        width: 40%;
     }
-    .inps .select-time{
-        width: 35%;
+    .inps .ele-itme{
+        width: 100%;
+    }
+    
+    .el-input {
+        width: 85%;
     }
     .course-package-top button{
         float: left;
