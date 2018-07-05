@@ -54,7 +54,7 @@
           <el-table-column
             label="操作">
             <template slot-scope="scope">
-              <el-button size="mini" @click="toDetail(scope.row.id)">查看</el-button>
+              <el-button size="mini" @click="toDetail(scope.row)">查看</el-button>
             </template>
           </el-table-column>
         </el-table>
@@ -114,8 +114,8 @@
           this.totalCount = resp.data.num_results;
         })
       },
-      toDetail(id) {
-        this.$router.push(`/student/studentDetail?id=${id}&blkname=info`);
+      toDetail(row) {
+        this.$router.push(`/student/studentDetail?id=${row.id}&blkname=info&student_name=${row.username}`);
       }
     },
     mixins: [paginationMix],

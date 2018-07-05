@@ -56,7 +56,7 @@ ul,li,ol {
 }
 .el-main {
   padding: 10px;
-  min-width: 1200px;
+  min-width: 1400px;
   font-size: 14px;
 }
 .el-tree-node__content {

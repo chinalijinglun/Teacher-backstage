@@ -8,15 +8,8 @@
                         <el-form-item label="教师姓名：">
                             <el-input size="mini"></el-input>
                         </el-form-item>
-                        <el-form-item class="select-time" label="上课时间：">    
-                            <date-range 
-                            :start-date.sync="form.startDate" 
-                            :end-date.sync="form.endDate"
-                            size="mini"
-                            range-separator="-"
-                            start-placeholder="开始时间"
-                            end-placeholder="结束时间">
-                            </date-range>
+                        <el-form-item label="联系电话：">
+                            <el-input size="mini"></el-input>
                         </el-form-item>
                         <el-form-item label="联系邮箱：">
                             <el-input size="mini"></el-input>
@@ -28,6 +21,16 @@
                             <el-option label="无效" value="1"></el-option>
                             </el-select>
                         </el-form-item>
+                        <el-form-item class="select-time" label="上课时间：">    
+                            <date-range 
+                            :start-date.sync="form.startDate" 
+                            :end-date.sync="form.endDate"
+                            size="mini"
+                            range-separator="-"
+                            start-placeholder="开始时间"
+                            end-placeholder="结束时间">
+                            </date-range>
+                        </el-form-item>
                     </el-row>
                 </div>
                 <el-button type="primary" size="mini">查询</el-button>
@@ -37,15 +40,13 @@
             <el-table :data="tableData" style="width: 100%;margin-top:20px;">
                 <el-table-column fixed prop="zhname" label="ID" style="width: 15%;">
                 </el-table-column>
-                <el-table-column prop="enname" label="用户名" style="width: 15%;">
-                </el-table-column>
                 <el-table-column prop="zip" label="教师姓名" style="width: 10%;">
                 </el-table-column>
                 <el-table-column prop="province" label="联系电话" style="width: 10%;">
                 </el-table-column>
                 <el-table-column prop="address" label="联系邮箱" style="width: 10%;">
                 </el-table-column>
-                <el-table-column prop="date" label="注册时间" style="width: 10%;">
+                <el-table-column prop="date" label="操作时间" style="width: 10%;">
                 </el-table-column>
                 <el-table-column prop="city" label="状态" style="width: 15%;">
                 </el-table-column>

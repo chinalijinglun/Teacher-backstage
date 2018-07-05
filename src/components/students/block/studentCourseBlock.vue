@@ -13,6 +13,7 @@
             <el-date-picker
               v-model="form.course_time"
               type="datetime"
+              size="mini"
               placeholder="选择日期时间">
             </el-date-picker>
           </el-form-item>
@@ -52,8 +53,8 @@
           <el-table-column
             label="上课时间">
             <template slot-scope="scope">
-              {{ 
-              `${$dateFmt(new Date(scope.row.start), 'yyyy-MM-dd')} — ${$dateFmt(new Date(scope.row.end), 'MM-dd')}` 
+              {{
+              `${$dateFmt(new Date(scope.row.start), 'yyyy-MM-dd')} — ${$dateFmt(new Date(scope.row.end), 'MM-dd')}`
               }}
             </template>
           </el-table-column>
@@ -66,7 +67,7 @@
           <el-table-column
             label="操作">
             <template slot-scope="scope">
-              <el-button size="mini" @click="handlerClick">查看详情</el-button>
+              <el-button size="mini" @click="handlerClick(scope.row)">查看详情</el-button>
             </template>
           </el-table-column>
         </el-table>
@@ -88,6 +89,7 @@
     studentCoursePost
   } from '@/api/student'
   import paginationMix from '@/components/commons/mixins/paginationMix';
+
   export default {
     data() {
       return {
@@ -127,7 +129,7 @@
           page_no
         });
 
-        studentCoursePost({ 
+        studentCoursePost({
           ...f,
           page_limit: 10
         }).then(res => {
@@ -135,13 +137,16 @@
           this.totalCount = res.data.num_results;
         })
       },
-      handlerClick() {
-        var { path } = this.$route;
+      handlerClick(row) {
+        var {path} = this.$route;
         const query = {
           ...this.$route.query,
-          courseBlk: 'detail'
+          courseBlk: 'detail',
+          course_id: row.id,
+          course_name: encodeURI(row.course_name),
+          teacher_name: encodeURI(row.teacher_name)
         };
-        this.$router.push({ path, query });
+        this.$router.push({path, query});
       },
       toApplyFree() {
         this.$router.push('/course/auditions');
@@ -150,17 +155,19 @@
   }
 </script>
 <style scoped>
-.list-container {
-  padding: 15px;
-}
-.list-title {
-  font-family: "Microsoft YaHei";
-  font-size: 16px;
-  line-height: 20px;
-}
-.pagination-container {
-  text-align: right;
-  margin-top: 30px;
-}
+  .list-container {
+    padding: 15px;
+  }
+
+  .list-title {
+    font-family: "Microsoft YaHei";
+    font-size: 16px;
+    line-height: 20px;
+  }
+
+  .pagination-container {
+    text-align: right;
+    margin-top: 30px;
+  }
 </style>
 

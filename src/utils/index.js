@@ -9,11 +9,7 @@ import {
   baseAxios,
   baseApiUrl
 } from './axios';
-import {
-  MOBILE_REG_EXP,
-  EMAIL_REG_EXP,
-  MOBILE_REG_EXP_NATIONAL
-} from './regExp';
+import * as regExp from './regExp';
 
 import {
   setLocalStorage,
@@ -46,9 +42,7 @@ const install = (Vue) => {
   Vue.prototype.$axios = axios;
   Vue.prototype.$baseAxios = baseAxios;
   Vue.prototype.$baseApiUrl = baseApiUrl;
-  Vue.prototype.$MOBILE_REG_EXP = MOBILE_REG_EXP;
-  Vue.prototype.$EMAIL_REG_EXP = EMAIL_REG_EXP;
-  Vue.prototype.$MOBILE_REG_EXP_NATIONAL = MOBILE_REG_EXP_NATIONAL;
+
   Vue.prototype.$setLocalStorage = setLocalStorage;
   Vue.prototype.$getLocalStorage = getLocalStorage;
   Vue.prototype.$deleteLocalStorage = deleteLocalStorage;
@@ -57,12 +51,17 @@ const install = (Vue) => {
   Vue.prototype.$getNopageQueryParams = getNopageQueryParams;
   Vue.prototype.$deleteEmptyProps = deleteEmptyProps;
 
+  // regexp start
+  // 正则表达是
+  for(let key in regExp) {
+    Vue.prototype[`$${key}`] = regExp[key];
+  }
+  // regexp end
   // enum start
   // 有效状态
   for(let key in enums) {
     Vue.prototype[`$${key}`] = enums[key];
   }
-
   // enum end
 
   // 默认每页分页条数
@@ -81,7 +80,5 @@ export default {
   dateFactory,
   axios,
   baseAxios,
-  baseApiUrl,
-  MOBILE_REG_EXP,
-  EMAIL_REG_EXP
+  baseApiUrl
 }

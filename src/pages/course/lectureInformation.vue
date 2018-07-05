@@ -8,9 +8,9 @@
                         <el-form-item label="教师姓名：">
                             <el-input size="mini"></el-input>
                         </el-form-item>
-                        <el-form-item class="select-time" label="上课时间：">    
-                            <date-range 
-                            :start-date.sync="form.startDate" 
+                        <el-form-item class="select-time" label="上课时间：">
+                            <date-range
+                            :start-date.sync="form.startDate"
                             :end-date.sync="form.endDate"
                             size="mini"
                             range-separator="-"
@@ -59,13 +59,11 @@
             </el-table>
             <div class="block">
                 <el-pagination
-                @size-change="handleSizeChange"
                 @current-change="handleCurrentChange"
-                :current-page="currentPage4"
-                :page-sizes="[100, 200, 300, 400]"
-                :page-size="100"
-                layout="total, sizes, prev, pager, next, jumper"
-                :total="400">
+                :current-page="page"
+                :page-size="10"
+                layout="total, prev, pager, next, jumper"
+                :total="total">
                 </el-pagination>
             </div>
         </div>
@@ -73,27 +71,42 @@
 </template>
 
 <script>
-export default {
-  data() {
-    return {
-      tableData: [],
-      currentPage4: 4,
-      startDate: null, //开始时间
-      endDate: null, //结束时间
-      form: {
-        status: ""
-      }
-    };
-  },
-  methods: {
-    handleSizeChange(val) {
-      console.log(`每页 ${val} 条`);
+  import {
+    courseAppointmentGet
+  } from '@/api/course_appointment'
+  export default {
+    data() {
+      return {
+        tableData: [],
+        page: 1,
+        total: 0,
+        startDate: null, //开始时间
+        endDate: null, //结束时间
+        form: {
+          status: ""
+        }
+      };
     },
-    handleCurrentChange(val) {
-      console.log(`当前页: ${val}`);
+    created() {
+      this.query();
+    },
+    methods: {
+      handleCurrentChange(val) {
+        this.page = val;
+        this.query();
+      },
+      query() {
+        const filter = this.$json2filter({});
+
+        courseAppointmentGet(filter, {
+          page: this.page
+        }).then(resp=>{
+          this.total = resp.data.num_results;
+          this.tableData = resp.data.objects;
+        })
+      }
     }
-  }
-};
+  };
 </script>
 
 <style scoped>

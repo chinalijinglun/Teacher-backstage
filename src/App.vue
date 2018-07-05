@@ -40,5 +40,8 @@ ul,li,ol {
   height: 36px;
   cursor: pointer;
 }
+.date-classs .inps label{
+    width: 125px!important;
+}
 </style>
 

@@ -4,19 +4,19 @@
       <el-form :inline="true" ref="form" :model="form" label-width="96px">
         <el-row>
           <el-form-item label="订单编号：">
-            <el-input v-model="form.course_id" size="mini"></el-input>
+            <el-input v-model="form.order_id" size="mini"></el-input>
           </el-form-item>
           <el-form-item label="课程包名称：">
-            <el-input v-model="form.course_name" size="mini"></el-input>
+            <el-input v-model="form.subject_name" size="mini"></el-input>
           </el-form-item>
           <el-form-item label="下单人：">
             <el-input v-model="form.updated_by" size="mini"></el-input>
           </el-form-item>
         </el-row>
         <el-row>
-          <el-form-item label="下单时间：">    
-            <date-range 
-              :start-date.sync="form.created_at_start" 
+          <el-form-item label="下单时间：">
+            <date-range
+              :start-date.sync="form.created_at_start"
               :end-date.sync="form.created_at_end"
               size="mini"
               range-separator="-"
@@ -27,15 +27,13 @@
           <el-form-item label="订单类型：">
             <el-select v-model="form.order_type" placeholder="请选择" size="mini">
               <el-option label="所有状态" value=""></el-option>
-              <el-option label="待分配" value="1"></el-option>
-              <el-option label="已分配" value="1"></el-option>
+              <el-option v-for="(item, key) in $ORDER_TYPE" :key="key" :label="item" :value="key"></el-option>
             </el-select>
           </el-form-item>
           <el-form-item label="订单状态：">
-            <el-select v-model="form.order_state" placeholder="请选择" size="mini">
+            <el-select v-model="form.payment_state" placeholder="请选择" size="mini">
               <el-option label="所有状态" value=""></el-option>
-              <el-option label="待分配" value="1"></el-option>
-              <el-option label="已分配" value="1"></el-option>
+              <el-option v-for="(item, key) in $PAYMENT_STATE" :key="key" :label="item" :value="key"></el-option>
             </el-select>
           </el-form-item>
         </el-row>
@@ -48,14 +46,16 @@
     <el-row class="list-contain">
       <el-row>
         <el-table
-          :data="tableData"
-          style="width: 100%">
+          :data="tableData">
           <el-table-column
             prop="id"
             label="订单编号">
+            <template slot-scope="scope">
+              <el-button size="mini" type="text" @click="toDetail(scope.row.id)">{{scope.row.id}}</el-button>
+            </template>
           </el-table-column>
           <el-table-column
-            prop="course_name"
+            prop="subject_name"
             label="课程包名称">
           </el-table-column>
           <el-table-column
@@ -63,12 +63,16 @@
             label="课节数">
           </el-table-column>
           <el-table-column
-            prop="order_type"
             label="订单类型">
+            <template slot-scope="scope">
+              {{ $ORDER_TYPE[scope.row.order_type] }}
+            </template>
           </el-table-column>
           <el-table-column
-            prop="order_state"
             label="状态">
+            <template slot-scope="scope">
+              {{ $PAYMENT_STATE[scope.row.payment_state] }}
+            </template>
           </el-table-column>
           <el-table-column
             prop="updated_by"
@@ -91,9 +95,13 @@
             label="价格">
           </el-table-column>
           <el-table-column
-            label="操作">
+            fixed="right"
+            label="操作"
+            width="200">
             <template slot-scope="scope">
-              <el-button size="mini">查看</el-button>
+              <el-button size="mini" @click="toPayed(scope.row.id)" v-if="scope.row.payment_state === 1">确认付款</el-button>
+              <el-button size="mini" @click="toCancel(scope.row)" v-if="scope.row.payment_state === 1">取消订单</el-button>
+              <el-button size="mini" @click="toRefund(scope.row.id)" v-if="scope.row.payment_state === 2">申请退款</el-button>
             </template>
           </el-table-column>
         </el-table>
@@ -108,31 +116,41 @@
         </el-pagination>
       </el-row>
     </el-row>
-    <assign-conselor-dialog :visible.sync="dialogVisible"></assign-conselor-dialog>
+    <order-reason-dialog :visible.sync="visible" @onSubmit="cancelSubmit"></order-reason-dialog>
   </div>
 </template>
 <script>
   import {
-    orderMainQuery
-  } from '@/api/order'
-  import assignConselorDialog from '@/components/students/dialog/assignConselorDialog';
+    mangeOrders,
+    orderPutById
+  } from '@/api/order';
+
+  import {
+    payLogPost
+  } from '@/api/pay_log';
+
+  import { mapState } from 'vuex'
   import paginationMix from '@/components/commons/mixins/paginationMix';
 
   export default {
+    computed: {
+      ...mapState({userName: state=>state.auth.userName})
+    },
     data() {
       return {
-        dialogVisible: false,
         form: {
           order_state: '',
           order_type: '',
-          course_name: '',
-          course_id: '',
-          status: '',
+          subject_name: '',
+          order_id: '',
+          payment_state: '',
           created_at_start: '',
           created_at_end: '',
           updated_by: '',
           page: 1
         },
+        visible: '',
+        order_row: {},
         totalCount: 0,
         tableData: []
       };
@@ -141,13 +159,64 @@
       this.query()
     },
     methods: {
+      toDetail(id) {
+        this.$router.push({path: '/order/orderDetail', query: {id}})
+      },
+      toPayed(id) {
+        return this.toUpdate(id, 2, '确认此订单客户已付款？');
+      },
+      toCancel(row) {
+        this.order_row = row;
+        this.visible = true;
+      },
+      cancelSubmit(reason) {
+        orderPutById(this.order_row.id, {
+          payment_state: 3
+        }).then(resp => {
+          return this.addLog(reason)
+        }).then(resp => {
+          this.$message.success('取消成功！');
+          this.query();
+          this.visible = false;
+          this.order_row = {};
+        });
+      },
+      addLog(reason) {
+        return payLogPost({
+          order_id: this.order_row.id,
+          payment_fee: this.order_row.order_amount,
+          state: 3,
+          payment_method: 1,
+          result: 0,
+          state_reason: reason,
+          amount: 0,
+          direction: 2,
+          delete_flag: 1,
+          created_at: new Date(),
+          updated_at: new Date(),
+          updated_by: this.userName
+        });
+      },
+      toRefund(id) {
+        return this.$router.push({path: '/order/returnApply', query: {id}})
+      },
+      toUpdate(id, state, confirm) {
+        return this.$confirm(confirm || '确认更改状态？').then(_=>{
+          orderPutById(id, {
+            payment_state: state
+          }).then(resp => {
+            this.$message.success('状态更新成功！');
+            this.query();
+          })
+        }).catch(_=>{})
+      },
       query() {
         const {
           order_state,
           order_type,
-          course_name,
-          course_id,
-          status,
+          subject_name,
+          order_id,
+          payment_state,
           created_at_start,
           created_at_end,
           updated_by,
@@ -156,15 +225,15 @@
         const f = this.$deleteEmptyProps({
           order_state,
           order_type,
-          course_name,
-          course_id,
-          status,
+          subject_name,
+          order_id,
+          payment_state,
           created_at_start,
           created_at_end,
           updated_by,
           page_no
         })
-        orderMainQuery({  
+        mangeOrders({
           ...f,
           page_limit: 10
         }).then(resp => {
@@ -173,10 +242,7 @@
         })
       }
     },
-    mixins: [paginationMix],
-    components: {
-      assignConselorDialog
-    }
+    mixins: [paginationMix]
   }
 </script>
 <style scoped>
