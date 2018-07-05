@@ -42,30 +42,48 @@
 		</el-row>
 	</div>
 	<div class="btn-box">
-		<el-button type="primary" size="mini">审核通过</el-button>
+		<el-button type="primary" size="mini" @click="auditSuccess">审核通过</el-button>
 		<el-button type="primary" size="mini">审核不通过</el-button>
-		<el-button size="mini">返回</el-button>
+		<el-button size="mini" @click="back">返回</el-button>
 	</div>
 </div>
 </template>
 
 <script>
 import {
-	teacherGetByTeacherid
+	teacherGetByTeacherid,
+	teacherPutByTeacherid
 } from '@/api/teacher'
 export default {
   data() {
-    return {};
+    return {
+			id: ''
+		};
 	},
 	created() {
 		const id = this.$route.query.id;
+		this.id = id;
 		this.getTeacherInfo(id);
 	},
 	methods: {
+		back() {
+			this.$router.back();
+		},
 		getTeacherInfo(id) {
 			teacherGetByTeacherid(id).then(resp => {
 				console.log(resp.data);
 			});
+		},
+		auditSuccess() {
+			teacherPutByTeacherid(this.id, {
+				state: 4
+			}).then(resp => {
+				this.$message.success('审核通过！');
+				this.back()
+			})
+		},
+		auditFail() {
+			
 		}
 	}
 };

@@ -73,7 +73,7 @@ export default {
 			tableData: [],
 			total: 0,
       form: {
-      	page: 4,
+      	page: 1,
 				email: '',
 				mobile: '',
 				username: ''
@@ -99,7 +99,7 @@ export default {
 				email,
 				mobile,
 				username,
-				state: [1,3,4,5]
+				state: [3]
 			})
 			teacherGetBare(filter, {page}).then(resp => {
 				this.tableData = resp.data.objects;
