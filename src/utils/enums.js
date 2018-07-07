@@ -29,11 +29,11 @@ export const ORDER_TYPE = {
 }
 
 export const COURSE_SCHEDULE_STATE = {
-  0:'未开课',
-  1:'未上',
-  2:'已经上课',
-  3:'取消',
-  4:'问题课'
+  0: '未开课',
+  1: '未上',
+  2: '已经上课',
+  3: '取消',
+  4: '问题课'
 }
 
 export const PAYMENT_STATE = {
@@ -69,7 +69,7 @@ export const COURSE_TYPE_MAP = {
 export const TEACHER_STATE_ENUM = {
   RECRUIT: 1,
   BASIC_INFO: 2,
-  WAIT_FOR_CHECK:3,
+  WAIT_FOR_CHECK: 3,
   CHECK_PASS: 4,
   CHECK_ERROR: 5,
   WAIT_FOR_INTERVIEW: 6,
@@ -85,21 +85,21 @@ export const TEACHER_STATE_ENUM = {
 };
 
 export const TEACHER_STATE_ZH = {
-  1:'新用户',
-  2:'填写基本信息',
-  3:'待审核',
-  4:'审核通过(待预约)',
-  5:'审核未通过',
-  6:'已预约(待面试)',
-  7:'面试结果通过(待签约)',
-  8:'面试结果失败',
-  9:'已签约',
-  10:'待预约培训试讲',
-  11:'培训试讲结果成功',
-  12:'培训试讲结果失败',
-  13:'在岗',
-  14:'未在岗',
-  15:'无效'
+  1: '新用户',
+  2: '填写基本信息',
+  3: '待审核',
+  4: '审核通过(待预约)',
+  5: '审核未通过',
+  6: '已预约(待面试)',
+  7: '面试结果通过(待签约)',
+  8: '面试结果失败',
+  9: '已签约',
+  10: '待预约培训试讲',
+  11: '培训试讲结果成功',
+  12: '培训试讲结果失败',
+  13: '在岗',
+  14: '未在岗',
+  15: '无效'
 };
 
 export const MOBILE_PRE = {
@@ -116,4 +116,35 @@ export const TIME_ZONE = {
 
 export const ZIP_CODE = {
   '1': '测试1'
+}
+export const GERDER = {
+  'UNKNOWN': '未知',
+  'MALE': '男',
+  'FEMALE': '女'
+}
+
+export const DEGREE = {
+  'college_graduate': '大专',
+  'university_diploma': '本科',
+  'bachelor_degree': '学士学位',
+  'master_degree': '硕士学位',
+  'doctor_degree': '博士学位',
+  'post-doctoral': '博士后',
+  'other': '其他'
+}
+
+export const GRADE = {
+  'kindergarten': '幼儿园',
+  'primary_school': '小学',
+  'junior_middle_school': '初中',
+  'high_school': '高中',
+  'university': '大学',
+  'post-adult': '成人',
+  'other': '其他'
+}
+
+export const INTERVIEW = {
+  '1': 'NO_INTERVIEW，未面试',
+  '2': 'ALREADY_INTERVIEW,已经面试',
+  '3': 'CANCEL，取消'
 }

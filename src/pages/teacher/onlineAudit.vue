@@ -83,7 +83,7 @@ export default {
     return {
 			tableData: [],
 			total: 0,
-      page_no: 4,
+      page_no: 1,
       form: {
         email: '',
 				mobile: '',

@@ -1,5 +1,5 @@
 import axios from 'axios';
-import { baseApiUrl } from '@/config/config';
+import { baseApiUrl,whiltApi } from '@/config/config';
 import { Message } from 'element-ui';
 import store from '@/store';
 import router from '@/router';
@@ -12,7 +12,11 @@ const baseAxios = axios.create({
 });
 
 baseAxios.interceptors.request.use(config => {
-  config.headers['authorization'] = store.state.auth.authorization;
+  if(whiltApi.indexOf(config.url)!==-1 || !store.state.auth.authorization) {
+    config.headers['authorization'] = '';
+  } else {
+    config.headers['authorization'] = store.state.auth.authorization
+  }
   // config.headers['lang'] = 1000000;
   return config;
 }, error => {
