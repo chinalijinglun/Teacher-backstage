@@ -29,7 +29,7 @@
           <el-form-item label="状态：">
             <el-select v-model="form.state" placeholder="请选择" size="mini">
               <el-option label="所有状态" value=""></el-option>
-              <el-option v-for="(item, key) in $TEACHER_STATE_ENUM" :key="item" :label="$TEACHER_STATE_ZH[item]" :value="item"></el-option>
+              <el-option v-for="item in $TEACHER_STATE_ENUM" :key="item" :label="$TEACHER_STATE_ZH[item]" :value="item"></el-option>
             </el-select>
           </el-form-item>
         </el-row>
@@ -56,7 +56,7 @@
 			</el-table-column>
 			<el-table-column fixed="right" label="操作" style="width: 15%;">
 			<template slot-scope="scope">
-        <el-button v-if="$TEACHER_STATE_ENUM[scope.row.state] === 3" size="mini" @click="audit(scope.row.id)">审核</el-button>
+        <el-button v-if="$TEACHER_STATE_ENUM[scope.row.state] === 3 || $TEACHER_STATE_ENUM[scope.row.state] === 5" size="mini" @click="audit(scope.row.id)">审核</el-button>
 			</template>
 			</el-table-column>
 		</el-table>

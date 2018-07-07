@@ -7,6 +7,7 @@ import {
 const state = {
   authorization: getLocalStorage('authorization'),
   userName: getLocalStorage('userName'),
+  userId: getLocalStorage('userId'),
   userType: 'SysUser'
 };
 
@@ -18,6 +19,10 @@ const mutations = {
   setUserName(state, v) {
     setLocalStorage('userName', v);
     state.userName = v;
+  },
+  setUserId(state, v) {
+    setLocalStorage('userId', v);
+    state.userId = v;
   }
 }
 

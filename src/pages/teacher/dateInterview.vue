@@ -109,7 +109,7 @@ export default {
 				page: 1
 			}).then(resp => {
 				this.tableData = resp.data.objects;
-				this.total = resp.data.num_resultes;
+				this.total = resp.data.num_results;
 			})
 		},
 		

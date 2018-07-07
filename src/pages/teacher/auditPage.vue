@@ -2,45 +2,20 @@
 <!-- 审核页面 -->
 <div class="audit-page">
 	<h3>审核记录</h3>
-	<table style="width:100%">
-		<thead>
-			<tr>
-				<td>审核时间</td>
-				<td>审核人</td>
-				<td>审核记录</td>
-			</tr>
-		</thead>
-		<tbody>
-			<tr>
-				<td>
-					2017-09-16 15:32:04
-				</td>
-				<td>
-					Kira
-				</td>
-				<td>
-					不通过：教学经历描述过于简单
-				</td>
-			</tr>
-		</tbody>
-	</table>
-	<div class="essential-information">
-		<el-row>
-			<el-col :span="12">
-				<flat-feild name="教师ID：" :value="teacher.id"></flat-feild>
-				<flat-feild name="昵称：" :value="teacher.nickname"></flat-feild>
-				<flat-feild name="联系电话：" :value="teacher.mobile"></flat-feild>
-			</el-col>
-			<el-col :span="12">x
-				<flat-feild name="联系邮箱：" :value="teacher.id"></flat-feild>
-			</el-col>
-		</el-row>
-	</div>
+	<el-table :data="fialLogLs" style="width: 100%;margin-top:20px;">
+		<el-table-column prop="updated_at" label="审核时间">
+		</el-table-column>
+		<el-table-column prop="updated_by" label="审核人">
+		</el-table-column>
+		<el-table-column prop="action_event_desc" label="审核记录">
+		</el-table-column>
+	</el-table>
 	<div class="btn-box">
 		<el-button type="primary" size="mini" @click="auditSuccess">审核通过</el-button>
-		<el-button type="primary" size="mini">审核不通过</el-button>
+		<el-button type="primary" size="mini" @click="visible=true;">审核不通过</el-button>
 		<el-button size="mini" @click="back">返回</el-button>
 	</div>
+	<order-reason-dialog :visible="visible" @onSubmit="auditFail"></order-reason-dialog>
 </div>
 </template>
 
@@ -48,30 +23,57 @@
 import {
 	teacherGetByTeacherid,
 	teacherPutByTeacherid
-} from '@/api/teacher'
+} from '@/api/teacher';
+import {
+	actionEventPost,
+	actionEventBareGet
+} from '@/api/action_event';
+import {
+	ACTION_EVENT_TYPE
+} from '@/utils/enums'
+const actionEventConfig = {
+	action_event_type: ACTION_EVENT_TYPE.TEACHER_CHECK,
+	primary_table_name: 'teacher',
+	before_state: 3,
+	after_state: 5,
+}
 export default {
   data() {
     return {
+			visible: false,
+			fialLogLs: [],
       teacher: {
         id: '',
         nickname: '',
-        mobile: '',
+				mobile: '',
+				result: '',
       }
     };
 	},
 	created() {
 		const id = this.$route.query.id;
-		this.id = id;
-		this.getTeacherInfo(id);
+		this.teacher.id = id;
+		this.getFailLog(id);
 	},
 	methods: {
 		back() {
 			this.$router.back();
 		},
 		getTeacherInfo(id) {
-			teacherGetByTeacherid(id).then(resp => {
+			return teacherGetByTeacherid(id).then(resp => {
 				console.log(resp.data);
 			});
+		},
+		getFailLog(id) {
+			const filter = this.$json2filter({
+				action_event_type: [ACTION_EVENT_TYPE.TEACHER_CHECK],
+				primary_table_name: ['teacher'],
+				after_state: [5],
+				primary_data_id: [id]
+			})
+			actionEventBareGet(filter).then(resp=>{
+				this.fialLogLs = resp.data.objects;
+			})
 		},
 		auditSuccess() {
 			teacherPutByTeacherid(this.id, {
@@ -81,8 +83,20 @@ export default {
 				this.back()
 			})
 		},
-		auditFail() {
-			
+		auditFail(reason) {
+			teacherPutByTeacherid(this.teacher.id, {
+				state: 5
+			}).then(resp => {
+				return actionEventPost({
+					...actionEventConfig,
+					primary_data_id: this.teacher.id,
+					action_event_desc: reason
+				})
+			}).then(_=>{
+				this.visible = false;
+				this.$message.success('审核不通过！');
+				this.back()
+			})
 		}
 	}
 };

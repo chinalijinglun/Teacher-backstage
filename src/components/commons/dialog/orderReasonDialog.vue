@@ -1,7 +1,9 @@
 <template>
-  <el-dialog
+  <el-dialog 
+    class="no-header-dialog"
     :visible.sync="dialogVisible"
     @close="handlerClose"
+    :show-close="false"
     width="30%">
     <div class="audit-refund-failed">
       <el-form label-width="90px" label-position="top">
@@ -36,7 +38,11 @@
     },
     methods: {
       onSubmit() {
-        this.$emit('onSubmit', this.form.reason);
+        if(this.form.reason) {
+          this.$emit('onSubmit', this.form.reason);
+        } else {
+          this.$message.error('请输入原因！');
+        }
       },
       handlerClose() {
         this.form.reason = ''
@@ -45,8 +51,11 @@
     mixins: [dialogContainer]
   }
 </script>
-<style scoped>
+<style>
   .btn-container{
     text-align: center;
+  }
+  .no-header-dialog .el-dialog__header {
+    display: none;
   }
 </style>

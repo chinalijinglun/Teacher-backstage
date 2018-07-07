@@ -144,7 +144,20 @@ export const GRADE = {
 }
 
 export const INTERVIEW = {
-  '1': 'NO_INTERVIEW，未面试',
-  '2': 'ALREADY_INTERVIEW,已经面试',
-  '3': 'CANCEL，取消'
+  '1': '待预约',
+  '2': '未面试',
+  '3': '已经面试',
+  '4': '取消',
+  '5': '未完成',
+  '6': '等待确认时间',
+  '7': '待定',
+  '98': '有效',
+  '99': '无效'
 }
+
+export const ACTION_EVENT_TYPE = {
+  'UNKNOWN': 1,
+  'TEACHER_CHECK': 2,
+  'TEACHER_TALK': 3,
+  'STUDENT_TALK': 4
+};

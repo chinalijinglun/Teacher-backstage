@@ -15,3 +15,5 @@ export const teacherDeleteByTeacherid = (teacherid) => teacherPutByTeacherid(tea
 export const mangerThacherCheck = (form) => baseAxios.post('/manger/thacher_check', form);
 
 export const mangerThacherInterview = (form) => baseAxios.post('/manger/thacher_interview', form);
+
+export const mangerThacherApponit = form => baseAxios.post('/manger/thacher_apponit', form);
