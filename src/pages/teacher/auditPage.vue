@@ -22,6 +22,7 @@
 <script>
 import {
 	teacherGetByTeacherid,
+	teacherCheckPass,
 	teacherPutByTeacherid
 } from '@/api/teacher';
 import {
@@ -76,9 +77,7 @@ export default {
 			})
 		},
 		auditSuccess() {
-			teacherPutByTeacherid(this.id, {
-				state: 4
-			}).then(resp => {
+			teacherCheckPass(this.teacher.id+'').then(resp => {
 				this.$message.success('审核通过！');
 				this.back()
 			})

@@ -17,3 +17,5 @@ export const mangerThacherCheck = (form) => baseAxios.post('/manger/thacher_chec
 export const mangerThacherInterview = (form) => baseAxios.post('/manger/thacher_interview', form);
 
 export const mangerThacherApponit = form => baseAxios.post('/manger/thacher_apponit', form);
+
+export const teacherCheckPass = teacher_id => baseAxios.post('/teacher/check_pass', {teacher_id});
