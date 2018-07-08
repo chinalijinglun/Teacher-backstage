@@ -19,3 +19,15 @@ export const mangerThacherInterview = (form) => baseAxios.post('/manger/thacher_
 export const mangerThacherApponit = form => baseAxios.post('/manger/thacher_apponit', form);
 
 export const teacherCheckPass = teacher_id => baseAxios.post('/teacher/check_pass', {teacher_id});
+
+export const interviewResult = () => teacherGet({
+  filters: [{
+    name: 'interviews__state',
+    op: 'any',
+    val: 2
+  },{
+    name: 'interviews__state',
+    op: 'any',
+    val: 3
+  }]
+})

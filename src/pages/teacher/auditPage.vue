@@ -15,10 +15,9 @@
 		<el-button type="primary" size="mini" @click="visible=true;">审核不通过</el-button>
 		<el-button size="mini" @click="back">返回</el-button>
 	</div>
-	<order-reason-dialog :visible="visible" @onSubmit="auditFail"></order-reason-dialog>
+	<order-reason-dialog :visible.sync="visible" @onSubmit="auditFail"></order-reason-dialog>
 </div>
 </template>
-
 <script>
 import {
 	teacherGetByTeacherid,

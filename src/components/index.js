@@ -9,6 +9,9 @@ import header from './header';
 import navigation from './navigation';
 import reasonReview from './commons/dialog/reasonReview';
 import orderReasonDialog from './commons/dialog/orderReasonDialog';
+import dateTimeDialog from './commons/dialog/dateTimeDialog';
+import actionEventReview from './commons/dialog/actionEventReview';
+import timeSure from './commons/dialog/timeSure';
 
 import paginationMix from './commons/mixins/paginationMix';
 
@@ -18,6 +21,9 @@ const install = (Vue) => {
   Vue.component(teacherDialog.name, teacherDialog);
   Vue.component(sureTimeDialog.name, sureTimeDialog);
   Vue.component(orderReasonDialog.name, orderReasonDialog);
+  Vue.component(dateTimeDialog.name, dateTimeDialog);
+  Vue.component(timeSure.name, timeSure);
+  Vue.component(actionEventReview.name, actionEventReview);
   Vue.component(reasonReview.name, reasonReview);
   Vue.component(addSysUser.name, addSysUser);
   Vue.component(appointmentTeacher.name, appointmentTeacher);
