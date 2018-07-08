@@ -24,6 +24,8 @@ import {
   getQueryParams
 } from './json2filter';
 
+import object from 'lodash/fp/object';
+
 function deleteEmptyProps(form) {
   const f = {...form};
   for(let key in form){
@@ -50,6 +52,8 @@ const install = (Vue) => {
   Vue.prototype.$getQueryParams = getQueryParams;
   Vue.prototype.$getNopageQueryParams = getNopageQueryParams;
   Vue.prototype.$deleteEmptyProps = deleteEmptyProps;
+
+  Vue.prototype.$_object = object;
 
   // regexp start
   // 正则表达是

@@ -5,7 +5,9 @@
       <router-link to="/teacher/dateInterview">
         <el-button type="primary" size="mini">预约面试</el-button>
       </router-link>
-      <el-button type="primary" size="mini">面试结果</el-button>
+      <router-link to="/teacher/interviewResult">
+        <el-button type="primary" size="mini">面试结果</el-button>
+      </router-link>
     </div>
     <div class="all-course">
       <h3>所有试听课程</h3>

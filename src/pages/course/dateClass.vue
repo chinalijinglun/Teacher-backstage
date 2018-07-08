@@ -104,7 +104,7 @@ export default {
 			// 	state: [10, 11, 12, 13, 14, 15]
 			// });
       const filter = this.$json2filter({});
-			teacherGet(filter,{page:this.form.page}).then(res => {
+			teacherGet({page:this.form.page}).then(res => {
 				this.total = res.data.num_results;
 				this.tableData = res.data.objects
 			})

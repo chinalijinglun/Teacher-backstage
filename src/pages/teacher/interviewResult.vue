@@ -62,9 +62,7 @@
         </el-table-column>
         <el-table-column fixed="right" label="操作" style="width: 15%;">
           <template slot-scope="scope">
-            <button type="button" class="el-button el-button--default el-button--small">
-              <span>填写面试报告</span>
-            </button>
+            <el-button size="mini" @click="toFillReport(scope.row)">填写面试报告</el-button>
           </template>
         </el-table-column>
       </el-table>
@@ -117,6 +115,13 @@ export default {
         this.tableData = resp.data.objects;
         this.total = resp.data.num_results;
       })
+    },
+    toFillReport(row) {
+      if(new Date(row.end) > new Date()) {
+        this.$router.push({
+          path: '/'
+        })
+      }
     },
     getStateFilter(state) {
       switch(state) {

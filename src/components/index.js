@@ -12,6 +12,7 @@ import orderReasonDialog from './commons/dialog/orderReasonDialog';
 import dateTimeDialog from './commons/dialog/dateTimeDialog';
 import actionEventReview from './commons/dialog/actionEventReview';
 import timeSure from './commons/dialog/timeSure';
+import imgUpload from './commons/upload/imgUpload';
 
 import paginationMix from './commons/mixins/paginationMix';
 
@@ -30,6 +31,7 @@ const install = (Vue) => {
   Vue.component(header.name, header);
   Vue.component(navigation.name, navigation);
   Vue.component(flatFeild.name, flatFeild);
+  Vue.component(imgUpload.name, imgUpload);
 }
 export {
   paginationMix

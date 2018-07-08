@@ -18,3 +18,5 @@ export const coursePackageQuery = (params) => baseAxios.post('/course/package_qu
 export const mangerThacherCommon = (form) => baseAxios.post('/manger/thacher_common', form);
 
 export const courseSchedule = (form) => baseAxios.post('/course/schedule', form);
+
+export const studentTryout = (form) => baseAxios.post('/manger/student_tryout',form);

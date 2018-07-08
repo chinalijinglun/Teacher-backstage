@@ -7,6 +7,7 @@ export const teacherGetBare = (params, options) => baseAxios.get('/api/v1/_bare/
 export const teacherPost = (form) => baseAxios.post('/api/v1/teacher', form);
 
 export const teacherGetByTeacherid = (teacherid) => baseAxios.get(`/api/v1/teacher/${teacherid}`);
+export const teacherGetBareByTeacherid = (teacherid) => baseAxios.get(`/api/v1/_bare/teacher/${teacherid}`);
 
 export const teacherPutByTeacherid = (teacherid, form) => baseAxios.put(`/api/v1/teacher/${teacherid}`, form);
 

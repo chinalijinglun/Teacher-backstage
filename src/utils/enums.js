@@ -72,17 +72,35 @@ export const TEACHER_STATE_ENUM = {
   WAIT_FOR_CHECK: 3,
   CHECK_PASS: 4,
   CHECK_ERROR: 5,
-  WAIT_FOR_INTERVIEW: 6,
-  INTERVIEW_PASS: 7,
-  INTERVIEW_ERROR: 8,
-  CONTRACTOR: 9,
-  WAIT_FOR_TRAIN: 10,
-  TRAIN_PASS: 11,
-  TRAIN_ERROR: 12,
-  WORKING: 13,
-  NO_WORK: 14,
-  INVALID: 15
+  WAIT_FOR_INTERVIEW: 10,
+  INTERVIEW_PASS: 11,
+  INTERVIEW_ERROR: 12,
+  CONTRACTOR: 20,
+  WAIT_FOR_TRAIN: 30,
+  TRAIN_PASS: 31,
+  TRAIN_ERROR: 32,
+  WORKING: 80,
+  NO_WORK: 81,
+  INVALID: 99
 };
+
+/**
+ * RECRUIT = 1
+    BASIC_INFO = 2
+    WAIT_FOR_CHECK = 3
+    CHECK_PASS = 4
+    CHECK_ERROR = 5
+    WAIT_FOR_INTERVIEW = 10
+    INTERVIEW_PASS = 11
+    INTERVIEW_ERROR = 12
+    CONTRACTOR = 20
+    WAIT_FOR_TRAIN = 30
+    TRAIN_PASS = 31
+    TRAIN_ERROR = 32
+    WORKING = 80
+    NO_WORK = 81
+    INVALID = 99
+ */
 
 export const TEACHER_STATE_ZH = {
   1: '新用户',
@@ -90,16 +108,16 @@ export const TEACHER_STATE_ZH = {
   3: '待审核',
   4: '审核通过(待预约)',
   5: '审核未通过',
-  6: '已预约(待面试)',
-  7: '面试结果通过(待签约)',
-  8: '面试结果失败',
-  9: '已签约',
-  10: '待预约培训试讲',
-  11: '培训试讲结果成功',
-  12: '培训试讲结果失败',
-  13: '在岗',
-  14: '未在岗',
-  15: '无效'
+  10: '已预约(待面试)',
+  11: '面试结果通过(待签约)',
+  12: '面试结果失败',
+  20: '已签约',
+  30: '待预约培训试讲',
+  31: '培训试讲结果成功',
+  32: '培训试讲结果失败',
+  80: '在岗',
+  81: '未在岗',
+  99: '无效'
 };
 
 export const MOBILE_PRE = {
@@ -162,3 +180,9 @@ export const ACTION_EVENT_TYPE = {
   'TEACHER_TALK': 3,
   'STUDENT_TALK': 4
 };
+
+export const COURSEWARE_STATE = {
+  1: '未审核',
+  2: '审核通过',
+  3: '审核驳回'
+}

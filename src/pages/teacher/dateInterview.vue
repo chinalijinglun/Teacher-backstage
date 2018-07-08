@@ -76,7 +76,7 @@
 
 						<el-button 
 						@click="dateInterviewDialogOpen(scope.row.interview_id)" 
-						v-if="scope.row.integerview_state === 8"
+						v-if="scope.row.integerview_state === 8 || scope.row.integerview_state === 5"
 						size="mini">重新预约</el-button>
 						<el-button 
 						@click="reasonReview(scope.row.interview_id)" 
@@ -172,6 +172,7 @@ export default {
 		dateInterview(timeRange) {
 			interviewPutByinterviewid(this.interview_id, {
 				state: 6,
+				result: '',
 				set_time: JSON.stringify(timeRange)
 			}).then(resp => {
 				console.log(resp);
