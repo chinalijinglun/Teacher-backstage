@@ -15,7 +15,6 @@ import homework from '@/pages/teacher/homework';
 import evaluate from '@/pages/teacher/evaluate';
 import coursewareAudit from '@/pages/teacher/coursewareAudit';
 import courseAuditPage from '@/pages/teacher/courseAuditPage';
-import failed from '@/pages/teacher/failed';
 import agreement from '@/pages/teacher/agreement';
 
 export default [
@@ -121,12 +120,6 @@ export default [
     path: 'courseAuditPage',
     name: 'courseAuditPage',
     component: courseAuditPage
-  },
-  {
-    title: '面试不成功',
-    path: 'failed',
-    name: 'failed',
-    component: failed
   },
   {
     title: '发合同',
