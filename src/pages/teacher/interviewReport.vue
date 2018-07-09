@@ -1024,10 +1024,10 @@ export default {
 				if(this.result === 3) {
 					// 面试通过
 					teacherPutByTeacherid(this.teacher_id, {
-						state: 'INTERVIEW_PASS'
+						state: 'WAITE_FOR_CONTRACT'
 					}).then(resp => {
 						return interviewPutByinterviewid(this.interview_id, {
-							state: 3,
+							state: 9,
 							result: JSON.stringify(this.form)
 						})
 					}).then(_=>{
@@ -1048,7 +1048,7 @@ export default {
 				// 面试失败
 				if(this.failReason) {
 					interviewPutByinterviewid(this.interview_id, {
-						state: 3,
+						state: 10,
 						result: this.failReason
 					}).then(_=>{
 						this.$message.success('填写成功！');

@@ -57,7 +57,7 @@ export const COURSE_TYPE_MAP = {
 // CHECK_PASS:审核通过(待预约)、
 // CHECK_ERROR:审核未通过，
 // WAIT_FOR_INTERVIEW:已预约(待面试)，
-// INTERVIEW_PASS:面试结果通过(待签约)，
+// WAITE_FOR_CONTRACT:待签约，
 // INTERVIEW_ERROR:面试结果失败，
 // CONTRACTOR:已签约，
 // WAIT_FOR_TRAIN:待预约培训试讲，
@@ -73,8 +73,7 @@ export const TEACHER_STATE_ENUM = {
   CHECK_PASS: 4,
   CHECK_ERROR: 5,
   WAIT_FOR_INTERVIEW: 10,
-  INTERVIEW_PASS: 11,
-  INTERVIEW_ERROR: 12,
+  WAITE_FOR_CONTRACT: 11,
   CONTRACTOR: 20,
   WAIT_FOR_TRAIN: 30,
   TRAIN_PASS: 31,
@@ -91,8 +90,7 @@ export const TEACHER_STATE_ENUM = {
     CHECK_PASS = 4
     CHECK_ERROR = 5
     WAIT_FOR_INTERVIEW = 10
-    INTERVIEW_PASS = 11
-    INTERVIEW_ERROR = 12
+    WAITE_FOR_CONTRACT = 11
     CONTRACTOR = 20
     WAIT_FOR_TRAIN = 30
     TRAIN_PASS = 31
@@ -109,8 +107,7 @@ export const TEACHER_STATE_ZH = {
   4: '审核通过(待预约)',
   5: '审核未通过',
   10: '已预约(待面试)',
-  11: '面试结果通过(待签约)',
-  12: '面试结果失败',
+  11: '待签约',
   20: '已签约',
   30: '待预约培训试讲',
   31: '培训试讲结果成功',
@@ -170,6 +167,8 @@ export const INTERVIEW = {
   '6': '待答复',
   '7': '待确认',
   '8': '待定',
+  '9': '面试通过',
+  '10': '面试失败',
   '98': '有效',
   '99': '无效'
 }
