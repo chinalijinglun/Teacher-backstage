@@ -10,7 +10,6 @@ import course from './course';
 import employee from './employee';
 import order from './order';
 import partner from './partner';
-import price from './price';
 import student from './student';
 import teacher from './teacher';
 
