@@ -129,7 +129,7 @@
 				</el-table-column>
 				<el-table-column prop="created_at" label="注册时间" style="width: 10%;">
 				</el-table-column>
-				<el-table-column prop="teacher_name" label="教师姓名" style="width: 10%;">
+				<el-table-column prop="username" label="教师姓名" style="width: 10%;">
 				</el-table-column>
 				<el-table-column prop="mobile" label="联系电话" style="width: 10%;">
 				</el-table-column>
