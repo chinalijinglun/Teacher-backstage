@@ -6,13 +6,13 @@
         <div class="inps">
           <el-row>
             <el-form-item label="教师姓名：">
-              <el-input size="mini"></el-input>
+              <el-input size="mini" v-model="form.teacher_name"></el-input>
             </el-form-item>
             <el-form-item label="联系电话：">
-              <el-input size="mini"></el-input>
+              <el-input size="mini" v-model="form.mobile"></el-input>
             </el-form-item>
             <el-form-item label="联系邮箱：">
-              <el-input size="mini"></el-input>
+              <el-input size="mini" v-model="form.email"></el-input>
             </el-form-item>
             <el-form-item label="状态：" style="margin-right:20px;">
               <el-select v-model="form.state" placeholder="请选择" size="mini">
@@ -27,8 +27,12 @@
               <el-input size="mini"></el-input>
             </el-form-item>
             <el-form-item class="select-time" label="面试时间：">
-              <date-range :start-date.sync="form.startDate" :end-date.sync="form.endDate" size="mini" range-separator="-" start-placeholder="开始时间" end-placeholder="结束时间">
-              </date-range>
+              <el-date-picker
+                v-model="form.interview_at"
+                size="mini"
+                type="date"
+                placeholder="选择日期">
+              </el-date-picker>
             </el-form-item>
           </el-row>
         </div>
@@ -80,7 +84,8 @@
 </template>
 <script>
 import {
-  teacherGet
+  teacherGet,
+  mangerThacherApponit
 } from '@/api/teacher'
 export default {
   data() {
@@ -88,8 +93,12 @@ export default {
       tableData: [],
       page: 1,
       total: 0,
-      form: {
-        state: ''
+      form: {  
+        email: '',
+        interview_at: '',
+        mobile: '',
+        state: '',
+        teacher_name: ''
       }
     };
   },
@@ -102,15 +111,11 @@ export default {
       this.query();
     },
     query() {
-      const {
-        state
-      } = this.form;
-      const filter = this.$json2filter({});
-      const stateFilters = this.getStateFilter(state);
-      filter.filters = [...filter.filters, ...stateFilters];
-
-      teacherGet(filter, {
-        page: this.page
+      const f = this.$deleteEmptyProps(this.form);
+      mangerThacherApponit({
+        ...f,
+        page_no: this.page,
+        page_limit: 10
       }).then(resp=> {
         this.tableData = resp.data.objects;
         this.total = resp.data.num_results;
@@ -152,8 +157,8 @@ export default {
         default:
           return [{
             name: 'state',
-            op: 'in',
-            val: [6, 7, 8]
+            op: 'eq',
+            val: 10
           }];
       }
     }

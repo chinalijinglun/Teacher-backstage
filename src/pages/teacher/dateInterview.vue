@@ -55,37 +55,37 @@
 				</el-table-column>
 				<el-table-column label="状态">
 					<template slot-scope="scope">
-						{{$INTERVIEW[scope.row.integerview_state]}}
+						{{$INTERVIEW[scope.row.interview_state]}}
 					</template>
 				</el-table-column>
 				<el-table-column fixed="right" label="操作">
 					<template slot-scope="scope">
 						<el-button 
 						@click="dateInterviewDialogOpen(scope.row.interview_id)" 
-						v-if="scope.row.integerview_state === 1" 
+						v-if="scope.row.interview_state === 1" 
 						size="mini">预约面试</el-button>
 
 						<el-button 
 						@click="dateInterviewEditOpen(scope.row.interview_id)" 
-						v-if="scope.row.integerview_state === 6"
+						v-if="scope.row.interview_state === 6"
 						size="mini">编辑查看</el-button>
 						<el-button 
 						@click="reasonDialogOpen(scope.row.interview_id)" 
-						v-if="scope.row.integerview_state === 6"
+						v-if="scope.row.interview_state === 6"
 						size="mini">待定</el-button>
 
 						<el-button 
 						@click="dateInterviewDialogOpen(scope.row.interview_id)" 
-						v-if="scope.row.integerview_state === 8 || scope.row.integerview_state === 5"
+						v-if="scope.row.interview_state === 8 || scope.row.interview_state === 5"
 						size="mini">重新预约</el-button>
 						<el-button 
 						@click="reasonReview(scope.row.interview_id)" 
-						v-if="scope.row.integerview_state === 8"
+						v-if="scope.row.interview_state === 8"
 						size="mini">待定记录</el-button>
 
 						<el-button 
 						@click="sureTime(scope.row)" 
-						v-if="scope.row.integerview_state === 7"
+						v-if="scope.row.interview_state === 7"
 						size="mini">确认时间</el-button>
 					</template>
 				</el-table-column>
