@@ -5,627 +5,629 @@
 			<el-button size="mini">教师档案</el-button>
 			<el-button type="primary" size="mini">教师课程</el-button>
 		</div>
-		<h4>基本信息</h4>
-		<div class="teacher-mess">
-			<div class="fir01">
-				<div class="name">
-					照片
-				</div>
-				<div class="pic pic-contain">
-					<img-upload 
-						name="file"
-						v-model="file_list"
-						:preUrl="$baseApiUrl"
-          	:uploadUrl="$baseApiUrl + '/upload'"
-						:maxNum="1"
-					></img-upload>
-				</div>
-			</div>
-			<div class="fir02">
-				<div class="names">
-					教师姓名
-				</div>
-				<div class="pic base">
-					<input type="text" placeholder="First Name" v-model="form.first_name">
-					<input type="text" placeholder="Middle Name" v-model="form.middle_name">
-					<input type="text" placeholder="Last Name" v-model="form.last_name">
-				</div>
-			</div>
-			<div class="fir02">
-				<div class="names">
-					联系邮箱
-				</div>
-				<div class="pic base">
-					<input type="text" class="widths" v-model="form.email">
-				</div>
-			</div>
-			<div class="fir02">
-				<div class="names">
-					联系电话
-				</div>
-				<div class="pic base">
-					<select v-model="form.nation">
-						<option v-for="(item, key) in $MOBILE_PRE" :value="key" :key="key">{{item}}</option>
-					</select>
-					<input type="text" class="widths" v-model="form.mobile">
-				</div>
-			</div>
-			<div class="fir02">
-				<div class="names">
-					联系邮箱
-				</div>
-				<div class="pic bases">
-					<select name="" id="">
-						<option value="国家">国家</option>
-					</select>
-					<select name="" id="">
-						<option value="州">州</option>
-					</select>
-					<select name="" id="">
-						<option value="城市">城市</option>
-					</select>
-				</div>
-			</div>
-			<div class="fir02">
-				<div class="names">
-					街道
-				</div>
-				<div class="pic base">
-					<input v-model="form.street" type="text" class="widths">
-				</div>
-			</div>
-			<div class="fir02">
-				<div class="names">
-					邮政编码
-				</div>
-				<div class="pic base">
-					<input type="text" v-model="form.zipone" class="widths">
-				</div>
-			</div>
-			<div class="fir02">
-				<div class="names">
-					时区
-				</div>
-				<div class="pic base times">
-					<select name="" id="">
-						<option value="时区选择">时区选择</option>
-					</select>
-				</div>
-			</div>
-			<div class="fir03">
-				<div class="name01">
-					教育背景
-				</div>
-				<div class="xueli">
-					<div class="xl-tit">学历</div>
-					<div class="xl-name">博士后</div>
-					<div class="xl-name">博士</div>
-					<div class="xl-name">硕士</div>
-					<div class="xl-name">本科</div>
-				</div>
-				<div class="zdsj">
-					<div class="zdsj-tit">在读期间</div>
-					<div class="zdsj-name">
-						<input type="text" placeholder="年份"> 至
-						<input type="text" placeholder="年份">
+		<div>
+			<h4>基本信息</h4>
+			<div class="teacher-mess">
+				<div class="fir01">
+					<div class="name">
+						照片
 					</div>
-					<div class="zdsj-name">
-						<input type="text" placeholder="年份"> 至
-						<input type="text" placeholder="年份">
-					</div>
-					<div class="zdsj-name">
-						<input type="text" placeholder="年份"> 至
-						<input type="text" placeholder="年份">
-					</div>
-					<div class="zdsj-name">
-						<input type="text" placeholder="年份"> 至
-						<input type="text" placeholder="年份">
+					<div class="pic pic-contain">
+						<img-upload 
+							name="file"
+							v-model="file_list"
+							:preUrl="$baseApiUrl"
+							:uploadUrl="$baseApiUrl + '/upload'"
+							:maxNum="1"
+						></img-upload>
 					</div>
 				</div>
-				<div class="zdsj">
-					<div class="zdsj-tit">在读学校</div>
-					<div class="zdsj-name">
-						<input class="inp" type="text">
+				<div class="fir02">
+					<div class="names">
+						教师姓名
 					</div>
-					<div class="zdsj-name">
-						<input class="inp" type="text">
-					</div>
-					<div class="zdsj-name">
-						<input class="inp" type="text">
-					</div>
-					<div class="zdsj-name">
-						<input class="inp" type="text">
+					<div class="pic base">
+						<input type="text" placeholder="First Name" v-model="form.first_name">
+						<input type="text" placeholder="Middle Name" v-model="form.middle_name">
+						<input type="text" placeholder="Last Name" v-model="form.last_name">
 					</div>
 				</div>
-				<div class="zdsj">
-					<div class="zdsj-tit">专业</div>
-					<div class="zdsj-name">
-						<input class="inp" type="text">
+				<div class="fir02">
+					<div class="names">
+						联系邮箱
 					</div>
-					<div class="zdsj-name">
-						<input class="inp" type="text">
-					</div>
-					<div class="zdsj-name">
-						<input class="inp" type="text">
-					</div>
-					<div class="zdsj-name">
-						<input class="inp" type="text">
+					<div class="pic base">
+						<input type="text" class="widths" v-model="form.email">
 					</div>
 				</div>
-				<div class="zdsj">
-					<div class="zdsj-tit">毕业证明</div>
-					<div class="zdsj-name">
-						<div>
-							<span>毕业证明 1</span>&nbsp;&nbsp;&nbsp;&nbsp;
-							<span class="delet">X</span>
+				<div class="fir02">
+					<div class="names">
+						联系电话
+					</div>
+					<div class="pic base">
+						<select v-model="form.nation">
+							<option v-for="(item, key) in $MOBILE_PRE" :value="key" :key="key">{{item}}</option>
+						</select>
+						<input type="text" class="widths" v-model="form.mobile">
+					</div>
+				</div>
+				<div class="fir02">
+					<div class="names">
+						联系邮箱
+					</div>
+					<div class="pic bases">
+						<select name="" id="">
+							<option value="国家">国家</option>
+						</select>
+						<select name="" id="">
+							<option value="州">州</option>
+						</select>
+						<select name="" id="">
+							<option value="城市">城市</option>
+						</select>
+					</div>
+				</div>
+				<div class="fir02">
+					<div class="names">
+						街道
+					</div>
+					<div class="pic base">
+						<input v-model="form.street" type="text" class="widths">
+					</div>
+				</div>
+				<div class="fir02">
+					<div class="names">
+						邮政编码
+					</div>
+					<div class="pic base">
+						<input type="text" v-model="form.zipone" class="widths">
+					</div>
+				</div>
+				<div class="fir02">
+					<div class="names">
+						时区
+					</div>
+					<div class="pic base times">
+						<select name="" id="">
+							<option value="时区选择">时区选择</option>
+						</select>
+					</div>
+				</div>
+				<div class="fir03">
+					<div class="name01">
+						教育背景
+					</div>
+					<div class="xueli">
+						<div class="xl-tit">学历</div>
+						<div class="xl-name">博士后</div>
+						<div class="xl-name">博士</div>
+						<div class="xl-name">硕士</div>
+						<div class="xl-name">本科</div>
+					</div>
+					<div class="zdsj">
+						<div class="zdsj-tit">在读期间</div>
+						<div class="zdsj-name">
+							<input type="text" placeholder="年份"> 至
+							<input type="text" placeholder="年份">
 						</div>
-						<div>
-							<span>毕业证明 1</span>&nbsp;&nbsp;&nbsp;&nbsp;
-							<span class="delet">X</span>
+						<div class="zdsj-name">
+							<input type="text" placeholder="年份"> 至
+							<input type="text" placeholder="年份">
 						</div>
-						<button>上传</button>
-					</div>
-					<div class="zdsj-name">
-						<div>
-							<span>毕业证明 1</span>&nbsp;&nbsp;&nbsp;&nbsp;
-							<span class="delet">X</span>
+						<div class="zdsj-name">
+							<input type="text" placeholder="年份"> 至
+							<input type="text" placeholder="年份">
 						</div>
-						<div>
-							<span>毕业证明 1</span>&nbsp;&nbsp;&nbsp;&nbsp;
-							<span class="delet">X</span>
-						</div>
-						<button>上传</button>
-					</div>
-					<div class="zdsj-name">
-						<div>
-							<span>毕业证明 1</span>&nbsp;&nbsp;&nbsp;&nbsp;
-							<span class="delet">X</span>
-						</div>
-						<div>
-							<span>毕业证明 1</span>&nbsp;&nbsp;&nbsp;&nbsp;
-							<span class="delet">X</span>
-						</div>
-						<button>上传</button>
-					</div>
-					<div class="zdsj-name">
-						<div>
-							<span>毕业证明 1</span>&nbsp;&nbsp;&nbsp;&nbsp;
-							<span class="delet">X</span>
-						</div>
-						<div>
-							<span>毕业证明 1</span>&nbsp;&nbsp;&nbsp;&nbsp;
-							<span class="delet">X</span>
-						</div>
-						<button>上传</button>
-					</div>
-				</div>
-				<div class="zdsj" style="border:none;width:15.5%">
-					<div class="zdsj-tit">备注</div>
-					<div class="zdsj-name">
-						<input class="inp" type="text">
-					</div>
-					<div class="zdsj-name">
-						<input class="inp" type="text">
-					</div>
-					<div class="zdsj-name">
-						<input class="inp" type="text">
-					</div>
-					<div class="zdsj-name">
-						<input class="inp" type="text">
-					</div>
-				</div>
-			</div>
-			<div class="fir02">
-				<div class="names">
-					Skype账号
-				</div>
-				<div class="pic base">
-					<input type="text" class="widths">
-				</div>
-			</div>
-			<div class="fir04">
-				<div class="name01">
-					可选授课时间
-				</div>
-				<div class="week">
-					<div class="weeks-tit">周</div>
-					<div class="weeks">周一</div>
-					<div class="weeks">周二</div>
-					<div class="weeks">周三</div>
-					<div class="weeks">周四</div>
-					<div class="weeks">周五</div>
-					<div class="weeks">周六</div>
-					<div class="weeks">周日</div>
-				</div>
-				<div class="week-time">
-					<div class="weeks-tit">周</div>
-					<div class="weeks">
-						<div>
-							<select name="" id="">
-								<option value="00">00</option>
-							</select>
-							<select name="" id="">
-								<option value="00">00</option>
-							</select>
-							------
-							<select name="" id="">
-								<option value="00">00</option>
-							</select>
-							<select name="" id="">
-								<option value="00">00</option>
-							</select>
-							<span class="add"> + </span>
+						<div class="zdsj-name">
+							<input type="text" placeholder="年份"> 至
+							<input type="text" placeholder="年份">
 						</div>
 					</div>
-					<div class="weeks">
-						<div>
-							<select name="" id="">
-								<option value="00">00</option>
-							</select>
-							<select name="" id="">
-								<option value="00">00</option>
-							</select>
-							------
-							<select name="" id="">
-								<option value="00">00</option>
-							</select>
-							<select name="" id="">
-								<option value="00">00</option>
-							</select>
-							<span class="add"> + </span>
+					<div class="zdsj">
+						<div class="zdsj-tit">在读学校</div>
+						<div class="zdsj-name">
+							<input class="inp" type="text">
+						</div>
+						<div class="zdsj-name">
+							<input class="inp" type="text">
+						</div>
+						<div class="zdsj-name">
+							<input class="inp" type="text">
+						</div>
+						<div class="zdsj-name">
+							<input class="inp" type="text">
 						</div>
 					</div>
-					<div class="weeks">
-						<div>
-							<select name="" id="">
-								<option value="00">00</option>
-							</select>
-							<select name="" id="">
-								<option value="00">00</option>
-							</select>
-							------
-							<select name="" id="">
-								<option value="00">00</option>
-							</select>
-							<select name="" id="">
-								<option value="00">00</option>
-							</select>
-							<span class="add"> + </span>
+					<div class="zdsj">
+						<div class="zdsj-tit">专业</div>
+						<div class="zdsj-name">
+							<input class="inp" type="text">
+						</div>
+						<div class="zdsj-name">
+							<input class="inp" type="text">
+						</div>
+						<div class="zdsj-name">
+							<input class="inp" type="text">
+						</div>
+						<div class="zdsj-name">
+							<input class="inp" type="text">
 						</div>
 					</div>
-					<div class="weeks">
-						<div>
-							<select name="" id="">
-								<option value="00">00</option>
-							</select>
-							<select name="" id="">
-								<option value="00">00</option>
-							</select>
-							------
-							<select name="" id="">
-								<option value="00">00</option>
-							</select>
-							<select name="" id="">
-								<option value="00">00</option>
-							</select>
-							<span class="add"> + </span>
+					<div class="zdsj">
+						<div class="zdsj-tit">毕业证明</div>
+						<div class="zdsj-name">
+							<div>
+								<span>毕业证明 1</span>&nbsp;&nbsp;&nbsp;&nbsp;
+								<span class="delet">X</span>
+							</div>
+							<div>
+								<span>毕业证明 1</span>&nbsp;&nbsp;&nbsp;&nbsp;
+								<span class="delet">X</span>
+							</div>
+							<button>上传</button>
+						</div>
+						<div class="zdsj-name">
+							<div>
+								<span>毕业证明 1</span>&nbsp;&nbsp;&nbsp;&nbsp;
+								<span class="delet">X</span>
+							</div>
+							<div>
+								<span>毕业证明 1</span>&nbsp;&nbsp;&nbsp;&nbsp;
+								<span class="delet">X</span>
+							</div>
+							<button>上传</button>
+						</div>
+						<div class="zdsj-name">
+							<div>
+								<span>毕业证明 1</span>&nbsp;&nbsp;&nbsp;&nbsp;
+								<span class="delet">X</span>
+							</div>
+							<div>
+								<span>毕业证明 1</span>&nbsp;&nbsp;&nbsp;&nbsp;
+								<span class="delet">X</span>
+							</div>
+							<button>上传</button>
+						</div>
+						<div class="zdsj-name">
+							<div>
+								<span>毕业证明 1</span>&nbsp;&nbsp;&nbsp;&nbsp;
+								<span class="delet">X</span>
+							</div>
+							<div>
+								<span>毕业证明 1</span>&nbsp;&nbsp;&nbsp;&nbsp;
+								<span class="delet">X</span>
+							</div>
+							<button>上传</button>
 						</div>
 					</div>
-					<div class="weeks">
-						<div>
-							<select name="" id="">
-								<option value="00">00</option>
-							</select>
-							<select name="" id="">
-								<option value="00">00</option>
-							</select>
-							------
-							<select name="" id="">
-								<option value="00">00</option>
-							</select>
-							<select name="" id="">
-								<option value="00">00</option>
-							</select>
-							<span class="add"> + </span>
+					<div class="zdsj" style="border:none;width:15.5%">
+						<div class="zdsj-tit">备注</div>
+						<div class="zdsj-name">
+							<input class="inp" type="text">
 						</div>
-					</div>
-					<div class="weeks">
-						<div>
-							<select name="" id="">
-								<option value="00">00</option>
-							</select>
-							<select name="" id="">
-								<option value="00">00</option>
-							</select>
-							------
-							<select name="" id="">
-								<option value="00">00</option>
-							</select>
-							<select name="" id="">
-								<option value="00">00</option>
-							</select>
-							<span class="add"> + </span>
+						<div class="zdsj-name">
+							<input class="inp" type="text">
 						</div>
-					</div>
-					<div class="weeks">
-						<div>
-							<select name="" id="">
-								<option value="00">00</option>
-							</select>
-							<select name="" id="">
-								<option value="00">00</option>
-							</select>
-							------
-							<select name="" id="">
-								<option value="00">00</option>
-							</select>
-							<select name="" id="">
-								<option value="00">00</option>
-							</select>
-							<span class="add"> + </span>
+						<div class="zdsj-name">
+							<input class="inp" type="text">
+						</div>
+						<div class="zdsj-name">
+							<input class="inp" type="text">
 						</div>
 					</div>
 				</div>
-			</div>
-			<div class="fir05">
-				<div class="fir05-name">
-					自我介绍
-				</div>
-				<textarea name="" class="text" id="" cols="30" rows="10"></textarea>
-			</div>
-			<div class="fir02" style="border:none">
-				<div class="names">
-					宣传视频
-				</div>
-				<div class="pic base">
-					<input type="text" class="widths">
-				</div>
-			</div>
-		</div>
-		<h4>教学经历</h4>
-		<div class="jyjl">
-			<div class="fir02">
-				<div class="names">
-					当前任职学校
-				</div>
-				<div class="pic base">
-					<input type="text" class="widths" placeholder="如果是已经退休的教师或目前不在学校任职，请填写最新一段教学经历">
-				</div>
-			</div>
-			<div class="sknj">
-				<div class="names">
-					当前教授科目和年级
-				</div>
-				<div class="right">
-					<div class="addelet">
-						<button>添加科目</button>
-						<button>删除科目</button>
+				<div class="fir02">
+					<div class="names">
+						Skype账号
 					</div>
-					<div class="tits">
-						<div class="choose">
-							选择
+					<div class="pic base">
+						<input type="text" class="widths">
+					</div>
+				</div>
+				<div class="fir04">
+					<div class="name01">
+						可选授课时间
+					</div>
+					<div class="week">
+						<div class="weeks-tit">周</div>
+						<div class="weeks">周一</div>
+						<div class="weeks">周二</div>
+						<div class="weeks">周三</div>
+						<div class="weeks">周四</div>
+						<div class="weeks">周五</div>
+						<div class="weeks">周六</div>
+						<div class="weeks">周日</div>
+					</div>
+					<div class="week-time">
+						<div class="weeks-tit">周</div>
+						<div class="weeks">
+							<div>
+								<select name="" id="">
+									<option value="00">00</option>
+								</select>
+								<select name="" id="">
+									<option value="00">00</option>
+								</select>
+								------
+								<select name="" id="">
+									<option value="00">00</option>
+								</select>
+								<select name="" id="">
+									<option value="00">00</option>
+								</select>
+								<span class="add"> + </span>
+							</div>
 						</div>
-						<div class="kcfl">
-							课程分类
+						<div class="weeks">
+							<div>
+								<select name="" id="">
+									<option value="00">00</option>
+								</select>
+								<select name="" id="">
+									<option value="00">00</option>
+								</select>
+								------
+								<select name="" id="">
+									<option value="00">00</option>
+								</select>
+								<select name="" id="">
+									<option value="00">00</option>
+								</select>
+								<span class="add"> + </span>
+							</div>
 						</div>
-						<div class="nianji">
-							年级
+						<div class="weeks">
+							<div>
+								<select name="" id="">
+									<option value="00">00</option>
+								</select>
+								<select name="" id="">
+									<option value="00">00</option>
+								</select>
+								------
+								<select name="" id="">
+									<option value="00">00</option>
+								</select>
+								<select name="" id="">
+									<option value="00">00</option>
+								</select>
+								<span class="add"> + </span>
+							</div>
+						</div>
+						<div class="weeks">
+							<div>
+								<select name="" id="">
+									<option value="00">00</option>
+								</select>
+								<select name="" id="">
+									<option value="00">00</option>
+								</select>
+								------
+								<select name="" id="">
+									<option value="00">00</option>
+								</select>
+								<select name="" id="">
+									<option value="00">00</option>
+								</select>
+								<span class="add"> + </span>
+							</div>
+						</div>
+						<div class="weeks">
+							<div>
+								<select name="" id="">
+									<option value="00">00</option>
+								</select>
+								<select name="" id="">
+									<option value="00">00</option>
+								</select>
+								------
+								<select name="" id="">
+									<option value="00">00</option>
+								</select>
+								<select name="" id="">
+									<option value="00">00</option>
+								</select>
+								<span class="add"> + </span>
+							</div>
+						</div>
+						<div class="weeks">
+							<div>
+								<select name="" id="">
+									<option value="00">00</option>
+								</select>
+								<select name="" id="">
+									<option value="00">00</option>
+								</select>
+								------
+								<select name="" id="">
+									<option value="00">00</option>
+								</select>
+								<select name="" id="">
+									<option value="00">00</option>
+								</select>
+								<span class="add"> + </span>
+							</div>
+						</div>
+						<div class="weeks">
+							<div>
+								<select name="" id="">
+									<option value="00">00</option>
+								</select>
+								<select name="" id="">
+									<option value="00">00</option>
+								</select>
+								------
+								<select name="" id="">
+									<option value="00">00</option>
+								</select>
+								<select name="" id="">
+									<option value="00">00</option>
+								</select>
+								<span class="add"> + </span>
+							</div>
 						</div>
 					</div>
-					<div class="tits">
-						<div class="choose">
-							<input type="checkbox" name="" id="">
-						</div>
-						<div class="kcfl">
-							<select name="" id="">
-								<option value="一级分类">一级分类</option>
-							</select>
-							<select name="" id="">
-								<option value="一级分类">一级分类</option>
-							</select>
-						</div>
-						<div class="nianji">
-							<input type="checkbox" name="" id=""> 幼儿园
-							<input type="checkbox" name="" id=""> 小学
-							<input type="checkbox" name="" id=""> 初中
-							<input type="checkbox" name="" id=""> 高中
-							<input type="checkbox" name="" id=""> 大学
-							<input type="checkbox" name="" id=""> 成人
-						</div>
+				</div>
+				<div class="fir05">
+					<div class="fir05-name">
+						自我介绍
 					</div>
-					<div class="tits">
-						<div class="choose">
-							<input type="checkbox" name="" id="">
-						</div>
-						<div class="kcfl">
-							<select name="" id="">
-								<option value="一级分类">一级分类</option>
-							</select>
-							<select name="" id="">
-								<option value="一级分类">一级分类</option>
-							</select>
-						</div>
-						<div class="nianji">
-							<input type="checkbox" name="" id=""> 幼儿园
-							<input type="checkbox" name="" id=""> 小学
-							<input type="checkbox" name="" id=""> 初中
-							<input type="checkbox" name="" id=""> 高中
-							<input type="checkbox" name="" id=""> 大学
-							<input type="checkbox" name="" id=""> 成人
-						</div>
+					<textarea name="" class="text" id="" cols="30" rows="10"></textarea>
+				</div>
+				<div class="fir02" style="border:none">
+					<div class="names">
+						宣传视频
 					</div>
-					<div class="tits" style="border:none">
-						<div class="choose">
-							<input type="checkbox" name="" id="">
-						</div>
-						<div class="kcfl">
-							<select name="" id="">
-								<option value="其他">其他</option>
-							</select>
-							<input type="text" placeholder="手动输入科目名">
-						</div>
-						<div class="nianji">
-							<input type="checkbox" name="" id=""> 幼儿园
-							<input type="checkbox" name="" id=""> 小学
-							<input type="checkbox" name="" id=""> 初中
-							<input type="checkbox" name="" id=""> 高中
-							<input type="checkbox" name="" id=""> 大学
-							<input type="checkbox" name="" id=""> 成人
-						</div>
+					<div class="pic base">
+						<input type="text" class="widths">
 					</div>
 				</div>
 			</div>
+			<h4>教学经历</h4>
+			<div class="jyjl">
+				<div class="fir02">
+					<div class="names">
+						当前任职学校
+					</div>
+					<div class="pic base">
+						<input type="text" class="widths" placeholder="如果是已经退休的教师或目前不在学校任职，请填写最新一段教学经历">
+					</div>
+				</div>
+				<div class="sknj">
+					<div class="names">
+						当前教授科目和年级
+					</div>
+					<div class="right">
+						<div class="addelet">
+							<button>添加科目</button>
+							<button>删除科目</button>
+						</div>
+						<div class="tits">
+							<div class="choose">
+								选择
+							</div>
+							<div class="kcfl">
+								课程分类
+							</div>
+							<div class="nianji">
+								年级
+							</div>
+						</div>
+						<div class="tits">
+							<div class="choose">
+								<input type="checkbox" name="" id="">
+							</div>
+							<div class="kcfl">
+								<select name="" id="">
+									<option value="一级分类">一级分类</option>
+								</select>
+								<select name="" id="">
+									<option value="一级分类">一级分类</option>
+								</select>
+							</div>
+							<div class="nianji">
+								<input type="checkbox" name="" id=""> 幼儿园
+								<input type="checkbox" name="" id=""> 小学
+								<input type="checkbox" name="" id=""> 初中
+								<input type="checkbox" name="" id=""> 高中
+								<input type="checkbox" name="" id=""> 大学
+								<input type="checkbox" name="" id=""> 成人
+							</div>
+						</div>
+						<div class="tits">
+							<div class="choose">
+								<input type="checkbox" name="" id="">
+							</div>
+							<div class="kcfl">
+								<select name="" id="">
+									<option value="一级分类">一级分类</option>
+								</select>
+								<select name="" id="">
+									<option value="一级分类">一级分类</option>
+								</select>
+							</div>
+							<div class="nianji">
+								<input type="checkbox" name="" id=""> 幼儿园
+								<input type="checkbox" name="" id=""> 小学
+								<input type="checkbox" name="" id=""> 初中
+								<input type="checkbox" name="" id=""> 高中
+								<input type="checkbox" name="" id=""> 大学
+								<input type="checkbox" name="" id=""> 成人
+							</div>
+						</div>
+						<div class="tits" style="border:none">
+							<div class="choose">
+								<input type="checkbox" name="" id="">
+							</div>
+							<div class="kcfl">
+								<select name="" id="">
+									<option value="其他">其他</option>
+								</select>
+								<input type="text" placeholder="手动输入科目名">
+							</div>
+							<div class="nianji">
+								<input type="checkbox" name="" id=""> 幼儿园
+								<input type="checkbox" name="" id=""> 小学
+								<input type="checkbox" name="" id=""> 初中
+								<input type="checkbox" name="" id=""> 高中
+								<input type="checkbox" name="" id=""> 大学
+								<input type="checkbox" name="" id=""> 成人
+							</div>
+						</div>
+					</div>
+				</div>
 
-			<div class="fir02">
-				<div class="names">
-					当前任职学校
+				<div class="fir02">
+					<div class="names">
+						当前任职学校
+					</div>
+					<div class="pic base sel">
+						<select name="" id="">
+							<option value="请选择地区">请选择地区</option>
+						</select>
+						<select name="" id="">
+							<option value="请选择州">请选择州</option>
+						</select>
+					</div>
 				</div>
-				<div class="pic base sel">
-					<select name="" id="">
-						<option value="请选择地区">请选择地区</option>
-					</select>
-					<select name="" id="">
-						<option value="请选择州">请选择州</option>
-					</select>
-				</div>
-			</div>
 
-			<div class="sknj">
-				<div class="names">
-					可教授其他科目和年级
-				</div>
-				<div class="right">
-					<div class="addelet">
-						<button>添加科目</button>
-						<button>删除科目</button>
+				<div class="sknj">
+					<div class="names">
+						可教授其他科目和年级
 					</div>
-					<div class="tits">
-						<div class="choose">
-							选择
+					<div class="right">
+						<div class="addelet">
+							<button>添加科目</button>
+							<button>删除科目</button>
 						</div>
-						<div class="kcfl">
-							课程分类
+						<div class="tits">
+							<div class="choose">
+								选择
+							</div>
+							<div class="kcfl">
+								课程分类
+							</div>
+							<div class="nianji">
+								年级
+							</div>
 						</div>
-						<div class="nianji">
-							年级
+						<div class="tits">
+							<div class="choose">
+								<input type="checkbox" name="" id="">
+							</div>
+							<div class="kcfl">
+								<select name="" id="">
+									<option value="一级分类">一级分类</option>
+								</select>
+								<select name="" id="">
+									<option value="一级分类">一级分类</option>
+								</select>
+							</div>
+							<div class="nianji">
+								<input type="checkbox" name="" id=""> 幼儿园
+								<input type="checkbox" name="" id=""> 小学
+								<input type="checkbox" name="" id=""> 初中
+								<input type="checkbox" name="" id=""> 高中
+								<input type="checkbox" name="" id=""> 大学
+								<input type="checkbox" name="" id=""> 成人
+							</div>
+						</div>
+						<div class="tits">
+							<div class="choose">
+								<input type="checkbox" name="" id="">
+							</div>
+							<div class="kcfl">
+								<select name="" id="">
+									<option value="一级分类">一级分类</option>
+								</select>
+								<select name="" id="">
+									<option value="一级分类">一级分类</option>
+								</select>
+							</div>
+							<div class="nianji">
+								<input type="checkbox" name="" id=""> 幼儿园
+								<input type="checkbox" name="" id=""> 小学
+								<input type="checkbox" name="" id=""> 初中
+								<input type="checkbox" name="" id=""> 高中
+								<input type="checkbox" name="" id=""> 大学
+								<input type="checkbox" name="" id=""> 成人
+							</div>
+						</div>
+						<div class="tits" style="border:none">
+							<div class="choose">
+								<input type="checkbox" name="" id="">
+							</div>
+							<div class="kcfl">
+								<select name="" id="">
+									<option value="其他">其他</option>
+								</select>
+								<input type="text" placeholder="手动输入科目名">
+							</div>
+							<div class="nianji">
+								<input type="checkbox" name="" id=""> 幼儿园
+								<input type="checkbox" name="" id=""> 小学
+								<input type="checkbox" name="" id=""> 初中
+								<input type="checkbox" name="" id=""> 高中
+								<input type="checkbox" name="" id=""> 大学
+								<input type="checkbox" name="" id=""> 成人
+							</div>
 						</div>
 					</div>
-					<div class="tits">
-						<div class="choose">
-							<input type="checkbox" name="" id="">
-						</div>
-						<div class="kcfl">
-							<select name="" id="">
-								<option value="一级分类">一级分类</option>
-							</select>
-							<select name="" id="">
-								<option value="一级分类">一级分类</option>
-							</select>
-						</div>
-						<div class="nianji">
-							<input type="checkbox" name="" id=""> 幼儿园
-							<input type="checkbox" name="" id=""> 小学
-							<input type="checkbox" name="" id=""> 初中
-							<input type="checkbox" name="" id=""> 高中
-							<input type="checkbox" name="" id=""> 大学
-							<input type="checkbox" name="" id=""> 成人
-						</div>
+				</div>
+				<div class="fir02">
+					<div class="names">
+						总教龄
 					</div>
-					<div class="tits">
-						<div class="choose">
-							<input type="checkbox" name="" id="">
-						</div>
-						<div class="kcfl">
-							<select name="" id="">
-								<option value="一级分类">一级分类</option>
-							</select>
-							<select name="" id="">
-								<option value="一级分类">一级分类</option>
-							</select>
-						</div>
-						<div class="nianji">
-							<input type="checkbox" name="" id=""> 幼儿园
-							<input type="checkbox" name="" id=""> 小学
-							<input type="checkbox" name="" id=""> 初中
-							<input type="checkbox" name="" id=""> 高中
-							<input type="checkbox" name="" id=""> 大学
-							<input type="checkbox" name="" id=""> 成人
-						</div>
-					</div>
-					<div class="tits" style="border:none">
-						<div class="choose">
-							<input type="checkbox" name="" id="">
-						</div>
-						<div class="kcfl">
-							<select name="" id="">
-								<option value="其他">其他</option>
-							</select>
-							<input type="text" placeholder="手动输入科目名">
-						</div>
-						<div class="nianji">
-							<input type="checkbox" name="" id=""> 幼儿园
-							<input type="checkbox" name="" id=""> 小学
-							<input type="checkbox" name="" id=""> 初中
-							<input type="checkbox" name="" id=""> 高中
-							<input type="checkbox" name="" id=""> 大学
-							<input type="checkbox" name="" id=""> 成人
-						</div>
+					<div class="pic base sel">
+						<select name="" id="">
+							<option value="0">0</option>
+						</select>
+						<select name="" id="">
+							<option value="6">6</option>
+						</select>
 					</div>
 				</div>
-			</div>
-			<div class="fir02">
-				<div class="names">
-					总教龄
+				<div class="fir02">
+					<div class="names">
+						简历
+					</div>
+					<div class="pic base sel">
+						<span>简历</span>
+						<span>重新上传</span>
+					</div>
 				</div>
-				<div class="pic base sel">
-					<select name="" id="">
-						<option value="0">0</option>
-					</select>
-					<select name="" id="">
-						<option value="6">6</option>
-					</select>
+				<div class="fir02">
+					<div class="names">
+						执教资格证明
+					</div>
+					<div class="pic base sel">
+						<span>资格证明1</span>
+						<span>资格证明2</span>
+					</div>
 				</div>
-			</div>
-			<div class="fir02">
-				<div class="names">
-					简历
+				<div class="fir02">
+					<div class="names">
+						经验分享
+					</div>
+					<div class="pic base">
+						<input type="text" class="widths" placeholder="请描述职业生涯中认为对申请该职位有帮助的任何加分经验">
+					</div>
 				</div>
-				<div class="pic base sel">
-					<span>简历</span>
-					<span>重新上传</span>
+				<div class="fir02">
+					<div class="names">
+						所得奖项
+					</div>
+					<div class="pic base sel">
+						<span>所得奖项1</span>
+						<span>所得奖项2</span>
+					</div>
 				</div>
-			</div>
-			<div class="fir02">
-				<div class="names">
-					执教资格证明
+				<div class="fir05">
+					<div class="fir05-name">
+						其他工作经历
+					</div>
+					<textarea name="" class="text" id="" cols="30" rows="10"></textarea>
 				</div>
-				<div class="pic base sel">
-					<span>资格证明1</span>
-					<span>资格证明2</span>
-				</div>
-			</div>
-			<div class="fir02">
-				<div class="names">
-					经验分享
-				</div>
-				<div class="pic base">
-					<input type="text" class="widths" placeholder="请描述职业生涯中认为对申请该职位有帮助的任何加分经验">
-				</div>
-			</div>
-			<div class="fir02">
-				<div class="names">
-					所得奖项
-				</div>
-				<div class="pic base sel">
-					<span>所得奖项1</span>
-					<span>所得奖项2</span>
-				</div>
-			</div>
-			<div class="fir05">
-				<div class="fir05-name">
-					其他工作经历
-				</div>
-				<textarea name="" class="text" id="" cols="30" rows="10"></textarea>
 			</div>
 		</div>
 		<div class="btn-box">

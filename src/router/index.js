@@ -81,13 +81,6 @@ export default new Router({
       children: partner
     },
     {
-      title: '价格',
-      path: '/price',
-      name: 'price',
-      component: main,
-      children: price
-    },
-    {
       title: '学生',
       path: '/student',
       name: 'student',

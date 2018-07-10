@@ -1,112 +1,99 @@
 <template>
-<!-- 试讲课信息 -->
-    <div class="lecture-information">
-        <div class="course-package-top">
-            <el-form ref="form" label-width="96px">
-                <div class="inps">
-                    <el-row>
-                        <el-form-item label="教师姓名：">
-                            <el-input size="mini"></el-input>
-                        </el-form-item>
-                        <el-form-item class="select-time" label="上课时间：">
-                            <date-range
-                            :start-date.sync="form.startDate"
-                            :end-date.sync="form.endDate"
-                            size="mini"
-                            range-separator="-"
-                            start-placeholder="开始时间"
-                            end-placeholder="结束时间">
-                            </date-range>
-                        </el-form-item>
-                        <el-form-item label="联系邮箱：">
-                            <el-input size="mini"></el-input>
-                        </el-form-item>
-                        <el-form-item label="状态：">
-                            <el-select v-model="form.status" placeholder="请选择" size="mini">
-                            <el-option label="所有状态" value=""></el-option>
-                            <el-option label="有效" value="1"></el-option>
-                            <el-option label="无效" value="1"></el-option>
-                            </el-select>
-                        </el-form-item>
-                    </el-row>
-                </div>
-                <el-button type="primary" size="mini">查询</el-button>
-                </el-form>
+  <!-- 试讲课信息 -->
+  <div class="lecture-information">
+    <div class="course-package-top">
+      <el-form ref="form" label-width="96px">
+        <div class="inps">
+          <el-row>
+            <el-form-item label="教师姓名：">
+              <el-input size="mini"></el-input>
+            </el-form-item>
+            <el-form-item class="select-time" label="上课时间：">
+              <date-range :start-date.sync="form.startDate" :end-date.sync="form.endDate" size="mini" range-separator="-" start-placeholder="开始时间" end-placeholder="结束时间">
+              </date-range>
+            </el-form-item>
+            <el-form-item label="联系邮箱：">
+              <el-input size="mini"></el-input>
+            </el-form-item>
+            <el-form-item label="状态：">
+              <el-select v-model="form.status" placeholder="请选择" size="mini">
+                <el-option label="所有状态" value=""></el-option>
+                <el-option label="有效" value="1"></el-option>
+                <el-option label="无效" value="1"></el-option>
+              </el-select>
+            </el-form-item>
+          </el-row>
         </div>
-        <div class="table-list">
-            <el-table :data="tableData" style="width: 100%;margin-top:20px;">
-                <el-table-column fixed prop="zhname" label="编号" style="width: 15%;">
-                </el-table-column>
-                <el-table-column prop="enname" label="试讲发布时间" style="width: 15%;">
-                </el-table-column>
-                <el-table-column prop="zip" label="教师姓名" style="width: 10%;">
-                </el-table-column>
-                <el-table-column prop="province" label="讲课内容" style="width: 10%;">
-                </el-table-column>
-                <el-table-column prop="address" label="授课对象" style="width: 10%;">
-                </el-table-column>
-                <el-table-column prop="date" label="授课时间" style="width: 10%;">
-                </el-table-column>
-                <el-table-column prop="city" label="状态" style="width: 15%;">
-                </el-table-column>
-                <el-table-column fixed="right" label="操作" style="width: 15%;">
-                <template slot-scope="scope">
-                    <button type="button" class="el-button el-button--default el-button--small">
-                        <span>报名</span>
-                    </button>
-                </template>
-                </el-table-column>
-            </el-table>
-            <div class="block">
-                <el-pagination
-                @current-change="handleCurrentChange"
-                :current-page="page"
-                :page-size="10"
-                layout="total, prev, pager, next, jumper"
-                :total="total">
-                </el-pagination>
-            </div>
-        </div>
+        <el-button type="primary" size="mini">查询</el-button>
+      </el-form>
     </div>
+    <div class="table-list">
+      <el-table :data="tableData" style="width: 100%;margin-top:20px;">
+        <el-table-column fixed prop="zhname" label="编号" style="width: 15%;">
+        </el-table-column>
+        <el-table-column prop="enname" label="试讲发布时间" style="width: 15%;">
+        </el-table-column>
+        <el-table-column prop="zip" label="教师姓名" style="width: 10%;">
+        </el-table-column>
+        <el-table-column prop="province" label="讲课内容" style="width: 10%;">
+        </el-table-column>
+        <el-table-column prop="address" label="授课对象" style="width: 10%;">
+        </el-table-column>
+        <el-table-column prop="date" label="授课时间" style="width: 10%;">
+        </el-table-column>
+        <el-table-column prop="city" label="状态" style="width: 15%;">
+        </el-table-column>
+        <el-table-column fixed="right" label="操作" style="width: 15%;">
+          <template slot-scope="scope">
+            <button type="button" class="el-button el-button--default el-button--small">
+              <span>报名</span>
+            </button>
+          </template>
+        </el-table-column>
+      </el-table>
+      <div class="block">
+        <el-pagination @current-change="handleCurrentChange" :current-page="page" :page-size="10" layout="total, prev, pager, next, jumper" :total="total">
+        </el-pagination>
+      </div>
+    </div>
+  </div>
 </template>
 
 <script>
-  import {
-    courseAppointmentGet
-  } from '@/api/course_appointment'
-  export default {
-    data() {
-      return {
-        tableData: [],
-        page: 1,
-        total: 0,
-        startDate: null, //开始时间
-        endDate: null, //结束时间
-        form: {
-          status: ""
-        }
-      };
-    },
-    created() {
+import { courseAppointmentGet } from "@/api/course_appointment";
+export default {
+  data() {
+    return {
+      tableData: [],
+      page: 1,
+      total: 0,
+      startDate: null, //开始时间
+      endDate: null, //结束时间
+      form: {
+        status: ""
+      }
+    };
+  },
+  created() {
+    this.query();
+  },
+  methods: {
+    handleCurrentChange(val) {
+      this.page = val;
       this.query();
     },
-    methods: {
-      handleCurrentChange(val) {
-        this.page = val;
-        this.query();
-      },
-      query() {
-        const filter = this.$json2filter({});
+    query() {
+      const filter = this.$json2filter({});
 
-        courseAppointmentGet(filter, {
-          page: this.page
-        }).then(resp=>{
-          this.total = resp.data.num_results;
-          this.tableData = resp.data.objects;
-        })
-      }
+      courseAppointmentGet(filter, {
+        page: this.page
+      }).then(resp => {
+        this.total = resp.data.num_results;
+        this.tableData = resp.data.objects;
+      });
     }
-  };
+  }
+};
 </script>
 
 <style scoped>

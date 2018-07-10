@@ -3,11 +3,11 @@
     <p class="title-info">成绩单：</p>
     <div class="score-table">
       <el-table
-        :data="detail"
+        :data="tableData"
         border
         style="width: 100%">
         <el-table-column
-          prop="className"
+          prop="course_name"
           label="课程">
         </el-table-column>
         <el-table-column
@@ -15,14 +15,16 @@
           label="上传时间">
         </el-table-column>
         <el-table-column
-          prop="teacherName"
+          prop="teacher_name"
           label="教师">
         </el-table-column>
         <el-table-column
           label="操作">
           <template slot-scope="scope">
             <el-button type="text">预览</el-button>
-            <el-button type="text">下载</el-button>
+            <a :href="$baseApiUrl + scope.row.report_card_url" :download="scope.row.course_name">
+              下载
+            </a>
           </template>
         </el-table-column>
       </el-table>
@@ -30,6 +32,9 @@
   </el-row>
 </template>
 <script>
+  import {
+    studentReportCard
+  } from '@/api/student'
   export default {
     name: 'studentScoreBlock',
     data() {
@@ -37,7 +42,20 @@
         tableData: []
       };
     },
-    props: ['detail']
+    created() {
+      this.query(this.$route.query.id);
+    },
+    methods: {
+      query(id) {
+        studentReportCard({
+          page_no: 1,
+          page_limit: 1000,
+          student_id: id
+        }).then(resp => {
+          this.tableData = resp.data.objects;
+        })
+      }
+    }
   }
 </script>
 <style scoped>

@@ -1,62 +1,47 @@
 <template>
-<!-- 课程详情 -->
-    <div class="course-detail">   
-        <div class="operation">
-            <el-button type="primary" size="mini">教师资料</el-button>
-            <el-button size="mini">教师课程</el-button>
-        </div>
-        <div class="people">
-            <div class="teacher">
-                <span>
-                    教师姓名：
-                </span>
-                <span>
-                    Kira Yuan
-                </span>
-            </div>
-            <div class="tudent">
-                <span>学生名称：</span>
-                <span>ViVian、SUsan、Jess、Tom</span>
-            </div>
-            <div class="other-teacher">
-                <span>班主任/助教：</span>
-                <span>Lily</span>
-            </div>
-        </div>
-        <div>
-            <el-table
-            :data="tableData6"
-            :span-method="objectSpanMethod"
-            border
-            style="width: 100%; margin-top: 20px">
-            <el-table-column
-                prop="id"
-                label="课程名称"
-                width="180">
-            </el-table-column>
-            <el-table-column
-                prop="name"
-                label="课节名称">
-            </el-table-column>
-            <el-table-column
-                prop="amount1"
-                label="上课时间">
-            </el-table-column>
-            <el-table-column
-                prop="amount2"
-                label="状态">
-            </el-table-column>
-            <el-table-column
-                prop="amount3"
-                label="操作">
-            </el-table-column>
-            </el-table>
-        </div>
+  <!-- 课程详情 -->
+  <div class="course-detail">
+    <div class="operation">
+      <el-button type="primary" size="mini">教师资料</el-button>
+      <el-button size="mini">教师课程</el-button>
     </div>
+    <div class="people">
+      <div class="teacher">
+        <span>
+          教师姓名：
+        </span>
+        <span>
+          Kira Yuan
+        </span>
+      </div>
+      <div class="tudent">
+        <span>学生名称：</span>
+        <span>ViVian、SUsan、Jess、Tom</span>
+      </div>
+      <div class="other-teacher">
+        <span>班主任/助教：</span>
+        <span>Lily</span>
+      </div>
+    </div>
+    <div>
+      <el-table :data="tableData6" :span-method="objectSpanMethod" border style="width: 100%; margin-top: 20px">
+        <el-table-column prop="id" label="课程名称" width="180">
+        </el-table-column>
+        <el-table-column prop="name" label="课节名称">
+        </el-table-column>
+        <el-table-column prop="amount1" label="上课时间">
+        </el-table-column>
+        <el-table-column prop="amount2" label="状态">
+        </el-table-column>
+        <el-table-column prop="amount3" label="操作">
+        </el-table-column>
+      </el-table>
+    </div>
+  </div>
 </template>
 
 <script>
-import paginationMix from '@/components/commons/mixins/paginationMix';
+import paginationMix from "@/components/commons/mixins/paginationMix";
 export default {
   data() {
     return {
@@ -74,8 +59,7 @@ export default {
           amount1: "165",
           amount2: "4.43",
           amount3: 12
-        },
-        
+        }
       ]
     };
   },
