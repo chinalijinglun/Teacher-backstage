@@ -24,7 +24,7 @@
               </el-select>
             </el-form-item>
             <el-form-item label="面试人姓名：">
-              <el-input size="mini"></el-input>
+              <el-input size="mini" v-model="form.interview_name"></el-input>
             </el-form-item>
             <el-form-item class="select-time" label="面试时间：">
               <el-date-picker
@@ -49,19 +49,13 @@
         </el-table-column>
         <el-table-column prop="email" label="联系邮箱" style="width: 10%;">
         </el-table-column>
-        <el-table-column label="面试时间" style="width: 10%;">
-          <template slot-scope="scope">
-            {{scope.row.interviews[0].start}}
-          </template>
+        <el-table-column prop="start" label="面试时间" style="width: 10%;">
         </el-table-column>
-        <el-table-column label="面试人" style="width: 15%;">
-          <template slot-scope="scope">
-            {{ scope.row.interviews[0].interviewers?scope.row.interviews[0].interviewers.username : '' }}
-          </template>
+        <el-table-column prop="interview_name" label="面试人" style="width: 15%;">
         </el-table-column>
         <el-table-column label="状态" style="width: 15%;">
           <template slot-scope="scope">
-            {{ scope.row.state }}
+            {{ $INTERVIEW[scope.row.interview_state] }}
           </template>
         </el-table-column>
         <el-table-column fixed="right" label="操作" style="width: 15%;">
@@ -84,9 +78,8 @@
 </template>
 <script>
 import {
-  teacherGet,
-  mangerThacherApponit
-} from '@/api/teacher'
+  interviewResult
+} from '@/api/interview'
 export default {
   data() {
     return {
@@ -98,7 +91,8 @@ export default {
         interview_at: '',
         mobile: '',
         state: '',
-        teacher_name: ''
+        teacher_name: '',
+        interview_name: ''
       }
     };
   },
@@ -112,7 +106,7 @@ export default {
     },
     query() {
       const f = this.$deleteEmptyProps(this.form);
-      mangerThacherApponit({
+      interviewResult({
         ...f,
         page_no: this.page,
         page_limit: 10
@@ -122,11 +116,12 @@ export default {
       })
     },
     toFillReport(row) {
-      if(new Date(row.end) > new Date()) {
-        this.$router.push({
-          path: '/'
-        })
-      }
+      this.$router.push({
+        path: '/teacher/interviewReport',
+        query: {
+          id: row.interview_id
+        }
+      })
     },
     getStateFilter(state) {
       switch(state) {
@@ -170,9 +165,6 @@ export default {
 .inps .el-form-item {
   width: 20%;
   float: left;
-}
-.el-input {
-  width: 95%;
 }
 .inps .select-time {
   width: 35%;

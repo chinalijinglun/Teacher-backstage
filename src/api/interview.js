@@ -12,3 +12,5 @@ export const interviewGetByinterviewid = (interviewid) => baseAxios.get(`/api/v1
 export const interviewPutByinterviewid = (interviewid, form) => baseAxios.put(`/api/v1/interview/${interviewid}`, form);
 
 export const interviewDeleteByinterviewid = (interviewid) => interviewPutByinterviewid(interviewid, {delete_flag: DELETE_FLAG.DELETED});
+
+export const interviewResult = (form) => baseAxios.post('/manger/interview_result', form);
