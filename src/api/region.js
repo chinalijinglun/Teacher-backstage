@@ -14,3 +14,7 @@ export const regionBareGet = (params, others) => baseAxios.get('/api/v1/_bare/re
 export const regionBareGetById = (id) => baseAxios.get(`/api/v1/_bare/region/${id}`);
 
 export const mangerStaffQuery = form => baseAxios.post('/manger/staff_query', form);
+
+export const getCountry = () => regionBareGet(json2filter({id: COUNTRY_IDS}));
+
+export const getRegionByPid = (id) => regionBareGet(json2filter({pid: [id]}));
