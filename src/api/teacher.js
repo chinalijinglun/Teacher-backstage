@@ -22,3 +22,5 @@ export const mangerThacherApponit = form => baseAxios.post('/manger/thacher_appo
 export const teacherCheckPass = teacher_id => baseAxios.post('/teacher/check_pass', {teacher_id});
 
 export const teacherMainQuery = form => baseAxios.post('/teacher/main_query', form);
+
+export const teacherCourseQuery = form => baseAxios.post('/teacher/my_course', form);

@@ -2,14 +2,14 @@
   <!-- 课程详情 -->
   <div class="course-detail">
     <div class="operation">
-      <el-button type="primary" size="mini">教师资料</el-button>
-      <el-button size="mini">教师课程</el-button>
+      <el-button type="primary" @click="goCourDetail" size="mini">教师资料</el-button>
+			<el-button size="mini" @click="goCourse">教师课程</el-button>
     </div>
     <div class="people">
       <div class="teacher">
         <span>
           教师姓名：
-        </span>
+        </span> 
         <span>
           Kira Yuan
         </span>
@@ -24,7 +24,7 @@
       </div>
     </div>
     <div>
-      <el-table :data="tableData6" :span-method="objectSpanMethod" border style="width: 100%; margin-top: 20px">
+      <el-table :data="tableData" :span-method="objectSpanMethod" border style="width: 100%; margin-top: 20px">
         <el-table-column prop="id" label="课程名称" width="180">
         </el-table-column>
         <el-table-column prop="name" label="课节名称">
@@ -39,41 +39,31 @@
     </div>
   </div>
 </template>
-
 <script>
+import {
+	courseGetByCourseId
+} from '@/api/course'
 import paginationMix from "@/components/commons/mixins/paginationMix";
 export default {
   data() {
     return {
-      tableData6: [
-        {
-          id: "ESL英语综合提升中级",
-          name: "Lesson 3 Exploring Space and Astronomy",
-          amount1: "2018.05.27 13:00 - 13:50",
-          amount2: "未开始",
-          amount3: 10
-        },
-        {
-          id: "12987123",
-          name: "王小虎",
-          amount1: "165",
-          amount2: "4.43",
-          amount3: 12
-        }
-      ]
+      tableData: []
     };
   },
+  created(){
+    let courseId = this.$route.query.courseId;
+    this.query(courseId);
+  },
   methods: {
-    arraySpanMethod({ row, column, rowIndex, columnIndex }) {
-      if (rowIndex % 2 === 0) {
-        if (columnIndex === 0) {
-          return [1, 2];
-        } else if (columnIndex === 1) {
-          return [0, 0];
-        }
-      }
-    },
-
+    // arraySpanMethod({ row, column, rowIndex, columnIndex }) {
+    //   if (rowIndex % 2 === 0) {
+    //     if (columnIndex === 0) {
+    //       return [1, 2];
+    //     } else if (columnIndex === 1) {
+    //       return [0, 0];
+    //     }
+    //   }
+    // },
     objectSpanMethod({ row, column, rowIndex, columnIndex }) {
       if (columnIndex === 0) {
         if (rowIndex % 2 === 0) {
@@ -88,7 +78,19 @@ export default {
           };
         }
       }
-    }
+    },
+    query(courseId){
+      return courseGetByCourseId(courseId).then( resp => {
+        console.log('33333', resp.data)
+        this.tableData = resp.data.objects;
+      })
+    },
+    goCourse(){
+			this.$router.push('/teacher/teacherCourse');
+		},
+		goCourDetail(){
+			this.$router.push('/teacher/courseDetail');
+		}
   }
 };
 </script>
