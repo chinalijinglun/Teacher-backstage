@@ -191,8 +191,8 @@ export default {
     };
 	},
 	created() {
-		this.countryClick();
 		this.query();
+		this.countryClick();
 	},
   methods: {
     handleCurrentChange(val) {
