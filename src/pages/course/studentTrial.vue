@@ -27,11 +27,11 @@
 		</div>
 		<div class="table-list">
 			<el-table :data="tableData" style="width: 100%;margin-top:20px;">
-				<el-table-column fixed prop="zhname" label="编号" style="width: 15%;">
+				<el-table-column fixed prop="id" label="编号" style="width: 15%;">
 				</el-table-column>
-				<el-table-column prop="enname" label="报名时间" style="width: 15%;">
+				<el-table-column prop="created_at" label="报名时间" style="width: 15%;">
 				</el-table-column>
-				<el-table-column prop="zip" label="学生姓名" style="width: 10%;">
+				<el-table-column prop="student_id" label="学生姓名" style="width: 10%;">
 				</el-table-column>
 				<el-table-column prop="province" label="提报人" style="width: 10%;">
 				</el-table-column>
@@ -62,8 +62,8 @@
 
 <script>
 import {
-	studyAppointmentmentBareGet
-} from '@/api/study_appointment'
+	studentRequirementsGet
+} from '@/api/student_requirements'
 export default {
   data() {
     return {
@@ -88,7 +88,7 @@ export default {
 		},
 		query() {
 			const filter = this.$json2filter({});
-			studyAppointmentmentBareGet(filter,{page:1}).then(resp => {
+			studentRequirementsGet(filter,{page:1}).then(resp => {
 				this.tableData = resp.data.objects;
 				this.total = resp.data.num_results;
 			})

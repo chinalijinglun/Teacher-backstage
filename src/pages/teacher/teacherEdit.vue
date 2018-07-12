@@ -13,7 +13,13 @@
 						照片
 					</div>
 					<div class="pic pic-contain">
-						<img :src="form.avatar" />
+						<img-upload 
+							name="file"
+							v-model="form.avatar"
+							:preUrl="$baseApiUrl"
+							:uploadUrl="$baseApiUrl + '/upload'"
+							:maxNum="1"
+						></img-upload>
 					</div>
 				</div>
 				<div class="fir02">
@@ -21,9 +27,9 @@
 						教师姓名
 					</div>
 					<div class="pic base">
-						<input type="text" placeholder="First Name" v-model="form.first_name" readonly>
-						<input type="text" placeholder="Middle Name" v-model="form.middle_name" readonly>
-						<input type="text" placeholder="Last Name" v-model="form.last_name" readonly>
+						<input type="text" placeholder="First Name" v-model="form.first_name">
+						<input type="text" placeholder="Middle Name" v-model="form.middle_name">
+						<input type="text" placeholder="Last Name" v-model="form.last_name">
 					</div>
 				</div>
 				<div class="fir02">
@@ -31,7 +37,7 @@
 						联系邮箱
 					</div>
 					<div class="pic base">
-						<input type="text" class="widths" v-model="form.email" readonly>
+						<input type="text" class="widths" v-model="form.email">
 					</div>
 				</div>
 				<div class="fir02">
@@ -39,24 +45,24 @@
 						联系电话
 					</div>
 					<div class="pic base">
-						<select v-model="form.nation" disabled>
+						<select v-model="form.nation">
 							<option v-for="(item, key) in $MOBILE_PRE" :value="key" :key="key">{{item}}</option>
 						</select>
-						<input type="text" class="widths" v-model="form.mobile" readonly>
+						<input type="text" class="widths" v-model="form.mobile">
 					</div>
 				</div>
 				<div class="fir02">
 					<div class="names">
-						国家地区
+						联系邮箱
 					</div>
 					<div class="pic bases">
-						<select name="" v-model="form.country" id="" disabled>
+						<select name="" v-model="form.country" id="">
 							<option value="国家">国家</option>
 						</select>
-						<select name="" v-model="form.province" id="" disabled>
+						<select name="" v-model="form.province" id="">
 							<option value="州">州</option>
 						</select>
-						<select name="" v-model="form.city" id="" disabled>
+						<select name="" v-model="form.city" id="">
 							<option value="城市">城市</option>
 						</select>
 					</div>
@@ -66,7 +72,7 @@
 						街道
 					</div>
 					<div class="pic base">
-						<input v-model="form.street" type="text" class="widths" readonly>
+						<input v-model="form.street" type="text" class="widths">
 					</div>
 				</div>
 				<div class="fir02">
@@ -74,7 +80,7 @@
 						邮政编码
 					</div>
 					<div class="pic base">
-						<input type="text" v-model="form.zipone" class="widths" readonly>
+						<input type="text" v-model="form.zipone" class="widths">
 					</div>
 				</div>
 				<div class="fir02">
@@ -82,7 +88,7 @@
 						时区
 					</div>
 					<div class="pic base times">
-						<select name="" v-model="form.timezone" id="" disabled>
+						<select name="" v-model="form.timezone" id="">
 							<option value="时区选择">时区选择</option>
 						</select>
 					</div>
@@ -101,50 +107,50 @@
 					<div class="zdsj">
 						<div class="zdsj-tit">在读期间</div>
 						<div class="zdsj-name">
-							<input type="text" placeholder="年份" readonly> 至
-							<input type="text" placeholder="年份" readonly>
+							<input type="text" placeholder="年份"> 至
+							<input type="text" placeholder="年份">
 						</div>
 						<div class="zdsj-name">
-							<input type="text" placeholder="年份" readonly> 至
-							<input type="text" placeholder="年份" readonly>
+							<input type="text" placeholder="年份"> 至
+							<input type="text" placeholder="年份">
 						</div>
 						<div class="zdsj-name">
-							<input type="text" placeholder="年份" readonly> 至
-							<input type="text" placeholder="年份" readonly>
+							<input type="text" placeholder="年份"> 至
+							<input type="text" placeholder="年份">
 						</div>
 						<div class="zdsj-name">
-							<input type="text" placeholder="年份" readonly> 至
-							<input type="text" placeholder="年份" readonly>
+							<input type="text" placeholder="年份"> 至
+							<input type="text" placeholder="年份">
 						</div>
 					</div>
 					<div class="zdsj">
 						<div class="zdsj-tit">在读学校</div>
 						<div class="zdsj-name">
-							<input class="inp" type="text" readonly>
+							<input class="inp" type="text">
 						</div>
 						<div class="zdsj-name">
-							<input class="inp" type="text" readonly>
+							<input class="inp" type="text">
 						</div>
 						<div class="zdsj-name">
-							<input class="inp" type="text" readonly>
+							<input class="inp" type="text">
 						</div>
 						<div class="zdsj-name">
-							<input class="inp" type="text" readonly>
+							<input class="inp" type="text">
 						</div>
 					</div>
 					<div class="zdsj">
 						<div class="zdsj-tit">专业</div>
 						<div class="zdsj-name">
-							<input class="inp" type="text" readonly>
+							<input class="inp" type="text">
 						</div>
 						<div class="zdsj-name">
-							<input class="inp" type="text" readonly>
+							<input class="inp" type="text">
 						</div>
 						<div class="zdsj-name">
-							<input class="inp" type="text" readonly>
+							<input class="inp" type="text">
 						</div>
 						<div class="zdsj-name">
-							<input class="inp" type="text" readonly>
+							<input class="inp" type="text">
 						</div>
 					</div>
 					<div class="zdsj">
@@ -197,16 +203,16 @@
 					<div class="zdsj" style="border:none;width:15.5%">
 						<div class="zdsj-tit">备注</div>
 						<div class="zdsj-name">
-							<input class="inp" type="text" readonly>
+							<input class="inp" type="text">
 						</div>
 						<div class="zdsj-name">
-							<input class="inp" type="text" readonly>
+							<input class="inp" type="text">
 						</div>
 						<div class="zdsj-name">
-							<input class="inp" type="text" readonly>
+							<input class="inp" type="text">
 						</div>
 						<div class="zdsj-name">
-							<input class="inp" type="text" readonly>
+							<input class="inp" type="text">
 						</div>
 					</div>
 				</div>
@@ -215,7 +221,7 @@
 						Skype账号
 					</div>
 					<div class="pic base">
-						<input type="text" v-model="form.skype_account" class="widths" readonly>
+						<input type="text" v-model="form.skype_account" class="widths">
 					</div>
 				</div>
 				<div class="fir04">
@@ -234,22 +240,130 @@
 					</div>
 					<div class="week-time">
 						<div class="weeks-tit">周</div>
-						<div class="weeks" v-for="item in form.teachertime" :key="item.id">
+						<div class="weeks">
 							<div>
-								<select name="" v-model="item.start" id="" disabled>
+								<select name="" id="">
 									<option value="00">00</option>
 								</select>
-								<select name="" v-model="item.start" id="" disabled>
+								<select name="" id="">
 									<option value="00">00</option>
 								</select>
 								------
-								<select name="" v-model="item.end" id="" disabled>
+								<select name="" id="">
 									<option value="00">00</option>
 								</select>
-								<select name="" v-model="item.end" id="" disabled>
+								<select name="" id="">
 									<option value="00">00</option>
 								</select>
-								
+								<span class="add"> + </span>
+							</div>
+						</div>
+						<div class="weeks">
+							<div>
+								<select name="" id="">
+									<option value="00">00</option>
+								</select>
+								<select name="" id="">
+									<option value="00">00</option>
+								</select>
+								------
+								<select name="" id="">
+									<option value="00">00</option>
+								</select>
+								<select name="" id="">
+									<option value="00">00</option>
+								</select>
+								<span class="add"> + </span>
+							</div>
+						</div>
+						<div class="weeks">
+							<div>
+								<select name="" id="">
+									<option value="00">00</option>
+								</select>
+								<select name="" id="">
+									<option value="00">00</option>
+								</select>
+								------
+								<select name="" id="">
+									<option value="00">00</option>
+								</select>
+								<select name="" id="">
+									<option value="00">00</option>
+								</select>
+								<span class="add"> + </span>
+							</div>
+						</div>
+						<div class="weeks">
+							<div>
+								<select name="" id="">
+									<option value="00">00</option>
+								</select>
+								<select name="" id="">
+									<option value="00">00</option>
+								</select>
+								------
+								<select name="" id="">
+									<option value="00">00</option>
+								</select>
+								<select name="" id="">
+									<option value="00">00</option>
+								</select>
+								<span class="add"> + </span>
+							</div>
+						</div>
+						<div class="weeks">
+							<div>
+								<select name="" id="">
+									<option value="00">00</option>
+								</select>
+								<select name="" id="">
+									<option value="00">00</option>
+								</select>
+								------
+								<select name="" id="">
+									<option value="00">00</option>
+								</select>
+								<select name="" id="">
+									<option value="00">00</option>
+								</select>
+								<span class="add"> + </span>
+							</div>
+						</div>
+						<div class="weeks">
+							<div>
+								<select name="" id="">
+									<option value="00">00</option>
+								</select>
+								<select name="" id="">
+									<option value="00">00</option>
+								</select>
+								------
+								<select name="" id="">
+									<option value="00">00</option>
+								</select>
+								<select name="" id="">
+									<option value="00">00</option>
+								</select>
+								<span class="add"> + </span>
+							</div>
+						</div>
+						<div class="weeks">
+							<div>
+								<select name="" id="">
+									<option value="00">00</option>
+								</select>
+								<select name="" id="">
+									<option value="00">00</option>
+								</select>
+								------
+								<select name="" id="">
+									<option value="00">00</option>
+								</select>
+								<select name="" id="">
+									<option value="00">00</option>
+								</select>
+								<span class="add"> + </span>
 							</div>
 						</div>
 					</div>
@@ -258,14 +372,14 @@
 					<div class="fir05-name">
 						自我介绍
 					</div>
-					<textarea v-model="form.about_me" class="text" id="" cols="30" rows="10" readonly></textarea>
+					<textarea name="" v-model="form.about_me" class="text" id="" cols="30" rows="10"></textarea>
 				</div>
 				<div class="fir02" style="border:none">
 					<div class="names">
 						宣传视频
 					</div>
 					<div class="pic base">
-						<input type="text" class="widths" readonly>
+						<input type="text" class="widths">
 					</div>
 				</div>
 			</div>
@@ -276,7 +390,7 @@
 						当前任职学校
 					</div>
 					<div class="pic base">
-						<input type="text" v-model="form.cur_school" class="widths" placeholder="如果是已经退休的教师或目前不在学校任职，请填写最新一段教学经历" readonly>
+						<input type="text" v-model="form.cur_school" class="widths" placeholder="如果是已经退休的教师或目前不在学校任职，请填写最新一段教学经历">
 					</div>
 				</div>
 				<div class="sknj">
@@ -301,63 +415,63 @@
 						</div>
 						<div class="tits">
 							<div class="choose">
-								<input type="checkbox" name="" id="" disabled>
+								<input type="checkbox" name="" id="">
 							</div>
 							<div class="kcfl">
-								<select name="" id="" disabled>
+								<select name="" id="">
 									<option value="一级分类">一级分类</option>
 								</select>
-								<select name="" id="" disabled>
+								<select name="" id="">
 									<option value="一级分类">一级分类</option>
 								</select>
 							</div>
 							<div class="nianji">
-								<input type="checkbox" name="" id="" disabled> 幼儿园
-								<input type="checkbox" name="" id="" disabled> 小学
-								<input type="checkbox" name="" id="" disabled> 初中
-								<input type="checkbox" name="" id="" disabled> 高中
-								<input type="checkbox" name="" id="" disabled> 大学
-								<input type="checkbox" name="" id="" disabled> 成人
+								<input type="checkbox" name="" id=""> 幼儿园
+								<input type="checkbox" name="" id=""> 小学
+								<input type="checkbox" name="" id=""> 初中
+								<input type="checkbox" name="" id=""> 高中
+								<input type="checkbox" name="" id=""> 大学
+								<input type="checkbox" name="" id=""> 成人
 							</div>
 						</div>
 						<div class="tits">
 							<div class="choose">
-								<input type="checkbox" name="" id="" disabled>
+								<input type="checkbox" name="" id="">
 							</div>
 							<div class="kcfl">
-								<select name="" id="" disabled>
+								<select name="" id="">
 									<option value="一级分类">一级分类</option>
 								</select>
-								<select name="" id="" disabled>
+								<select name="" id="">
 									<option value="一级分类">一级分类</option>
 								</select>
 							</div>
 							<div class="nianji">
-								<input type="checkbox" name="" id="" disabled> 幼儿园
-								<input type="checkbox" name="" id="" disabled> 小学
-								<input type="checkbox" name="" id="" disabled> 初中
-								<input type="checkbox" name="" id="" disabled> 高中
-								<input type="checkbox" name="" id="" disabled> 大学
-								<input type="checkbox" name="" id="" disabled> 成人
+								<input type="checkbox" name="" id=""> 幼儿园
+								<input type="checkbox" name="" id=""> 小学
+								<input type="checkbox" name="" id=""> 初中
+								<input type="checkbox" name="" id=""> 高中
+								<input type="checkbox" name="" id=""> 大学
+								<input type="checkbox" name="" id=""> 成人
 							</div>
 						</div>
 						<div class="tits" style="border:none">
 							<div class="choose">
-								<input type="checkbox" name="" id="" disabled>
+								<input type="checkbox" name="" id="">
 							</div>
 							<div class="kcfl">
-								<select name="" id="" disabled>
+								<select name="" id="">
 									<option value="其他">其他</option>
 								</select>
-								<input type="text" placeholder="手动输入科目名" readonly>
+								<input type="text" placeholder="手动输入科目名">
 							</div>
 							<div class="nianji">
-								<input type="checkbox" name="" id="" disabled> 幼儿园
-								<input type="checkbox" name="" id="" disabled> 小学
-								<input type="checkbox" name="" id="" disabled> 初中
-								<input type="checkbox" name="" id="" disabled> 高中
-								<input type="checkbox" name="" id="" disabled> 大学
-								<input type="checkbox" name="" id="" disabled> 成人
+								<input type="checkbox" name="" id=""> 幼儿园
+								<input type="checkbox" name="" id=""> 小学
+								<input type="checkbox" name="" id=""> 初中
+								<input type="checkbox" name="" id=""> 高中
+								<input type="checkbox" name="" id=""> 大学
+								<input type="checkbox" name="" id=""> 成人
 							</div>
 						</div>
 					</div>
@@ -365,13 +479,13 @@
 
 				<div class="fir02">
 					<div class="names">
-						当前任职地区
+						当前任职学校
 					</div>
 					<div class="pic base sel">
-						<select name="" v-model="form.cur_country" id="" disabled>
+						<select name="" v-model="form.cur_country" id="">
 							<option value="请选择地区">请选择地区</option>
 						</select>
-						<select name="" v-model="form.cur_province" id="" disabled>
+						<select name="" v-model="form.cur_province" id="">
 							<option value="请选择州">请选择州</option>
 						</select>
 					</div>
@@ -399,63 +513,63 @@
 						</div>
 						<div class="tits">
 							<div class="choose">
-								<input type="checkbox" name="" id="" disabled>
+								<input type="checkbox" name="" id="">
 							</div>
 							<div class="kcfl">
-								<select name="" id="" disabled>
+								<select name="" id="">
 									<option value="一级分类">一级分类</option>
 								</select>
-								<select name="" id="" disabled>
+								<select name="" id="">
 									<option value="一级分类">一级分类</option>
 								</select>
 							</div>
 							<div class="nianji">
-								<input type="checkbox" name="" id="" disabled> 幼儿园
-								<input type="checkbox" name="" id="" disabled> 小学
-								<input type="checkbox" name="" id="" disabled> 初中
-								<input type="checkbox" name="" id="" disabled> 高中
-								<input type="checkbox" name="" id="" disabled> 大学
-								<input type="checkbox" name="" id="" disabled> 成人
+								<input type="checkbox" name="" id=""> 幼儿园
+								<input type="checkbox" name="" id=""> 小学
+								<input type="checkbox" name="" id=""> 初中
+								<input type="checkbox" name="" id=""> 高中
+								<input type="checkbox" name="" id=""> 大学
+								<input type="checkbox" name="" id=""> 成人
 							</div>
 						</div>
 						<div class="tits">
 							<div class="choose">
-								<input type="checkbox" name="" id="" disabled>
+								<input type="checkbox" name="" id="">
 							</div>
 							<div class="kcfl">
-								<select name="" id="" disabled>
+								<select name="" id="">
 									<option value="一级分类">一级分类</option>
 								</select>
-								<select name="" id="" disabled>
+								<select name="" id="">
 									<option value="一级分类">一级分类</option>
 								</select>
 							</div>
 							<div class="nianji">
-								<input type="checkbox" name="" id="" disabled> 幼儿园
-								<input type="checkbox" name="" id="" disabled> 小学
-								<input type="checkbox" name="" id="" disabled> 初中
-								<input type="checkbox" name="" id="" disabled> 高中
-								<input type="checkbox" name="" id="" disabled> 大学
-								<input type="checkbox" name="" id="" disabled> 成人
+								<input type="checkbox" name="" id=""> 幼儿园
+								<input type="checkbox" name="" id=""> 小学
+								<input type="checkbox" name="" id=""> 初中
+								<input type="checkbox" name="" id=""> 高中
+								<input type="checkbox" name="" id=""> 大学
+								<input type="checkbox" name="" id=""> 成人
 							</div>
 						</div>
 						<div class="tits" style="border:none">
 							<div class="choose">
-								<input type="checkbox" name="" id="" disabled>
+								<input type="checkbox" name="" id="">
 							</div>
 							<div class="kcfl">
-								<select name="" id="" disabled>
+								<select name="" id="">
 									<option value="其他">其他</option>
 								</select>
-								<input type="text" placeholder="手动输入科目名" readonly>
+								<input type="text" placeholder="手动输入科目名">
 							</div>
 							<div class="nianji">
-								<input type="checkbox" name="" id="" disabled> 幼儿园
-								<input type="checkbox" name="" id="" disabled> 小学
-								<input type="checkbox" name="" id="" disabled> 初中
-								<input type="checkbox" name="" id="" disabled> 高中
-								<input type="checkbox" name="" id="" disabled> 大学
-								<input type="checkbox" name="" id="" disabled> 成人
+								<input type="checkbox" name="" id=""> 幼儿园
+								<input type="checkbox" name="" id=""> 小学
+								<input type="checkbox" name="" id=""> 初中
+								<input type="checkbox" name="" id=""> 高中
+								<input type="checkbox" name="" id=""> 大学
+								<input type="checkbox" name="" id=""> 成人
 							</div>
 						</div>
 					</div>
@@ -465,8 +579,11 @@
 						总教龄
 					</div>
 					<div class="pic base sel">
-						<select name="" v-model="form.teacher_age" id="" disabled>
+						<select name="" v-model="form.teacher_age" id="">
 							<option value="0">0</option>
+						</select>
+						<select name="" id="">
+							<option value="6">6</option>
 						</select>
 					</div>
 				</div>
@@ -475,7 +592,8 @@
 						简历
 					</div>
 					<div class="pic base sel">
-						<span>{{form.resume_url}}</span>
+						<span>简历</span>
+						<span>重新上传</span>
 					</div>
 				</div>
 				<div class="fir02">
@@ -483,7 +601,8 @@
 						执教资格证明
 					</div>
 					<div class="pic base sel">
-						<span>{{form.seniority_url}}</span>
+						<span>资格证明1</span>
+						<span>资格证明2</span>
 					</div>
 				</div>
 				<div class="fir02">
@@ -491,7 +610,7 @@
 						经验分享
 					</div>
 					<div class="pic base">
-						<input type="text" class="widths" placeholder="请描述职业生涯中认为对申请该职位有帮助的任何加分经验" readonly>
+						<input type="text" class="widths" placeholder="请描述职业生涯中认为对申请该职位有帮助的任何加分经验">
 					</div>
 				</div>
 				<div class="fir02">
@@ -499,27 +618,26 @@
 						所得奖项
 					</div>
 					<div class="pic base sel">
-						<span>{{form.award_url}}</span>
+						<span>所得奖项1</span>
+						<span>所得奖项2</span>
 					</div>
 				</div>
 				<div class="fir05">
 					<div class="fir05-name">
 						其他工作经历
 					</div>
-					<textarea name="" class="text" id="" cols="30" rows="10" readonly></textarea>
+					<textarea name="" class="text" id="" cols="30" rows="10"></textarea>
 				</div>
 			</div>
 		</div>
 		<div class="btn-box">
-			<el-button type="primary" size="mini" @click="goEdit">编辑</el-button>
+			<el-button type="primary" size="mini" @click="submit">提交</el-button>
+			<el-button size="mini" @click="goBack">返回</el-button>
 		</div>
 	</div>
 </template>
 
 <script>
-import {
-	teacherGetByTeacherid
-} from '@/api/teacher';
 export default {
 	data() {
 		return {
@@ -554,19 +672,15 @@ export default {
 			}
 		}
 	},
-	created(){
-		const _self = this;
-		const teacherid = this.$route.query.id;
-		return teacherGetByTeacherid(teacherid).then(resp=>{
-			_self.form = resp.data;
-		})
-	},
 	methods: {
 		onUploadSuccess() {
 			this.form.avatar = e[0].download_file;
 		},
-		goEdit(){
-			this.$router.push({path: '/teacher/teacherEdit', query: {'id': this.$route.query.id}})
+		submit() {
+			console.log(this.form);
+		},
+		goBack(){
+			this.$router.push({path: '/teacher/teacherDetail', query: {'id': this.$route.query.id}})
 		}
 	}
 };

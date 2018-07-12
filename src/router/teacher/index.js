@@ -9,6 +9,7 @@ import contractMess from '@/pages/teacher/contractMess';
 import lookContract from '@/pages/teacher/lookContract';
 import teacherUser from '@/pages/teacher/teacherUser';
 import teacherDetail from '@/pages/teacher/teacherDetail';
+import teacherEdit from '@/pages/teacher/teacherEdit';
 import teacherCourse from '@/pages/teacher/teacherCourse';
 import courseDetail from '@/pages/teacher/courseDetail';
 import homework from '@/pages/teacher/homework';
@@ -84,6 +85,12 @@ export default [
     path: 'teacherDetail',
     name: 'teacherDetail',
     component: teacherDetail
+  },
+  {
+    title: '教师编辑',
+    path: 'teacherEdit',
+    name: 'teacherEdit',
+    component: teacherEdit
   },
   {
     title: '教师课程',
