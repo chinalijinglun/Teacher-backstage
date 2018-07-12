@@ -3,7 +3,7 @@
     <div class="item-left" :style="{
       width: labelWidth
     }">
-
+      {{label}}
     </div>
     <div class="item-right">
       <slot></slot>
