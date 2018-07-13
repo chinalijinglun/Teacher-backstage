@@ -83,7 +83,7 @@
 						</el-form-item>
 						<el-form-item label="可选授课时间：" class="ele-itme">
 							<el-select size="mini" v-model="form.week" filterable placeholder="请选择周">
-								<el-option v-for="(name, key) in $TEACHER_WEEK" :key="name" :label="name+'周'" :value="name">
+								<el-option v-for="name in $TEACHER_WEEK" :key="name" :label="name+'周'" :value="name">
 								</el-option>
 							</el-select>
 							<date-range :start-date.sync="form.start" :end-date.sync="form.end" size="mini" range-separator="-" start-placeholder="开始时间" end-placeholder="结束时间">
