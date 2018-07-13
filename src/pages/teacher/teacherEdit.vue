@@ -2,7 +2,10 @@
 	<!-- 教师详情 -->
 	<div class="teacher-detail">
 		<teacher-basic></teacher-basic>
-		<teacher-educations></teacher-educations>
+		<teacher-educations ref="teacherEducations"></teacher-educations>
+		<el-row>
+			<el-button size="mini" type="primary" @click="submit">提交</el-button>
+		</el-row>
 	</div>
 </template>
 <script>
@@ -33,25 +36,12 @@ export default {
 		}
 	},
 	methods: {
-		onUploadSuccess() {
-			this.form.avatar = e[0].download_file;
-		},
-		submit() {
-			console.log(this.form);
-		},
 		goBack(){
 			this.$router.push({path: '/teacher/teacherDetail', query: {'id': this.$route.query.id}})
 		},
-		handlerSuccess(index) {
-			return (data) => {
-				return this.tableData[index].certificate.push({
-					name: data[0].upload_file,
-					url: data[0].download_file
-				})
-			}
-		},
-		getFileList(backList) {
-			return backList.map(item => ({url: this.$baseApiUrl + item.url, ...item}))
+		submit() {
+			const education_history_form = this.$refs.teacherEducations.getForm();
+			console.log(JSON.stringify(education_history_form));
 		}
 	},
 	components: {

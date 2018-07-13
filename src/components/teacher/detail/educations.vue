@@ -91,14 +91,9 @@ export default {
 		}
 	},
 	methods: {
-		onUploadSuccess() {
-			this.form.avatar = e[0].download_file;
-		},
-		submit() {
-			console.log(this.form);
-		},
-		goBack(){
-			this.$router.push({path: '/teacher/teacherDetail', query: {'id': this.$route.query.id}})
+		getForm() {
+			this.form.education_history = JSON.stringify(this.tableData);
+			return this.form;
 		},
 		handlerSuccess(index) {
 			return (data) => {
