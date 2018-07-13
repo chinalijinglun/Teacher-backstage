@@ -20,9 +20,110 @@
 			</el-aside>
 			<el-main class="detail-item-main">
         <el-row>
-          <el-input size="mini"></el-input>
-          <el-input size="mini"></el-input>
-          <el-input size="mini"></el-input>
+          <el-input size="mini" class="detail-item-width1"></el-input>
+          <el-input size="mini" class="detail-item-width1"></el-input>
+          <el-input size="mini" class="detail-item-width1"></el-input>
+        </el-row>
+			</el-main>
+		</el-container>
+		<el-container class="detail-item">
+			<el-aside class="detail-item-aside" width="100px">
+				联系邮箱
+			</el-aside>
+			<el-main class="detail-item-main">
+        <el-row>
+          <el-input size="mini" class="detail-item-width3"></el-input>
+        </el-row>
+			</el-main>
+		</el-container>
+		<el-container class="detail-item">
+			<el-aside class="detail-item-aside" width="100px">
+				联系电话
+			</el-aside>
+			<el-main class="detail-item-main">
+        <el-row>
+					<el-select size="mini" class="detail-item-width1">
+						<el-option label="全部" value=""></el-option>
+					</el-select>
+          <el-input size="mini" class="detail-item-width2"></el-input>
+        </el-row>
+			</el-main>
+		</el-container>
+		<el-container class="detail-item">
+			<el-aside class="detail-item-aside" width="100px">
+				国家地区
+			</el-aside>
+			<el-main class="detail-item-main">
+        <el-row>
+					<el-select size="mini" class="detail-item-width1">
+						<el-option label="全部" value=""></el-option>
+					</el-select>
+					<el-select size="mini" class="detail-item-width1">
+						<el-option label="全部" value=""></el-option>
+					</el-select>
+					<el-select size="mini" class="detail-item-width1">
+						<el-option label="全部" value=""></el-option>
+					</el-select>
+        </el-row>
+			</el-main>
+		</el-container>
+		<el-container class="detail-item">
+			<el-aside class="detail-item-aside" width="100px">
+				街道
+			</el-aside>
+			<el-main class="detail-item-main">
+        <el-row>
+					<el-input size="mini" class="detail-item-width3"></el-input>
+        </el-row>
+			</el-main>
+		</el-container>
+		<el-container class="detail-item">
+			<el-aside class="detail-item-aside" width="100px">
+				邮政编码
+			</el-aside>
+			<el-main class="detail-item-main">
+        <el-row>
+					<el-input size="mini" class="detail-item-width3"></el-input>
+        </el-row>
+			</el-main>
+		</el-container>
+		<el-container class="detail-item">
+			<el-aside class="detail-item-aside" width="100px">
+				时区
+			</el-aside>
+			<el-main class="detail-item-main">
+        <el-row>
+					<el-input size="mini" class="detail-item-width3"></el-input>
+        </el-row>
+			</el-main>
+		</el-container>
+		<el-container class="detail-item">
+			<el-aside class="detail-item-aside" width="100px">
+				Skype账号
+			</el-aside>
+			<el-main class="detail-item-main">
+        <el-row>
+					<el-input size="mini" class="detail-item-width3"></el-input>
+        </el-row>
+			</el-main>
+		</el-container>
+		<el-container class="detail-item">
+			<el-aside class="detail-item-aside" width="100px">
+				自我介绍
+			</el-aside>
+			<el-main class="detail-item-main">
+        <el-row>
+					<el-input size="mini" class="detail-item-width3"></el-input>
+        </el-row>
+			</el-main>
+		</el-container>
+		<el-container class="detail-item">
+			<el-aside class="detail-item-aside" width="100px">
+				宣传视频
+			</el-aside>
+			<el-main class="detail-item-main">
+        <el-row>
+					<el-input size="mini" class="detail-item-width3"></el-input>
         </el-row>
 			</el-main>
 		</el-container>
@@ -83,11 +184,11 @@ export default {
 
 <style>
 .detail-container {
-	border: 1px #eee solid;
+	border: 1px #e3e3e3 solid;
 	border-radius: 3px;
 }
 .detail-item {
-	border-bottom: 1px #eee solid
+	border-bottom: 1px #e3e3e3 solid
 }
 .detail-item:last-of-type {
 	border-bottom: none
@@ -97,5 +198,14 @@ export default {
 	align-items: center;
 	justify-content: center;
 	display: flex;
+}
+.detail-item-width1 {
+	width: 100px;
+}
+.detail-item-width2 {
+	width: 205px;
+}
+.detail-item-width3 {
+	width: 310px;
 }
 </style>
