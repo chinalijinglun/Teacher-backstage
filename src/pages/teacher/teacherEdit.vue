@@ -1,8 +1,9 @@
 <template>
 	<!-- 教师详情 -->
 	<div class="teacher-detail">
-		<teacher-basic></teacher-basic>
+		<teacher-basic ref="teacherBasic"></teacher-basic>
 		<teacher-educations ref="teacherEducations"></teacher-educations>
+		<teacher-time ref="teacherTime"></teacher-time>
 		<el-row>
 			<el-button size="mini" type="primary" @click="submit">提交</el-button>
 		</el-row>
@@ -11,25 +12,10 @@
 <script>
 import teacherBasic from '@/components/teacher/detail/basic'
 import teacherEducations from '@/components/teacher/detail/educations'
+import teacherTime from '@/components/teacher/detail/time'
 export default {
 	data() {
 		return {
-      tableData: [{
-				// 学历证明
-				certificate: [{name: 'a',url: '/download/1c47b24a5f9a3c570e512964ee32fc3071a811d2d2a6f547a4e4587488ddf7f0'}],
-				// 在校开始时间
-				start: '2018',
-				// 在校结束时间
-				end: '2022',
-				// 学位
-				degree: 'bachelor_degree',
-				// 专业
-				major: 'cs',
-				// 学校
-				school: 'hfut',
-				// 备注
-				remark: ''
-			}],
 			form: {
 				education_history: '',
 			}
@@ -41,12 +27,24 @@ export default {
 		},
 		submit() {
 			const education_history_form = this.$refs.teacherEducations.getForm();
-			console.log(JSON.stringify(education_history_form));
+			const basic_form = this.$refs.teacherBasic.getForm();
+			const time_form = this.$refs.teacherTime.getForm();
+				
+		},
+		removeTeacherTime(id) {
+
+		},
+		addTeacherTime(id) {
+			
+		},
+		updateTeacherInfo(id) {
+			
 		}
 	},
 	components: {
 		teacherEducations,
-		teacherBasic
+		teacherBasic,
+		teacherTime
 	}
 };
 </script>

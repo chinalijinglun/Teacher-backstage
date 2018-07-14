@@ -278,3 +278,12 @@ export const HAVE_SENIORITY = {
   '1': '有'
 }
 export const TEACHER_WEEK = ['1','2','3','4','5','6','7']
+export const TEACHER_WEEK_ENUM = {
+  1: '周一',
+  2: '周二',
+  3: '周三',
+  4: '周四',
+  5: '周五',
+  6: '周六',
+  7: '周日'
+}

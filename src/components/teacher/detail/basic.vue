@@ -10,6 +10,7 @@
 					name="file"
 					:preUrl="$baseApiUrl"
 					:uploadUrl="$baseApiUrl + '/upload'"
+					v-model="avatar"
 					:maxNum="1"
 				></img-upload>
 			</el-main>
@@ -20,9 +21,9 @@
 			</el-aside>
 			<el-main class="detail-item-main">
         <el-row>
-          <el-input size="mini" class="detail-item-width1"></el-input>
-          <el-input size="mini" class="detail-item-width1"></el-input>
-          <el-input size="mini" class="detail-item-width1"></el-input>
+          <el-input size="mini" v-model="form.first_name" class="detail-item-width1"></el-input>
+          <el-input size="mini" v-model="form.middle_name" class="detail-item-width1"></el-input>
+          <el-input size="mini" v-model="form.last_name" class="detail-item-width1"></el-input>
         </el-row>
 			</el-main>
 		</el-container>
@@ -32,7 +33,7 @@
 			</el-aside>
 			<el-main class="detail-item-main">
         <el-row>
-          <el-input size="mini" class="detail-item-width3"></el-input>
+          <el-input size="mini" v-model="form.email" class="detail-item-width3"></el-input>
         </el-row>
 			</el-main>
 		</el-container>
@@ -42,10 +43,10 @@
 			</el-aside>
 			<el-main class="detail-item-main">
         <el-row>
-					<el-select size="mini" class="detail-item-width1">
+					<el-select size="mini" v-model="form.nation" class="detail-item-width1">
 						<el-option label="全部" value=""></el-option>
 					</el-select>
-          <el-input size="mini" class="detail-item-width2"></el-input>
+          <el-input size="mini" v-model="form.mobile" class="detail-item-width2"></el-input>
         </el-row>
 			</el-main>
 		</el-container>
@@ -55,13 +56,13 @@
 			</el-aside>
 			<el-main class="detail-item-main">
         <el-row>
-					<el-select size="mini" class="detail-item-width1">
+					<el-select size="mini" v-model="form.country" class="detail-item-width1">
 						<el-option label="全部" value=""></el-option>
 					</el-select>
-					<el-select size="mini" class="detail-item-width1">
+					<el-select size="mini" v-model="form.province" class="detail-item-width1">
 						<el-option label="全部" value=""></el-option>
 					</el-select>
-					<el-select size="mini" class="detail-item-width1">
+					<el-select size="mini" v-model="form.city" class="detail-item-width1">
 						<el-option label="全部" value=""></el-option>
 					</el-select>
         </el-row>
@@ -73,7 +74,7 @@
 			</el-aside>
 			<el-main class="detail-item-main">
         <el-row>
-					<el-input size="mini" class="detail-item-width3"></el-input>
+					<el-input size="mini" v-model="form.street" class="detail-item-width3"></el-input>
         </el-row>
 			</el-main>
 		</el-container>
@@ -83,7 +84,7 @@
 			</el-aside>
 			<el-main class="detail-item-main">
         <el-row>
-					<el-input size="mini" class="detail-item-width3"></el-input>
+					<el-input size="mini" v-model="form.zipone" class="detail-item-width3"></el-input>
         </el-row>
 			</el-main>
 		</el-container>
@@ -93,7 +94,7 @@
 			</el-aside>
 			<el-main class="detail-item-main">
         <el-row>
-					<el-input size="mini" class="detail-item-width3"></el-input>
+					<el-input size="mini" v-model="form.timezone" class="detail-item-width3"></el-input>
         </el-row>
 			</el-main>
 		</el-container>
@@ -103,7 +104,7 @@
 			</el-aside>
 			<el-main class="detail-item-main">
         <el-row>
-					<el-input size="mini" class="detail-item-width3"></el-input>
+					<el-input size="mini" v-model="form.skype_account" class="detail-item-width3"></el-input>
         </el-row>
 			</el-main>
 		</el-container>
@@ -113,17 +114,7 @@
 			</el-aside>
 			<el-main class="detail-item-main">
         <el-row>
-					<el-input size="mini" class="detail-item-width3"></el-input>
-        </el-row>
-			</el-main>
-		</el-container>
-		<el-container class="detail-item">
-			<el-aside class="detail-item-aside" width="100px">
-				宣传视频
-			</el-aside>
-			<el-main class="detail-item-main">
-        <el-row>
-					<el-input size="mini" class="detail-item-width3"></el-input>
+					<el-input v-model="form.about_me" type="textarea" :rows="3" size="mini" class="detail-item-width3"></el-input>
         </el-row>
 			</el-main>
 		</el-container>
@@ -137,9 +128,10 @@ import {
 export default {
 	data() {
 		return {
+			avatar: [], //照片
 			form: {
+				avatar: '',
 				about_me: '', //自我介绍
-				avatar: [], //照片
 				first_name: '', //教师姓名
 				middle_name: '',
 				last_name: '',
@@ -152,28 +144,33 @@ export default {
 				street: '', //街道
 				zipone: 0, //邮政编码
 				timezone: 0, //时区
-				skype_account: '', //skype账号
-				teachertime: [], //可选授课时间
-				teaching_history: {}, //教学历史
-				cur_school: '', //当前任职学校
-				cur_grade: '', //当前教授年级
-				cur_country: '', //当前任职地区
-				cur_province: '', //当前工作省/州
-				teacher_age: 0, //总教龄
-				resume_url: '', //简历
-				seniority_url: '', //资格证明
-				award_url: '', //所得奖励
-				//其他工作经历
-				//宣传视频
+				skype_account: '' //skype账号
+				// teachertime: [], //可选授课时间
+				// teaching_history: {}, //教学历史
+				// cur_school: '', //当前任职学校
+				// cur_grade: '', //当前教授年级
+				// cur_country: '', //当前任职地区
+				// cur_province: '', //当前工作省/州
+				// teacher_age: 0, //总教龄
+				// resume_url: '', //简历
+				// seniority_url: '', //资格证明
+				// award_url: '', //所得奖励
+				// //其他工作经历
+				// //宣传视频
 			}
+		}
+	},
+	watch: {
+		avatar(v) {
+			this.form.avatar = v[0]
 		}
 	},
 	methods: {
 		onUploadSuccess() {
 			this.form.avatar = e[0].download_file;
 		},
-		submit() {
-			console.log(this.form);
+		getForm() {
+			return this.form;
 		},
 		goBack(){
 			this.$router.push({path: '/teacher/teacherDetail', query: {'id': this.$route.query.id}})
