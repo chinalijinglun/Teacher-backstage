@@ -1,8 +1,8 @@
 <template>
-<div class="picture-upload" :value="value">
-  <div v-if="images.length > 0" class="images-list">
+<div class="picture-upload">
+  <div v-if="value.length > 0" class="images-list">
     <ul class="img-upload-ul">
-      <li v-for="(image,index) in images" :key="index" class="img-upload-li">
+      <li v-for="(image,index) in value" :key="index" class="img-upload-li">
         <img :src="preUrl+image" />
         <div class="img-upload-li-cover">
           <i class="img-icon el-icon-view" @click="previewImage(image)"></i>
@@ -24,7 +24,7 @@
 export default {
 	name: 'imgUpload',
   watch: {
-    images(v, oldv) {
+    value(v, oldv) {
       if (v.length >= this.maxNum) {
         this.canPlus = false;
       } else {
@@ -32,9 +32,6 @@ export default {
       }
       this.$emit("getImgs", v);
       this.$emit("input", v);
-    },
-    oldImgs(v, oldv) {
-      this.images = this.oldImgs;
     }
   },
   data() {
@@ -42,7 +39,6 @@ export default {
       dialogImageUrl: "",
       canPlus: true,
       visible: false,
-      images: [],
       relImages: []
     };
   },
@@ -61,7 +57,7 @@ export default {
     },
     value: {
       type: Array,
-      value: ""
+      default: []
     },
     oldImgs: {
       type: Array,
@@ -118,7 +114,7 @@ export default {
         this.$refs.fileupload.value = "";
         return false;
       }
-      if (this.images.length > this.maxNum - 1) {
+      if (this.value.length > this.maxNum - 1) {
         this.open("图片上传数量超过" + this.maxNum + "张");
         this.$refs.fileupload.value = "";
         return false;
@@ -140,17 +136,17 @@ export default {
       this.visible = true;
     },
     delImage(index) {
-      this.images.splice(index, 1);
+      this.value.splice(index, 1);
     },
     removeImage(e) {
-      this.images = [];
+      this.value = [];
     },
     uploadImage() {
       let formData = new FormData(this.$refs.form);
       this.$refs.fileupload.value = "";
       this.axios.post(this.uploadUrl, formData).then(data => {
         if (data.data) {
-          this.images.push(data.data[0].download_file);
+          this.value.push(data.data[0].download_file);
         }
       });
     }

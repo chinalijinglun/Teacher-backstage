@@ -24,3 +24,5 @@ export const teacherCheckPass = teacher_id => baseAxios.post('/teacher/check_pas
 export const teacherMainQuery = form => baseAxios.post('/teacher/main_query', form);
 
 export const teacherCourseQuery = form => baseAxios.post('/teacher/my_course', form);
+
+export const teacherSubject = form => baseAxios.post('/teacher/subject', {page_no: 1, page_limit: 1000, ...form})

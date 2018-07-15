@@ -1,5 +1,6 @@
 import dateRange from './commons/form/dateRange';
 import curriculumSelect from './commons/select/curriculumSelect';
+import areaSelect from './commons/select/areaSelect';
 import teacherDialog from './commons/dialog/teacherDialog';
 import appointmentTeacher from './commons/dialog/appointmentTeacher';
 import sureTimeDialog from './commons/dialog/sureTimeDialog';
@@ -15,6 +16,13 @@ import timeSure from './commons/dialog/timeSure';
 import imgUpload from './commons/upload/imgUpload';
 
 import paginationMix from './commons/mixins/paginationMix';
+
+
+import viewInput from './commons/view/input';
+import viewImage from './commons/view/image';
+import viewAreaSelect from './commons/view/areaSelect';
+import viewFileUpload from './commons/view/fileUpload';
+import viewSubjectSelect from './commons/view/subjectSelect';
 
 const install = (Vue) => {
   Vue.component(dateRange.name, dateRange);
@@ -32,6 +40,13 @@ const install = (Vue) => {
   Vue.component(navigation.name, navigation);
   Vue.component(flatFeild.name, flatFeild);
   Vue.component(imgUpload.name, imgUpload);
+  Vue.component(areaSelect.name, areaSelect);
+
+  Vue.component(viewInput.name, viewInput);
+  Vue.component(viewImage.name, viewImage);
+  Vue.component(viewAreaSelect.name, viewAreaSelect);
+  Vue.component(viewFileUpload.name, viewFileUpload);
+  Vue.component(viewSubjectSelect.name, viewSubjectSelect);
 }
 export {
   paginationMix

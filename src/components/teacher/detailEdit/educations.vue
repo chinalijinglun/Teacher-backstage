@@ -21,36 +21,44 @@
 						width="230px"
             label="在读期间">
 						<template slot-scope="scope">    
-							<view-input :text="scope.row.start" width="100px"></view-input>
-							<view-input :text="scope.row.end" width="100px"></view-input>
+							<el-input v-model="scope.row.start" size="mini" class="detail-item-width1"></el-input>
+							<el-input v-model="scope.row.end" size="mini" class="detail-item-width1"></el-input>
 						</template>
           </el-table-column>
           <el-table-column
             prop="school"
             label="在读学校">
 						<template slot-scope="scope">    
-							<view-input :text="scope.row.school" width="100px"></view-input>
+							<el-input v-model="scope.row.school" size="mini" class="detail-item-width1"></el-input>
 						</template>
           </el-table-column>
           <el-table-column
             prop="major"
             label="专业">
 						<template slot-scope="scope">    
-							<view-input :text="scope.row.major" width="100px"></view-input>
+							<el-input v-model="scope.row.major" size="mini" class="detail-item-width1"></el-input>
 						</template>
           </el-table-column>
           <el-table-column
             prop="address"
             label="毕业证明">
 						<template slot-scope="scope">    
-							<view-file-upload :files="scope.row.certificate"></view-file-upload>
+							<el-upload
+								class="upload-demo"
+								:action="$baseApiUrl+'/upload'"
+								multiple
+								:on-success="handlerSuccess(scope.$index)" 
+								:on-remove="handleRemove(scope.$index)"
+								:file-list="getFileList(scope.row.certificate)">
+								<el-button size="mini" type="primary">点击上传</el-button>
+							</el-upload>
 						</template>
           </el-table-column>
           <el-table-column
             prop="remark"
             label="备注">
 						<template slot-scope="scope">    
-							<view-input :text="scope.row.remark" type="textarea" :rows="2" width="100px"></view-input>
+							<el-input v-model="scope.row.remark" type="textarea" :rows="2" size="mini" class="detail-item-width1"></el-input>
 						</template>
           </el-table-column>
         </el-table>
@@ -90,6 +98,9 @@ export default {
 			return (file, fileList) => {
 				this.tableData[index].certificate = fileList.map(item => ({name: item.name, url: item.url}))
 			}
+		},
+		getFileList(backList) {
+			return backList.map(item => ({url: this.$baseApiUrl + item.url, ...item}))
 		}
 	}
 };

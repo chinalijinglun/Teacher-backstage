@@ -6,7 +6,13 @@
 				照片
 			</el-aside>
 			<el-main class="detail-item-main">
-				<view-image :images="[form.avatar]"></view-image>
+				<img-upload 
+					name="file"
+					:preUrl="$baseApiUrl"
+					:uploadUrl="$baseApiUrl + '/upload'"
+					v-model="avatar"
+					:maxNum="1"
+				></img-upload>
 			</el-main>
 		</el-container>
 		<el-container class="detail-item">
@@ -15,9 +21,9 @@
 			</el-aside>
 			<el-main class="detail-item-main">
         <el-row>
-          <view-input :text="form.first_name"></view-input>
-          <view-input :text="form.middle_name"></view-input>
-          <view-input :text="form.last_name"></view-input>
+          <el-input size="mini" v-model="form.first_name" class="detail-item-width1"></el-input>
+          <el-input size="mini" v-model="form.middle_name" class="detail-item-width1"></el-input>
+          <el-input size="mini" v-model="form.last_name" class="detail-item-width1"></el-input>
         </el-row>
 			</el-main>
 		</el-container>
@@ -27,7 +33,7 @@
 			</el-aside>
 			<el-main class="detail-item-main">
         <el-row>
-          <view-input :text="form.email" width="310px"></view-input>
+          <el-input size="mini" v-model="form.email" class="detail-item-width3"></el-input>
         </el-row>
 			</el-main>
 		</el-container>
@@ -37,7 +43,10 @@
 			</el-aside>
 			<el-main class="detail-item-main">
         <el-row>
-          <view-input :text="form.nation+'-'+form.mobile" width="310px"></view-input>
+					<el-select size="mini" v-model="form.nation" class="detail-item-width1">
+						<el-option label="全部" value=""></el-option>
+					</el-select>
+          <el-input size="mini" v-model="form.mobile" class="detail-item-width2"></el-input>
         </el-row>
 			</el-main>
 		</el-container>
@@ -46,7 +55,7 @@
 				国家地区
 			</el-aside>
 			<el-main class="detail-item-main">
-				<view-area-select :areaLs="areaLs"></view-area-select>
+				<area-select v-model="areaLs" ref="areaSelect"></area-select >
 			</el-main>
 		</el-container>
 		<el-container class="detail-item">
@@ -55,7 +64,7 @@
 			</el-aside>
 			<el-main class="detail-item-main">
         <el-row>
-					<view-input :text="form.street" width="310px"></view-input>
+					<el-input size="mini" v-model="form.street" class="detail-item-width3"></el-input>
         </el-row>
 			</el-main>
 		</el-container>
@@ -65,7 +74,7 @@
 			</el-aside>
 			<el-main class="detail-item-main">
         <el-row>
-					<view-input :text="form.zipone" width="310px"></view-input>
+					<el-input size="mini" v-model="form.zipone" class="detail-item-width3"></el-input>
         </el-row>
 			</el-main>
 		</el-container>
@@ -75,7 +84,7 @@
 			</el-aside>
 			<el-main class="detail-item-main">
         <el-row>
-					<view-input :text="form.timezone" width="310px"></view-input>
+					<el-input size="mini" v-model="form.timezone" class="detail-item-width3"></el-input>
         </el-row>
 			</el-main>
 		</el-container>
@@ -85,7 +94,7 @@
 			</el-aside>
 			<el-main class="detail-item-main">
         <el-row>
-					<view-input :text="form.skype_account" width="310px"></view-input>
+					<el-input size="mini" v-model="form.skype_account" class="detail-item-width3"></el-input>
         </el-row>
 			</el-main>
 		</el-container>
@@ -95,7 +104,7 @@
 			</el-aside>
 			<el-main class="detail-item-main">
         <el-row>
-					<view-input :text="form.video_url" width="310px"></view-input>
+					<el-input size="mini" v-model="form.video_url" class="detail-item-width3"></el-input>
         </el-row>
 			</el-main>
 		</el-container>
@@ -105,7 +114,7 @@
 			</el-aside>
 			<el-main class="detail-item-main">
         <el-row>
-					<view-input :text="form.about_me" type="textarea" :rows="3" width="310px"></view-input>
+					<el-input v-model="form.about_me" type="textarea" :rows="3" size="mini" class="detail-item-width3"></el-input>
         </el-row>
 			</el-main>
 		</el-container>
@@ -142,7 +151,11 @@ export default {
 		initData(form) {
 			this.$fillProps(this.form, form);
 			this.areaLs = [+form.country, +form.province, +form.city];
+			this.$nextTick(_=>{
+				this.$refs.areaSelect.onInit();
+			});
 			this.avatar = [form.avatar];
+			this.$refs.areaSelect.onInit();
 		},
 		onUploadSuccess() {
 			this.form.avatar = e[0].download_file;

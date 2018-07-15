@@ -1,17 +1,21 @@
 <template>
   <div>
     <el-select v-model="form.curriculum_id" placeholder="一级分类" size="mini" @change="handleCurriculumChange">
-      <el-option label="全部" value=""></el-option>
+      <el-option label="全部" value="" v-if="!hasOther"></el-option>
+      <el-option label="其他" value="" v-if="hasOther"></el-option>
       <el-option v-for="(item,index) in curriculumLs" :key="index" :label="item.full_name" :value="item.id"></el-option>
     </el-select>
-    <el-select v-model="form.subject_category_id" placeholder="二级分类" size="mini" @change="handleCategoryChange">
-      <el-option label="全部" value=""></el-option>
-      <el-option v-for="(item,index) in subjectCategoryLs" :key="index" :label="item.subject_category" :value="item.id"></el-option>
-    </el-select>
-    <el-select v-model="form.subject_id" placeholder="三级分类" size="mini" @change="handleSubjectChange">
-      <el-option label="全部" value=""></el-option>
-      <el-option v-for="(item,index) in subjectLs" :key="index" :label="item.subject_name" :value="item.id"></el-option>
-    </el-select>
+    <template v-if="form.curriculum_id !== ''">
+      <el-select v-model="form.subject_category_id" placeholder="二级分类" size="mini" @change="handleCategoryChange">
+        <el-option label="全部" value=""></el-option>
+        <el-option v-for="(item,index) in subjectCategoryLs" :key="index" :label="item.subject_category" :value="item.id"></el-option>
+      </el-select>
+      <el-select v-model="form.subject_id" placeholder="三级分类" size="mini" @change="handleSubjectChange">
+        <el-option label="全部" value=""></el-option>
+        <el-option v-for="(item,index) in subjectLs" :key="index" :label="item.subject_name" :value="item.id"></el-option>
+      </el-select>
+    </template>
+    <el-input v-if="form.curriculum_id === ''" size="mini" placeholder="手动输入科目名" class="curriculum-input" v-model="form.subject_name"></el-input>
   </div>
 </template>
 
@@ -33,7 +37,8 @@
         form: {
           curriculum_id: '',
           subject_category_id: '',
-          subject_id: ''
+          subject_id: '',
+          subject_name: ''
         },
         curriculumLs: [],
         subjectCategoryLs: [],
@@ -44,20 +49,38 @@
       value: {
         type: Array,
         default: []
+      },
+      hasOther: {
+        type: Boolean,
+        default: false
       }
     },
     created() {
       this.onInit();
+    },
+    watch: {
+      'form.subject_name': {
+        handler(v) {
+          this.subChange([
+            this.form.curriculum_id,
+            this.form.subject_category_id,
+            this.form.subject_id,
+            v
+          ])
+        },
+        deep: true
+      }
     },
     methods: {
       onInit() {
         this.form = {
           curriculum_id: '',
           subject_category_id: '',
-          subject_id: ''
+          subject_id: '',
+          subject_name: ''
         };
-        console.log(this.value);
-        const [curriculum_id, subject_category_id, subject_id] = this.value;
+        const [curriculum_id, subject_category_id, subject_id, subject_name] = this.value;
+        this.form.subject_name = subject_name
         this.getCurriculum().then(curriculumLs => {
           this.curriculumLs = curriculumLs;
           if(curriculum_id) {
@@ -94,10 +117,15 @@
         });
       },
       handleCurriculumChange(id) {
+        if(id === 'other') {
+          return;
+        }
         this.form.subject_category_id = '';
         this.form.subject_id = '';
         const value = [];
         value[0] = id;
+        value[1] = '';
+        value[2] = '';
         this.getSubjectCategory(id).then( subjectCategoryLs => {
           this.subjectCategoryLs = subjectCategoryLs;
         });
@@ -119,8 +147,14 @@
         this.subChange(value);
       },
       subChange(value) {
+        console.log(value)
         this.$emit('input', value);
       }
     }
   }
 </script>
+<style>
+.curriculum-input {
+  width: 200px;
+}
+</style>

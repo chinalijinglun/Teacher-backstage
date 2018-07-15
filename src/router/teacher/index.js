@@ -17,8 +17,15 @@ import evaluate from '@/pages/teacher/evaluate';
 import coursewareAudit from '@/pages/teacher/coursewareAudit';
 import courseAuditPage from '@/pages/teacher/courseAuditPage';
 import agreement from '@/pages/teacher/agreement';
+import teacherInfoReadOnly from '@/pages/teacher/teacherInfoReadOnly';
 
 export default [
+  {
+    title:'教师详情',
+    path: 'teacherInfoReadOnly',
+    name: 'teacherInfoReadOnly',
+    component: teacherInfoReadOnly
+  },
   {
     title:'教师在线审核',
     path: 'onlineAudit',

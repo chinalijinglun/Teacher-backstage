@@ -35,6 +35,13 @@ function deleteEmptyProps(form) {
   }
   return f;
 }
+function fillProps(d1, d2) {
+  for(let key in d1){
+    if(d2[key] !== undefined) {
+      d1[key] = d2[key];
+    }
+  }
+}
 
 const install = (Vue) => {
   Vue.prototype.$dateFmt = dateFmt;
@@ -54,6 +61,8 @@ const install = (Vue) => {
   Vue.prototype.$deleteEmptyProps = deleteEmptyProps;
 
   Vue.prototype.$_object = object;
+
+  Vue.prototype.$fillProps = fillProps;
 
   // regexp start
   // 正则表达是

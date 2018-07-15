@@ -25,11 +25,12 @@
 									is-range
 									size="mini"
 									v-model="item.timeRange"
-									disabled
 									placeholder="选择时间范围">
 								</el-time-picker>
+								<el-button size="mini" v-if="index === scope.row.timeRanges.length-1" @click="handlerAdd(scope.row.timeRanges)">+</el-button>
+								<el-button size="mini" @click="handlerRemove(scope.row.timeRanges, index)">-</el-button>
 							</div>
-							<view-input v-if="!scope.row.timeRanges.length" text="暂未填写" width="350px"></view-input>
+							<el-button size="mini" v-if="!scope.row.timeRanges.length" @click="handlerAdd(scope.row.timeRanges)">+</el-button>
 						</template>
           </el-table-column>
         </el-table>
@@ -69,7 +70,7 @@ export default {
 					})
 				}
 			})
-			console.log('a', a);
+			console.log(a);
 			return a;
 		}
 	},
@@ -85,7 +86,7 @@ export default {
 	methods: {
 		initData(form) {
 			this.$fillProps(this.form, form);
-			this.originData = form.teachertime;
+			form.teachertime&&(this.originData = form.teachertime.concat(this.originData));
 		},
 		handlerAdd(timeRanges) {
 			timeRanges.push({

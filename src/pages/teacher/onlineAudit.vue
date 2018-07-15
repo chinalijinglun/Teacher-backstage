@@ -42,6 +42,9 @@
 			<el-table-column fixed prop="id" label="ID" style="width: 10%;">
 			</el-table-column>
 			<el-table-column prop="teacher_name" label="教师姓名" style="width: 10%;">
+				<template slot-scope="scope">
+					<router-link :to="'/teacher/teacherInfoReadOnly?id='+scope.row.id">{{scope.row.teacher_name}}</router-link>
+				</template>
 			</el-table-column>
 			<el-table-column prop="mobile" label="联系电话" style="width: 10%;">
 			</el-table-column>

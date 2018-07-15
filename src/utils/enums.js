@@ -237,6 +237,15 @@ export const GRADE = {
   'other': '其他'
 }
 
+export const GRADE_ENUMS = {
+  1: '幼儿园',
+  2: '小学',
+  3: '初中',
+  4: '高中',
+  5: '大学',
+  6: '成人'
+}
+
 export const INTERVIEW = {
   '1': '待预约',
   '2': '未面试',
