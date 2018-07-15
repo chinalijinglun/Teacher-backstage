@@ -1,19 +1,51 @@
 <template>
   <div class="student-list">
     <el-row class="form-contain">
-      <el-form :inline="true" ref="form" :model="form" label-width="82px">
+      <el-form :inline="true" ref="form" :model="form" label-width="120px">
         <el-row>
+          <el-form-item label="学生ID：">
+            <el-input v-model="form.student_id" size="mini"></el-input>
+          </el-form-item>
           <el-form-item label="学生姓名：">
-            <el-input v-model="form.username" size="mini"></el-input>
+            <el-input v-model="form.student_name" size="mini"></el-input>
           </el-form-item>
-          <el-form-item label="联系电话：">
-            <el-input v-model="form.mobile" size="mini"></el-input>
+          <el-form-item label="年级：">
+            <el-select v-model="form.gender" placeholder="请选择" size="mini">
+              <el-option label="全部" value=""></el-option>
+              <el-option v-for="(item, key) in $GRADE_ENUMS" :key="key" :label="item" :value="key"></el-option>
+            </el-select>
           </el-form-item>
-          <el-form-item label="联系邮箱：">
-            <el-input v-model="form.email" size="mini"></el-input>
+          <el-form-item label="家长联系电话：">
+            <el-input v-model="form.parent_mobile" size="mini"></el-input>
           </el-form-item>
         </el-row>
         <el-row>
+          <el-form-item label="意向科目：">
+            <el-select v-model="form.category_1" placeholder="请选择" size="mini" @change="handlerCurriculumChange">
+              <el-option label="全部" value=""></el-option>
+              <el-option v-for="(item, index) in curriculumLs" :key="index" :label="item.full_name_zh" :value="item.id"></el-option>
+            </el-select>
+            <el-select v-model="form.category_2" placeholder="请选择" size="mini">
+              <el-option label="全部" value=""></el-option>
+              <el-option v-for="(item, index) in subjectCategoryLs" :key="index" :label="item.subject_category_zh" :value="item.id"></el-option>
+            </el-select>
+          </el-form-item>
+          <el-form-item label="注册时间：">
+            <date-range
+              :start-date.sync="form.created_at_start"
+              :end-date.sync="form.created_at_end"
+              size="mini"
+              range-separator="-"
+              start-placeholder="开始时间"
+              end-placeholder="结束时间">
+            </date-range>
+          </el-form-item>
+          <el-form-item label="来源：">
+            <el-select v-model="form.channel_id" placeholder="请选择" size="mini">
+              <el-option label="所有来源" value=""></el-option>
+              <el-option v-for="(item, index) in channelLs" :key="index" :label="item.channel_name" :value="item.id"></el-option>
+            </el-select>
+          </el-form-item>
           <el-button type="primary" size="mini" @click="query">查询</el-button>
         </el-row>
       </el-form>
@@ -29,27 +61,21 @@
             width="60">
           </el-table-column>
           <el-table-column
-            prop="username"
-            label="用户名"
+            prop="created_at"
+            label="注册时间"
             width="180">
           </el-table-column>
           <el-table-column
+            prop="student_name"
             label="学生姓名">
-            <template slot-scope="scope">
-              {{`${scope.row.given_name || ''} ${scope.row.family_name || ''}`}}
-            </template>
           </el-table-column>
           <el-table-column
-            prop="mobile"
-            label="联系电话">
+            prop="gender"
+            label="年级">
           </el-table-column>
           <el-table-column
-            prop="email"
-            label="联系邮箱">
-          </el-table-column>
-          <el-table-column
-            prop="created_at"
-            label="注册时间">
+            prop="channel_name"
+            label="来源">
           </el-table-column>
           <el-table-column
             label="操作">
@@ -69,24 +95,42 @@
         </el-pagination>
       </el-row>
     </el-row>
-    <assign-conselor-dialog :visible.sync="dialogVisible"></assign-conselor-dialog>
   </div>
 </template>
 <script>
   import assignConselorDialog from '@/components/students/dialog/assignConselorDialog';
   import paginationMix from '@/components/commons/mixins/paginationMix';
   import {
-    studentBareGet
+    mangerStudents
   } from '@/api/student'
+  import {
+    channelBareGet
+  } from '@/api/channel'
+  import {
+    curriculumGetBare
+  } from '@/api/curriculum'
+
+  import {
+    subjectCategoryGetBare
+  } from '@/api/subject_category'
 
   export default {
     data() {
       return {
-        dialogVisible: false,
+        channelLs: [],
+        curriculumLs: [],
+        subjectCategoryLs: [],
         form: {
-          username: '',
-          mobile: '',
-          email: '',
+          category_1: '',
+          category_2: '',
+          channel_id: '',
+          created_at_end: '',
+          created_at_start: '',
+          gender: '',
+          page_limit: 10,
+          parent_mobile: '',
+          student_id: '',
+          student_name: '',
           page: 1
         },
         totalCount: 0,
@@ -95,27 +139,74 @@
     },
     created() {
       this.query();
+      this.getChannelLs();
+      this.getCurriculumLs();
     },
     methods: {
       query() {
         const {
-          username,
-          mobile,
-          email,
+          category_1,
+          category_2,
+          channel_id,
+          created_at_end,
+          created_at_start,
+          gender,
+          page_limit,
+          parent_mobile,
+          student_id,
+          student_name,
           page
         } = this.form;
-        const filter = this.$json2filter({
-          username,
-          mobile,
-          email
+        const form = this.$deleteEmptyProps({
+          category_1,
+          category_2,
+          channel_id,
+          created_at_end,
+          created_at_start,
+          gender,
+          page_limit,
+          parent_mobile,
+          student_id,
+          student_name
         })
-        studentBareGet(filter,{page}).then(resp => {
+        mangerStudents({
+          ...form,
+          page_no: page
+        }).then(resp => {
           this.tableData = resp.data.objects;
           this.totalCount = resp.data.num_results;
         })
       },
       toDetail(row) {
-        this.$router.push(`/student/studentDetail?id=${row.id}&blkname=info&student_name=${row.username}`);
+        this.$router.push(`/student/studentDetail?id=${row.id}&blkname=info`);
+      },
+      getChannelLs() {
+        const filter = this.$json2filter({})
+        return channelBareGet(filter,{
+          results_per_page: 1000,
+          page: 1
+        }).then(resp => {
+          this.channelLs = resp.data.objects;
+        })
+      },
+      getCurriculumLs() {
+        const filter = this.$json2filter({});
+        return curriculumGetBare(filter).then(resp => {
+          this.curriculumLs = resp.data.objects;
+        })
+      },
+      handlerCurriculumChange(id) {
+        this.subjectCategoryLs = [];
+        this.form.category_2 = '';
+        this.getSubjectCategoryLs(id);
+      },
+      getSubjectCategoryLs(id) {
+        const filter = this.$json2filter({
+          curriculum_id: id
+        });
+        return subjectCategoryGetBare(filter).then(resp => {
+          this.subjectCategoryLs = resp.data.objects;
+        })
       }
     },
     mixins: [paginationMix],

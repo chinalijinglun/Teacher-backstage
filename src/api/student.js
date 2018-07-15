@@ -20,3 +20,5 @@ export const studentCoursePost = (form) => baseAxios.post('/manger/student_cours
 export const studentSchedule = (form) => baseAxios.post('/student/schedule', form);
 
 export const studentReportCard = (form) => baseAxios.post('/student/report_card', form);
+
+export const mangerStudents = (form) => baseAxios.post('/manger/students', form);
