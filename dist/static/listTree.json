@@ -1,0 +1,33 @@
+[
+    {
+        "classNameZh": "AP课程",
+        "classNameEn": "AP",
+        "classId": "001",
+        "creator": "Kira",
+        "createTime": "2018-02-27 11:25:30",
+        "state": "有效",
+        "children":[{
+            "classNameZh": "AP课程2",
+            "classNameEn": "AP",
+            "classId": "001",
+            "creator": "Kira",
+            "createTime": "2018-02-27 11:25:30",
+            "state": "有效",
+            "children":[{
+                "classNameZh": "AP课程3",
+                "classNameEn": "AP",
+                "classId": "001",
+                "creator": "Kira",
+                "createTime": "2018-02-27 11:25:30",
+                "state": "有效"
+            },{
+                "classNameZh": "AP课程4",
+                "classNameEn": "AP",
+                "classId": "001",
+                "creator": "Kira",
+                "createTime": "2018-02-27 11:25:30",
+                "state": "有效"
+            }]
+        }]
+    }
+]
