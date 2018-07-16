@@ -217,6 +217,12 @@ export const GERDER = {
   'FEMALE': '女'
 }
 
+export const GERDER_ENUM = {
+  1: '未知',
+  2: '男',
+  3: '女'
+}
+
 export const DEGREE = {
   'college_graduate': '大专',
   'university_diploma': '本科',

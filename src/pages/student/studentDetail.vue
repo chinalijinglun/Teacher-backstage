@@ -8,7 +8,7 @@
       </el-radio-group>
     </el-row>
     <el-row class="detail-body">
-      <student-info-block v-if="blkname==='info'" :detail="detail"></student-info-block>
+      <student-info-block v-if="blkname==='info'" :student-id="studentId"></student-info-block>
       <student-requirements v-if="blkname==='requirements'"></student-requirements>
       <student-chat-log v-if="blkname==='chat'" :detail="detail.id"></student-chat-log>
     </el-row>
@@ -28,6 +28,7 @@
     data() {
       return {
         blkname: 'info',
+        studentId: '',
         detail: {
           given_name: '',
           family_name: '',
@@ -47,7 +48,8 @@
       this.blkname = this.$route.query.blkname;
       this.courseBlk = this.$route.query.courseBlk;
       const id = this.$route.query.id;
-      this.getStudentById(id)
+      this.studentId = id
+      // this.getStudentById(id)
     },
     methods: {
       handleRadioChange(e) {
@@ -59,16 +61,16 @@
         };
         this.$router.replace({ path, query });
       },
-      getStudentById(id) {
-        return studentGetById(id).then(resp => {
-          for(let key in this.detail) {
-            if(resp.data[key] !== undefined) {
-              this.detail[key] = resp.data[key]
-            }
-          }
-          this.study_results = resp.data.study_results;
-        })
-      }
+      // getStudentById(id) {
+      //   return studentGetById(id).then(resp => {
+      //     for(let key in this.detail) {
+      //       if(resp.data[key] !== undefined) {
+      //         this.detail[key] = resp.data[key]
+      //       }
+      //     }
+      //     this.study_results = resp.data.study_results;
+      //   })
+      // }
     },
     components: {
       studentInfoBlock,
