@@ -6,28 +6,52 @@
     </el-aside>
     <el-main class="detail-item-main">
       <el-row>
-        <view-input :text="channel_name" width="310px"></view-input>
+        <el-select size="mini" class="detail-item-width3" v-model="form.channel_id" filterable placeholder="请选择">
+          <el-option
+            v-for="item in channelLs"
+            :key="item.id"
+            :label="item.channel_name"
+            :value="item.id">
+          </el-option>
+        </el-select>
       </el-row>
     </el-main>
   </el-container>
 </template>
 <script>
 import {
-  channelBareGetById
+  channelBareGet
 } from '@/api/channel'
 export default {
 	data() {
 		return {
-      channelLs: [],
-      channel_name: ''
+			channelLs: [],
+			form: {
+				channel_id: ''
+			}
 		}
   },
 	methods: {
 		initData(form) {
-      channelBareGetById(form.channel_id).then(resp=>{
-        this.channel_name = resp.data.channel_name;
+      this.getChannel().then(()=>{
+        this.form.channel_id = form.channel_id;
       })
-    }
+    },
+    getChannel() {
+      const filter = this.$json2filter({})
+      return channelBareGet(filter, {
+        results_per_page: 1000,
+        page: 1
+      }).then(resp => {
+        this.channelLs = resp.data.objects;
+      })
+    },
+		onUploadSuccess() {
+			this.form.avatar = e[0].download_file;
+		},
+		getForm() {
+			return this.form;
+		}
 	}
 };
 </script>

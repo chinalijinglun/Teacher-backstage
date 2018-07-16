@@ -8,14 +8,16 @@
       </el-radio-group>
     </el-row>
     <el-row class="detail-body">
-      <student-info-block v-if="blkname==='info'" :student-id="studentId"></student-info-block>
-      <student-requirements v-if="blkname==='requirements'"></student-requirements>
-      <student-chat-log v-if="blkname==='chat'" :detail="detail.id"></student-chat-log>
+      <student-info-block v-if="$route.query.blkname==='info' && !$route.query.updated" :student-id="studentId"></student-info-block>
+      <student-edit-block v-if="$route.query.blkname==='info' && $route.query.updated" :student-id="studentId"></student-edit-block>
+      <student-requirements v-if="$route.query.blkname==='requirements'"></student-requirements>
+      <student-chat-log v-if="$route.query.blkname==='chat'" :detail="detail.id"></student-chat-log>
     </el-row>
   </div>
 </template>
 <script>
   import studentInfoBlock from '@/components/students/block/studentInfoBlock';
+  import studentEditBlock from '@/components/students/block/studentEditBlock';
   import studentChatLog from '@/components/students/block/studentChatLog'; 
   import studentRequirements from '@/components/students/block/studentRequirements'; 
   
@@ -49,7 +51,6 @@
       this.courseBlk = this.$route.query.courseBlk;
       const id = this.$route.query.id;
       this.studentId = id
-      // this.getStudentById(id)
     },
     methods: {
       handleRadioChange(e) {
@@ -60,22 +61,13 @@
           blkname: e
         };
         this.$router.replace({ path, query });
-      },
-      // getStudentById(id) {
-      //   return studentGetById(id).then(resp => {
-      //     for(let key in this.detail) {
-      //       if(resp.data[key] !== undefined) {
-      //         this.detail[key] = resp.data[key]
-      //       }
-      //     }
-      //     this.study_results = resp.data.study_results;
-      //   })
-      // }
+      }
     },
     components: {
       studentInfoBlock,
       studentChatLog,
-      studentRequirements
+      studentRequirements,
+      studentEditBlock
     }
   }
 </script>

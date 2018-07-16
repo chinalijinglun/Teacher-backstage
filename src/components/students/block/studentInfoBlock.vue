@@ -4,7 +4,7 @@
       <student-basic ref="studentBasic"></student-basic>
     </div>
     <el-row class="btn-container">
-      <el-button @click="submit">修改</el-button>
+      <el-button @click="toEdit" type="primay">修改</el-button>
     </el-row>
   </div>
 </template>
@@ -13,6 +13,11 @@
     studentBareGetById,
     studentPutById
   } from '@/api/student';
+  import {
+    studentSubjectType2GetByStudentId,
+    studentSubjectPost,
+    studentSubjectDeleteById
+  } from '@/api/student_subject';
   import { mapState } from 'vuex';
   import studentBasic from '../detail/basic';
 
@@ -27,7 +32,8 @@
     },
     props: ['studentId'],
     created() {
-      this.getStudentInfo(this.studentId)
+      this.getStudentInfo(this.studentId);
+      this.getSubjectInfo(this.studentId);
     },
     computed: {
       ...mapState({
@@ -35,21 +41,24 @@
       })
     },
     methods: {
+      getSubjectInfo(id) {
+        return studentSubjectType2GetByStudentId(id).then(objects => {
+          return this.$refs.studentBasic.initSubject(objects);
+        })
+      },
       getStudentInfo(id) {
         return studentBareGetById(id).then(resp => {
           this.$refs.studentBasic.initData(resp.data);
         });
       },
-      submit() {
-        let form = this.$refs.studentBasic.getForm();
-        form = this.$deleteEmptyProps(form);
-        studentPutById(this.studentId, {
-          updated_at: new Date(),
-          updated_by: this.userName,
-          ...form
-        }).then(resp => {
-          console.log(res);
-        })
+      toEdit() {
+        var { path } = this.$route;
+        this.courseBlk = '';
+        const query = {
+          ...this.$route.query,
+          updated: 1
+        };
+        this.$router.replace({ path, query });
       }
     },
     components: {

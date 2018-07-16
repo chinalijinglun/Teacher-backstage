@@ -7,7 +7,10 @@
 			</el-aside>
 			<el-main class="detail-item-main">
         <el-row>
-					<view-input :text="$GO_ABROAD[form.go_abroad]" width="310px"></view-input>
+					<el-radio-group v-model="form.go_abroad">
+						<el-radio label="YES">是</el-radio>
+						<el-radio label="NO">否</el-radio>
+					</el-radio-group>
         </el-row>
 			</el-main>
 		</el-container>
@@ -17,7 +20,13 @@
 			</el-aside>
 			<el-main class="detail-item-main">
         <el-row>
-          <view-input :text="$dateFmt(new Date(form.go_abroad_at), 'yyyy-MM-dd')" width="310px"></view-input>
+          <el-date-picker
+            v-model="form.go_abroad_at"
+            size="mini"
+            type="date"
+						class="detail-item-width3"
+            placeholder="选择日期">
+          </el-date-picker>
         </el-row>
 			</el-main>
 		</el-container>
@@ -27,7 +36,7 @@
 			</el-aside>
 			<el-main class="detail-item-main">
         <el-row>
-					<view-area-select :areaLs="areaLs" :type="2" item-width="153px"></view-area-select>
+					<area-select v-model="areaLs" ref="areaSelect" :type="2" item-width="153px"></area-select>
         </el-row>
 			</el-main>
 		</el-container>
@@ -51,6 +60,21 @@ export default {
 		initData(form) {
 			this.$fillProps(this.form, form);
 			this.areaLs = [+form.go_abroad_country, +form.go_abroad_province];
+			this.$nextTick(_=>{
+				this.$refs.areaSelect.onInit();
+			});
+		},
+		onUploadSuccess() {
+			this.form.avatar = e[0].download_file;
+		},
+		getForm() {
+			const [go_abroad_country, go_abroad_province] = this.areaLs;
+
+			return {
+				...this.form,
+				go_abroad_country,
+				go_abroad_province
+			};
 		}
 	}
 };

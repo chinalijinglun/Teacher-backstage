@@ -2,7 +2,7 @@
 <div class="images-list">
   <ul class="img-upload-ul">
     <li v-for="(image,index) in images" :key="index" class="img-upload-li">
-      <img :src="(preUrl||$baseApiUrl)+image" />
+      <img :src="image?(preUrl||$baseApiUrl)+image : ''" />
     </li>
   </ul>
 </div>

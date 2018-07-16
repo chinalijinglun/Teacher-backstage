@@ -302,3 +302,7 @@ export const TEACHER_WEEK_ENUM = {
   6: '周六',
   7: '周日'
 }
+export const GO_ABROAD = {
+  YES: '是',
+  NO: '否'
+}

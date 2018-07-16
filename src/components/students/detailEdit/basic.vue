@@ -6,7 +6,13 @@
 				照片
 			</el-aside>
 			<el-main class="detail-item-main">
-				<view-image :images="[form.avatar]"></view-image>
+				<img-upload 
+					name="file"
+					:preUrl="$baseApiUrl"
+					:uploadUrl="$baseApiUrl + '/upload'"
+					v-model="avatar"
+					:maxNum="1"
+				></img-upload>
 			</el-main>
 		</el-container>
 		<el-container class="detail-item">
@@ -15,7 +21,7 @@
 			</el-aside>
 			<el-main class="detail-item-main">
         <el-row>
-          <view-input :text="form.name" width="310px"></view-input>
+          <el-input size="mini" placeholder="中文名" v-model="form.name" class="detail-item-width3"></el-input>
         </el-row>
 			</el-main>
 		</el-container>
@@ -25,7 +31,7 @@
 			</el-aside>
 			<el-main class="detail-item-main">
         <el-row>
-          <view-input :text="form.first_name" width="310px"></view-input>
+          <el-input size="mini" placeholder="英文名" v-model="form.first_name" class="detail-item-width3"></el-input>
         </el-row>
 			</el-main>
 		</el-container>
@@ -35,7 +41,10 @@
 			</el-aside>
 			<el-main class="detail-item-main">
         <el-row>
-					<view-input :text="$GERDER_ENUM[form.gender]" width="310px"></view-input>
+					<el-radio-group v-model="form.gender">
+						<el-radio :label="2">男</el-radio>
+						<el-radio :label="3">女</el-radio>
+					</el-radio-group>
         </el-row>
 			</el-main>
 		</el-container>
@@ -45,7 +54,13 @@
 			</el-aside>
 			<el-main class="detail-item-main">
         <el-row>
-          <view-input :text="$dateFmt(new Date(form.birth), 'yyyy-MM-dd')" width="310px"></view-input>
+          <el-date-picker
+            v-model="form.birth"
+            size="mini"
+            type="date"
+						class="detail-item-width3"
+            placeholder="选择日期">
+          </el-date-picker>
         </el-row>
 			</el-main>
 		</el-container>
@@ -54,7 +69,7 @@
 				在读地区
 			</el-aside>
 			<el-main class="detail-item-main">
-				<view-area-select :areaLs="areaLs" ref="areaSelect" :type="2" item-width="153px"></view-area-select>
+				<area-select v-model="areaLs" ref="areaSelect" :type="2" item-width="153px"></area-select>
 			</el-main>
 		</el-container>
 		<el-container class="detail-item">
@@ -63,10 +78,10 @@
 			</el-aside>
 			<el-main class="detail-item-main">
         <el-row class="item-row">
-					<view-input  :text="form.read_school_zh" width="310px"></view-input>
+					<el-input size="mini" v-model="form.read_school_zh" placeholder="学校中文名" class="detail-item-width3"></el-input>
         </el-row>
         <el-row class="item-row">
-					<view-input  :text="form.read_school" width="310px"></view-input>
+					<el-input size="mini" v-model="form.read_school" placeholder="学校英文名" class="detail-item-width3"></el-input>
         </el-row>
 			</el-main>
 		</el-container>
@@ -76,7 +91,9 @@
 			</el-aside>
 			<el-main class="detail-item-main">
         <el-row>
-					<view-input :text="$GRADE_ENUMS[form.grade]"  width="310px"></view-input>
+					<el-select v-model="form.grade" placeholder="请选择" size="mini" class="detail-item-width3">
+						<el-option v-for="(item, key) in $GRADE_ENUMS" :key="key" :label="item" :value="key"></el-option>
+					</el-select>
         </el-row>
 			</el-main>
 		</el-container>
@@ -90,10 +107,10 @@
 			</el-aside>
 			<el-main class="detail-item-main">
         <el-row class="item-row">
-					<view-input  type="textarea" :row="3" :text="form.interest_zh" placeholder="中文" width="310px"></view-input>
+					<el-input size="mini" type="textarea" :row="3" v-model="form.interest_zh" placeholder="中文" class="detail-item-width3"></el-input>
         </el-row>
         <el-row class="item-row">
-					<view-input  type="textarea" :row="3" :text="form.interest" placeholder="英文" width="310px"></view-input>
+					<el-input size="mini" type="textarea" :row="3" v-model="form.interest" placeholder="英文" class="detail-item-width3"></el-input>
         </el-row>
 			</el-main>
 		</el-container>
@@ -103,10 +120,10 @@
 			</el-aside>
 			<el-main class="detail-item-main">
         <el-row class="item-row">
-					<view-input  type="textarea" :row="3" :text="form.award_zh" placeholder="中文" width="310px"></view-input>
+					<el-input size="mini" type="textarea" :row="3" v-model="form.award_zh" placeholder="中文" class="detail-item-width3"></el-input>
         </el-row>
         <el-row class="item-row">
-					<view-input  type="textarea" :row="3" :text="form.award" placeholder="英文" width="310px"></view-input>
+					<el-input size="mini" type="textarea" :row="3" v-model="form.award" placeholder="英文" class="detail-item-width3"></el-input>
         </el-row>
 			</el-main>
 		</el-container>
@@ -118,10 +135,10 @@
 			</el-aside>
 			<el-main class="detail-item-main">
         <el-row class="item-row">
-					<view-input  type="textarea" :row="3" :text="form.overseas_zh" placeholder="如有海外学习、生活或旅游经历，请详细描述（中文）" width="310px"></view-input>
+					<el-input size="mini" type="textarea" :row="3" v-model="form.overseas_zh" placeholder="如有海外学习、生活或旅游经历，请详细描述（中文）" class="detail-item-width3"></el-input>
         </el-row>
         <el-row class="item-row">
-					<view-input  type="textarea" :row="3" :text="form.overseas" placeholder="英文" width="310px"></view-input>
+					<el-input size="mini" type="textarea" :row="3" v-model="form.overseas" placeholder="英文" class="detail-item-width3"></el-input>
         </el-row>
 			</el-main>
 		</el-container>
@@ -131,10 +148,10 @@
 			</el-aside>
 			<el-main class="detail-item-main">
         <el-row class="item-row">
-					<view-input  type="textarea" :row="3" :text="form.english_zh" placeholder="请描述英语学习经历，如参加的培训机构、上课内容、效果评价、校内外考试成绩等（中文）" width="310px"></view-input>
+					<el-input size="mini" type="textarea" :row="3" v-model="form.english_zh" placeholder="请描述英语学习经历，如参加的培训机构、上课内容、效果评价、校内外考试成绩等（中文）" class="detail-item-width3"></el-input>
         </el-row>
         <el-row class="item-row">
-					<view-input  type="textarea" :row="3" :text="form.english" placeholder="英文" width="310px"></view-input>
+					<el-input size="mini" type="textarea" :row="3" v-model="form.english" placeholder="英文" class="detail-item-width3"></el-input>
         </el-row>
 			</el-main>
 		</el-container>
@@ -144,10 +161,10 @@
 			</el-aside>
 			<el-main class="detail-item-main">
         <el-row class="item-row">
-					<view-input  type="textarea" :row="3" :text="form.exam_results_zh" placeholder="请列出标化考试名称+成绩" width="310px"></view-input>
+					<el-input size="mini" type="textarea" :row="3" v-model="form.exam_results_zh" placeholder="请列出标化考试名称+成绩" class="detail-item-width3"></el-input>
         </el-row>
         <el-row class="item-row">
-					<view-input  type="textarea" :row="3" :text="form.exam_results" placeholder="英文" width="310px"></view-input>
+					<el-input size="mini" type="textarea" :row="3" v-model="form.exam_results" placeholder="英文" class="detail-item-width3"></el-input>
         </el-row>
 			</el-main>
 		</el-container>
@@ -157,7 +174,7 @@
 			</el-aside>
 			<el-main class="detail-item-main">
         <el-row>
-					<view-input  :text="form.parent" placeholder="学校中文名" width="310px"></view-input>
+					<el-input size="mini" v-model="form.parent" placeholder="学校中文名" class="detail-item-width3"></el-input>
         </el-row>
 			</el-main>
 		</el-container>
@@ -167,7 +184,12 @@
 			</el-aside>
 			<el-main class="detail-item-main">
         <el-row>
-					<view-input :text="form.parent_role" width="310px"></view-input>
+					<el-radio-group v-model="form.parent_role">
+						<el-radio label="父亲">父亲</el-radio>
+						<el-radio label="母亲">母亲</el-radio>
+						<el-radio label="other">其他</el-radio>
+					</el-radio-group>
+					<el-input size="mini" v-model="parent_role" placeholder="学校中文名" class="detail-item-width1"></el-input>
         </el-row>
 			</el-main>
 		</el-container>
@@ -177,7 +199,7 @@
 			</el-aside>
 			<el-main class="detail-item-main">
         <el-row>
-					<view-input  :text="form.parent_mobile" placeholder="学校中文名" width="310px"></view-input>
+					<el-input size="mini" v-model="form.parent_mobile" placeholder="家长电话" class="detail-item-width3"></el-input>
         </el-row>
 			</el-main>
 		</el-container>
@@ -187,7 +209,7 @@
 			</el-aside>
 			<el-main class="detail-item-main">
         <el-row>
-					<view-input  :text="form.parent_email" placeholder="学校中文名" width="310px"></view-input>
+					<el-input size="mini" v-model="form.parent_email" placeholder="家长邮箱" class="detail-item-width3"></el-input>
         </el-row>
 			</el-main>
 		</el-container>
@@ -197,7 +219,7 @@
 			</el-aside>
 			<el-main class="detail-item-main">
         <el-row>
-					<view-input  :text="form.remark" placeholder="学校中文名" width="310px"></view-input>
+					<el-input size="mini" v-model="form.remark" placeholder="其他备注信息" class="detail-item-width3"></el-input>
         </el-row>
 			</el-main>
 		</el-container>
@@ -212,6 +234,7 @@ import studentSubject from './subject'
 export default {
 	data() {
 		return {
+			avatar: [], //照片
 			areaLs: [],
 			parent_role: '',
 			form: {
@@ -247,6 +270,14 @@ export default {
 		initData(form) {
 			this.$fillProps(this.form, form);
 			this.areaLs = [+form.read_country, +form.read_province];
+			this.$nextTick(_=>{
+				this.$refs.areaSelect.onInit();
+			});
+			this.avatar = [form.avatar];
+			if(form.parent_role !== '父亲' && form.parent_role !== '母亲'){
+				this.form.parent_role = 'other';
+				this.parent_role = form.parent_role;
+			}
 			this.$refs.studentChannel.initData(form);
 			this.$refs.studentAbroad.initData(form);
 			

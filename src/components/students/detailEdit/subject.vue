@@ -3,17 +3,25 @@
   <el-aside class="detail-item-aside" width="200px">
     意向学习科目
   </el-aside>
-  <el-main class="detail-item-main ">
+  <el-main class="detail-item-main">
+    <el-row class="item-inner-row">
+      <el-button size="mini" type="primary" @click="add">添加科目</el-button>
+      <el-button size="mini" @click="remove">删除科目</el-button>
+    </el-row>
     <el-row>
       <el-table
         :data="tableData"
-        class="detail-item-width3"
+        @selection-change="handlerSelectionChange"
         border>
+        <el-table-column
+          width="50px"
+          type="selection"
+          label="选择">
+        </el-table-column>
         <el-table-column
           label="课程分类">
           <template slot-scope="scope">
-            <view-input v-if="!scope.row.subjects[2]" :text="scope.row.subjects[3] || '未填写'"></view-input>
-            <view-subject-select v-if="scope.row.subjects[2]" :id="scope.row.subjects[2]"></view-subject-select>
+            <curriculum-select v-model="scope.row.subjects" :type="3" :has-other="true"></curriculum-select>
           </template>
         </el-table-column>
       </el-table>
@@ -38,6 +46,32 @@ export default {
         this.tableData.push({subjects:[item.curriculum_id, item.subject_category_id, item.subject_id, item.subject_name],id:item.id})
         this.removeLs.push(item.id)
       })
+    },
+    getForm() {
+      console.log(this.tableData);
+      const addLs = this.tableData.map(item => ({
+        subject_id: item.subjects[2] || undefined,
+        subject_name: item.subjects[3]
+      }));
+      return {
+        removeLs: this.removeLs,
+        addLs,
+      }
+    },
+    handlerSelectionChange(e) {
+      this.selectRow = e.map(item => this.tableData.indexOf(item))
+    },
+    add() {
+      this.tableData.push({subjects:[],id: ''})
+    },
+    remove() {
+      if(!this.selectRow.length) {
+        this.$message.error('请选择要删除的行！')
+      } else {
+        const newTable = [...this.tableData]
+        this.selectRow.forEach(i => newTable[i] = undefined)
+        this.tableData = newTable.filter(item => item)
+      }
     }
 	}
 };
