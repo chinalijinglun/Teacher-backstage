@@ -2,7 +2,7 @@
   <el-row class="course-detail-block">
     <p class="title">课程顾问/班主任与学生沟通记录</p>
     <div class="title-info">
-      <el-input class="big-input" v-model="form.logText"></el-input>
+      <el-input class="big-input" type="textarea" :rows="3" v-model="content"></el-input>
     </div>
     <div class="center">
       <el-button type="primary" size="small" @click="goSave">
@@ -11,19 +11,15 @@
     </div>
     <p class="title">历史记录</p>
     <ul class="course-table">
-      <li>
-        <p>2018-02-27 11:25:30 <span>添加人：Kid</span></p>
-        <p>联系了学生家长</p>
-      </li>
-      <li>
-        <p>2018-02-27 11:25:30 <span>添加人：Kid</span></p>
-        <p>联系了学生家长</p>
+      <li v-for="item in logs" :key="item.id">
+        <p>{{item.created_at}} <span>添加人：{{item.updated_by}}</span></p>
+        <p>{{item.action_event_desc}}</p>
       </li>
     </ul>
     <div class="block">
       <el-pagination 
         @current-change="handleCurrentChange" 
-        :current-page="form.page_no" 
+        :current-page="page" 
         :page-size="10" 
         layout="total, prev, pager, next, jumper" 
         :total="totalCount">
@@ -32,26 +28,58 @@
   </el-row>
 </template>
 <script>
+  import {
+    //@param {before_state, after_state, primary_data_id, action_event_desc, action_event_type} form
+    actionEventPost,
+    actionEventBareGet
+  } from '@/api/action_event'
+  import {
+    ACTION_EVENT_TYPE
+  } from '@/utils/enums'
   export default {
     name: 'student-chat-log',
     data() {
       return {
-        form: {
-          logText: '',
-          page_no: 1,
-          page_limit: 10
+        logs: [],
+        actionEventConfig: {
+          action_event_type: ACTION_EVENT_TYPE.UNKNOWN,
+          primary_table_name: 'student',
+          before_state: 0,
+          after_state: 0,
         },
+        page: 1,
+        content: '',
 			  totalCount: 0
       };
     },
     created() {
+      this.query()
     },
+    props: ['studentId'],
     methods: {
+      query() {
+        const filter = this.$json2filter({
+          ...this.actionEventConfig,
+          primary_data_id: this.studentId
+        });
+        return actionEventBareGet(filter, {page:this.page}).then(resp => {
+          this.logs = resp.data.objects;
+          this.totalCount = resp.data.num_results;
+        })
+      },
       handleCurrentChange(val) {
-        this.form.page_no = val;
+        this.page = val;
+        this.query()
       },
       goSave(){
-
+        return actionEventPost({
+          ...this.actionEventConfig,
+          primary_data_id: this.studentId,
+          action_event_desc: this.content
+        }).then(resp => {
+          this.content = '';
+          this.query()
+        })
       }
     }
   }

@@ -11,7 +11,7 @@
       <student-info-block v-if="$route.query.blkname==='info' && !$route.query.updated" :student-id="studentId"></student-info-block>
       <student-edit-block v-if="$route.query.blkname==='info' && $route.query.updated" :student-id="studentId"></student-edit-block>
       <student-requirements v-if="$route.query.blkname==='requirements'"></student-requirements>
-      <student-chat-log v-if="$route.query.blkname==='chat'" :detail="detail.id"></student-chat-log>
+      <student-chat-log v-if="$route.query.blkname==='chat'" :student-id="studentId"></student-chat-log>
     </el-row>
   </div>
 </template>
