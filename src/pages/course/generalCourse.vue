@@ -37,7 +37,7 @@
               </el-form-item>
             </el-row>
           </div>
-          <el-button type="primary" size="mini">查询</el-button>
+          <el-button type="primary" @click="query" size="mini">查询</el-button>
         </el-form>
       </div>
     </div>
@@ -65,6 +65,7 @@
         <el-table-column fixed="right" label="操作" style="width: 15%;">
           <template slot-scope="scope">
             <el-button size="mini" v-if="!scope.row.course_schedule_id" @click="toSetSchedule(scope.row.id)">排课</el-button>
+            <el-button size="mini" v-else @click="toCourseDetail(scope.row.id)">查看详情</el-button>
           </template>
         </el-table-column>
       </el-table>
@@ -121,6 +122,12 @@
         this.$router.push({
           path: '/course/subscribeCourses',
           query: {id}
+        })
+      },
+      toCourseDetail(id) {
+        this.$router.push({
+          path: '/course/courseDetail',
+          query: {id, blkname: 'list'}
         })
       }
     }

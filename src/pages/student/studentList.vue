@@ -66,7 +66,7 @@
             width="180">
           </el-table-column>
           <el-table-column
-            prop="student_name"
+            prop="username"
             label="学生姓名">
           </el-table-column>
           <el-table-column
@@ -74,13 +74,23 @@
             label="年级">
           </el-table-column>
           <el-table-column
+            prop="parent_mobile"
+            label="家长联系电话">
+          </el-table-column>
+          <el-table-column
             prop="channel_name"
             label="来源">
           </el-table-column>
           <el-table-column
+            width="420px"
             label="操作">
             <template slot-scope="scope">
-              <el-button size="mini" @click="toDetail(scope.row)">查看</el-button>
+              <el-row>
+                <el-button size="mini" @click="toDetail(scope.row)">他的资料</el-button>
+                <el-button size="mini">报名试听</el-button>
+                <el-button size="mini" @click="$router.push(`/course/auditions?student_id=${scope.row.id}`)">他的试听课</el-button>
+                <el-button size="mini" @click="$router.push(`/course/generalCourse?student_id=${scope.row.id}`)">他的普通课</el-button>
+              </el-row>
             </template>
           </el-table-column>
         </el-table>
@@ -109,7 +119,6 @@
   import {
     curriculumGetBare
   } from '@/api/curriculum'
-
   import {
     subjectCategoryGetBare
   } from '@/api/subject_category'

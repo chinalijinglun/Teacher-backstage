@@ -14,8 +14,16 @@ import addCurriculum from '@/pages/course/addCurriculum';
 import addSubject from '@/pages/course/addSubject';
 import addSubjectCategory from '@/pages/course/addSubjectCategory';
 import subscribeCourses from '@/pages/course/subscribeCourses';
+import courseDetail from '@/pages/course/courseDetail';
 
 export default [
+    {
+      // 课程详情
+      name:'课程详情',
+      path: 'courseDetail',
+      name: 'courseDetail',
+      component: courseDetail
+    },
     {
       // 课程分类
       name:'课程分类',

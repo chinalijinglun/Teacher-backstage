@@ -1,5 +1,5 @@
 <template>
-  <el-dialog title="选择教师" :visible.sync="visible">
+  <el-dialog title="选择教师" :visible.sync="dialogVisible">
     <el-row>
       <el-form :inline="true">
         <el-form-item>
@@ -12,11 +12,7 @@
     </el-row>
     <el-table :data="teacherLs">
       <el-table-column property="id" label="id" width="150"></el-table-column>
-      <el-table-column label="姓名" width="200">
-        <template slot-scope="scope">
-          {{ scope.row.given_name + ' ' + scope.row.family_name}}
-        </template>
-      </el-table-column>
+      <el-table-column label="姓名" property="username" width="200"></el-table-column>
       <el-table-column property="username" label="用户名"></el-table-column>
       <el-table-column label="操作">
         <template slot-scope="scope">
@@ -37,6 +33,7 @@
     teacherGet
   } from "@/api/teacher";
 
+  import dialogContainer from '@/components/commons/mixins/dialogContainer'
   export default {
     name: 'teacherDialog',
     data() {
@@ -46,6 +43,7 @@
         queryStr: ''
       }
     },
+    mixins: [dialogContainer],
     props: {
       visible: {
         type: Boolean,
