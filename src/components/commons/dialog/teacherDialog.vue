@@ -6,7 +6,7 @@
           <el-input size="mini" placeholder="输入教师姓名、用户名或ID" v-model="queryStr"></el-input>
         </el-form-item>
         <el-form-item>
-          <el-button size="mini">查询</el-button>
+          <el-button size="mini" @click="getTeacher">查询</el-button>
         </el-form-item>
       </el-form>
     </el-row>
@@ -22,6 +22,9 @@
     </el-table>
     <el-row style="text-align: right">
       <el-pagination
+        @current-change="handleCurrentChange"
+        :page-size="10"
+        :current-page.sync="page"
         layout="prev, pager, next"
         :total="total">
       </el-pagination>
@@ -39,6 +42,7 @@
     data() {
       return {
         teacherLs: [],
+        page: 1,
         total: 0,
         queryStr: ''
       }
@@ -54,18 +58,23 @@
       this.onInit();
     },
     methods: {
+      handleCurrentChange(p) {
+        this.page = p;
+        this.onInit()
+      },
       onInit() {
         this.getTeacher().then(res => {
           this.teacherLs = res.objects;
           this.total = res.num_results;
         });
       },
-      getTeacher(queryStr) {
+      getTeacher() {
         const filter = this.$json2filter({
           'id|username|given_name|family_name': this.queryStr
         });
-        filter.limit = this.$MINI_LIMIT;
-        return teacherGet(filter).then(resp => {
+        return teacherGet(filter, {
+          page: this.page
+        }).then(resp => {
           return resp.data;
         });
       },
