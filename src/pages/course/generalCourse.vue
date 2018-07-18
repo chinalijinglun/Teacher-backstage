@@ -84,7 +84,7 @@
 </template>
 <script>
   import {
-    mangerThacherCommon
+    courseCommon
   } from '@/api/course'
   export default {
     data() {
@@ -110,7 +110,7 @@
       },
       query() {
         const f = this.$deleteEmptyProps(this.form);
-        return mangerThacherCommon({
+        return courseCommon({
           ...f,
           page_limit: 10
         }).then(resp => {
