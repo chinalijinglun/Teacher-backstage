@@ -1,21 +1,5 @@
 <template>
   <el-row class="course-detail-block">
-    <div class="title-info">
-      <ul>
-        <li class="title-info-li">
-          <span class="info-key">学生名称</span>
-          <span class="info-value">{{student_name}}</span>
-        </li>
-        <li class="title-info-li">
-          <span class="info-key">教师名称</span>
-          <span class="info-value">{{teacher_name}}</span>
-        </li>
-        <li class="title-info-li">
-          <span class="info-key">班主任/助教</span>
-          <span class="info-value">{{`${student_helpers_name}/${consultants_name}`}}</span>
-        </li>
-      </ul>
-    </div>
     <div class="course-table">
       <el-table
         :data="tableData"
