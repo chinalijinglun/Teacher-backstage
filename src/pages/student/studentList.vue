@@ -87,7 +87,7 @@
             <template slot-scope="scope">
               <el-row>
                 <el-button size="mini" @click="toDetail(scope.row)">他的资料</el-button>
-                <el-button size="mini">报名试听</el-button>
+                <el-button size="mini" @click="toAppoint(scope.row)">报名试听</el-button>
                 <el-button size="mini" @click="$router.push(`/course/auditions?student_id=${scope.row.id}`)">他的试听课</el-button>
                 <el-button size="mini" @click="$router.push(`/course/generalCourse?student_id=${scope.row.id}`)">他的普通课</el-button>
               </el-row>
@@ -105,10 +105,11 @@
         </el-pagination>
       </el-row>
     </el-row>
+    <appoint-course :visible.async="visible" :id="curId"></appoint-course>
   </div>
 </template>
 <script>
-  import assignConselorDialog from '@/components/students/dialog/assignConselorDialog';
+  import appointCourse from '@/components/students/dialog/appointCourse';
   import paginationMix from '@/components/commons/mixins/paginationMix';
   import {
     mangerStudents
@@ -143,7 +144,9 @@
           page: 1
         },
         totalCount: 0,
-        tableData: []
+        tableData: [],
+        curId: '',
+        visible: false
       };
     },
     created() {
@@ -152,6 +155,12 @@
       this.getCurriculumLs();
     },
     methods: {
+      toAppoint(row) {
+        this.curId = row.id;
+        this.$nextTick(_=>{
+          this.visible = true;
+        })
+      },
       query() {
         const {
           category_1,
@@ -220,7 +229,7 @@
     },
     mixins: [paginationMix],
     components: {
-      assignConselorDialog
+      appointCourse
     }
   }
 </script>

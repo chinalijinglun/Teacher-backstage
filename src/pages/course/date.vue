@@ -2,85 +2,178 @@
 <!-- 预约 -->
 <div class="date">
 	<el-button type="primary" size="mini">学生信息</el-button>
-	<div class="detail-content">
-		详细信息内容
-	</div>
 	<div class="student-needs">
-		<div class="stneeds">
-			学生需求
-		</div>
-		<div class="need-time">
-			2018-02-27 11:25:30
-		</div>
-		<div class="mian-content">
-			Lorem ipsum dolor sit amet, consectetur adipiscing elit. Aenean euismod bibendum laoreet. Proin gravida dolor sit amet lacus accumsan et viverra justo commodo. Proin sodales pulvinar tempor. Cum sociis natoque penatibus et magnis dis parturient montes, nascetur ridiculus mus. Nam fermentum, nulla luctus pharetra vulputate, felis tellus mollis orci, sed rhoncus sapien nunc eget.
+		<div class="trial-time">
+			<div class="trial-name">
+				试听学生
+			</div>
+			<div class="detail-time">
+				{{ info.studentName }}
+			</div>
 		</div>
 		<div class="trial-time">
 			<div class="trial-name">
 				试听时间
 			</div>
 			<div class="detail-time">
-				2018.05.27 13:00 - 13:50
+				{{ `${info.open_time_start} - ${info.open_time_end}` }}
 			</div>
 		</div>
 	</div>
+	<el-row class="date-teacher">
+		<p>接受情况</p>
+		<el-table :data="hisLs" style="width: 100%">
+			<el-table-column prop="id" label="ID" width="100">
+			</el-table-column>
+			<el-table-column prop="username" label="教师姓名" style="width:10%">
+			</el-table-column>
+			<el-table-column prop="mobile" label="联系电话" style="width:10%">
+			</el-table-column>
+			<el-table-column prop="email" label="联系邮箱" style="width:10%">
+			</el-table-column>
+			<el-table-column label="时区" style="width:10%">
+				<template slot-scope="scope">
+					{{ $TIME_ZONE_ENUM[scope.row.timezone] }}
+				</template>
+			</el-table-column>
+		</el-table>
+	</el-row>
 	<div class="date-teacher">
 		教师姓名：
-		<input placeholder="请输入中文名称/英文名称" type="text" class="placehold">
-		<el-button>确定</el-button>
+		<input placeholder="请输入教师ID" size="mini" type="text" v-model="input.id" class="placehold">
+		<el-button size="mini" @click="add">确定</el-button>
 	</div>
-	<el-table :data="tableData" style="width: 100%">
+	<el-table :data="tableData" style="width: 100%" @selection-change="handleSelectionChange">
+		<el-table-column type="selection" label="ID" width="50">
+		</el-table-column>
 		<el-table-column prop="id" label="ID" width="100">
 		</el-table-column>
-		<el-table-column prop="username" label="用户名" style="width:10%">
+		<el-table-column prop="username" label="教师姓名" style="width:10%">
 		</el-table-column>
-		<el-table-column prop="teachername" label="教师姓名" style="width:10%">
-		</el-table-column>
-		<el-table-column prop="telphone" label="联系电话" style="width:10%">
+		<el-table-column prop="mobile" label="联系电话" style="width:10%">
 		</el-table-column>
 		<el-table-column prop="email" label="联系邮箱" style="width:10%">
 		</el-table-column>
-		<el-table-column prop="registime" label="注册时间" style="width:10%">
+		<el-table-column label="时区" style="width:10%">
+			<template slot-scope="scope">
+				{{ $TIME_ZONE_ENUM[scope.row.timezone] }}
+			</template>
 		</el-table-column>
 	</el-table>
-
-	<div class="date-teacher">
-		试听课程：
-	</div>
-	<el-table :data="tableData1" style="width: 100%">
-		<el-table-column prop="courseName" label="用户名" width="200">
-		</el-table-column>
-		<el-table-column prop="teachername" label="教师姓名" width="180">
-		</el-table-column>
-		<el-table-column prop="time" label="联系电话" width="180">
-		</el-table-column>
-	</el-table>
+	<el-row class="btn-container date-block">
+		<el-button @click="date">预约</el-button>
+		<el-button @click="remove">删除</el-button>
+	</el-row>
+	<el-row class="info date-block">
+		<p>
+			说明：可以同时预约多个老师，输入教师ID，点添加加入到下方列表里，可以删除，点预约就发送到老师端，老师那边先确定的得到这次试听课，其他人不能在上课了。
+		</p>
+	</el-row>
 </div>
 </template>
-
 <script>
+import {
+	teacherGetBareByTeacherid
+} from '@/api/teacher';
+import {
+	courseAppointmentPost,
+	getCourseAppointmentByStudyAppointmentId
+} from '@/api/course_appointment';
+import {
+	studyAppointmentmentBareGetById
+} from '@/api/study_appointment';
+import {
+	studentBareGetById
+} from '@/api/student';
+import { mapState } from 'vuex';
+
 export default {
+	computed: {
+		...mapState({
+			userName: state => state.auth.userName
+		})
+	},
   data() {
     return {
-      tableData: [
-        {
-          id: "0001",
-          username: "laoxu184962824@163.com",
-          teachername: "Kira Yuan",
-          telphone: 17111111111,
-          email: "laoxu184962824@163.com",
-          registime: "2018-02-27 11:25:30"
-        }
-      ],
-      tableData1: [
-        {
-          courseName: "ESL英语综合提升中级",
-          teachername: "Kira Yuan",
-          time: "2018.02.27 — 04.28"
-        }
-      ]
+			info: {
+				studentName: '',
+				open_time_end: '',
+				open_time_start: ''
+			},
+			input: {
+				id: ''
+			},
+			// 已预约的教师列表
+			hisLs: [],
+			study_appointment_id: '',
+			teacherIdLs: [],
+			tableData: [],
+			choseLs: []
     };
-  }
+	},
+	created() {
+		this.study_appointment_id = this.$route.query.id;
+		this.detail();
+	},
+	methods: {
+		handleSelectionChange(e) {
+			this.choseLs = e;
+		},
+		detail() {
+			getCourseAppointmentByStudyAppointmentId(this.study_appointment_id).then(resp => {
+				this.hisLs = resp.data.objects;
+			});
+			return studyAppointmentmentBareGetById(this.study_appointment_id).then(resp => {
+				const {data:{student_id, open_time_end, open_time_start}} = resp;
+				studentBareGetById(student_id).then(res => {
+					this.info.studentName = res.data.name;
+					this.info.open_time_end = open_time_end;
+					this.info.open_time_start = open_time_start;
+				})
+			});
+		},
+		add() {
+			const id = +this.input.id;
+			if(this.teacherIdLs.indexOf(id)===-1) {
+				teacherGetBareByTeacherid(id).then(resp => {
+					if(resp.data) {
+						this.tableData.push(resp.data);
+						this.teacherIdLs.push(resp.data.id);
+					}
+				});
+			}
+		},
+		remove() {
+			this.choseLs.forEach(item => {
+				const index = this.tableData.indexOf(item);
+				const indexId = this.teacherIdLs.indexOf(item.id);
+				this.tableData.splice(index, 1);
+				this.teacherIdLs.splice(index, 1);
+			});
+		},
+		date() {
+			// console.log(this.tableData.map(item=>item.id))
+			const promiseAll = this.teacherIdLs.map(id=>this.dateTeacher(id))
+			Promise.all(promiseAll).then(resp => {
+				this.$message.success('预约成功');
+				this.goback();
+			})
+		},
+		dateTeacher(id) {
+			return courseAppointmentPost({
+				appointment_state: 3,
+				created_at: new Date(),
+				delete_flag: 1,
+				study_appointment_id: this.study_appointment_id,
+				updated_at: new Date(),
+				updated_by: this.userName,
+				teacher_id: id
+			})
+		},
+		goback(){
+			this.$router.back()
+		}
+	}
 };
 </script>
 
@@ -132,5 +225,8 @@ export default {
 }
 .date-teacher {
   margin-top: 20px;
+}
+.date-block {
+	margin-top: 20px;
 }
 </style>

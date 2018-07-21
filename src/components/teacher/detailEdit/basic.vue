@@ -84,7 +84,10 @@
 			</el-aside>
 			<el-main class="detail-item-main">
         <el-row>
-					<el-input size="mini" v-model="form.timezone" class="detail-item-width3"></el-input>
+					<el-select v-model="form.timezone" placeholder="请选择" size="mini">
+						<el-option label="所有状态" value=""></el-option>
+						<el-option v-for="(item,key) in $TIME_ZONE_ENUM" :key="key" :label="item" :value="key"></el-option>
+					</el-select>
         </el-row>
 			</el-main>
 		</el-container>
