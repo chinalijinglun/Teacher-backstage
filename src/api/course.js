@@ -22,3 +22,6 @@ export const courseSchedule = (form) => baseAxios.post('/course/schedule', form)
 export const studentTryout = (form) => baseAxios.post('/manger/student_tryout',form);
 
 export const mangerStudentTryoutApply = (form) => baseAxios.post('/manger/student_tryout_apply', form);
+
+// 课程详情
+export const getCourseSchedule = (form) => baseAxios.post('/course/course_schedule', form)

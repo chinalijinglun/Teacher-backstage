@@ -125,7 +125,7 @@ export const MOBILE_PRE = {
 
 export const COUNTRY_IDS = [7, 140, 25, 99];
 
-export const TIME_ZONE = {
+export const TIME_ZONE_ENUM = {
   'Asia/Shanghai': '中国标准时间 (北京)',
 	'Asia/Hong_Kong': '香港时间 (香港)',
 	'Asia/Taipei': '台北时间 (台北)',
@@ -210,7 +210,7 @@ export const TIME_ZONE = {
   'Pacific/Fiji': '斐济',
   'Pacific/Tongatapu': '东加塔布'
 }
-export const TIME_ZONE_ENUM = {
+export const TIME_ZONE = {
     "0":"Asia/Shanghai",
     "1":"Asia/Hong_Kong",
     "2":"Asia/Taipei",
@@ -393,8 +393,13 @@ export const GO_ABROAD = {
 }
 
 export const APPOINTMENT_STATE_ENUM = {
-  1: '待预约',
-  2: '待接受',
-  3: '待上课',
-  4: '已完成'
+  'WRITE_APPOINTMENT': '待预约',
+  'WRITE_ACCEPT': '待接受',
+  'WRITE_CLASS': '待上课',
+  'FINISH': '已完成'
+}
+export const COURSE_APPOINTMENT_STATE_ENUM = {
+  'APPLY': '未接受',
+  'REFUSE': '拒绝',
+  'ACCEPT': '接受'
 }

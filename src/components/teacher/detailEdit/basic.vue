@@ -21,9 +21,9 @@
 			</el-aside>
 			<el-main class="detail-item-main">
         <el-row>
-          <el-input size="mini" v-model="form.first_name" class="detail-item-width1"></el-input>
-          <el-input size="mini" v-model="form.middle_name" class="detail-item-width1"></el-input>
-          <el-input size="mini" v-model="form.last_name" class="detail-item-width1"></el-input>
+          <el-input size="mini" placeholder="first name" v-model="form.first_name" class="detail-item-width1"></el-input>
+          <el-input size="mini" placeholder="middle name" v-model="form.middle_name" class="detail-item-width1"></el-input>
+          <el-input size="mini" placeholder="last name" v-model="form.last_name" class="detail-item-width1"></el-input>
         </el-row>
 			</el-main>
 		</el-container>
@@ -33,7 +33,7 @@
 			</el-aside>
 			<el-main class="detail-item-main">
         <el-row>
-          <el-input size="mini" v-model="form.email" class="detail-item-width3"></el-input>
+          <el-input size="mini" placeholder="email" v-model="form.email" class="detail-item-width3"></el-input>
         </el-row>
 			</el-main>
 		</el-container>
@@ -44,9 +44,9 @@
 			<el-main class="detail-item-main">
         <el-row>
 					<el-select size="mini" v-model="form.nation" class="detail-item-width1">
-						<el-option label="全部" value=""></el-option>
+						<el-option v-for="(item,key) in $MOBILE_PRE" :key="key" :label="item" :value="key"></el-option>
 					</el-select>
-          <el-input size="mini" v-model="form.mobile" class="detail-item-width2"></el-input>
+          <el-input size="mini" placeholder="mobile" v-model="form.mobile" class="detail-item-width2"></el-input>
         </el-row>
 			</el-main>
 		</el-container>
@@ -64,7 +64,7 @@
 			</el-aside>
 			<el-main class="detail-item-main">
         <el-row>
-					<el-input size="mini" v-model="form.street" class="detail-item-width3"></el-input>
+					<el-input size="mini" placeholder="街道/县区" v-model="form.street" class="detail-item-width3"></el-input>
         </el-row>
 			</el-main>
 		</el-container>
@@ -74,7 +74,7 @@
 			</el-aside>
 			<el-main class="detail-item-main">
         <el-row>
-					<el-input size="mini" v-model="form.zipone" class="detail-item-width3"></el-input>
+					<el-input size="mini" placeholder="邮政编码" v-model="form.zipone" class="detail-item-width3"></el-input>
         </el-row>
 			</el-main>
 		</el-container>
@@ -84,9 +84,8 @@
 			</el-aside>
 			<el-main class="detail-item-main">
         <el-row>
-					<el-select v-model="form.timezone" placeholder="请选择" size="mini">
-						<el-option label="所有状态" value=""></el-option>
-						<el-option v-for="(item,key) in $TIME_ZONE_ENUM" :key="key" :label="item" :value="key"></el-option>
+					<el-select v-model="form.timezone" placeholder="请选择" size="mini" class="detail-item-width3">
+						<el-option v-for="(item,key) in $TIME_ZONE_ENUM" :key="key" :label="key" :value="key"></el-option>
 					</el-select>
         </el-row>
 			</el-main>
@@ -97,7 +96,7 @@
 			</el-aside>
 			<el-main class="detail-item-main">
         <el-row>
-					<el-input size="mini" v-model="form.skype_account" class="detail-item-width3"></el-input>
+					<el-input size="mini" placeholder="Skype账号" v-model="form.skype_account" class="detail-item-width3"></el-input>
         </el-row>
 			</el-main>
 		</el-container>
@@ -107,7 +106,7 @@
 			</el-aside>
 			<el-main class="detail-item-main">
         <el-row>
-					<el-input size="mini" v-model="form.video_url" class="detail-item-width3"></el-input>
+					<el-input size="mini" placeholder="视频介绍" v-model="form.video_url" class="detail-item-width3"></el-input>
         </el-row>
 			</el-main>
 		</el-container>
@@ -117,7 +116,7 @@
 			</el-aside>
 			<el-main class="detail-item-main">
         <el-row>
-					<el-input v-model="form.about_me" type="textarea" :rows="3" size="mini" class="detail-item-width3"></el-input>
+					<el-input v-model="form.about_me" placeholder="自我介绍" type="textarea" :rows="3" size="mini" class="detail-item-width3"></el-input>
         </el-row>
 			</el-main>
 		</el-container>

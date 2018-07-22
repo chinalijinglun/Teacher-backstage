@@ -20,20 +20,22 @@
 			</div>
 		</div>
 	</div>
-	<el-row class="date-teacher">
+	<el-row class="date-teacher" v-if="hisLs.length">
 		<p>接受情况</p>
 		<el-table :data="hisLs" style="width: 100%">
 			<el-table-column prop="id" label="ID" width="100">
 			</el-table-column>
-			<el-table-column prop="username" label="教师姓名" style="width:10%">
+			<el-table-column prop="teacher_name" label="教师姓名" style="width:10%">
 			</el-table-column>
 			<el-table-column prop="mobile" label="联系电话" style="width:10%">
 			</el-table-column>
 			<el-table-column prop="email" label="联系邮箱" style="width:10%">
 			</el-table-column>
-			<el-table-column label="时区" style="width:10%">
+			<el-table-column label="时区" prop="timezone" style="width:10%">
+			</el-table-column>
+			<el-table-column label="状态" style="width:10%">
 				<template slot-scope="scope">
-					{{ $TIME_ZONE_ENUM[scope.row.timezone] }}
+					{{ $COURSE_APPOINTMENT_STATE_ENUM[scope.row.appointment_state] }}
 				</template>
 			</el-table-column>
 		</el-table>
@@ -61,7 +63,7 @@
 		</el-table-column>
 	</el-table>
 	<el-row class="btn-container date-block">
-		<el-button @click="date">预约</el-button>
+		<el-button @click="date" type="primary">预约</el-button>
 		<el-button @click="remove">删除</el-button>
 	</el-row>
 	<el-row class="info date-block">
@@ -80,7 +82,9 @@ import {
 	getCourseAppointmentByStudyAppointmentId
 } from '@/api/course_appointment';
 import {
-	studyAppointmentmentBareGetById
+	studyAppointmentmentBareGetById,
+	studyAppointmentmentPutById,
+	getDateTeacherLsById
 } from '@/api/study_appointment';
 import {
 	studentBareGetById
@@ -121,8 +125,11 @@ export default {
 		},
 		detail() {
 			getCourseAppointmentByStudyAppointmentId(this.study_appointment_id).then(resp => {
-				this.hisLs = resp.data.objects;
+				this.teacherIdLs = resp.data.objects.map(item => item.teacher_id);
 			});
+			getDateTeacherLsById(this.study_appointment_id).then(resp => {
+				this.hisLs = resp.data.objects;
+			})
 			return studyAppointmentmentBareGetById(this.study_appointment_id).then(resp => {
 				const {data:{student_id, open_time_end, open_time_start}} = resp;
 				studentBareGetById(student_id).then(res => {
@@ -153,15 +160,22 @@ export default {
 		},
 		date() {
 			// console.log(this.tableData.map(item=>item.id))
-			const promiseAll = this.teacherIdLs.map(id=>this.dateTeacher(id))
-			Promise.all(promiseAll).then(resp => {
+			const promiseAll = this.tableData.map(item=>this.dateTeacher(item.id));
+			Promise.all([...promiseAll, this.changeState()]).then(resp => {
 				this.$message.success('预约成功');
 				this.goback();
+			});
+		},
+		changeState() {
+			return studyAppointmentmentPutById(this.study_appointment_id, {
+				updated_at: new Date(),
+				updated_by: this.userName,
+				appointment_state: 2
 			})
 		},
 		dateTeacher(id) {
 			return courseAppointmentPost({
-				appointment_state: 3,
+				appointment_state: 1,
 				created_at: new Date(),
 				delete_flag: 1,
 				study_appointment_id: this.study_appointment_id,

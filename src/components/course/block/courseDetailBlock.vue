@@ -23,8 +23,20 @@
           label="上课时间">
         </el-table-column>
         <el-table-column
+          label="课件">
+          <template slot-scope="scope">
+            {{+scope.row.courseware_num > 0?'已上传':'未上传'}}
+          </template>
+        </el-table-column>
+        <el-table-column
           prop="state_text"
-          label="状态">
+          label="课节状态">
+        </el-table-column>
+        <el-table-column
+          label="课节类型">
+          <template slot-scope="scope">
+            {{scope.row.schedule_type}}
+          </template>
         </el-table-column>
         <el-table-column label="操作">
           <template slot-scope="scope">
@@ -51,9 +63,8 @@
 </template>
 <script>
   import {
-    studentSchedule,
-    studentGetById
-  } from '@/api/student'
+    getCourseSchedule
+  } from '@/api/course'
   import paginationMix from '@/components/commons/mixins/paginationMix';
 
   export default {
@@ -61,7 +72,6 @@
     data() {
       return {
         form: {
-          student_id: '',
           course_id: '',
           page: 1
         },
@@ -76,22 +86,10 @@
       };
     },
     created() {
-      this.form.student_id = this.$route.query.id;
-      this.form.course_id = this.$route.query.course_id;
-      this.student_name = decodeURI(this.$route.query.student_name);
-      this.teacher_name = decodeURI(this.$route.query.teacher_name);
-      this.course_name = decodeURI(this.$route.query.course_name);
+      this.form.course_id = this.$route.query.id;
       this.query();
-      this.getCourseInfo();
     },
     methods: {
-      getCourseInfo() {
-        studentGetById(this.form.student_id).then(resp => {
-          console.log('res', resp)
-          this.student_helpers_name = resp.data.student_helpers.username;
-          this.consultants_name = resp.data.consultants.username;
-        });
-      },
       toEvaluate(row) {
         this.$router.push({
           path: '/student/scheduleEvaluate',
@@ -125,12 +123,10 @@
       },
       query() {
         const {
-          student_id,
           course_id,
           page: page_no
         } = this.form;
-        studentSchedule({
-          student_id,
+        getCourseSchedule({
           course_id,
           page_no,
           page_limit: 10

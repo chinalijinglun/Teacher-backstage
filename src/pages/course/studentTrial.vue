@@ -41,10 +41,14 @@
 				<el-table-column prop="open_time_start" label="试听时间" style="width: 10%;">
 				</el-table-column>
 				<el-table-column prop="appointment_state" label="状态" style="width: 15%;">
+					<template slot-scope="scope">
+						{{$APPOINTMENT_STATE_ENUM[scope.row.appointment_state]}}
+					</template>
 				</el-table-column>
 				<el-table-column label="操作" style="width: 15%;">
 					<template slot-scope="scope">
-						<el-button size="mini" @click="toDate(scope.row.study_appointment_id)">预约</el-button>
+						<el-button size="mini" @click="toDate(scope.row.study_appointment_id)" v-if="scope.row.appointment_state === 'WRITE_APPOINTMENT'">预约</el-button>
+						<el-button size="mini" @click="toDate(scope.row.study_appointment_id)" v-if="scope.row.appointment_state === 'WRITE_ACCEPT'">编辑查看</el-button>
 					</template>
 				</el-table-column>
 			</el-table>

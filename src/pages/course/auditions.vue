@@ -45,27 +45,28 @@
     <div class="table-list">
 
       <el-table :data="tableData" style="width: 100%;margin-top:20px;">
-        <el-table-column fixed prop="zhname" label="编号" style="width: 15%;">
+        <el-table-column fixed prop="id" label="编号" style="width: 15%;">
         </el-table-column>
-        <el-table-column prop="enname" label="试讲课程" style="width: 15%;">
+        <el-table-column prop="course_name" label="试讲课程名称" style="width: 15%;">
         </el-table-column>
-        <el-table-column prop="zip" label="年纪" style="width: 10%;">
+        <el-table-column prop="teacher_name" label="教师姓名" style="width: 10%;">
         </el-table-column>
-        <el-table-column prop="province" label="教师姓名" style="width: 10%;">
+        <el-table-column prop="student_name" label="学生" style="width: 10%;">
         </el-table-column>
-        <el-table-column prop="address" label="学生" style="width: 10%;">
+        <el-table-column prop="start" label="上课时间" style="width: 10%;">
         </el-table-column>
-        <el-table-column prop="date" label="上课时间" style="width: 10%;">
+        <el-table-column prop="courseware_num" label="课件" style="width: 10%;">
         </el-table-column>
-        <el-table-column prop="zip" label="课件" style="width: 10%;">
-        </el-table-column>
-        <el-table-column prop="city" label="状态" style="width: 15%;">
+        <el-table-column prop="course_schedule_state" label="状态" style="width: 15%;">
         </el-table-column>
         <el-table-column fixed="right" label="操作" style="width: 15%;">
           <template slot-scope="scope">
-            <button type="button" class="el-button el-button--default el-button--small">
-              <span>报名</span>
-            </button>
+            <el-button size="mini">进入教室</el-button>
+            <el-button size="mini">课件管理</el-button>
+            <el-button size="mini">修改时间</el-button>
+            <el-button size="mini">取消课程</el-button>
+            <el-button size="mini">报告问题</el-button>
+            <el-button size="mini">查看原因</el-button>
           </template>
         </el-table-column>
       </el-table>
