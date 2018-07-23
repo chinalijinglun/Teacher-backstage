@@ -124,7 +124,7 @@
     },
     methods: {
       addCompensate() {
-
+        
       },
       stateFilter(row) {
         const now = new Date();
