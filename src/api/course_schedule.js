@@ -14,3 +14,9 @@ export const sysUserBareGet = (params, others) => baseAxios.get('/api/v1/_bare/s
 export const sysUserBareGetById = (id) => baseAxios.get(`/api/v1/_bare/sys_user/${id}`);
 
 export const mangerStaffQuery = form => baseAxios.post('/manger/staff_query', form);
+
+// 修改课节时间
+export const modifyScheduleTime = form => baseAxios.post('/course/edit_course_schedule', form);
+
+// 修改课节状态
+export const modifyScheduleType = form => baseAxios.post('/course/edit_course_schedule_type', form);

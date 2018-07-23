@@ -1,4 +1,5 @@
 import dateRange from './commons/form/dateRange';
+import courseDateRange from './commons/form/courseDateRange';
 import curriculumSelect from './commons/select/curriculumSelect';
 import areaSelect from './commons/select/areaSelect';
 import teacherDialog from './commons/dialog/teacherDialog';
@@ -26,6 +27,7 @@ import viewSubjectSelect from './commons/view/subjectSelect';
 
 const install = (Vue) => {
   Vue.component(dateRange.name, dateRange);
+  Vue.component(courseDateRange.name, courseDateRange);
   Vue.component(curriculumSelect.name, curriculumSelect);
   Vue.component(teacherDialog.name, teacherDialog);
   Vue.component(sureTimeDialog.name, sureTimeDialog);

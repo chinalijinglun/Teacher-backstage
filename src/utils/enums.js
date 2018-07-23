@@ -403,3 +403,17 @@ export const COURSE_APPOINTMENT_STATE_ENUM = {
   'REFUSE': '拒绝',
   'ACCEPT': '接受'
 }
+
+export const COURSE_SCHEDULE_STATE_ENUM = {
+  'NO_CLASS': '未上课',
+  'CLASS_BEGIN': '已经上课',
+  'CANCEL': '取消',
+  'TROUBLE_CLASS': '问题课程'
+}
+
+export const COURSE_SCHEDULE_STATE_NUMBER = {
+  'NO_CLASS': 1,
+  'CLASS_BEGIN': 2,
+  'CANCEL': 3,
+  'TROUBLE_CLASS': 4
+}

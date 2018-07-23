@@ -42,6 +42,15 @@ function fillProps(d1, d2) {
     }
   }
 }
+function getCourseTime(start, end) {
+  if(!start||!end) {
+    return ''
+  }
+  const day = dateFmt(new Date(start), 'yyyy.MM.dd');
+  const timeStart = dateFmt(new Date(start), 'hh.mm');
+  const timeEnd = dateFmt(new Date(end), 'hh.mm');
+  return day+' '+timeStart+'-'+timeEnd;
+}
 
 const install = (Vue) => {
   Vue.prototype.$dateFmt = dateFmt;
@@ -59,6 +68,7 @@ const install = (Vue) => {
   Vue.prototype.$getQueryParams = getQueryParams;
   Vue.prototype.$getNopageQueryParams = getNopageQueryParams;
   Vue.prototype.$deleteEmptyProps = deleteEmptyProps;
+  Vue.prototype.$getCourseTime = getCourseTime;
 
   Vue.prototype.$_object = object;
 
