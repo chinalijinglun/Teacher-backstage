@@ -405,15 +405,15 @@ export const COURSE_APPOINTMENT_STATE_ENUM = {
 }
 
 export const COURSE_SCHEDULE_STATE_ENUM = {
-  'NO_CLASS': '未上课',
-  'CLASS_BEGIN': '已经上课',
+  'COMMON_CLASS': '正常课',
   'CANCEL': '取消',
-  'TROUBLE_CLASS': '问题课程'
+  'TROUBLE_CLASS': '问题课程',
+  'MAKE_UP_CLASS': '补偿课'
 }
 
 export const COURSE_SCHEDULE_STATE_NUMBER = {
-  'NO_CLASS': 1,
-  'CLASS_BEGIN': 2,
-  'CANCEL': 3,
-  'TROUBLE_CLASS': 4
+  'COMMON_CLASS': 1,
+  'CANCEL': 2,
+  'TROUBLE_CLASS': 3,
+  'MAKE_UP_CLASS': 4
 }

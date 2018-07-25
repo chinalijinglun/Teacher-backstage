@@ -5,7 +5,7 @@ export const studyScheduleGet = (params, others) => baseAxios.get('/api/v1/study
 
 export const studySchedulePost = (form) => baseAxios.post('/api/v1/study_schedule', form);
 
-export const studyScheduleDeleteById = (id) => studySchedulePutById(id, {delete_flag: DELETE_FLAG.DELETED});
+export const studyScheduleDeleteById = (id) => studySchedulePutById(id, { delete_flag: DELETE_FLAG.DELETED });
 
 export const studyScheduleGetById = (id) => baseAxios.get(`/api/v1/study_schedule/${id}`);
 

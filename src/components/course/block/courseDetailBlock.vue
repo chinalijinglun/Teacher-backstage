@@ -44,7 +44,7 @@
                 <el-button size="mini">课后作业</el-button>
               </el-row>
               <el-row class="table-btn-row" v-if="scope.row.state === 3">
-                <el-button size="mini">课后总结</el-button>
+                <el-button size="mini" @click="toStudyResult(scope.row)">课后总结</el-button>
                 <el-button size="mini">学生评价</el-button>
               </el-row>
             </template>
@@ -123,6 +123,14 @@
       this.query();
     },
     methods: {
+      toStudyResult(row) {
+        this.$router.push({
+          path:'/course/studyResult',
+          query: {
+            id: row.id
+          }
+        })
+      },
       addCompensate() {
         
       },
