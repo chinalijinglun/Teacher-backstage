@@ -18,11 +18,11 @@
         border
         style="width: 100%; margin-top: 20px">
         <el-table-column
-          prop="student_id"
+          prop="student_name"
           label="学生姓名">
         </el-table-column>
         <el-table-column
-          prop="student_score"
+          prop="overall"
           label="Performance in class:">
         </el-table-column>
         <el-table-column
@@ -40,7 +40,7 @@
 </template>
 <script>
   import {
-    studyScheduleBareGet
+    summaryGet
   } from '@/api/study_schedule';
 
   export default {
@@ -55,16 +55,32 @@
       this.query()
     },
     methods: {
-      toDetail() {
-        console.log('to detail')
+      toDetail(row) {
+        this.$router.push('/course/studentScheduleResult?id='+row.id)
       },
       query() {
         const filter = this.$json2filter({course_schedule_id:[this.course_schedule_id]})
-        return studyScheduleBareGet(filter, {
-          results_per_page: 1000,
-          page: 1
+        return summaryGet({
+          course_schedule_id: this.course_schedule_id,
+          page_limit: 1000,
+          page_no: 1
         }).then(resp => {
-          this.tableData = resp.data.objects;
+          this.tableData = resp.data.objects.map(item => {
+            const summary = {
+              overall: '',
+              created_at: '--'
+            }
+            if(item.teacher_evaluation) {
+              const evaluationJson = JSON.parse(item.teacher_evaluation);
+              summary.created_at = evaluationJson.created_at;
+              summary.overall = evaluationJson.performace.overall;
+            }
+            return {
+              id: item.study_schedule_id,
+              student_name: item.student_name,
+              ...summary
+            }
+          });
         })
       }
     }

@@ -14,3 +14,5 @@ export const studySchedulePutById = (id, form) => baseAxios.put(`/api/v1/study_s
 export const studyScheduleBareGet = (params, others) => baseAxios.get('/api/v1/_bare/study_schedule', { params: { q: JSON.stringify(params), results_per_page: 10, ...others } });
 
 export const studyScheduleBareGetById = (id) => baseAxios.get(`/api/v1/_bare/study_schedule/${id}`);
+
+export const summaryGet = (form) => baseAxios.post(`/course/common_summary`, form);
