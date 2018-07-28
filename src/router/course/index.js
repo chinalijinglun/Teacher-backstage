@@ -16,6 +16,7 @@ import addSubjectCategory from '@/pages/course/addSubjectCategory';
 import subscribeCourses from '@/pages/course/subscribeCourses';
 import courseDetail from '@/pages/course/courseDetail';
 import studyResult from '@/pages/course/studyResult';
+import studentScheduleResult from '@/pages/course/studentScheduleResult';
 
 export default [
   {
@@ -31,6 +32,13 @@ export default [
     path: 'studyResult',
     name: 'studyResult',
     component: studyResult
+  },
+  {
+    // 查看小结 
+    name:'查看小结',
+    path: 'studentScheduleResult',
+    name: 'studentScheduleResult',
+    component: studentScheduleResult
   },
   {
     // 课程分类

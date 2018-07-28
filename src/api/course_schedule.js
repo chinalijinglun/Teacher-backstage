@@ -20,3 +20,6 @@ export const modifyScheduleTime = form => baseAxios.post('/course/edit_course_sc
 
 // 修改课节状态
 export const modifyScheduleType = form => baseAxios.post('/course/edit_course_schedule_type', form);
+
+// view_homework
+export const viewHomework = form => baseAxios.post('/manger/view_homework', form);
