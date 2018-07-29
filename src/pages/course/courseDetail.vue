@@ -24,7 +24,7 @@
   <el-row class="detail-body">
     <course-detail-block v-if="blkname === 'list'"></course-detail-block>
     <course-summary-block v-if="blkname === 'summary'"></course-summary-block>
-    <course-grade-block v-if="blkname === 'summary'"></course-grade-block>
+    <course-grade-block v-if="blkname === 'grade'"></course-grade-block>
   </el-row>
 </div>
 </template>

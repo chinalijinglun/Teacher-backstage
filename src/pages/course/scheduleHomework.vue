@@ -63,6 +63,9 @@ export default {
       }).then(res => {
         this.tableData = res.data.objects;
       })
+    },
+    toDetail(row) {
+      
     }
   }
 }

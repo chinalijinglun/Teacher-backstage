@@ -19,6 +19,7 @@ import courseSummary from '@/pages/course/courseSummary';
 import studyResult from '@/pages/course/studyResult';
 import studentScheduleResult from '@/pages/course/studentScheduleResult';
 import scheduleHomework from '@/pages/course/scheduleHomework';
+import studentEvaluate from '@/pages/course/studentEvaluate';
 
 export default [
   {
@@ -55,6 +56,13 @@ export default [
     path: 'courseSummary',
     name: 'courseSummary',
     component: courseSummary
+  },
+  {
+    // 学生评价 
+    name:'学生评价',
+    path: 'studentEvaluate',
+    name: 'studentEvaluate',
+    component: studentEvaluate
   },
   {
     // 课程分类
