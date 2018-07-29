@@ -45,7 +45,7 @@
               </el-row>
               <el-row class="table-btn-row" v-if="scope.row.state === 3">
                 <el-button size="mini" @click="toStudyResult(scope.row)">课后总结</el-button>
-                <el-button size="mini">学生评价</el-button>
+                <el-button size="mini" @click="toStudentEvaluate(scope.row)">学生评价</el-button>
               </el-row>
             </template>
             <!-- <el-row class="table-btn-row" v-if="scope.row.schedule_type === 'CANCEL'">
@@ -77,6 +77,7 @@
 		:afterState="$COURSE_SCHEDULE_STATE_NUMBER[modifyType]" 
 		primaryTableName="course_schedule" 
 		:actionEventType="1" />
+    <add-schedule :visible.sync="addScheduleShow" :id="form.course_id" :row="curRow"></add-schedule>
   </el-row>
 </template>
 <script>
@@ -93,6 +94,7 @@
   } from '@/api/action_event'
   import paginationMix from '@/components/commons/mixins/paginationMix';
   import editTime from '../dialog/editTime';
+  import addSchedule from '../dialog/addSchedule';
   import reasonDialog from '../dialog/reasonDialog';
   import {
     ACTION_EVENT_TYPE
@@ -114,6 +116,7 @@
         visible: false,
         reasonVisible: false,
         reasonReviewShow: false,
+        addScheduleShow: false,
         curRow: {},
         modifyType: ''
       };
@@ -140,7 +143,7 @@
         })
       },
       addCompensate() {
-        
+        this.addScheduleShow = true;
       },
       stateFilter(row) {
         const now = new Date();
@@ -224,12 +227,21 @@
             this.query()
           })
         })
+      },
+      toStudentEvaluate(row) {
+        this.$router.push({
+          path: '/course/studentEvaluate',
+          query: {
+            id: row.id
+          }
+        })
       }
     },
     mixins: [paginationMix],
     components: {
       editTime,
-      reasonDialog
+      reasonDialog,
+      addSchedule
     }
   }
 </script>

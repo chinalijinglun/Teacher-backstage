@@ -8,7 +8,6 @@ import enroll from '@/pages/course/enroll';
 import auditions from '@/pages/course/auditions';
 import studentTrial from '@/pages/course/studentTrial';
 import date from '@/pages/course/date';
-import dateTeacher from '@/pages/course/dateTeacher';
 import generalCourse from '@/pages/course/generalCourse';
 import addCurriculum from '@/pages/course/addCurriculum';
 import addSubject from '@/pages/course/addSubject';
@@ -142,12 +141,6 @@ export default [
     path: 'date',
     name: 'date',
     component: date
-  },
-  {
-    name: '预约教师上课',
-    path: 'dateTeacher',
-    name: 'dateTeacher',
-    component: dateTeacher
   },
   {
     // 约课

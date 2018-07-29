@@ -42,7 +42,7 @@ function fillProps(d1, d2) {
     }
   }
 }
-function getCourseScheduleTime(start, end) {
+export function getCourseScheduleTime(start, end) {
   if(!start||!end) {
     return ''
   }
@@ -52,7 +52,7 @@ function getCourseScheduleTime(start, end) {
   return day+' '+timeStart+'-'+timeEnd;
 }
 
-function getCourseTime(start, end) {
+export function getCourseTime(start, end) {
   if(!start||!end) {
     return ''
   }

@@ -29,3 +29,9 @@ export const getCourseSchedule = (form) => baseAxios.post('/course/course_schedu
 export const courseCommon = (form) => baseAxios.post('/course/common', form);
 
 export const courseSummary = form => baseAxios.post('/course/common_summary_result', form);
+
+export const studentEvaluat = id => baseAxios.post('/course/common_evaluation', {
+  course_schedule_id: id,
+  page_limit: 1000,
+  page_no: 1
+})
