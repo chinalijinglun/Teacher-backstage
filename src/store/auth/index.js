@@ -26,8 +26,17 @@ const mutations = {
   }
 }
 
+const actions = {
+  logout({commit}) {
+    commit('setAuthorization', '')
+    commit('setUserName', '')
+    commit('setUserId', '')
+  }
+}
+
 export default {
   state,
   mutations,
+  actions,
   namespaced: true
 }

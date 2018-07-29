@@ -13,10 +13,6 @@
             "name":"课程包"
         },
         {
-            "path":"lecture",
-            "name":"试讲课"
-        },
-        {
             "path":"auditions",
             "name":"试听课"
         },

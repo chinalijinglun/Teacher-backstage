@@ -10,8 +10,8 @@
       active-text-color="#fff">
       <el-submenu index="2">
         <template slot="title">Kira</template>
-        <el-menu-item index="2-1">修改密码</el-menu-item>
-        <el-menu-item index="2-2">退出</el-menu-item>
+        <el-menu-item index="2-1" @click="toModify">修改密码</el-menu-item>
+        <el-menu-item index="2-2" @click="toLogout">退出</el-menu-item>
       </el-submenu>
     </el-menu>
     </div>
@@ -19,7 +19,17 @@
 </template>
 <script>
   export default {
-    name: 'mainHeader'
+    name: 'mainHeader',
+    methods: {
+      toModify() {
+        this.$store.dispatch('auth/logout')
+        this.$router.push('/reset')
+      },
+      toLogout() {
+        this.$store.dispatch('auth/logout')
+        this.$router.push('/login')
+      }
+    }
   }
 </script>
 <style lang="" scoped>
