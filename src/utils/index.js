@@ -42,7 +42,7 @@ function fillProps(d1, d2) {
     }
   }
 }
-function getCourseTime(start, end) {
+function getCourseScheduleTime(start, end) {
   if(!start||!end) {
     return ''
   }
@@ -50,6 +50,15 @@ function getCourseTime(start, end) {
   const timeStart = dateFmt(new Date(start), 'hh.mm');
   const timeEnd = dateFmt(new Date(end), 'hh.mm');
   return day+' '+timeStart+'-'+timeEnd;
+}
+
+function getCourseTime(start, end) {
+  if(!start||!end) {
+    return ''
+  }
+  const daystart = dateFmt(new Date(start), 'yyyy.MM.dd');
+  const dayend = dateFmt(new Date(end), 'MM.dd');
+  return daystart+'-'+dayend;
 }
 
 const install = (Vue) => {
@@ -68,6 +77,7 @@ const install = (Vue) => {
   Vue.prototype.$getQueryParams = getQueryParams;
   Vue.prototype.$getNopageQueryParams = getNopageQueryParams;
   Vue.prototype.$deleteEmptyProps = deleteEmptyProps;
+  Vue.prototype.$getCourseScheduleTime = getCourseScheduleTime;
   Vue.prototype.$getCourseTime = getCourseTime;
 
   Vue.prototype.$_object = object;

@@ -22,12 +22,16 @@
     </el-radio-group>
   </el-row>
   <el-row class="detail-body">
-    <course-detail-block></course-detail-block>
+    <course-detail-block v-if="blkname === 'list'"></course-detail-block>
+    <course-summary-block v-if="blkname === 'summary'"></course-summary-block>
+    <course-grade-block v-if="blkname === 'summary'"></course-grade-block>
   </el-row>
 </div>
 </template>
 <script>
 import courseDetailBlock from '@/components/course/block/courseDetailBlock'
+import courseSummaryBlock from '@/components/course/block/courseSummary'
+import courseGradeBlock from '@/components/course/block/courseGrade'
 
 export default {
   name: 'courseDetail',
@@ -51,7 +55,9 @@ export default {
     }
   },
   components: {
-    courseDetailBlock
+    courseDetailBlock,
+    courseSummaryBlock,
+    courseGradeBlock
   }
 }
 </script>

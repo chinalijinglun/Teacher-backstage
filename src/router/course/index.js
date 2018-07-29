@@ -15,8 +15,10 @@ import addSubject from '@/pages/course/addSubject';
 import addSubjectCategory from '@/pages/course/addSubjectCategory';
 import subscribeCourses from '@/pages/course/subscribeCourses';
 import courseDetail from '@/pages/course/courseDetail';
+import courseSummary from '@/pages/course/courseSummary';
 import studyResult from '@/pages/course/studyResult';
 import studentScheduleResult from '@/pages/course/studentScheduleResult';
+import scheduleHomework from '@/pages/course/scheduleHomework';
 
 export default [
   {
@@ -39,6 +41,20 @@ export default [
     path: 'studentScheduleResult',
     name: 'studentScheduleResult',
     component: studentScheduleResult
+  },
+  {
+    // 查看小结 
+    name:'课节作业',
+    path: 'scheduleHomework',
+    name: 'scheduleHomework',
+    component: scheduleHomework
+  },
+  {
+    // 课程总结查看 
+    name:'课程总结查看',
+    path: 'courseSummary',
+    name: 'courseSummary',
+    component: courseSummary
   },
   {
     // 课程分类

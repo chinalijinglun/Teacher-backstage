@@ -41,7 +41,7 @@
               </el-row>
               <el-row class="table-btn-row" v-if="scope.row.state === 3">
                 <el-button size="mini" @click="reportError(scope.row)">报告问题</el-button>
-                <el-button size="mini">课后作业</el-button>
+                <el-button size="mini" @click="toHomework(scope.row)">课后作业</el-button>
               </el-row>
               <el-row class="table-btn-row" v-if="scope.row.state === 3">
                 <el-button size="mini" @click="toStudyResult(scope.row)">课后总结</el-button>
@@ -123,6 +123,14 @@
       this.query();
     },
     methods: {
+      toHomework(row) {
+        this.$router.push({
+          path:'/course/scheduleHomework',
+          query: {
+            id: row.id
+          }
+        })
+      },
       toStudyResult(row) {
         this.$router.push({
           path:'/course/studyResult',
@@ -170,7 +178,7 @@
             return {
               ...item,
               ...this.stateFilter(item),
-              courseTime: this.$getCourseTime(item.start, item.end),
+              courseTime: this.$getCourseScheduleTime(item.start, item.end),
               coursewareState: +item.courseware_num>0?'已上传':'未上传',
               courseStateText: this.$COURSE_SCHEDULE_STATE_ENUM[item.schedule_type]
             }

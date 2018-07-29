@@ -133,7 +133,7 @@
         studentTryout(f).then(resp => {
           this.tableData = resp.data.objects.map(item => ({
             ...item,
-            courseTime: this.$getCourseTime(item.start, item.end),
+            courseTime: this.$getCourseScheduleTime(item.start, item.end),
             coursewareState: +item.courseware_num>0?'已上传':'未上传',
             courseStateText: this.$COURSE_SCHEDULE_STATE_ENUM[item.course_schedule_state]
           }));

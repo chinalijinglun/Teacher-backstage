@@ -27,3 +27,5 @@ export const mangerStudentTryoutApply = (form) => baseAxios.post('/manger/studen
 export const getCourseSchedule = (form) => baseAxios.post('/course/course_schedule', form);
 
 export const courseCommon = (form) => baseAxios.post('/course/common', form);
+
+export const courseSummary = form => baseAxios.post('/course/common_summary_result', form);
