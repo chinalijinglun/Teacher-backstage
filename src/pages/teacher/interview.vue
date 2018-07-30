@@ -10,7 +10,6 @@
       </router-link>
     </div>
     <div class="all-course">
-      <h3>所有试听课程</h3>
       <div class="course-package-top">
         <el-form ref="form" label-width="96px">
           <div class="inps">

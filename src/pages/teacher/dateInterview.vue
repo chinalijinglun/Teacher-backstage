@@ -175,7 +175,6 @@ export default {
 				result: '',
 				set_time: JSON.stringify(timeRange)
 			}).then(resp => {
-				console.log(resp);
 				this.$message.success('预约成功！');
 				this.timeDialogShow = false;
 				this.isEdit = false;

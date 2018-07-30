@@ -764,6 +764,7 @@ import {
 	teacherPutByTeacherid,
 	teacherGetBareByTeacherid
 } from '@/api/teacher';
+import {mapState} from 'vuex'
 export default {
   data() {
     return {
@@ -983,7 +984,10 @@ export default {
 		attainmentSum() {
 			return this.form.attainment.onTime + 
 						 this.form.attainment.loveTeache; 
-		}
+		},
+		...mapState({
+			userName: state => state.auth.userName
+		})
 	},
 	created() {
 		this.interview_id = this.$route.query.id;
@@ -1024,7 +1028,9 @@ export default {
 				if(this.result === 3) {
 					// 面试通过
 					teacherPutByTeacherid(this.teacher_id, {
-						state: 'WAITE_FOR_CONTRACT'
+						state: 11,
+						updated_by: this.userName,
+						updated_at: new Date()
 					}).then(resp => {
 						return interviewPutByinterviewid(this.interview_id, {
 							state: 9,
