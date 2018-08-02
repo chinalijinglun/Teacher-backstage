@@ -46,7 +46,7 @@
 			</el-table-column>
 			<el-table-column fixed="right" label="操作" style="width: 15%;">
 				<template slot-scope="scope">
-					<el-button size="mini" @click="toSign">签约</el-button>
+					<el-button size="mini" @click="toSign(scope.row)">签约</el-button>
 				</template>
 			</el-table-column>
 		</el-table>
@@ -87,7 +87,7 @@ export default {
 		},
 		query() {
 			const filter = this.$json2filter({
-				state: ['INTERVIEW_PASS']
+				state: ['WAITE_FOR_CONTRACT']
 			})
 			return teacherGet(filter, {
 				page: 1
@@ -98,7 +98,7 @@ export default {
 		},
 		toSign(row) {
 			this.$router.push({
-				path: '/',
+				path: '/teacher/contractMess',
 				query: {
 					id: row.id
 				}

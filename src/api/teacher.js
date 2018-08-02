@@ -26,3 +26,5 @@ export const teacherMainQuery = form => baseAxios.post('/teacher/main_query', fo
 export const teacherCourseQuery = form => baseAxios.post('/teacher/my_course', form);
 
 export const teacherSubject = form => baseAxios.post('/teacher/subject', {page_no: 1, page_limit: 1000, ...form})
+
+export const teacherContract = form => baseAxios.post('/teacher/contract', form)
