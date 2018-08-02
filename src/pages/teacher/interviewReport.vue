@@ -1028,7 +1028,7 @@ export default {
 				if(this.result === 3) {
 					// 面试通过
 					teacherPutByTeacherid(this.teacher_id, {
-						state: 11,
+						state: 'WAITE_FOR_CONTRACT',
 						updated_by: this.userName,
 						updated_at: new Date()
 					}).then(resp => {
