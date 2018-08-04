@@ -43,10 +43,14 @@
 			<el-table-column prop="updated_at" label="操作时间" style="width: 10%;">
 			</el-table-column>
 			<el-table-column prop="state" label="状态" style="width: 15%;">
+				<template slot-scope="{row}">
+					{{$TEACHER_STATE_ZH[row.state]}}
+				</template>
 			</el-table-column>
 			<el-table-column fixed="right" label="操作" style="width: 15%;">
 				<template slot-scope="scope">
-					<el-button size="mini" @click="toSign(scope.row)">签约</el-button>
+					<el-button size="mini" @click="toSign(scope.row)" v-if="!scope.row.contract_url">发送合同</el-button>
+					<el-button size="mini" @click="toWatch(scope.row.contract_url)" v-else>查看合同</el-button>
 				</template>
 			</el-table-column>
 		</el-table>
@@ -103,6 +107,9 @@ export default {
 					id: row.id
 				}
 			})
+		},
+		toWatch(url) {
+			window.open(this.$baseApiUrl + url)
 		}
   }
 };

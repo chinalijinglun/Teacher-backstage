@@ -24,12 +24,11 @@
 			</div>
 		</div>
 		<div class="btn-box">
-			<!-- <el-button type="primary" size="mini">预览合同</el-button> -->
+			<el-button type="primary" size="mini" @click="viewContract">预览合同</el-button>
 			<el-button type="primary" size="mini" @click="submit">发送合同</el-button>
 			<el-button size="mini" @click="goback">返回</el-button>
-			<!-- <el-button size="mini">合同已发送，等待教师回复</el-button> -->
-
 		</div>
+		<agreement :visible.sync="visible"></agreement>
 	</div>
 </template>
 
@@ -38,6 +37,7 @@ import {
 	teacherContract,
 	teacherGetBareByTeacherid
 } from '@/api/teacher'
+import agreement from '@/components/teacher/agreement'
 export default {
 	data() {
 		return {
@@ -45,8 +45,10 @@ export default {
 			teacherInfo: {
 				username: '',
 				mobile: '',
-				email: ''
+				email: '',
+				contract_url: ''
 			},
+			visible: false,
 			form: {
 				contract_dollar_price: ''
 			}
@@ -86,7 +88,13 @@ export default {
 			teacherGetBareByTeacherid(id).then(resp => {
 				this.teacherInfo = resp.data
 			})
+		},
+		viewContract() {
+			this.visible = true
 		}
+	},
+	components: {
+		agreement
 	}
 };
 </script>
