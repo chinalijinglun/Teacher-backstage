@@ -98,6 +98,19 @@
         </el-row>
 			</el-main>
 		</el-container>
+		<el-container class="detail-item">
+			<el-aside class="detail-item-aside" width="200px">
+				状态
+			</el-aside>
+			<el-main class="detail-item-main">
+        <el-row>
+					<el-radio-group v-model="form.state">
+						<el-radio label="WORKING">在岗</el-radio>
+						<el-radio label="NO_WORK">离职</el-radio>
+					</el-radio-group>
+        </el-row>
+			</el-main>
+		</el-container>
 	</div>
 </template>
 <script>
@@ -118,7 +131,8 @@ export default {
 				seniority_url: '', //资格证明
 				award_url: '',//所得奖励
 				teaching_history: '',// 其他教育经历
-				experience_sharing: ''//经验分享
+				experience_sharing: '',//经验分享
+				state: 'WORKING' // 教师状态
 			}
 		}
 	},
@@ -129,6 +143,9 @@ export default {
 			this.$nextTick(_=>{
 				this.$refs.areaSelect.onInit();
 			});
+			if(form.state !== 81 || form.state !== 'NO_WORK') {
+				this.form.state = 'WORKING'
+			}
 			form.award_url && (this.award_url = JSON.parse(form.award_url));
 			form.seniority_url && (this.seniority_url = JSON.parse(form.seniority_url));
 			form.resume_url && (this.resume_url = [{url:form.resume_url, name:'简历'}]);
