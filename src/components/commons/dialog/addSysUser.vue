@@ -1,6 +1,6 @@
 <template>
 <!-- 确认时间 -->
-<el-dialog :title="title" :visible.sync="visible" size="tiny" width="580px" @close="close" @open="handleOpen">
+<el-dialog :title="title" :visible.sync="dialogVisible" size="tiny" width="580px" @close="close" @open="handleOpen">
   <el-row>
     <el-form :inline="true" :model="form" label-width="80px">
       <el-row>
@@ -56,8 +56,10 @@ import {
   roleDefinitionBareGet
 } from '@/api/role_definition';
 import { mapState } from 'vuex';
+import dialogContainer from '@/components/commons/mixins/dialogContainer';
 
 export default {
+  mixins: [dialogContainer],
   name: "addSysUser",
   data() {
     return {
@@ -87,7 +89,7 @@ export default {
   created() {
     this.getRoleList()
   },
-  props: ["visible", "sysUserId"],
+  props: ["sysUserId"],
   methods: {
     handleOpen() {
       if(this.sysUserId) {
@@ -244,7 +246,7 @@ export default {
     updatedSysUser(form) {
       this.putSysUser(this.sysUserId, form).then(resp => {
         const diff = this.findDiff();
-        const sys_user_id = resp.id;
+        const sys_user_id = resp.data.id;
         const deleteSysRoleLs = diff.delLs.map(item => this.deleteSysRole(this.roleIdMap[item]));
         const postSysRoleLs = diff.addLs.map(item => this.postSysRole({sys_user_id, role_definition_id: item}));
         Promise.all([...deleteSysRoleLs, ...postSysRoleLs]).then(resp => {
@@ -256,14 +258,6 @@ export default {
     findDiff() {
       const roleLs = [...this.form.roleList];
       const oldRoleLs = [...this.oldRoleLs];
-      this.form.roleList.forEach((item, index) => {
-        const ci = roleLs.indexOf(item);
-        if(ci !== -1) {
-          const oi = oldRoleLs.indexOf(item);
-          roleLs.splice(ci, 1);
-          oldRoleLs.splice(oi, 1);
-        }
-      });
       return {
         delLs: oldRoleLs,
         addLs: roleLs

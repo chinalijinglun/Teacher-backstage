@@ -5,10 +5,10 @@
         <el-form ref="form" label-width="96px">
         <div class="inps">
             <el-row>
-                <el-form-item label="课程包名称：">
+                <el-form-item label="课程分类名称：">
                     <el-input size="mini" v-model="form.full_name"></el-input>
                 </el-form-item>
-                <el-form-item label="课程包ID：">
+                <el-form-item label="课程分类ID：">
                     <el-input size="mini" v-model="form.id"></el-input>
                 </el-form-item>
                 <el-form-item label="操作人：">

@@ -1,6 +1,6 @@
 <template>
 <!-- 确认时间 -->
-<el-dialog title="预约试讲" :visible.sync="visible">
+<el-dialog title="预约试讲" :visible.sync="dialogVisible">
 <div>
 	<div class="teacher-say">
 		老师回复：
@@ -26,9 +26,10 @@
 </template>
 
 <script>
+import dialogContainer from '@/components/commons/mixins/dialogContainer';
 export default {
-  name: "sureTimeDialog",
-  props: ["visible"]
+	mixins: [dialogContainer],
+  name: "sureTimeDialog"
 };
 </script>
 

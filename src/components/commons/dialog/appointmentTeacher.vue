@@ -1,6 +1,6 @@
 <template>
 <!-- 确认时间 -->
-<el-dialog title="预约试讲" :visible.sync="visible" width="500px" @close="handlerClose">
+<el-dialog title="预约试讲" :visible.sync="dialogVisible" width="500px" @close="handlerClose">
 <div>
 	<div class="teacher-time">
 		<div class="tt-time">
@@ -28,9 +28,11 @@
 <script>
 import { courseAppointmentPost } from '@/api/course_appointment';
 import { mapState } from 'vuex';
+import dialogContainer from '@/components/commons/mixins/dialogContainer';
 
 export default {
   name: "appointmentTeacher",
+  mixins: [dialogContainer],
   data() {
     return {
       form: {
