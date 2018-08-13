@@ -17,7 +17,6 @@ baseAxios.interceptors.request.use(config => {
   } else {
     config.headers['authorization'] = store.state.auth.authorization
   }
-  // config.headers['lang'] = 1000000;
   return config;
 }, error => {
   return Promise.reject(error);
@@ -26,12 +25,12 @@ baseAxios.interceptors.request.use(config => {
 baseAxios.interceptors.response.use(resp => {
   return resp;
 }, error => {
+  if(error.response && error.response.data) {
+    Message.error(error.response.data.message);
+  }
   if(error.response.status === 401) {
     router.push('/login');
     return Promise.reject(error);
-  }
-  if(error.response && error.response.data) {
-    Message.error(error.response.data.message);
   }
   return Promise.reject(error);
 });

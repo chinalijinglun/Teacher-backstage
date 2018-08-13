@@ -59,7 +59,7 @@
             label="课程包名称">
           </el-table-column>
           <el-table-column
-            prop="order_amount"
+            prop="classes_number"
             label="课节数">
           </el-table-column>
           <el-table-column

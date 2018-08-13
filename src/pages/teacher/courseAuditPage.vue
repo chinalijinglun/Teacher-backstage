@@ -47,7 +47,7 @@
 			</table>
 			<div class="fujian">
 				<div class="show-down">
-					<a class="down" :href="$baseApiUrl+courseware.ware_url" :download="courseware.ware_name||'课件1'">下载</a>
+					<a class="down" :href="courseware.ware_url" target="_blank" :download="courseware.ware_name||'课件1'">下载</a>
 				</div>
 			</div>
 		</div>

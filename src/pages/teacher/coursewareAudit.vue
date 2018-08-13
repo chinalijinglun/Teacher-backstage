@@ -58,7 +58,7 @@
 				</el-table-column>
 				<el-table-column fixed="right" label="操作">
 					<template slot-scope="scope">
-						<el-button size="mini" @click="audit(scope.id)">审核</el-button>
+						<el-button size="mini" @click="audit(scope.row.id)">审核</el-button>
 					</template>
 				</el-table-column>
 			</el-table>
@@ -108,6 +108,14 @@ export default {
     },
     handleCurrentChange(val) {
       console.log(`当前页: ${val}`);
+		},
+		audit(id) {
+			this.$router.push({
+				path: '/teacher/courseAuditPage',
+				query: {
+					id
+				}
+			})
 		},
 		query(){
 			mangerCourseWare(this.$deleteEmptyProps(this.form)).then(resp => {

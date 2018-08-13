@@ -9,7 +9,7 @@
       text-color="#fff"
       active-text-color="#fff">
       <el-submenu index="2">
-        <template slot="title">Kira</template>
+        <template slot="title">{{userName}}</template>
         <el-menu-item index="2-1" @click="toModify">修改密码</el-menu-item>
         <el-menu-item index="2-2" @click="toLogout">退出</el-menu-item>
       </el-submenu>
@@ -18,8 +18,14 @@
   </div>
 </template>
 <script>
+  import { mapState } from 'vuex';
   export default {
     name: 'mainHeader',
+    computed: {
+      ...mapState({
+        userName: state => state.auth.userName
+      })
+    },
     methods: {
       toModify() {
         this.$store.dispatch('auth/logout')
@@ -49,7 +55,6 @@
   height: 40px;
 }
 .login {
-  width: 110px;
   float: right;
 }
 .login ul {
