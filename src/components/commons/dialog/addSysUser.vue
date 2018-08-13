@@ -11,7 +11,7 @@
       <el-row>
         <el-form-item label="联系电话">
           <el-input size="mini" v-model="form.mobile">
-            <el-select v-model="form.preMobile" slot="prepend" style="width: 100px" placeholder="请选择">
+            <el-select v-model="form.nation" slot="prepend" style="width: 100px" placeholder="请选择">
               <el-option label="国家区号" value=""></el-option>
               <el-option v-for="(item, key) in $MOBILE_PRE" :label="item" :value="key" :key="key"></el-option>
             </el-select>
@@ -65,7 +65,7 @@ export default {
     return {
       form: {
         roleList: [],
-        preMobile: '',
+        nation: '',
         mobile: '',
         email: '',
         username: ''
@@ -104,7 +104,7 @@ export default {
       this.$emit('onClose');
       this.form = {
         roleList: [],
-        preMobile: '',
+        nation: '',
         mobile: '',
         email: '',
         username: ''
@@ -123,7 +123,7 @@ export default {
           return false;
         }
       }
-      if(!this.form.preMobile) {
+      if(!this.form.nation) {
         this.$message.error('请选择区号！');
         return false;
       }
@@ -146,7 +146,6 @@ export default {
     },
     getRoleList() {
       const filter = this.$json2filter({});
-
       return roleDefinitionBareGet(filter,{results_per_page: 1000, page: 1}).then(res => {
         const roleLs = res.data.objects;
         const viewLs = [];
@@ -165,13 +164,14 @@ export default {
       this.valid().then(valid => {
         if(valid) {
           const {
-            // preMobile,
+            nation,
             mobile,
             email,
             username
           } = this.form;
           if(this.sysUserId) {
             this.updatedSysUser({
+              nation,
               mobile,
               email,
               username,
@@ -180,7 +180,7 @@ export default {
             });
           } else {
             this.postSysUser({
-              // preMobile,
+              nation,
               mobile,
               email,
               username
@@ -200,12 +200,13 @@ export default {
     },
     postSysUser(form) {
       const {
-        // preMobile,
+        nation,
         mobile,
         email,
         username
       } = form;
       return sysUserPost({
+        nation,
         email,
         mobile,
         username,
