@@ -346,7 +346,7 @@
         const startTime = new Date(timeRange[0]);
         const endTime = new Date(timeRange[1]);
         const year = this.formatNumber(date.getFullYear());
-        const month = this.formatNumber(date.getMonth());
+        const month = this.formatNumber(date.getMonth() + 1);
         const day = this.formatNumber(date.getDate());
         const hourStart = this.formatNumber(startTime.getHours());
         const minutesStart = this.formatNumber(startTime.getMinutes());
