@@ -25,15 +25,17 @@ export const ORDER_TYPE = {
   2: '赠送课订单',
   3: '补偿订单',
   4: '免费订单',
-  5: '退款订单'
+  5: '退款订单',
+  6: '试听订单'
 }
 
 export const COURSE_SCHEDULE_STATE = {
   0: '未开课',
   1: '未上',
-  2: '已经上课',
-  3: '取消',
-  4: '问题课'
+  2: '取消',
+  3: '问题课',
+  4: '补偿课',
+  5: '试听课'
 }
 
 export const PAYMENT_STATE = {
