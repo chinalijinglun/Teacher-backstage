@@ -28,7 +28,7 @@ baseAxios.interceptors.response.use(resp => {
   if(error.response && error.response.data) {
     Message.error(error.response.data.message);
   }
-  if(error.response.status === 401) {
+  if(error.response && error.response.status === 401) {
     router.push('/login');
     return Promise.reject(error);
   }
