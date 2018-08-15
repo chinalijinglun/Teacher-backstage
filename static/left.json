@@ -19,6 +19,10 @@
         {
             "path":"generalCourse",
             "name":"常规课程"
+        },
+        {
+            "path":"coursewareAudit",
+            "name":"课件审核"
         }
     ]
     },
@@ -57,10 +61,6 @@
             {
                 "path":"teacherUser",
                 "name":"签约教师列表"
-            },
-            {
-                "path":"coursewareAudit",
-                "name":"课件审核"
             }
         ]
     },

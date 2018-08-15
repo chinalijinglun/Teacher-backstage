@@ -19,6 +19,8 @@ import studyResult from '@/pages/course/studyResult';
 import studentScheduleResult from '@/pages/course/studentScheduleResult';
 import scheduleHomework from '@/pages/course/scheduleHomework';
 import studentEvaluate from '@/pages/course/studentEvaluate';
+import coursewareAudit from '@/pages/course/coursewareAudit';
+import courseAuditPage from '@/pages/course/courseAuditPage';
 
 export default [
   {
@@ -27,6 +29,18 @@ export default [
     path: 'courseDetail',
     name: 'courseDetail',
     component: courseDetail
+  },
+  {
+    title: '课件审核',
+    path: 'coursewareAudit',
+    name: 'coursewareAudit',
+    component: coursewareAudit
+  },
+  {
+    title: '课件审核页面',
+    path: 'courseAuditPage',
+    name: 'courseAuditPage',
+    component: courseAuditPage
   },
   {
     // 课节小结 

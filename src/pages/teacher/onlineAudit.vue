@@ -29,7 +29,9 @@
           <el-form-item label="状态：">
             <el-select v-model="form.state" placeholder="请选择" size="mini">
               <el-option label="所有状态" value=""></el-option>
-              <el-option v-for="item in $TEACHER_STATE_ENUM" :key="item" :label="$TEACHER_STATE_ZH[item]" :value="item"></el-option>
+              <el-option label="待审核" value="WAIT_FOR_CHECK"></el-option>
+              <el-option label="审核通过(待预约)" value="CHECK_PASS"></el-option>
+              <el-option label="审核未通过" value="CHECK_ERROR"></el-option>
             </el-select>
           </el-form-item>
         </el-row>

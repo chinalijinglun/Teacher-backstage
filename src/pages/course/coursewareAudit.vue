@@ -111,7 +111,7 @@ export default {
 		},
 		audit(id) {
 			this.$router.push({
-				path: '/teacher/courseAuditPage',
+				path: '/course/courseAuditPage',
 				query: {
 					id
 				}

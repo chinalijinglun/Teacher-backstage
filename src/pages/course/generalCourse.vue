@@ -19,20 +19,11 @@
                 </el-date-picker>
               </el-form-item>
               <el-form-item label="状态：">
-                <el-select v-model="form.course_schedule_state" placeholder="请选择" size="mini">
+                <el-select v-model="form.state" placeholder="请选择" size="mini">
                   <el-option label="所有状态" value=""></el-option>
-                  <el-option label="待排课" value="0"></el-option>
-                  <el-option label="未上" value="1"></el-option>
-                  <el-option label="已经上课" value="2"></el-option>
-                  <el-option label="取消" value="3"></el-option>
-                  <el-option label="问题课" value="4"></el-option>
-                </el-select>
-              </el-form-item>
-              <el-form-item label="课件：">
-                <el-select v-model="form.courseware_state" placeholder="请选择" size="mini">
-                  <el-option label="所有状态" value=""></el-option>
-                  <el-option label="没有" value="0"></el-option>
-                  <el-option label="有" value="1"></el-option>
+                  <el-option label="待排课" value="1"></el-option>
+                  <el-option label="上课中" value="2"></el-option>
+                  <el-option label="已完成" value="3"></el-option>
                 </el-select>
               </el-form-item>
             </el-row>
@@ -45,26 +36,30 @@
       <el-table :data="tableData" style="width: 100%;margin-top:20px;">
         <el-table-column fixed prop="id" label="编号" style="width: 10%;">
         </el-table-column>
-        <el-table-column prop="course_name" label="试讲课程" style="width: 15%;">
+        <el-table-column prop="course_name" label="课程包名称" style="width: 15%;">
         </el-table-column>
-        <el-table-column prop="grade" label="年级" style="width: 10%;">
-        </el-table-column>
-        <el-table-column prop="teacher_name" label="教师姓名" style="width: 10%;">
+        <el-table-column prop="teacher_name" label="教师" style="width: 10%;">
         </el-table-column>
         <el-table-column prop="student_name" label="学生" style="width: 10%;">
         </el-table-column>
         <el-table-column prop="start" label="上课时间" width="200">
-        </el-table-column>
-        <el-table-column prop="courseware_num" label="课件" style="width: 10%;">
-        </el-table-column>
-        <el-table-column prop="course_schedule_state" label="状态" style="width: 10%;">
           <template slot-scope="scope">
-            {{$COURSE_SCHEDULE_STATE[scope.row.course_schedule_state]}}
+            {{scope.row | courseTime}}
+          </template>
+        </el-table-column>
+        <el-table-column prop="courseware_num" label="课程进度" style="width: 10%;">
+          <template slot-scope="scope">
+            {{`${scope.row.finish}/${scope.row.classes_number}`}}
+          </template>
+        </el-table-column>
+        <el-table-column prop="course_schedule_state" label="课程包状态" style="width: 10%;">
+          <template slot-scope="scope">
+            {{scope.row | stateZh}}
           </template>
         </el-table-column>
         <el-table-column fixed="right" label="操作" style="width: 15%;">
           <template slot-scope="scope">
-            <el-button size="mini" v-if="!scope.row.course_schedule_id" @click="toSetSchedule(scope.row.id)">排课</el-button>
+            <el-button size="mini" v-if="!scope.row.start" @click="toSetSchedule(scope.row.id)">排课</el-button>
             <el-button size="mini" v-else @click="toCourseDetail(scope.row.id)">查看详情</el-button>
           </template>
         </el-table-column>
@@ -86,6 +81,9 @@
   import {
     courseCommon
   } from '@/api/course'
+  import {
+    getCourseTime
+  } from '@/utils'
   export default {
     data() {
       return {
@@ -94,14 +92,30 @@
         form: {
           page_no: 1,
           class_at: '',
-          course_schedule_state: '',
-          courseware_state: '',
+          state: '',
           teacher_name: ''
         }
       }
     },
     created() {
       this.query();
+    },
+    filters: {
+      stateZh(row) {
+        if (!row.start && !row.end) {
+          return '待排课'
+        } else if(row.finish === row.classes_number) {
+          return '已完成'
+        } else {
+          return '上课中'
+        }
+      },
+      courseTime(row) {
+        return getCourseTime(row.start, row.end)
+      },
+      coursewareStatus(row) {
+        return row.courseware_num?'已上传':'未上传'
+      }
     },
     methods: {
       handleCurrentChange(val) {
@@ -142,10 +156,6 @@
 
   .el-input {
     width: 95%;
-  }
-
-  .inps .select-time {
-    width: 35%;
   }
 
   .operation button {
