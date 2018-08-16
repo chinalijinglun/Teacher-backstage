@@ -18,15 +18,18 @@
             </el-form-item>
             <el-form-item label="状态：">
               <el-select size="mini" v-model="form.course_schedule_state" name="" id="">
-                <el-option value="">所有状态</el-option>
-								<el-option v-for="(item,key) in $COURSE_SCHEDULE_STATE_ENUM" :key="key" :label="item" :value="key"></el-option>
+                <el-option value="" label="全部"></el-option>
+                <el-option value="2" label="已上课"></el-option>
+                <el-option value="1" label="未上课"></el-option>
+                <el-option value="3" label="已取消"></el-option>
+                <el-option value="4" label="问题课"></el-option>
               </el-select>
             </el-form-item>
             <el-form-item label="课件：">
               <el-select size="mini" v-model="form.courseware_state" name="" id="">
                 <el-option value="">所有状态</el-option>
-                <el-option :value="1">有</el-option>
-                <el-option :value="0">没有</el-option>
+                <el-option :value="1">已上传</el-option>
+                <el-option :value="0">未上传</el-option>
               </el-select>
             </el-form-item>
           </el-row>
@@ -189,7 +192,7 @@
         if(now < start) {
           return {
             state: 1,
-            state_text: '未开始'
+            state_text: '未上课'
           };
         } else if(now>start && now<end) {
           return {
@@ -199,7 +202,7 @@
         } else {
           return {
             state: 3,
-            state_text: '已结束'
+            state_text: '已上课'
           };
         }
       },

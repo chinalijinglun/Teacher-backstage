@@ -15,7 +15,7 @@
         <el-option v-for="(item,index) in subjectLs" :key="index" :label="item.subject_name" :value="item.id"></el-option>
       </el-select>
     </template>
-    <el-input v-if="form.curriculum_id === ''" size="mini" placeholder="手动输入科目名" class="curriculum-input" v-model="form.subject_name"></el-input>
+    <el-input v-if="form.curriculum_id === '' && hasOther" size="mini" placeholder="手动输入科目名" class="curriculum-input" v-model="form.subject_name"></el-input>
   </div>
 </template>
 
@@ -153,7 +153,6 @@
         this.subChange(value);
       },
       subChange(value) {
-        console.log(value)
         this.$emit('input', value);
       }
     }

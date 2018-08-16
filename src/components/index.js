@@ -1,6 +1,7 @@
 import dateRange from './commons/form/dateRange';
 import courseDateRange from './commons/form/courseDateRange';
 import curriculumSelect from './commons/select/curriculumSelect';
+import courseTypeSelect from './commons/select/courseTypeSelect';
 import areaSelect from './commons/select/areaSelect';
 import teacherDialog from './commons/dialog/teacherDialog';
 import appointmentTeacher from './commons/dialog/appointmentTeacher';
@@ -43,7 +44,7 @@ const install = (Vue) => {
   Vue.component(flatFeild.name, flatFeild);
   Vue.component(imgUpload.name, imgUpload);
   Vue.component(areaSelect.name, areaSelect);
-
+  Vue.component(courseTypeSelect.name, courseTypeSelect);
   Vue.component(viewInput.name, viewInput);
   Vue.component(viewImage.name, viewImage);
   Vue.component(viewAreaSelect.name, viewAreaSelect);

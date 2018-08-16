@@ -16,9 +16,21 @@ export const COURSE_TYPE = {
 
 export const CLASS_TYPE = {
   1: '1 v 1',
-  2: '1 v 4',
-  3: '1 v n'
+  2: '1 v 2',
+  3: '1 v 3',
+  4: '1 v 4',
+  5: '1 v 6',
+  6: '1 v 10',
+  7: '1 v 12'
 };
+
+export const PROJECT_TYPE = {
+  ALL: '所有项目', 
+  MEGO: '美高项目', 
+  CREDIT: '学分项目', 
+  AP: 'AP项目', 
+  OTHER: '其它'
+}
 
 export const ORDER_TYPE = {
   1: '普通课订单',

@@ -4,18 +4,13 @@
     <h4>课程包</h4>
     <el-form  label-width="100px" class="demo-ruleForm">
       <el-row>
-        <el-form-item prop="classLs" label="课程分类">
-          <curriculum-select ref="curriculum_select" v-model="form.classLs"></curriculum-select>
+        <el-form-item prop="subject_id" label="课程分类">
+          <course-type-select ref="typeSelect" v-model="form.subject_id" @change="subjectChange"></course-type-select>
         </el-form-item>
       </el-row>
       <el-row>
         <el-form-item prop="course_name_zh" label="课程中文名">
           <el-input size="mini" v-model="form.course_name_zh" placeholder="请输入中文名"></el-input>
-        </el-form-item>
-      </el-row>
-      <el-row>
-        <el-form-item prop="course_name" label="课程英文名">
-          <el-input size="mini" v-model="form.course_name" placeholder="请输入英文名"></el-input>
         </el-form-item>
       </el-row>
       <el-row>
@@ -30,6 +25,13 @@
         <el-form-item prop="class_type" label="班型">
           <el-select v-model="form.class_type" placeholder="所有班型" size="mini">
             <el-option v-for="(name, key) in $CLASS_TYPE" :label="name" :value="key" :key="key"></el-option>
+          </el-select>
+        </el-form-item>
+      </el-row>
+      <el-row>
+        <el-form-item prop="class_type" label="项目">
+          <el-select v-model="form.project_type" placeholder="所有项目" size="mini">
+            <el-option v-for="(name, key) in $PROJECT_TYPE" :label="name" :value="key" :key="key"></el-option>
           </el-select>
         </el-form-item>
       </el-row>
@@ -72,9 +74,6 @@
     coursePutByCourseId,
     courseBareGetByCourseId
   } from "@/api/course";
-  import {
-    subjectGetBySubjectid
-  } from "@/api/subject";
   import { mapState } from 'vuex'
 
   export default {
@@ -83,16 +82,20 @@
         showTeacherDialog: false,
         form: {
           id: '',
-          classLs: [],
+          subject_id: '',
           course_type: '',
           class_type: '',
+          project_type: '',
           state: this.$VALID_ENUM.VALID,
           teacher_name: '',
           primary_teacher_id: '',
           classes_number: '',
-          course_name: '',
           course_name_zh: '',
+          course_name: '',
           price: ''
+        },
+        rules: {
+          
         }
       }
     },
@@ -108,30 +111,21 @@
       })
     },
     methods: {
+      subjectChange({id, name}) {
+        this.form.course_name = name;
+      },
       getCourseById(id) {
         courseBareGetByCourseId(id).then(resp=> {
           for(let key in this.form) {
             resp.data[key]&&(this.form[key] = resp.data[key]);
           }
-          this.getSubjectById(resp.data.subject_id).then(subject => {
-            const a = [];
-            a[0] = subject.curriculum_id;
-            a[1] = subject.subject_category_id;
-            a[2] = resp.data.subject_id;
-            this.form.classLs = a;
-            this.$nextTick(_=>{
-              this.$refs.curriculum_select.onInit();
-            })
+          this.$nextTick(_=>{
+            this.$refs.typeSelect.init();
           })
         })
       },
-      getSubjectById(id) {
-        return subjectGetBySubjectid(id).then(resp => {
-          return resp.data
-        })
-      },
       valid() {
-        if(!this.form.classLs[2]) {
+        if(!this.form.subject_id) {
           this.$message.error('请选择课程分类！');
           return false;
         }
@@ -191,7 +185,7 @@
         if(this.valid()) {
           const {
             id,
-            classLs,
+            subject_id,
             course_type,
             class_type,
             state,
@@ -204,7 +198,7 @@
           if(id) {
             return this.updateCourse({
               id,
-              subject_id: classLs[2],
+              subject_id,
               course_type,
               class_type,
               state,
@@ -220,7 +214,7 @@
             });
           }
           return this.addCourse({
-            subject_id: classLs[2],
+            subject_id,
             course_type,
             class_type,
             state,

@@ -43,10 +43,12 @@
 				</el-form-item>
 			</el-row>
 				<el-button type="primary" size="mini" @click="query">查询</el-button>
-				<router-link to="/course/createPackage"><el-button type="primary" size="mini">创建课程包</el-button></router-link>
-				<el-button type="primary" class="dels" size="mini" @click="batchDelete">删除</el-button>
 			</el-form>
 		</div>
+    <el-row>
+      <router-link to="/course/createPackage"><el-button type="primary" size="mini">创建课程包</el-button></router-link>
+      <el-button type="primary" class="dels" size="mini" @click="batchDelete">删除</el-button>
+    </el-row>
 		<div class="table-list">
 			<el-table :data="tableData" style="width: 100%;margin-top:20px;" @selection-change="handlerSelectionChange">
 				<el-table-column type="selection" width="55"></el-table-column>
