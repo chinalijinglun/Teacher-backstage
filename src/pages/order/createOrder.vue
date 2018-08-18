@@ -161,7 +161,7 @@
           this.course_id_valid = true;
           this.course.course_type_name = this.$COURSE_TYPE_MAP[resp.data.course_type];
           this.course.class_type_name = this.$CLASS_TYPE[resp.data.class_type];
-          this.course.teacher = resp.data.assist_teacher.username;
+          this.course.teacher = resp.data.primary_teacher.username;
         })
       },
       valid() {

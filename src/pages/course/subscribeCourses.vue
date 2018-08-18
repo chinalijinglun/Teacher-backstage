@@ -141,13 +141,20 @@
           </el-table-column>
           <el-table-column
             prop="date"
+            min-width="300px"
             label="上课时间">
             <template slot-scope="scope">
               <p v-if="!scope.row.edit">{{scope.row.date}}</p>
               <p class="time-edit" v-else>
-                <input style="width: 75px;" v-model="dateEdit.date" type="text">
-                <input style="width: 40px;" v-model="dateEdit.start" type="text">
-                <input style="width: 40px;" v-model="dateEdit.end" type="text">
+                <el-date-picker
+                  v-model="dateEdit.date"
+                  type="date"
+                  size="mini"
+                  style="width: 130px;"
+                  placeholder="选择日期时间">
+                </el-date-picker>
+                <el-input style="width: 65px;" v-model="dateEdit.start" size="mini" type="text"/>
+                <el-input style="width: 65px;" v-model="dateEdit.end" size="mini" type="text"/>
               </p>
             </template>
           </el-table-column>
@@ -287,13 +294,13 @@
         });
       },
       fmtDate({year, month, day}) {
-        return `${year}.${month}.${day}`
+        return this.$dateFmt(new Date(year, month, day), 'yyyy-MM-dd')
       },
       fmtTime({hour, minutes}) {
         return `${hour}:${minutes}`
       },
       fmtRangeItem({year, month, day, hourStart, minutesStart, hourEnd, minutesEnd}) {
-        return `${year}.${month}.${day} ${hourStart}:${minutesStart}-${hourEnd}:${minutesEnd}`;
+        return `${this.$dateFmt(new Date(year, month, day), 'yyyy-MM-dd')} ${hourStart}:${minutesStart}-${hourEnd}:${minutesEnd}`;
       },
       save(index){
         const [year, month, day] = this.dateEdit.date.split('.');
@@ -346,7 +353,8 @@
         const startTime = new Date(timeRange[0]);
         const endTime = new Date(timeRange[1]);
         const year = this.formatNumber(date.getFullYear());
-        const month = this.formatNumber(date.getMonth() + 1);
+        const month = date.getMonth();
+        const monthStr = this.formatNumber(month+1);
         const day = this.formatNumber(date.getDate());
         const hourStart = this.formatNumber(startTime.getHours());
         const minutesStart = this.formatNumber(startTime.getMinutes());
