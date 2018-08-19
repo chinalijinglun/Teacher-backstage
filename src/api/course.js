@@ -35,3 +35,5 @@ export const studentEvaluat = id => baseAxios.post('/course/common_evaluation', 
   page_limit: 1000,
   page_no: 1
 })
+
+export const courseAdd = form => baseAxios.post('/course/schedule_compensate', form)

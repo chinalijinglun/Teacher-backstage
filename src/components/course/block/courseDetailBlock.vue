@@ -144,8 +144,11 @@
           }
         })
       },
-      addCompensate() {
-        this.addScheduleShow = true;
+      addCompensate(row) {
+        this.curRow = row;
+        this.$nextTick(resp => {
+          this.addScheduleShow = true;
+        })
       },
       stateFilter(row) {
         const now = new Date();

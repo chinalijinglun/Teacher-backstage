@@ -30,7 +30,8 @@
     modifyScheduleTime
   } from '@/api/course_schedule';
   import {
-    courseSchedule
+    courseSchedule,
+    courseAdd
   } from '@/api/course';
   export default {
     name: 'modifyTime',
@@ -53,13 +54,12 @@
       },
       onSubmit() {
         if(this.form.class_at_start && this.form.class_at_end) {
-          this.form.schedules = [{
-            course_name: this.course_name || '补偿课',
+          console.log(this.row)
+          return courseAdd({
+            course_schedule_id: this.row.id,
+            schedule_type: 'MAKE_UP_CLASS',
             start: this.form.class_at_start,
             end: this.form.class_at_end
-          }];
-          return modifyScheduleTime({
-            ...this.form
           }).then(resp => {
             this.$message.success('添加成功！');
             this.toClose();
