@@ -27,6 +27,6 @@ export const authResetpasswordPost = form => baseAxios.post('/auth/resetpassword
 });
 
 export const addSysUser = form => baseAxios.post('/auth/sysUser', {
-  password: 'a111111',
+  password: 'vipustutor',
   ...form
 })
