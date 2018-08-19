@@ -4,6 +4,7 @@ import hello from '@/pages/hello';
 import main from '@/pages/main';
 import regist from '@/pages/regist';
 import login from '@/pages/login';
+import room from '@/pages/room';
 import reset from '@/pages/reset';
 
 import course from './course';
@@ -51,6 +52,12 @@ export default new Router({
       path: '/reset',
       name: 'reset',
       component: reset
+    },
+    {
+      title:'教室',
+      path: '/room',
+      name: 'room',
+      component: room
     },
     {
       title: '课程',

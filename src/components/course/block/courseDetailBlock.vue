@@ -29,9 +29,9 @@
           <template slot-scope="scope">
             <template v-if="scope.row.schedule_type !== 'CANCEL' && scope.row.schedule_type !== 'TROUBLE_CLASS'">
               <el-row class="table-btn-row" v-if="scope.row.schedule_type !== 'CANCEL' && scope.row.schedule_type !== 'TROUBLE_CLASS'">
-                <el-button size="mini" v-if="scope.row.state !== 3">进入教室</el-button>
-                <el-button size="mini" v-if="scope.row.state === 3">回放</el-button>
-                <el-button size="mini">课件管理</el-button>
+                <el-button size="mini" v-if="scope.row.state !== 3" @click="toRoom(scope.row.id)">进入教室</el-button>
+                <el-button size="mini" v-if="scope.row.state === 3" @click="toRoom(scope.row.id)">回放</el-button>
+                <el-button size="mini" @click="seeCourseWare(scope.row)">课件管理</el-button>
                 <!--未上课-->
                 <!--已上课-->
               </el-row>
@@ -78,11 +78,13 @@
 		primaryTableName="course_schedule" 
 		:actionEventType="1" />
     <add-schedule :visible.sync="addScheduleShow" :id="form.course_id" :row="curRow"></add-schedule>
+    <course-ware :visible.sync="courseWareShow" :id="form.course_id" :row="curRow"></course-ware>
   </el-row>
 </template>
 <script>
   import {
-    getCourseSchedule
+    getCourseSchedule,
+    getRoomUrl
   } from '@/api/course'
   import {
     modifyScheduleType
@@ -96,6 +98,7 @@
   import editTime from '../dialog/editTime';
   import addSchedule from '../dialog/addSchedule';
   import reasonDialog from '../dialog/reasonDialog';
+  import courseWare from '../dialog/courseWare';
   import {
     ACTION_EVENT_TYPE
   } from '@/utils/enums'
@@ -117,6 +120,7 @@
         reasonVisible: false,
         reasonReviewShow: false,
         addScheduleShow: false,
+        courseWareShow: false,
         curRow: {},
         modifyType: ''
       };
@@ -126,6 +130,18 @@
       this.query();
     },
     methods: {
+      seeCourseWare(row) {
+        this.curRow = row;
+        this.$nextTick(_=>{this.courseWareShow = true;})
+      },
+      toRoom(id) {
+        this.$router.push({
+          path: '/room',
+          query: {
+            id
+          }
+        })
+      },
       toHomework(row) {
         this.$router.push({
           path:'/course/scheduleHomework',
@@ -246,7 +262,8 @@
     components: {
       editTime,
       reasonDialog,
-      addSchedule
+      addSchedule,
+      courseWare
     }
   }
 </script>
