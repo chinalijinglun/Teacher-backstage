@@ -5,7 +5,7 @@
     <el-form :inline="true" :model="form" label-width="80px">
       <el-row>
         <el-form-item label="员工姓名">
-          <el-input size="mini" v-model="form.username"></el-input>
+          <el-input size="mini" v-model="form.name"></el-input>
         </el-form-item>
       </el-row>
       <el-row>
@@ -53,6 +53,9 @@ import {
   sysUserBareGetById
 } from '@/api/sys_user';
 import {
+  addSysUser
+} from '@/api/auth'
+import {
   roleDefinitionBareGet
 } from '@/api/role_definition';
 import { mapState } from 'vuex';
@@ -68,7 +71,7 @@ export default {
         nation: '',
         mobile: '',
         email: '',
-        username: ''
+        name: ''
       },
       oldRoleLs: [],
       // 记录 role_definition_id和sys_user_role_id的对应关系，
@@ -107,16 +110,16 @@ export default {
         nation: '',
         mobile: '',
         email: '',
-        username: ''
+        name: ''
       };
       this.oldForm = {};
     },
     async valid() {
-      if(!this.form.username) {
+      if(!this.form.name) {
         this.$message.error('请填写用户名！');
         return false;
-      } else if(this.oldForm.username&&this.oldForm.username!==this.form.username){
-        const filter = this.$json2filter({username: this.form.username});
+      } else if(this.oldForm.name&&this.oldForm.name!==this.form.name){
+        const filter = this.$json2filter({name: this.form.name});
         const res = await sysUserBareGet(filter);
         if(res.data.objects.length) {
           this.$message.error('用户名已被占用！');
@@ -167,55 +170,31 @@ export default {
             nation,
             mobile,
             email,
-            username
+            name,
+            roleList
           } = this.form;
           if(this.sysUserId) {
             this.updatedSysUser({
               nation,
               mobile,
               email,
-              username,
+              name,
               updated_at: new Date(),
               updated_by: this.userName
             });
           } else {
-            this.postSysUser({
-              nation,
+            addSysUser({
+              code: nation,
               mobile,
               email,
-              username
+              name: name,
+              rolse: roleList.join(',')
             }).then(resp => {
-              const postRoleLs = [];
-              this.form.roleList.forEach(role_definition_id => {
-                postRoleLs.push(this.postSysRole({sys_user_id: resp.data.id, role_definition_id}));
-              });
-              Promise.all(postRoleLs).then(resp => {
-                this.$message.success('创建成功！');
-                this.closeSelf();
-              })
+              this.$message.success('添加成功！');
+              this.closeSelf();
             })
           }
         }
-      })
-    },
-    postSysUser(form) {
-      const {
-        nation,
-        mobile,
-        email,
-        username
-      } = form;
-      return sysUserPost({
-        nation,
-        email,
-        mobile,
-        username,
-        password: "1111",
-        delete_flag: "IN_FORCE",
-        state: "TRAINING",
-        updated_at: new Date(),
-        created_at: new Date(),
-        updated_by: this.userName
       })
     },
     postSysRole({sys_user_id, role_definition_id}) {

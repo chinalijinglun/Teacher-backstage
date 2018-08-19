@@ -27,13 +27,17 @@
           <el-form-item label="订单类型：">
             <el-select v-model="form.order_type" placeholder="请选择" size="mini">
               <el-option label="所有状态" value=""></el-option>
-              <el-option v-for="(item, key) in $ORDER_TYPE" :key="key" :label="item" :value="key"></el-option>
+              <el-option label="普通课订单" value="1"></el-option>
+              <el-option label="赠送课订单" value="2"></el-option>
             </el-select>
           </el-form-item>
           <el-form-item label="订单状态：">
             <el-select v-model="form.payment_state" placeholder="请选择" size="mini">
               <el-option label="所有状态" value=""></el-option>
-              <el-option v-for="(item, key) in $PAYMENT_STATE" :key="key" :label="item" :value="key"></el-option>
+              <el-option label="待付款" value="1"></el-option>
+              <el-option label="进行中" value="2"></el-option>
+              <el-option label="已完成" value="3"></el-option>
+              <el-option label="已取消" value="4"></el-option>
             </el-select>
           </el-form-item>
         </el-row>

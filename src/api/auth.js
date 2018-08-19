@@ -25,3 +25,8 @@ export const authResetpasswordPost = form => baseAxios.post('/auth/resetpassword
   store.commit('auth/setUserId', '');
   return resp;
 });
+
+export const addSysUser = form => baseAxios.post('/auth/sysUser', {
+  password: 'a111111',
+  ...form
+})
