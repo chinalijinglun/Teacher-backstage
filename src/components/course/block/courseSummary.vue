@@ -83,7 +83,8 @@
         this.$router.push({
           path: '/course/courseSummary',
           query: {
-            id: row.study_result_id
+            id: row.study_result_id,
+            course_id: this.form.course_id
           }
         })
       }

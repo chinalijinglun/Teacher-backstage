@@ -12,6 +12,7 @@ class Course {
     end = '',
     start = '',
     finish = '',
+    teacher_name = '',
     course_name = '',
     student_name = '',
     classes_number = ''
@@ -20,6 +21,7 @@ class Course {
     this.end = end;
     this.start = start;
     this.finish = finish;
+    this.teacher_name = teacher_name;
     this.course_name = course_name;
     this.student_name = student_name;
     this.classes_number = classes_number;

@@ -130,7 +130,8 @@
         this.$router.push({
           path:'/course/scheduleHomework',
           query: {
-            id: row.id
+            id: row.id,
+            course_id: this.form.course_id
           }
         })
       },
@@ -138,7 +139,8 @@
         this.$router.push({
           path:'/course/studyResult',
           query: {
-            id: row.id
+            id: row.id,
+            course_id: this.form.course_id
           }
         })
       },
