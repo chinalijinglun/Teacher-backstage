@@ -33,12 +33,18 @@
 				<el-table-column prop="study_appointment_id" label="编号" style="width: 15%;">
 				</el-table-column>
 				<el-table-column prop="created_at" label="报名时间" style="width: 15%;">
+					<template slot-scope="{row}">
+						{{row.created_at | hasTime}}
+					</template>
 				</el-table-column>
 				<el-table-column prop="student_name" label="学生姓名" style="width: 10%;">
 				</el-table-column>
 				<el-table-column prop="apply_by" label="提报人" style="width: 10%;">
 				</el-table-column>
 				<el-table-column prop="open_time_start" label="试听时间" style="width: 10%;">
+					<template slot-scope="{row}">
+						{{row.open_time_start | hasTime}}
+					</template>
 				</el-table-column>
 				<el-table-column prop="appointment_state" label="状态" style="width: 15%;">
 					<template slot-scope="scope">

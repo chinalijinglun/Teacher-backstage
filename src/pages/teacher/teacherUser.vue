@@ -116,8 +116,14 @@
 				<el-table-column prop="province" label="州" style="width: 15%;">
 				</el-table-column>
 				<el-table-column prop="timezone" label="时区" style="width: 15%;">
+					<template slot-scope="{row}">
+						{{ $TIME_ZONE[row.timezone] || '-'}}
+					</template>
 				</el-table-column>
 				<el-table-column prop="state" label="状态" style="width: 15%;">
+					<template slot-scope="{row}">
+						{{ $TEACHER_STATE_ZH[$TEACHER_STATE_ENUM[row.state]] || '-'}}
+					</template>
 				</el-table-column>
 				<el-table-column fixed="right" label="操作" style="width: 15%;">
 					<template slot-scope="scope">

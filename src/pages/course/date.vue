@@ -16,7 +16,7 @@
 				试听时间
 			</div>
 			<div class="detail-time">
-				{{ `${info.open_time_start} - ${info.open_time_end}` }}
+				{{ info.open_time_start | courseScheduleTime(info.open_time_end)}}
 			</div>
 		</div>
 	</div>

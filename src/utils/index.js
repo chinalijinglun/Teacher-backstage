@@ -103,6 +103,36 @@ const install = (Vue) => {
   Vue.prototype.$MINI_LIMIT = 5;
   // 不需要分页的时候的最大数据条数
   Vue.prototype.$NO_PAGE_LIMIT = 100;
+
+  
+  Vue.filter('courseTime', (start, end) => {
+    if(!start||!end) {
+      return ''
+    }
+    const daystart = dateFmt(new Date(start), 'yyyy.MM.dd');
+    const dayend = dateFmt(new Date(end), 'MM.dd');
+    return daystart+'-'+dayend;
+  })
+  
+  Vue.filter('courseScheduleTime', (start, end) => {
+    if(!start||!end) {
+      return ''
+    }
+    const day = dateFmt(new Date(start), 'yyyy.MM.dd');
+    const timeStart = dateFmt(new Date(start), 'hh:mm');
+    const timeEnd = dateFmt(new Date(end), 'hh:mm');
+    return day+' '+timeStart+'-'+timeEnd;
+  })
+
+  Vue.filter('hasTime', (value) => {
+    if(!value) return ''
+    return dateFmt(new Date(value), 'yyyy-MM-dd hh:mm')
+  })
+
+  Vue.filter('noTime', (value) => {
+    if(!value) return ''
+    return dateFmt(new Date(value), 'yyyy-MM-dd')
+  })
 }
 
 export default {
