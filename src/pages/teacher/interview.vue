@@ -75,7 +75,7 @@
         </el-table-column>
         <el-table-column label="状态" style="width: 15%;">
           <template slot-scope="scope">
-            {{ scope.row.end?'已面试':'未面试' }}
+            {{ $INTERVIEW[scope.row.integerview_state] }}
           </template>
         </el-table-column>
         <el-table-column fixed="right" label="操作" style="width: 15%;">
