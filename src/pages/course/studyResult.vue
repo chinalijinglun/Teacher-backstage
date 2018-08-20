@@ -1,13 +1,13 @@
 <template>
   <div>
     <el-row>
-      <flat-feild name="课程包名称：" value="ESL英语综合提升中级"></flat-feild>
+      <flat-feild name="课程包名称：" :value="course.course_name"></flat-feild>
       <el-row>
         <el-col :span="6">
-          <flat-feild name="课程包名称：" value="ESL英语综合提升中级"></flat-feild>
+          <flat-feild name="教师名称：" :value="course.teacher_name"></flat-feild>
         </el-col>
         <el-col :span="6">
-          <flat-feild name="课程包名称：" value="ESL英语综合提升中级"></flat-feild>
+          <flat-feild name="学生名称：" :value="course.student_name"></flat-feild>
         </el-col>
       </el-row>
     </el-row>
@@ -42,6 +42,7 @@
   import {
     summaryGet
   } from '@/api/study_schedule';
+  import { mapState } from 'vuex'
 
   export default {
     data() {
@@ -50,8 +51,15 @@
         tableData: []
       };
     },
+    computed: {
+      ...mapState({
+        course: state=>state.course.course
+      })
+    },
     created() {
       this.course_schedule_id = this.$route.query.id
+      const courseId = this.$route.query.course_id;
+      this.$store.dispatch('COURSE_GET_BY_ID', courseId)
       this.query()
     },
     methods: {

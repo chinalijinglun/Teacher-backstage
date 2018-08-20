@@ -44,7 +44,6 @@
     methods: {
       getSubjectInfo(id) {
         return studentSubjectType2GetByStudentId(id).then(objects => {
-          console.log(objects)
           return this.$refs.studentBasicEdit.initSubject(objects);
         })
       },

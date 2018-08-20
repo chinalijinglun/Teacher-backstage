@@ -59,7 +59,6 @@
                 return this.getChildren(this.chose)
               }).then(_=>{
                 index3 = this.typeLs[index1].children[index2].children.findIndex(item => this.findIndexById(this.value, item.value))
-                console.log(this.typeLs)
                 this.chose.push(this.typeLs[index1].children[index2].children[index3].value)
               })
             })

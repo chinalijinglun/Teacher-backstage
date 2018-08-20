@@ -303,7 +303,9 @@
         return `${this.$dateFmt(new Date(year, month, day), 'yyyy-MM-dd')} ${hourStart}:${minutesStart}-${hourEnd}:${minutesEnd}`;
       },
       save(index){
-        const [year, month, day] = this.dateEdit.date.split('.');
+        const year = new Date(this.dateEdit.date).getFullYear()
+        const month = new Date(this.dateEdit.date).getMonth()
+        const day = new Date(this.dateEdit.date).getDate()
         const [hourStart, minutesStart] = this.dateEdit.start.split(':');
         const [hourEnd, minutesEnd] = this.dateEdit.end.split(':');
         const fmtStr = this.fmtRangeItem({year, month, day, hourStart, minutesStart, hourEnd, minutesEnd});

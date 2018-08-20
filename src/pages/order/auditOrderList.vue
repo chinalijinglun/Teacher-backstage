@@ -117,7 +117,8 @@
 </template>
 <script>
   import {
-    mangeRefunds
+    mangeRefunds,
+    orderPutById
   } from '@/api/order'
   import paginationMix from '@/components/commons/mixins/paginationMix';
 
@@ -161,7 +162,7 @@
           orderPutById(id, {
             payment_state: 7
           }).then(resp => {
-            this.$message.success('已确认退款！');
+            this.$message.success('已退款！');
             this.query();
           })
         }).catch(_=>{});
