@@ -82,9 +82,10 @@
         const removePromiseLs = removeLs.map(item => this.removeSubject(item));
         Promise.all([
           ...addPromiseLs,
-          ...removePromiseLs
+          ...removePromiseLs,
+          this.updatedBasic()
         ]).then(resp => {
-          console.log(resp)
+          this.cancel()
         })
       },
       cancel() {

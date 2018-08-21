@@ -25,7 +25,7 @@
         </el-table-column>
       </el-table>
     </el-row>
-    <requirements-dialog :visible.sync="visible" :requirements-id="curId" @onClose="query" :student-id="student_id"></requirements-dialog>
+    <requirements-dialog :visible.sync="visible" :requirements-id="curId" @onClose="handlerClose" :student-id="student_id"></requirements-dialog>
   </div>
 </template>
 <script>
@@ -64,6 +64,10 @@ export default {
     edit(id) {
       this.curId = id;
       this.visible = true;
+    },
+    handlerClose() {
+      this.curId = '';
+      this.query()
     }
   },
   components: {
