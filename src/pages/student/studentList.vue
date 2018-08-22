@@ -82,7 +82,7 @@
             label="来源">
           </el-table-column>
           <el-table-column
-            width="420px"
+            width="440px"
             label="操作">
             <template slot-scope="scope">
               <el-row>

@@ -66,9 +66,4 @@ export default {
   }
 }
 </script>
-<style>
-.detail-body {
-  height: 100px;
-}
-</style>
 

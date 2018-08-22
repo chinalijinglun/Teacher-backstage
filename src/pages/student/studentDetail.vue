@@ -78,6 +78,7 @@
     border: 1px solid #eee;
     border-radius: 4px;
     margin-bottom: 40px;
+    overflow: hidden;
   }
 </style>
 
