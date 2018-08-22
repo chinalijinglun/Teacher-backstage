@@ -26,6 +26,17 @@
       </p>
     </el-main>
   </el-container>
+  <el-container class="detail-item" v-if="homeworkInfo.evaluation.length">
+    <el-aside class="detail-item-aside" width="100px">
+      作业点评：
+    </el-aside>
+    <el-main class="detail-item-main">
+      <div v-for="(item, index) in homeworkInfo.evaluation" :key="index">
+        <p>{{item.time | hasTime}}</p>
+        <div v-html="item.evaluation"></div>
+      </div>
+    </el-main>
+  </el-container>
 </div>
 </template>
 <script>
@@ -39,12 +50,12 @@
         homeworkInfo: {
           question_name: '',
           question_text: '',
-          question_attachment_url: []
+          question_attachment_url: [],
+          evaluation: []
         }
       }
     },
     created() {
-
       this.getHomeworkInfo(this.$route.query.id)
     },
     methods: {
@@ -53,6 +64,9 @@
           this.homeworkInfo.question_name = resp.data.question_name;
           this.homeworkInfo.question_text = resp.data.question_text;
           this.homeworkInfo.question_attachment_url = resp.data.question_attachment_url?JSON.parse(resp.data.question_attachment_url):[];
+          if(resp.data.evaluation) {
+            this.homeworkInfo.evaluation = JSON.parse(resp.data.evaluation)
+          }
         })
       }
     }
