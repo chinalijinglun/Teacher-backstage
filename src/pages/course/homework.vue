@@ -5,7 +5,7 @@
       作业标题：
     </el-aside>
     <el-main class="detail-item-main">
-      {{ homeworkInfo.student_name }}
+      {{ homeworkInfo.question_name }}
     </el-main>
   </el-container>
   <el-container class="detail-item">
@@ -13,7 +13,7 @@
       作业描述：
     </el-aside>
     <el-main class="detail-item-main">
-      {{ homeworkInfo.question_text }}
+      <div v-html="homeworkInfo.question_text"></div>
     </el-main>
   </el-container>
   <el-container class="detail-item">
@@ -44,7 +44,8 @@
       }
     },
     created() {
-      this.getHomeworkInfo()
+
+      this.getHomeworkInfo(this.$route.query.id)
     },
     methods: {
       getHomeworkInfo(id) {
