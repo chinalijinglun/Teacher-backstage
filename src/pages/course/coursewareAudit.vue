@@ -54,7 +54,10 @@
 				</el-table-column>
 				<el-table-column prop="created_at" label="课件上传时间">
 				</el-table-column>
-				<el-table-column prop="state" label="状态">
+				<el-table-column label="状态">
+					<template slot-scope="scope">
+						{{$COURSEWARE_STATE_ENUM[scope.row.state]}}
+					</template>
 				</el-table-column>
 				<el-table-column fixed="right" label="操作">
 					<template slot-scope="scope">

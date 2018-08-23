@@ -378,6 +378,11 @@ export const COURSEWARE_STATE = {
   2: '审核通过',
   3: '审核驳回'
 }
+export const COURSEWARE_STATE_ENUM = {
+  BEFORE_CHECK: '未审核',
+  CHECK_PASSED: '审核通过',
+  CHECK_DENY: '审核驳回'
+}
 export const TEACHER_STATE = {
   '81': '不在岗',
   '80': '在岗'
