@@ -1,12 +1,10 @@
 <template>
   <div class="student-evaluate">
-    <el-row>
-      <flat-feild name="课程包名称：" :value="course.course_name"></flat-feild>
-      <el-row>
-        <el-col :span="6">
-          <flat-feild name="教师名称：" :value="course.teacher_name"></flat-feild>
-        </el-col>
-      </el-row>
+    <el-row class="content-row">
+      <h2>课节名称：{{ course_schedule.name }}</h2>
+      <div>
+        <span>上课时间：{{ course_schedule.start | courseScheduleTime(course_schedule.end) }}</span>
+      </div>
     </el-row>
     <el-row v-for="(item, index) in evaluations" :key="index">
       <el-container class="detail-item">
@@ -37,30 +35,30 @@
         <el-aside class="detail-item-aside" width="100px">
           意见内容：
         </el-aside>
-        <el-main class="detail-item-main" v-html="item.teacher_evaluation.summary"></el-main>
+        <el-main class="detail-item-main">{{item.teacher_result}}</el-main>
       </el-container>
     </el-row>
   </div>
 </template>
 <script>
   import { studentEvaluat } from '@/api/course';
-  import { mapState } from 'vuex';
+  import {
+    courseScheduleBareGetById
+  } from '@/api/course_schedule';
+  import {
+    teacherGetBareByTeacherid
+  } from '@/api/teacher'
   export default {
     data() {
       return {
-        value1: 5,
+        teacher: {},
+        course_schedule: {},
         evaluations: []
       }
     },
     created() {
-      const courseId = this.$route.query.course_id;
-      this.$store.dispatch('COURSE_GET_BY_ID', courseId)
+      this.courseSchedule(this.$route.query.id)
       this.getEvaluats(this.$route.query.id)
-    },
-    computed: {
-      ...mapState({
-        course: state=>state.course.course
-      })
     },
     methods: {
       getEvaluats(id) {
@@ -69,6 +67,11 @@
             ...item,
             teacher_evaluation: JSON.parse(item.teacher_evaluation)
           }))
+        })
+      },
+      courseSchedule(id) {
+        return courseScheduleBareGetById(id).then(resp => {
+          this.course_schedule = resp.data
         })
       }
     }
