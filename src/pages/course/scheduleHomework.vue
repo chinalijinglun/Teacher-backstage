@@ -77,7 +77,12 @@ export default {
       })
     },
     toDetail(row) {
-      
+      this.$router.push({
+        path: '/course/homework',
+        query: {
+          id: row.id
+        }
+      })
     }
   }
 }

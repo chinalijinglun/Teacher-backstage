@@ -18,6 +18,7 @@ import courseSummary from '@/pages/course/courseSummary';
 import studyResult from '@/pages/course/studyResult';
 import studentScheduleResult from '@/pages/course/studentScheduleResult';
 import scheduleHomework from '@/pages/course/scheduleHomework';
+import homework from '@/pages/course/homework';
 import studentEvaluate from '@/pages/course/studentEvaluate';
 import coursewareAudit from '@/pages/course/coursewareAudit';
 import courseAuditPage from '@/pages/course/courseAuditPage';
@@ -168,5 +169,11 @@ export default [
     path: 'generalCourse',
     name: 'generalCourse',
     component: generalCourse
+  },
+  {
+    name: '查看作业',
+    path: 'homework',
+    name: 'homework',
+    component: homework
   }
 ];
