@@ -1,7 +1,7 @@
 <template>
   <div class="student-schedule-result">
     <el-row class="content-row">
-      <h2>课节名称：{{ 'Lesson 2 Exploring Space and Astronomy' }}</h2>
+      <h2>课节名称：{{course.course_name}}</h2>
       <div>
         <span>总结周期：{{ $getCourseTime(start, end) }}</span>
         <span>学生：{{ studentName }}</span>
@@ -57,6 +57,7 @@
   import {
     courseExamBareGetById
   } from '@/api/course_exam'
+  import { mapState } from 'vuex'
 
   export default {
     name: 'studentScheduleResult',
@@ -65,11 +66,19 @@
         studentName: '',
         start: '',
         end: '',
+        course_schedule: {},
         evaluate: new CourseSummary({})
       }
     },
+    computed: {
+      ...mapState({
+        course: state=>state.course.course
+      })
+    },
     created() {
       this.study_result_id = this.$route.query.id;
+      const courseId = this.$route.query.course_id;
+      this.$store.dispatch('COURSE_GET_BY_ID', courseId)
       this.getResult(this.study_result_id)
     },
     methods: {

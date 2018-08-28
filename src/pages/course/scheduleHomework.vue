@@ -1,15 +1,11 @@
 <template>
   <div>
     <el-row>
-      <flat-feild name="课程包名称：" :value="course.course_name"></flat-feild>
-      <el-row>
-        <el-col :span="6">
-          <flat-feild name="教师名称：" :value="course.teacher_name"></flat-feild>
-        </el-col>
-        <el-col :span="6">
-          <flat-feild name="学生名称：" :value="course.student_name"></flat-feild>
-        </el-col>
-      </el-row>
+      <h2>课节名称：{{ course_schedule.name }}</h2>
+      <div>
+        <span>教师名称：{{ course.teacher_name }}</span>
+        <span style="margin-left: 20px;">上课时间：{{ course_schedule.start | courseScheduleTime(course_schedule.end) }}</span>
+      </div>
     </el-row>
     <el-row>
       <p>教师预留的作业：</p>
@@ -40,13 +36,15 @@
 </template>
 <script>
 import {
-  viewHomework
+  viewHomework,
+  courseScheduleBareGetById
 } from '@/api/course_schedule'
 import { mapState } from 'vuex'
 export default {
   name: 'scheduleHomework',
   data() {
     return {
+      course_schedule: {},
       course_schedule_id: '',
       tableData: []
     };
@@ -61,6 +59,7 @@ export default {
     const courseId = this.$route.query.course_id;
     this.$store.dispatch('COURSE_GET_BY_ID', courseId)
     this.getHomework()
+    this.courseSchedule(this.course_schedule_id)
   },
   methods: {
     getHomework() {
@@ -70,6 +69,11 @@ export default {
         course_schedule_id: this.course_schedule_id+''
       }).then(res => {
         this.tableData = res.data.objects;
+      })
+    },
+    courseSchedule(id) {
+      return courseScheduleBareGetById(id).then(resp => {
+        this.course_schedule = resp.data
       })
     },
     toDetail(row) {

@@ -64,7 +64,12 @@
     },
     methods: {
       toDetail(row) {
-        this.$router.push('/course/studentScheduleResult?id='+row.id)
+        this.$router.push({
+          path: '/course/studentScheduleResult',
+          query: {
+            id: row.id
+          }
+        })
       },
       query() {
         const filter = this.$json2filter({course_schedule_id:[this.course_schedule_id]})

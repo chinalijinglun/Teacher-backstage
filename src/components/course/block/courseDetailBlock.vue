@@ -253,7 +253,8 @@
         this.$router.push({
           path: '/course/studentEvaluate',
           query: {
-            id: row.id
+            id: row.id,
+            course_id: this.form.course_id
           }
         })
       }

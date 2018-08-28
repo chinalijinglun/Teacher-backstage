@@ -1,10 +1,10 @@
 <template>
   <div class="student-schedule-result">
     <el-row class="content-row">
-      <h2>课节名称：{{ 'Lesson 2 Exploring Space and Astronomy' }}</h2>
+      <h2>课节名称：{{ course_schedule.name }}</h2>
       <div>
-        <span>学生：{{ '' }}</span>
-        <span>上课时间：{{ '' }}</span>
+        <span>学生：{{ student.first_name }}</span>
+        <span>上课时间：{{ course_schedule.start | courseScheduleTime(course_schedule.end) }}</span>
       </div>
     </el-row>
     <el-row class="content-row">
@@ -56,11 +56,19 @@
   import {
     studyScheduleBareGetById
   } from '@/api/study_schedule';
+  import {
+    courseScheduleBareGetById
+  } from '@/api/course_schedule';
+  import {
+    studentBareGetById
+  } from '@/api/student';
 
   export default {
     name: 'studentScheduleResult',
     data() {
       return {
+        student: {},
+        course_schedule: {},
         evaluate: new TeacherEvaluate({})
       }
     },
@@ -77,6 +85,18 @@
           if(resp.data.teacher_evaluation) {
             this.evaluate = new TeacherEvaluate(JSON.parse(resp.data.teacher_evaluation))
           }
+          this.getStudent(resp.data.student_id)
+          this.getCourseSchedult(resp.data.course_schedule_id)
+        })
+      },
+      getStudent(id) {
+        return studentBareGetById(id).then(resp => {
+          this.student = resp.data;
+        })
+      },
+      getCourseSchedult(id) {
+        return courseScheduleBareGetById(id).then(resp => {
+          this.course_schedule = resp.data
         })
       }
     }

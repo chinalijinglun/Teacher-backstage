@@ -35,6 +35,7 @@
 		:afterState="$COURSE_SCHEDULE_STATE_NUMBER[modifyType]" 
 		primaryTableName="course_schedule" 
 		:actionEventType="1" />
+    <grade-dialog :visible.sync="gradeShow" :row="curRow"></grade-dialog>
   </el-row>
 </template>
 <script>
@@ -42,6 +43,7 @@
     courseSummary
   } from '@/api/course'
   import paginationMix from '@/components/commons/mixins/paginationMix';
+  import gradeDialog from '../dialog/grade';
   export default {
     name: 'course-summary-block',
     data() {
@@ -55,6 +57,7 @@
         visible: false,
         reasonVisible: false,
         reasonReviewShow: false,
+        gradeShow: false,
         curRow: {},
         modifyType: ''
       };
@@ -80,16 +83,14 @@
         })
       },
       toDetail(row) {
-        this.$router.push({
-          path: '/course/courseSummary',
-          query: {
-            id: row.study_result_id,
-            course_id: this.form.course_id
-          }
-        })
+        this.curRow = row;
+        this.gradeShow = true;
       }
     },
-    mixins: [paginationMix]
+    mixins: [paginationMix],
+    components: {
+      gradeDialog
+    }
   }
 </script>
 <style scoped>

@@ -1,9 +1,11 @@
 <template>
   <div class="student-evaluate">
-    <h3>课节名称：Lesson 2 Exploring Space and Astronomy</h3>
-    <p>
-      教师：Kira Yuan
-    </p>
+    <el-row class="content-row">
+      <h2>课节名称：{{ course_schedule.name }}</h2>
+      <div>
+        <span>上课时间：{{ course_schedule.start | courseScheduleTime(course_schedule.end) }}</span>
+      </div>
+    </el-row>
     <el-row v-for="(item, index) in evaluations" :key="index">
       <el-container class="detail-item">
         <el-aside class="detail-item-aside" width="100px">
@@ -33,29 +35,43 @@
         <el-aside class="detail-item-aside" width="100px">
           意见内容：
         </el-aside>
-        <el-main class="detail-item-main">{{ item.teacher_evaluation }}</el-main>
+        <el-main class="detail-item-main">{{item.teacher_result}}</el-main>
       </el-container>
     </el-row>
   </div>
 </template>
 <script>
+  import { studentEvaluat } from '@/api/course';
   import {
-    studentEvaluat
-  } from '@/api/course';
+    courseScheduleBareGetById
+  } from '@/api/course_schedule';
+  import {
+    teacherGetBareByTeacherid
+  } from '@/api/teacher'
   export default {
     data() {
       return {
-        value1: 5,
+        teacher: {},
+        course_schedule: {},
         evaluations: []
       }
     },
     created() {
+      this.courseSchedule(this.$route.query.id)
       this.getEvaluats(this.$route.query.id)
     },
     methods: {
       getEvaluats(id) {
         return studentEvaluat(id).then(resp => {
-          this.evaluations = resp.data.objects;
+          this.evaluations = resp.data.objects.map(item => ({
+            ...item,
+            teacher_evaluation: JSON.parse(item.teacher_evaluation)
+          }))
+        })
+      },
+      courseSchedule(id) {
+        return courseScheduleBareGetById(id).then(resp => {
+          this.course_schedule = resp.data
         })
       }
     }
