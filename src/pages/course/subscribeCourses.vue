@@ -249,24 +249,20 @@
       },
       getScheduleTimes() {
         return this.tableData.map(item => {
-          const start = this.$dateFmt(
-            new Date(
-              item.dateDetail.year,
-              item.dateDetail.month,
-              item.dateDetail.day,
-              item.dateDetail.hourStart,
-              item.dateDetail.minutesStart
-            )
-          );
-          const end = this.$dateFmt(
-            new Date(
-              item.dateDetail.year,
-              item.dateDetail.month,
-              item.dateDetail.day,
-              item.dateDetail.hourEnd,
-              item.dateDetail.minutesEnd
-            )
-          );
+          const start = new Date(
+            item.dateDetail.year,
+            item.dateDetail.month,
+            item.dateDetail.day,
+            item.dateDetail.hourStart,
+            item.dateDetail.minutesStart
+          )
+          const end = new Date(
+            item.dateDetail.year,
+            item.dateDetail.month,
+            item.dateDetail.day,
+            item.dateDetail.hourEnd,
+            item.dateDetail.minutesEnd
+          )
           const course_name = item.name;
           return {
             course_name,

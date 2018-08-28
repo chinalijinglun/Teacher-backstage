@@ -37,7 +37,6 @@
               </el-row>
               <el-row class="table-btn-row" v-if="scope.row.state === 1">
                 <el-button size="mini" @click="modifyTime(scope.row)">修改时间</el-button>
-                <!-- <el-button size="mini" @click="cancel(scope.row)">取消课程</el-button> -->
               </el-row>
               <el-row class="table-btn-row" v-if="scope.row.state === 3">
                 <el-button size="mini" @click="reportError(scope.row)">报告问题</el-button>
@@ -48,9 +47,6 @@
                 <el-button size="mini" @click="toStudentEvaluate(scope.row)">学生评价</el-button>
               </el-row>
             </template>
-            <!-- <el-row class="table-btn-row" v-if="scope.row.schedule_type === 'CANCEL'">
-              <el-button size="mini" @click="reviewReason(scope.row)">查看原因</el-button>
-            </el-row> -->
             <!--问题课-->
             <el-row class="table-btn-row" v-if="scope.row.schedule_type === 'TROUBLE_CLASS'">
               <el-button size="mini" @click="reviewReason(scope.row)">查看原因</el-button>
