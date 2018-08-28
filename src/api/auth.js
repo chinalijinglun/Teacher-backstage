@@ -30,3 +30,8 @@ export const addSysUser = form => baseAxios.post('/auth/sysUser', {
   password: 'vipustutor',
   ...form
 })
+
+export const authMenu = () => baseAxios.post('/auth/menu', {
+  page_no: 1,
+  page_limit: 1000
+})

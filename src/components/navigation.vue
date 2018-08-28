@@ -6,9 +6,7 @@
       <el-submenu v-for="(item,index) in menulist" :index='index+""' :key='index'>
         <template slot="title">{{item.name}}</template>
         <el-menu-item-group v-for="(items,subindex) in item.children" :key='subindex'>
-          <router-link :to='item.parent+"/"+items.path'>
-            <el-menu-item :index='subindex+""' class="nav-link">{{items.name}}</el-menu-item>
-          </router-link>
+          <el-menu-item :index='subindex+""' @click="$router.push(items.parent_url + '/' + items.url)" class="nav-link">{{items.menu_name_zh}}</el-menu-item>
         </el-menu-item-group>
       </el-submenu>
 
@@ -18,6 +16,7 @@
 </template>
 
 <script>
+import {authMenu} from '@/api/auth'
 export default {
   name: 'navigation',
   data(){
@@ -26,10 +25,29 @@ export default {
     }
   },
   created(){
-    var _that = this
-    this.$axios.get('/static/left.json').then(function(data){
-      _that.menulist = data.data;
-    })
+    this.getAuthMenu()
+  },
+  methods: {
+    getAuthMenu() {
+      return authMenu().then(resp => {
+        this.menulist = this.groupBy(resp.data.objects)
+      });
+    },
+    groupBy(ls = []) {
+      const o = {}, retArr = [];
+      ls.forEach(item => {
+        o[item.parent_id]||(o[item.parent_id] = {name: item.parent_name_zh})
+        o[item.parent_id].children?(o[item.parent_id].children.push(item)):(o[item.parent_id].children = [item])
+      })
+      for(let k in o) {
+        retArr.push({
+          id: k,
+          ...o[k]
+        })
+      }
+      console.log(retArr);
+      return retArr;
+    }
   }
 }
 </script>
