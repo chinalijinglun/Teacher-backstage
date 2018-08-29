@@ -6,7 +6,8 @@
         <el-row>
           <el-form-item label="订单类型">
             <el-select placeholder="订单类型" size="mini" v-model="form.order_type">
-              <el-option v-for="(name, key) in $ORDER_TYPE" :label="name" :value="key" :key="key"></el-option>
+              <el-option label="普通课订单" :value="1"></el-option>
+              <el-option label="赠送课订单" :value="2"></el-option>
             </el-select>
           </el-form-item>
         </el-row>
