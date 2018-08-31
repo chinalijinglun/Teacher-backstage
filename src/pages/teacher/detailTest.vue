@@ -46,7 +46,7 @@
 					</div>
 					<div class="pic base">
 						<select v-model="form.nation">
-							<option v-for="(item, key) in $MOBILE_PRE" :value="key" :key="key">{{item}}</option>
+							<option v-for="(item, index) in $NATIONAL_CODE" :value="item.code" :key="index">{{item.name_zh}}</option>
 						</select>
 						<input type="text" class="widths" v-model="form.mobile">
 					</div>

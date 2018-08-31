@@ -13,7 +13,7 @@
           <el-input size="mini" v-model="form.mobile">
             <el-select v-model="form.nation" slot="prepend" style="width: 100px" placeholder="请选择">
               <el-option label="国家区号" value=""></el-option>
-              <el-option v-for="(item, key) in $MOBILE_PRE" :label="item" :value="key" :key="key"></el-option>
+              <el-option v-for="(item, index) in $NATIONAL_CODE" :label="item.name_zh" :value="item.code" :key="index"></el-option>
             </el-select>
           </el-input>
         </el-form-item>

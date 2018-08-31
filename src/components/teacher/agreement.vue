@@ -1,16 +1,16 @@
 <template>
-  <el-dialog :visible.sync="dialogVisible">
+  <el-dialog :visible.sync="dialogVisible" width="900px">
 	<div class="content">
 		<div class="contents">
 			<h5>INDEPENDENT CONTRACTOR AGREEMENT</h5>
 
-			<p> THIS AGREEMENT executed on this the June 7, 2018 （合同生成日期，为当天日期）, but agreed to be effective from and after June 14, 2018（合同生效日期，为合同生成日期往后顺延5天，避开双休日和美国法定节假日）, by and between Dandelion International Institute, LLC (hereinafter “Company”), and XXXXX (老师姓名)(hereinafter “Contractor”).</p>
+			<p> THIS AGREEMENT executed on this the {{now}}, but agreed to be effective from and after {{aweekLater}}, by and between Dandelion International Institute, LLC (hereinafter “Company”), and {{teacherName}}(hereinafter “Contractor”).</p>
 
 			<p> NOW, THEREFORE, FOR AND IN CONSIDERATION of the mutual promises and agreements contained herein, Company hires Contractor, and Contractor agrees to work for Company under the terms and conditions hereby agreed upon by the parties:</p>
 
 			<p>SECTION 1 – WORK TO BE PERFORMED</p>
 
-			<p>1.1 Term. Company agrees to hire Contractor, at will, for a term commencing on June 14, 2018 （合同生效日期，为合同生成日期往后顺延5天，避开双休日和美国法定节假日）and continuing until terminated in accordance with Section 4.</p>
+			<p>1.1 Term. Company agrees to hire Contractor, at will, for a term commencing on {{now}} and continuing until terminated in accordance with Section 4.</p>
 
 			<p>1.2 Duties. Contractor agrees to perform work for the Company on the terms and conditions set forth in this agreement, and agrees to devote all necessary time and attention (reasonable periods of illness accepted) to the performance of the duties specified in this agreement. Contractor’s duties shall be as follows:</p>
 
@@ -60,7 +60,7 @@
 
 			<p> SECTION 3 – COMPENSATION</p>
 
-			<p> 3.1 Compensation. In consideration of all services to be rendered by Contractor to the Company, the Company shall pay to the Contractor the sum of $30.00 （此处为工资部分，管理员填写） per hour worked as defined in Section 1.2. Said compensation shall be paid on a bi-weekly basis. (Ref. ATT 1)</p>
+			<p> 3.1 Compensation. In consideration of all services to be rendered by Contractor to the Company, the Company shall pay to the Contractor the sum of ${{salary}} per hour worked as defined in Section 1.2. Said compensation shall be paid on a bi-weekly basis. (Ref. ATT 1)</p>
 
 			<p> 3.2 Withholding; Other Benefits. Compensation paid pursuant to this Agreement shall not subject to the customary withholding of income taxes and other employment taxes. Contractor shall be solely responsible for reporting and paying any such taxes. The Company shall not provide Contractor with any coverage or participation in the Company’s accident and health insurance, life insurance, disability income insurance, medical expense reimbursement, wage continuation plans, or other fringe benefits provided to regular employees.</p>
 
@@ -99,8 +99,16 @@
 </el-dialog>
 </template>
 <script>
+import moment from 'moment'
 import dialogContainer from '@/components/commons/mixins/dialogContainer'
 export default {
+	props: ['salary', 'teacherName'],
+	data() {
+		return {
+			now: moment().format('LL'),
+			aweekLater: moment().add(7, 'days').format('LL')
+		}
+	},
 	mixins: [dialogContainer]
 };
 </script>

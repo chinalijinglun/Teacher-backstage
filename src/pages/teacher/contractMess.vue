@@ -5,7 +5,7 @@
 		<div class="teacher-mess">
 			<div class="teacher-name">
 				<div class="title">教师姓名</div>
-				<div class="cont">{{teacherInfo.username}}</div>
+				<div class="cont">{{teacherName}}</div>
 			</div>
 			<div class="teacher-name">
 				<div class="title">联系电话</div>
@@ -28,7 +28,7 @@
 			<el-button type="primary" size="mini" @click="submit">发送合同</el-button>
 			<el-button size="mini" @click="goback">返回</el-button>
 		</div>
-		<agreement :visible.sync="visible"></agreement>
+		<agreement :visible.sync="visible" :salary="form.contract_dollar_price" :teacher-name="teacherName"></agreement>
 	</div>
 </template>
 
@@ -44,6 +44,9 @@ export default {
 			id: '',
 			teacherInfo: {
 				username: '',
+				first_name: '',
+				middle_name: '',
+				last_name: '',
 				mobile: '',
 				email: '',
 				contract_url: ''
@@ -51,6 +54,20 @@ export default {
 			visible: false,
 			form: {
 				contract_dollar_price: ''
+			}
+		}
+	},
+	computed: {
+		teacherName() {
+			const teacherInfo = {...this.teacherInfo}
+			const nameArr = [];
+			if(teacherInfo.first_name || teacherInfo.middle_name || teacherInfo.last_name) {
+				teacherInfo.first_name && nameArr.push(teacherInfo.first_name)
+				teacherInfo.middle_name && nameArr.push(teacherInfo.middle_name)
+				teacherInfo.last_name && nameArr.push(teacherInfo.last_name)
+				return nameArr.join(' ');
+			} else {
+				return teacherInfo.username;
 			}
 		}
 	},

@@ -12,6 +12,7 @@
   "dependencies": {
     "axios": "^0.18.0",
     "element-ui": "^2.3.7",
+    "kind-of": "^6.0.2",
     "lodash": "^4.17.10",
     "moment": "^2.22.1",
     "vue": "^2.5.2",

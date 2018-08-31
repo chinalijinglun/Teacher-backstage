@@ -44,7 +44,7 @@
 			<el-main class="detail-item-main">
         <el-row>
 					<el-select size="mini" v-model="form.nation" class="detail-item-width1">
-						<el-option v-for="(item,key) in $MOBILE_PRE" :key="key" :label="item" :value="key"></el-option>
+						<el-option v-for="(item,index) in $NATIONAL_CODE" :key="index" :label="item.name_zh" :value="item.code"></el-option>
 					</el-select>
           <el-input size="mini" placeholder="mobile" v-model="form.mobile" class="detail-item-width2"></el-input>
         </el-row>
