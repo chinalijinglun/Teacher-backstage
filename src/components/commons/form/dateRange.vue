@@ -22,11 +22,11 @@
     },
     props: {
       startDate: {
-        type: String,
+        type: [Date,String],
         default: ''
       },
       endDate: {
-        type: String,
+        type: [Date,String],
         default: ''
       },
       dateFmt: {
@@ -54,10 +54,8 @@
     },
     watch: {
       dateRange(v, ov) {
-        const startDate = this.$dateFmt(v[0]);
-        const endDate = this.$dateFmt(v[1]);
-        this.$emit('update:startDate', startDate);
-        this.$emit('update:endDate', endDate);
+        this.$emit('update:startDate', v[0]);
+        this.$emit('update:endDate', v[1]);
       }
     }
   }

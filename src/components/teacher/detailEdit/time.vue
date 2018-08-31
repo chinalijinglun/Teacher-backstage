@@ -116,8 +116,8 @@ export default {
 				week.timeRanges.forEach(item => {
 					addLs.push({
 						week: week.week,
-						start: this.$dateFmt(item.timeRange[0]),
-						end: this.$dateFmt(item.timeRange[1])
+						start: item.timeRange[0],
+						end: item.timeRange[1]
 					})
 				})
 			})

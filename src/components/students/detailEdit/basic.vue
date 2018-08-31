@@ -269,6 +269,7 @@ export default {
 	methods: {
 		initData(form) {
 			this.$fillProps(this.form, form);
+			this.form.birth = new Date(form.birth)
 			this.areaLs = [+form.read_country, +form.read_province];
 			this.$nextTick(_=>{
 				this.$refs.areaSelect.onInit();

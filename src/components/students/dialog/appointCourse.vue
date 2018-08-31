@@ -12,6 +12,7 @@
         :end-date.sync="form.end"
         size="mini"
         range-separator="-"
+        @change="handlerChange"
         start-placeholder="开始时间"
         end-placeholder="结束时间">
         </date-range>
@@ -41,6 +42,9 @@
     },
     props: ['id','isEdit'],
     methods: {
+      handlerChange() {
+        console.log(arguments)
+      },
       open() {
         this.form.student_id = this.id;
       },
