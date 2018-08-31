@@ -189,7 +189,7 @@
 						<el-radio label="母亲">母亲</el-radio>
 						<el-radio label="other">其他</el-radio>
 					</el-radio-group>
-					<el-input size="mini" v-model="parent_role" placeholder="学校中文名" class="detail-item-width1"></el-input>
+					<el-input size="mini" v-model="parent_role" placeholder="家长称谓" class="detail-item-width1"></el-input>
         </el-row>
 			</el-main>
 		</el-container>
