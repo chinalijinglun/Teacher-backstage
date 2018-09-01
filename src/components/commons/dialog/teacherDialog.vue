@@ -12,7 +12,11 @@
     </el-row>
     <el-table :data="teacherLs">
       <el-table-column property="id" label="id" width="150"></el-table-column>
-      <el-table-column label="姓名" property="username" width="200"></el-table-column>
+      <el-table-column label="姓名" property="username" width="200">
+        <template slot-scope="{row}">
+          {{`${row.first_name || ''} ${row.middle_name || ''} ${row.last_name || ''}`}}
+        </template>
+      </el-table-column>
       <el-table-column property="username" label="用户名"></el-table-column>
       <el-table-column label="操作">
         <template slot-scope="scope">
@@ -55,26 +59,22 @@
       }
     },
     created() {
-      this.onInit();
+      this.getTeacher();
     },
     methods: {
       handleCurrentChange(p) {
         this.page = p;
-        this.onInit()
-      },
-      onInit() {
-        this.getTeacher().then(res => {
-          this.teacherLs = res.objects;
-          this.total = res.num_results;
-        });
+        this.getTeacher()
       },
       getTeacher() {
         const filter = this.$json2filter({
-          'id|username': this.queryStr
+          'id|username|first_name|middle_name|last_name': this.queryStr
         });
         return teacherGet(filter, {
           page: this.page
         }).then(resp => {
+          this.teacherLs = resp.data.objects;
+          this.total = resp.data.num_results;
           return resp.data;
         });
       },

@@ -3,7 +3,7 @@
   <div class="auditions">
     <div class="operation">
       <router-link to="/course/studentTrial">
-        <el-button size="mini" type="primary">学生试听报名</el-button>
+        <el-button type="primary">学生试听课报名查询</el-button>
       </router-link>
     </div>
     <div class="all-course">
@@ -269,7 +269,9 @@
 
 <style scoped>
   .operation {
-    margin-bottom: 20px;
+    padding-bottom: 10px;
+    margin-bottom: 10px;
+    border-bottom: 1px #ddd solid;
   }
   .block {
     padding: 20px;

@@ -16,7 +16,7 @@
   </div>
 </template>
 <script>
-  import studentInfoBlock from '@/components/students/block/';
+  import studentInfoBlock from '@/components/students/block/studentInfoBlock';
   import studentEditBlock from '@/components/students/block/studentEditBlock';
   import studentChatLog from '@/components/students/block/studentChatLog'; 
   import studentRequirements from '@/components/students/block/studentRequirements'; 

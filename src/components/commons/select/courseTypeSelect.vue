@@ -71,8 +71,8 @@
       },
       resolveValue(value) {
         if(!value) return null;
-        const [id, name] = value.split(':');
-        return {id, name}
+        const [id, name, name_zh] = value.split(':');
+        return {id, name, name_zh}
       },
       getChildren([curriculum_value, subject_category_value, subject_value]) {
         if (subject_value) {
@@ -105,7 +105,7 @@
         const filter = this.$json2filter({});
         return curriculumGet(filter).then( resp=> {
           return resp.data.objects.map(item => ({
-            value: `${item.id}:${item.full_name}`,
+            value: `${item.id}:${item.full_name}:${item.full_name_zh}`,
             label: item.full_name,
             children: []
           }))
@@ -115,7 +115,7 @@
         const filter = this.$json2filter({curriculum_id: [curriculum_id]});
         return subjectCategoryGet(filter).then( resp=> {
           return resp.data.objects.map(item => ({
-            value: `${item.id}:${item.subject_category}`,
+            value: `${item.id}:${item.subject_category}:${item.subject_category_zh}`,
             label: item.subject_category,
             children: []
           }));
@@ -125,7 +125,7 @@
         const filter = this.$json2filter({subject_category_id: [subject_category_id]});
         return subjectGet(filter).then( resp => {
           return resp.data.objects.map(item => ({
-            value: `${item.id}:${item.subject_name}`,
+            value: `${item.id}:${item.subject_name}:${item.subject_name_zh}`,
             label: item.subject_name
           }));
         });

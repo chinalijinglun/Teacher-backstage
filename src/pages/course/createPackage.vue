@@ -9,11 +9,6 @@
         </el-form-item>
       </el-row>
       <el-row>
-        <el-form-item prop="course_name_zh" label="课程中文名">
-          <el-input size="mini" v-model="form.course_name_zh" placeholder="请输入中文名"></el-input>
-        </el-form-item>
-      </el-row>
-      <el-row>
         <el-form-item prop="course_type" label="课程包类型">
           <el-select v-model="form.course_type" placeholder="所有类型" size="mini">
             <el-option label="在线课" :value="$COURSE_TYPE.ONLINE"></el-option>
@@ -74,6 +69,9 @@
     coursePutByCourseId,
     courseBareGetByCourseId
   } from "@/api/course";
+  import {
+    teacherGetBareByTeacherid
+  } from '@/api/teacher'
   import { mapState } from 'vuex'
 
   export default {
@@ -111,13 +109,19 @@
       })
     },
     methods: {
-      subjectChange({id, name}) {
+      subjectChange({id, name, name_zh}) {
         this.form.course_name = name;
+        this.form.course_name_zh = name_zh;
       },
       getCourseById(id) {
         courseBareGetByCourseId(id).then(resp=> {
           for(let key in this.form) {
             resp.data[key]&&(this.form[key] = resp.data[key]);
+          }
+          if(resp.data.primary_teacher_id) {
+            teacherGetBareByTeacherid(resp.data.primary_teacher_id).then(resp => {
+              this.form.teacher_name = resp.data.username;
+            })
           }
           this.$nextTick(_=>{
             this.$refs.typeSelect.init();
@@ -127,10 +131,6 @@
       valid() {
         if(!this.form.subject_id) {
           this.$message.error('请选择课程分类！');
-          return false;
-        }
-        if(!this.form.course_name_zh) {
-          this.$message.error('请输入课程中文名！');
           return false;
         }
         if(!this.form.course_name) {
