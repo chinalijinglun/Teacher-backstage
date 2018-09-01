@@ -70,7 +70,7 @@
       },
       getTeacher() {
         const filter = this.$json2filter({
-          'id|username|given_name|family_name': this.queryStr
+          'id|username': this.queryStr
         });
         return teacherGet(filter, {
           page: this.page

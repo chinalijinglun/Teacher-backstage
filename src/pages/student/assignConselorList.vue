@@ -43,7 +43,7 @@
           <el-table-column
             label="学生姓名">
             <template slot-scope="scope">
-              {{`${scope.row.given_name || ''} ${scope.row.family_name || ''}`}}
+              {{scope.row.first_name || ''}}
             </template>
           </el-table-column>
           <el-table-column
@@ -138,7 +138,7 @@
           page
         } = this.form;
         const filter = this.$json2filter({
-          'given_name|family_name': name,
+          'name|first_name': name,
           mobile,
           email
         });

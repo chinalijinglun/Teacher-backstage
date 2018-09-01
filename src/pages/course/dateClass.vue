@@ -36,7 +36,7 @@
 			</el-table-column>
       <el-table-column label="姓名" width="200">
         <template slot-scope="scope">
-          {{ (scope.row.given_name || '') + ' ' + (scope.row.family_name || '')}}
+          {{ (scope.row.username || '') }}
         </template>
       </el-table-column>
 			<el-table-column prop="mobile" label="联系电话" style="width: 10%;">
