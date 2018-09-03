@@ -42,8 +42,9 @@
 	</el-row>
 	<div class="date-teacher">
 		教师姓名：
-		<input placeholder="请输入教师ID" size="mini" type="text" v-model="input.id" class="placehold">
-		<el-button size="mini" @click="add">确定</el-button>
+		<el-button type="text" @click="showTeacherDialog = true">{{ '请选择教师' }}</el-button>
+		<!-- <input placeholder="请输入教师ID" size="mini" type="text" v-model="input.id" class="placehold">
+		<el-button size="mini" @click="add">确定</el-button> -->
 	</div>
 	<el-table :data="tableData" style="width: 100%" @selection-change="handleSelectionChange">
 		<el-table-column type="selection" label="ID" width="50">
@@ -71,6 +72,7 @@
 			说明：可以同时预约多个老师，输入教师ID，点添加加入到下方列表里，可以删除，点预约就发送到老师端，老师那边先确定的得到这次试听课，其他人不能在上课了。
 		</p>
 	</el-row>
+	<teacher-dialog :visible.sync="showTeacherDialog" @chose="handlerChoseTeacher"></teacher-dialog>
 </div>
 </template>
 <script>
@@ -99,6 +101,7 @@ export default {
 	},
   data() {
     return {
+			showTeacherDialog: false,
 			info: {
 				studentName: '',
 				open_time_end: '',
@@ -139,16 +142,9 @@ export default {
 				})
 			});
 		},
-		add() {
-			const id = +this.input.id;
-			if(this.teacherIdLs.indexOf(id)===-1) {
-				teacherGetBareByTeacherid(id).then(resp => {
-					if(resp.data) {
-						this.tableData.push(resp.data);
-						this.teacherIdLs.push(resp.data.id);
-					}
-				});
-			}
+		handlerChoseTeacher(teacher) {
+			this.tableData.push(teacher);
+			this.teacherIdLs.push(teacher.id);
 		},
 		remove() {
 			this.choseLs.forEach(item => {
