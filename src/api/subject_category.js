@@ -11,4 +11,4 @@ export const subjectCategoryGetBySubjectcategoryId = (subjectcategoryId) => base
 
 export const subjectCategoryPutBySubjectcategoryId = (subjectcategoryId, form) => baseAxios.put(`/api/v1/subject_category/${subjectcategoryId}`, form);
 
-export const subjectCategoryDeleteBySubjectcategoryId = (subjectcategoryId) => subjectCategoryPutBySubjectcategoryId(subjectcategoryId, {delete_flag: DELETE_FLAG.DELETED});
+export const subjectCategoryDeleteBySubjectcategoryId = (id) => baseAxios.post('/course/del_course_package', { "course_id": id, "type": "2" });

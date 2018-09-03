@@ -1,6 +1,7 @@
 <template>
 <div :value="value">
   <el-cascader
+    :disabled="disabled"
     class="course-type-select"
     :options="typeLs"
     @active-item-change="getChildren"
@@ -37,7 +38,7 @@
     created() {
       this.init()
     },
-    props: ['value'],
+    props: ['value', 'disabled'],
     methods: {
       init() {
         this.getCurriculum().then(typeLs => {

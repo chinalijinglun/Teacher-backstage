@@ -58,7 +58,7 @@
 		</el-table-column>
 		<el-table-column label="时区" style="width:10%">
 			<template slot-scope="scope">
-				{{ $TIME_ZONE_ENUM[scope.row.timezone] }}
+				{{ $TIME_ZONE[scope.row.timezone] }}
 			</template>
 		</el-table-column>
 	</el-table>

@@ -3,7 +3,7 @@ import {DELETE_FLAG} from "../utils/enums";
 
 export const coursePost = (form) => baseAxios.post('/api/v1/course', form);
 
-export const courseDeleteByCourseId = (id) => coursePutByCourseId(id, {delete_flag: DELETE_FLAG.DELETED});
+export const courseDeleteByCourseId = (id) => baseAxios.post('/course/del_course_package', { "course_id": id, "type": "4" });
 
 export const courseGetByCourseId = (courseId) => baseAxios.get(`/api/v1/course/${courseId}`);
 
@@ -39,3 +39,5 @@ export const studentEvaluat = id => baseAxios.post('/course/common_evaluation', 
 export const courseAdd = form => baseAxios.post('/course/schedule_compensate', form)
 
 export const getRoomUrl = course_schedule_id => baseAxios.post('/manger/get_enter_room_url', { course_schedule_id })
+
+export const courseQuery = form => baseAxios.post('/course/package_query', form);

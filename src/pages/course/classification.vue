@@ -113,7 +113,7 @@
                 {{data.creator}}
               </span>
               <span style="width:140px;display:inline-block;">
-                {{data.createTime}}
+                {{data.createTime | hasTime}}
               </span>
               <span style="width:56px;display:inline-block;">
                 {{data.state}}

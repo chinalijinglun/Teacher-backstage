@@ -5,12 +5,12 @@
     <el-form  label-width="100px" class="demo-ruleForm">
       <el-row>
         <el-form-item prop="subject_id" label="课程分类">
-          <course-type-select ref="typeSelect" v-model="form.subject_id" @change="subjectChange"></course-type-select>
+          <course-type-select :disabled="!canEdit" ref="typeSelect" v-model="form.subject_id" @change="subjectChange"></course-type-select>
         </el-form-item>
       </el-row>
       <el-row>
         <el-form-item prop="course_type" label="课程包类型">
-          <el-select v-model="form.course_type" placeholder="所有类型" size="mini">
+          <el-select :disabled="!canEdit" v-model="form.course_type" placeholder="所有类型" size="mini">
             <el-option label="在线课" :value="$COURSE_TYPE.ONLINE"></el-option>
             <el-option label="公开课" :value="$COURSE_TYPE.PUBLIC"></el-option>
           </el-select>
@@ -18,31 +18,31 @@
       </el-row>
       <el-row>
         <el-form-item prop="class_type" label="班型">
-          <el-select v-model="form.class_type" placeholder="所有班型" size="mini">
+          <el-select :disabled="!canEdit" v-model="form.class_type" placeholder="所有班型" size="mini">
             <el-option v-for="(name, key) in $CLASS_TYPE" :label="name" :value="key" :key="key"></el-option>
           </el-select>
         </el-form-item>
       </el-row>
       <el-row>
         <el-form-item prop="class_type" label="项目">
-          <el-select v-model="form.project_type" placeholder="所有项目" size="mini">
+          <el-select :disabled="!canEdit" v-model="form.project_type" placeholder="所有项目" size="mini">
             <el-option v-for="(name, key) in $PROJECT_TYPE" :label="name" :value="key" :key="key"></el-option>
           </el-select>
         </el-form-item>
       </el-row>
       <el-row>
         <el-form-item prop="primary_teacher_id" label="教师">
-          <el-button type="text" @click="openChoseTeacherDialog">{{ form.teacher_name || '请选择教师' }}</el-button>
+          <el-button :disabled="!canEdit" type="text" @click="openChoseTeacherDialog">{{ form.teacher_name || '请选择教师' }}</el-button>
         </el-form-item>
       </el-row>
       <el-row>
         <el-form-item prop="classes_number" label="课节数">
-          <el-input size="mini" v-model="form.classes_number" placeholder="请输入课节数" :maxlength="3"></el-input>
+          <el-input :disabled="!canEdit" size="mini" v-model="form.classes_number" placeholder="请输入课节数" :maxlength="3"></el-input>
         </el-form-item>
       </el-row>
       <el-row>
         <el-form-item prop="price" label="基本价格">
-          <el-input size="mini" v-model="form.price" :maxlength="5" placeholder="请输入价格">
+          <el-input :disabled="!canEdit" size="mini" v-model="form.price" :maxlength="5" placeholder="请输入价格">
             <template slot="prepend">¥</template>
             <template slot="append">/节</template>
           </el-input>
@@ -71,13 +71,17 @@
   } from "@/api/course";
   import {
     teacherGetBareByTeacherid
-  } from '@/api/teacher'
+  } from '@/api/teacher';
+  import {
+    orderBareGet
+  } from '@/api/order';
   import { mapState } from 'vuex'
 
   export default {
     data(){
       return{
         showTeacherDialog: false,
+        canEdit: false,
         form: {
           id: '',
           subject_id: '',
@@ -101,6 +105,9 @@
       this.form.id = this.$route.query.id;
       if(this.form.id) {
         this.getCourseById(this.form.id)
+        this.hasOrder(this.form.id).then(res => this.canEdit = !res)
+      } else {
+        this.canEdit = true
       }
     },
     computed: {
@@ -109,6 +116,13 @@
       })
     },
     methods: {
+      async hasOrder(id) {
+        const filter = this.$json2filter({
+          course_id: [id]
+        })
+        const {data} = await orderBareGet(filter)
+        return !!data.num_results
+      },
       subjectChange({id, name, name_zh}) {
         this.form.course_name = name;
         this.form.course_name_zh = name_zh;
