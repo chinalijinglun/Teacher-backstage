@@ -46,7 +46,16 @@
               <el-option v-for="(item, index) in channelLs" :key="index" :label="item.channel_name" :value="item.id"></el-option>
             </el-select>
           </el-form-item>
-          <el-button type="primary" size="mini" @click="query">查询</el-button>
+          <el-form-item label="是否报名试听：">
+            <el-select v-model="form.enroll_type" placeholder="请选择" size="mini">
+              <el-option label="全部" value=""></el-option>
+              <el-option label="已报名" :value="1"></el-option>
+              <el-option label="未报名" :value="0"></el-option>
+            </el-select>
+          </el-form-item>
+          <el-form-item>
+            <el-button type="primary" size="mini" @click="query">查询</el-button>
+          </el-form-item>
         </el-row>
       </el-form>
     </el-row>
@@ -82,6 +91,12 @@
             label="来源">
           </el-table-column>
           <el-table-column
+            label="是否报名试听">
+            <template slot-scope="{row}">
+              {{ {0: '未报名', 1: '已报名'}[row.enroll_type]|| '未报名' }}
+            </template>
+          </el-table-column>
+          <el-table-column
             width="440px"
             label="操作">
             <template slot-scope="scope">
@@ -105,7 +120,7 @@
         </el-pagination>
       </el-row>
     </el-row>
-    <appoint-course :visible.async="visible" :id="curId"></appoint-course>
+    <appoint-course :visible.sync="visible" :id="curId"></appoint-course>
   </div>
 </template>
 <script>
@@ -141,6 +156,7 @@
           parent_mobile: '',
           student_id: '',
           student_name: '',
+          enroll_type: '',
           page: 1
         },
         totalCount: 0,
@@ -173,6 +189,7 @@
           parent_mobile,
           student_id,
           student_name,
+          enroll_type,
           page
         } = this.form;
         const form = this.$deleteEmptyProps({
@@ -185,6 +202,7 @@
           page_limit,
           parent_mobile,
           student_id,
+          enroll_type,
           student_name
         })
         mangerStudents({

@@ -15,7 +15,7 @@
 						<el-input size="mini" v-model="form.course_name"></el-input>
 					</el-form-item>
 					<el-form-item label="课程包ID：">
-						<el-input size="mini" v-model="form.id"></el-input>
+						<el-input size="mini" v-model="form.course_id"></el-input>
 					</el-form-item>
 					<el-form-item label="操作人：">
 						<el-input size="mini" v-model="form.updated_by"></el-input>
@@ -26,8 +26,8 @@
 			<el-row class="state-createTime">
 				<el-form-item label="创建时间：">
 					<date-range
-					:start-date.sync="form.created_at.gt"
-					:end-date.sync="form.created_at.lt"
+					:start-date.sync="form.created_at_start"
+					:end-date.sync="form.created_at_end"
 					size="mini"
 					range-separator="-"
 					start-placeholder="开始时间"
@@ -35,7 +35,7 @@
 					</date-range>
 				</el-form-item>
 				<el-form-item label="状态：">
-					<el-select v-model="form.state" placeholder="请选择" size="mini">
+					<el-select v-model="form.course_state" placeholder="请选择" size="mini">
 					<el-option label="全部" value=""></el-option>
 					<el-option label="有效" value="98"></el-option>
 					<el-option label="无效" value="99"></el-option>
@@ -52,25 +52,28 @@
 		<div class="table-list">
 			<el-table :data="tableData" style="width: 100%;margin-top:20px;" @selection-change="handlerSelectionChange">
 				<el-table-column type="selection" width="55"></el-table-column>
-				<el-table-column fixed prop="course_name_zh" label="中文名称" style="width: 15%;">
+				<el-table-column fixed prop="course_name_zh" label="中文名称">
 				</el-table-column>
-				<el-table-column prop="course_name" label="英文名称" style="width: 15%;">
+				<el-table-column prop="course_name" label="英文名称">
 				</el-table-column>
-				<el-table-column prop="id" label="课程包ID" style="width: 10%;">
+				<el-table-column prop="id" label="课程包ID">
 				</el-table-column>
-				<el-table-column label="类型" style="width: 10%;">
+				<el-table-column label="类型">
           <template slot-scope="scope">
             {{{1:'全部',2:'线上课程',3:'公开课'}[scope.row.course_type]}}
           </template>
 				</el-table-column>
-				<el-table-column label="状态" style="width: 10%;">
+				<el-table-column label="状态">
           <template slot-scope="scope">
-            {{{98: '有效', 99: '无效'}[scope.row.state]}}
+            {{{98: '有效', 99: '无效'}[scope.row.course_state]}}
           </template>
 				</el-table-column>
-				<el-table-column prop="updated_by" label="创建人" style="width: 10%;">
+				<el-table-column prop="updated_by" label="创建人">
 				</el-table-column>
-				<el-table-column prop="created_at" label="创建时间" style="width: 15%;">
+				<el-table-column prop="created_at" label="创建时间">
+          <template slot-scope="scope">
+            {{scope.row.created_at | hasTime}}
+          </template>
 				</el-table-column>
 				<el-table-column fixed="right" width="200" label="操作">
           <template slot-scope="scope">
@@ -98,6 +101,7 @@
 <script>
 import {
   courseBareGet,
+  courseQuery,
   courseDeleteByCourseId
 } from '@/api/course';
 import paginationMix from '@/components/commons/mixins/paginationMix'
@@ -114,13 +118,10 @@ export default {
       form: {
         classLs: [],
         course_name: "",
-				id: "",
-				startDate: '',
-				created_at: {
-          gt: '',
-          lt: ''
-        },
-        state: [''],
+				course_id: "",
+        created_at_end: '',
+        created_at_start: '',
+        course_state: '',
 				updated_by: "",
 				page: 1
       },
@@ -166,21 +167,30 @@ export default {
       const {
         classLs,
         course_name,
-        id,
-        created_at,
+        course_id,
+        created_at_end,
+        created_at_start,
         updated_by,
-        page,
-        state
+        course_state,
+        page
       } = this.form;
-      const filter = this.$json2filter({
-        subject_id: [classLs[2]],
-        'course_name|course_name_zh': course_name,
-        id,
-        state,
-        created_at,
-        updated_by
-      });
-      courseBareGet(filter, {page}).then(resp => {
+      const [category_1, category_2, category_3] = classLs;
+
+      courseQuery({
+        ...this.$deleteEmptyProps({
+          category_1,
+          category_2,
+          category_3,
+          course_name,
+          course_id,
+          created_at_end,
+          created_at_start,
+          updated_by,
+          course_state,
+        }),
+        page_no: page,
+        page_limit: 10
+      }).then(resp => {
 				this.tableData = resp.data.objects;
 				this.totalCount = resp.data.num_results;
 			});

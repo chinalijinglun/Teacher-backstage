@@ -35,8 +35,8 @@
             <el-select v-model="form.payment_state" placeholder="请选择" size="mini">
               <el-option label="所有状态" value=""></el-option>
               <el-option label="待付款" value="1"></el-option>
-              <el-option label="进行中" value="2"></el-option>
-              <el-option label="已完成" value="3"></el-option>
+              <el-option label="已付款" value="2"></el-option>
+              <el-option label="已排课" value="3"></el-option>
               <el-option label="已取消" value="4"></el-option>
             </el-select>
           </el-form-item>
@@ -106,6 +106,7 @@
               <el-button size="mini" @click="toPayed(scope.row.id)" v-if="scope.row.payment_state === 1">确认付款</el-button>
               <el-button size="mini" @click="toCancel(scope.row)" v-if="scope.row.payment_state === 1">取消订单</el-button>
               <el-button size="mini" @click="toRefund(scope.row.id)" v-if="scope.row.payment_state === 2">申请退款</el-button>
+              <el-button size="mini" @click="toRefund(scope.row.id)" v-if="scope.row.payment_state === 8">申请退款</el-button>
             </template>
           </el-table-column>
         </el-table>

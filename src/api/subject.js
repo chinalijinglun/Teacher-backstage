@@ -11,4 +11,4 @@ export const subjectBareGetById = (subjectid) => baseAxios.get(`/api/v1/_bare/su
 
 export const subjectPutBySubjectid = (subjectid, form) => baseAxios.put(`/api/v1/subject/${subjectid}`, form);
 
-export const subjectDeleteBySubjectid = (subjectid) => subjectPutBySubjectid(subjectid, {delete_flag: DELETE_FLAG.DELETED});
+export const subjectDeleteBySubjectid = (id) => baseAxios.post('/course/del_course_package', { "course_id": id, "type": "3" });

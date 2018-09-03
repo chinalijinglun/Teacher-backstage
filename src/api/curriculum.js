@@ -13,4 +13,4 @@ export const curriculumGetByCurriculumidBare = curriculumid => baseAxios.get(`/a
 
 export const curriculumPutByCurriculumid = (curriculumid, form) => baseAxios.put(`/api/v1/curriculum/${curriculumid}`, form);
 
-export const curriculumDeleteByCurriculumid = curriculumid => curriculumPutByCurriculumid(curriculumid, { delete_flag: DELETE_FLAG.DELETED });
+export const curriculumDeleteByCurriculumid = (id) => baseAxios.post('/course/del_course_package', { "course_id": id, "type": "1" });

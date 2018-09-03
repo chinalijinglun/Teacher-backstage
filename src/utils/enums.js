@@ -51,14 +51,14 @@ export const COURSE_SCHEDULE_STATE = {
 }
 
 export const PAYMENT_STATE = {
-  1: '未付款',
+  1: '待付款',
   2: '已付款',
-  3: '取消',
+  3: '已取消',
   4: '申请退款',
   5: '退款审核通过',
   6: '退款审核驳回',
   7: '已退款',
-  8: '已使用'
+  8: '已排课'
 }
 
 export const COURSE_TYPE_MAP = {
