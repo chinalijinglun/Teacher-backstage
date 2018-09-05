@@ -9,11 +9,6 @@ import axios from 'axios';
 import selfComponents from './components';
 import utils from './utils';
 import store from './store';
-import moment from 'moment';
-import momentTimezone from 'moment-timezone';
-
-window.moment = moment;
-window.momentTimezone = momentTimezone;
 
 Vue.config.productionTip = false;
 Vue.prototype.axios = axios;
