@@ -7,7 +7,7 @@
         </el-form-item>
       </div>
       <div class="apply-storey return-class">
-        <p class="apply-title">选择要退款课节：</p>
+        <p class="apply-title">可退款课节：</p>
         <el-table
           :data="tableData"
           border
@@ -19,6 +19,9 @@
           <el-table-column
             prop="start"
             label="上课时间">
+            <template slot-scope="{row}">
+              {{row.start | hasTime}}
+            </template>
           </el-table-column>
         </el-table>
       </div>
@@ -103,12 +106,11 @@
       getStudentSchedule(student_id, course_id) {
         return studentSchedule({
           course_id,
-          page_limit: 10,
+          page_limit: 1000,
           page_no: 1,
           student_id
         }).then(resp => {
-          console.log(resp);
-          this.tableData = resp.data.objects;
+          this.tableData = resp.data.objects.filter(item => new Date(item.start) > new Date());
         })
       }
     }

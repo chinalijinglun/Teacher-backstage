@@ -9,7 +9,6 @@
           <el-menu-item :index='subindex+""' @click="$router.push(items.parent_url + '/' + items.url)" class="nav-link">{{items.menu_name_zh}}</el-menu-item>
         </el-menu-item-group>
       </el-submenu>
-
     </el-menu>
   </el-aside>
   </div>
@@ -66,5 +65,8 @@ export default {
 }
 .left .el-menu-item.is-active{
   background-color: #3c8dbc;
+}
+.el-menu-item.nav-link.is-active {
+  background-color: #3c8dbc !important;
 }
 </style>
