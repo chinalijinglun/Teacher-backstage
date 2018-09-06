@@ -1,5 +1,5 @@
 import {
-  courseCommon
+  courseMember
 } from '@/api/course'
 import {
   getCourseTime
@@ -50,14 +50,7 @@ const mutations = {
 
 const actions = {
   COURSE_GET_BY_ID({ state, commit }, course_id) {
-    if(state.last_id === course_id) {
-      return Promise.resolve(state.course)
-    }
-    return courseCommon({
-      course_id,
-      page_limit: 1,
-      page_no: 1
-    }).then(res => {
+    return courseMember(course_id).then(res => {
       const course = res.data.objects[0];
       commit(COURSE_SET, course)
       return course;

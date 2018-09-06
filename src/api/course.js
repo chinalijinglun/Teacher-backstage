@@ -41,3 +41,9 @@ export const courseAdd = form => baseAxios.post('/course/schedule_compensate', f
 export const getRoomUrl = course_schedule_id => baseAxios.post('/manger/get_enter_room_url', { course_schedule_id })
 
 export const courseQuery = form => baseAxios.post('/course/package_query', form);
+
+export const courseMember = course_id => baseAxios.post('/course/member', {
+  course_id,
+  page_limit: 1,
+  page_no: 1
+});

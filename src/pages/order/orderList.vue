@@ -36,8 +36,8 @@
               <el-option label="所有状态" value=""></el-option>
               <el-option label="待付款" value="1"></el-option>
               <el-option label="已付款" value="2"></el-option>
-              <el-option label="已排课" value="3"></el-option>
-              <el-option label="已取消" value="4"></el-option>
+              <el-option label="已排课" value="8"></el-option>
+              <el-option label="已取消" value="3"></el-option>
             </el-select>
           </el-form-item>
         </el-row>
