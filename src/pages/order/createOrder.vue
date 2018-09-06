@@ -22,13 +22,7 @@
         <template v-if="form.have_course === 1">
           <el-row>
             <el-form-item label="课程包">
-              <el-input size="mini" placeholder="输入课程包ID" v-model="form.course_id"></el-input>
-              <el-button size="mini" type="primary" @click="validCourse">验证</el-button>
-            </el-form-item>
-          </el-row>
-          <el-row>
-            <el-form-item label="课程包名称">
-              <el-input size="mini" :disabled="true" :value="course.course_name"></el-input>
+              <el-button type="text" size="mini" @click="showCourseDialog = true;" >{{course.course_name || '选择课程'}}</el-button>
             </el-form-item>
           </el-row>
           <el-row>
@@ -59,9 +53,7 @@
         </template>
         <template v-else>
           <el-form-item label="课程分类">
-            <curriculum-select
-              v-model="classLs"
-            />
+            <curriculum-select v-model="classLs"/>
           </el-form-item>
           <el-form-item label="课程包类型">
             <el-select v-model="form.course_type" placeholder="所有类型" size="mini">
@@ -74,7 +66,7 @@
             </el-select>
           </el-form-item>
           <el-form-item label="教师">
-            <el-input size="mini" v-model="form.teacher" placeholder="输入教师姓名或ID"></el-input>
+            <el-button type="text" size="mini" @click="showTeacherDialog = true;" >{{teacher_name || '选择教师'}}</el-button>
           </el-form-item>
           <el-form-item label="课节数">
             <el-input size="mini" v-model="form.classes_number" placeholder="请输入课节数"></el-input>
@@ -88,7 +80,7 @@
         </template>
         <el-row>
           <el-form-item label="学生">
-            <el-input size="mini" v-model="form.student" placeholder="请输入学生ID"></el-input>
+            <el-button type="text" size="mini" @click="showStudentDialog = true;" >{{student_name || '选择学生'}}</el-button>
           </el-form-item>
         </el-row>
         <el-row>
@@ -109,6 +101,9 @@
         </el-row>
       </el-form>
     </div>
+    <course-dialog :visible.sync="showCourseDialog" @chose="handlerChoseCourse"></course-dialog>
+    <student-dialog :visible.sync="showStudentDialog" @chose="handlerChoseStudent"></student-dialog>
+    <teacher-dialog :visible.sync="showTeacherDialog" @chose="handlerChoseTeacher"></teacher-dialog>
   </div>
 </template>
 <script>
@@ -137,7 +132,9 @@
           teacher: ''
         },
         classLs: [],
-        course_id_valid: false,
+        showCourseDialog: false,
+        showStudentDialog: false,
+        showTeacherDialog: false,
         course: {
           course_name: '',
           course_type_name: '',
@@ -145,7 +142,9 @@
           teacher: '',
           classes_number: '',
           price: ''
-        }
+        },
+        student_name: '',
+        teacher_name: ''
       }
     },
     methods: {
@@ -159,20 +158,34 @@
               this.course[key] = resp.data[key];
             }
           }
-          this.course_id_valid = true;
           this.course.course_type_name = this.$COURSE_TYPE_MAP[resp.data.course_type];
           this.course.class_type_name = this.$CLASS_TYPE[resp.data.class_type];
           this.course.teacher = resp.data.primary_teacher.username;
         })
       },
+      handlerChoseCourse(course) {
+        for(let k in this.course) {
+          if(course[k] !== undefined) {
+            this.course[k] = course[k]
+          }
+          this.form.course_id = course.id
+          this.course.course_type_name = this.$COURSE_TYPE_MAP[course.course_type];
+          this.course.class_type_name = this.$CLASS_TYPE[course.class_type];
+          this.course.teacher = course.primary_teacher.username;
+        }
+      },
+      handlerChoseStudent(student) {
+        this.student_name = student.name;
+        this.form.student = student.id;
+      },
+      handlerChoseTeacher(teacher) {
+        this.teacher_name = teacher.username;
+        this.form.teacher = teacher.id;
+      },
       valid() {
         if(this.form.have_course) {
           if(!this.form.course_id) {
-            this.$message.error('请输入课程id！');
-            return false;
-          }
-          if(!this.course_id_valid) {
-            this.$message.error('请输入有效的课程id并验证！');
+            this.$message.error('请选择课程！');
             return false;
           }
         } else {

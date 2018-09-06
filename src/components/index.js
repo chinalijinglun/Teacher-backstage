@@ -18,6 +18,8 @@ import timeSure from './commons/dialog/timeSure';
 import imgUpload from './commons/upload/imgUpload';
 
 import paginationMix from './commons/mixins/paginationMix';
+import courseDialog from './commons/dialog/courseDialog';
+import studentDialog from './commons/dialog/studentDialog';
 
 
 import viewInput from './commons/view/input';
@@ -50,6 +52,8 @@ const install = (Vue) => {
   Vue.component(viewAreaSelect.name, viewAreaSelect);
   Vue.component(viewFileUpload.name, viewFileUpload);
   Vue.component(viewSubjectSelect.name, viewSubjectSelect);
+  Vue.component(courseDialog.name, courseDialog);
+  Vue.component(studentDialog.name, studentDialog);
 }
 export {
   paginationMix

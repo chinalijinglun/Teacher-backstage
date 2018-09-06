@@ -9,6 +9,8 @@ export const courseGetByCourseId = (courseId) => baseAxios.get(`/api/v1/course/$
 
 export const coursePutByCourseId = (courseId, form) => baseAxios.put(`/api/v1/course/${courseId}`, form);
 
+export const courseGet = (params, others) => baseAxios.get('/api/v1/course', { params: { q: JSON.stringify(params), results_per_page: 10, ...others } });
+
 export const courseBareGet = (params, others) => baseAxios.get('/api/v1/_bare/course', { params: { q: JSON.stringify(params), results_per_page: 10, ...others } });
 
 export const courseBareGetByCourseId = (courseId) => baseAxios.get(`/api/v1/_bare/course/${courseId}`);
