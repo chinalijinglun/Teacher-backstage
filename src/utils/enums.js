@@ -134,14 +134,8 @@ export const TEACHER_STATE_ZH = {
 // 手机区号
 export const NATIONAL_CODE = [
   {
-    name_zh: "美国",
-    name: "U.S.A",
-    code: "+1",
-    time: "-13.00"
-  },
-  {
-    name_zh: "加拿大",
-    name: "Canada",
+    name_zh: "美国/加拿大",
+    name: "U.S.A/Canada",
     code: "+1",
     time: "-13.00"
   },
@@ -1518,12 +1512,6 @@ export const NATIONAL_CODE = [
     name: "Zimbabwe",
     code: "+263",
     time: "-6.00"
-  },
-  {
-    name_zh: "中华人民共和国",
-    name: "P.R.C.",
-    code: "+86",
-    time: "0"
   }
 ]
 
