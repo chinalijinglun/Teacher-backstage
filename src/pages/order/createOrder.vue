@@ -245,9 +245,37 @@
         this.$router.back();
       },
       submit() {
-        this.form.subject_id = this.classLs[2];
+        const {
+          have_course,
+          amount,
+          basic_amount,
+          class_type,
+          classes_number,
+          course_id,
+          course_type,
+          order_desc,
+          order_type,
+          project_type,
+          student,
+          subject_id,
+          teacher
+        } = this.form;
         if(this.valid()) {
-          const f = this.$deleteEmptyProps(this.form);
+          const f = this.$deleteEmptyProps({
+            have_course,
+            amount,
+            basic_amount,
+            class_type,
+            classes_number,
+            course_id: '' + course_id,
+            course_type,
+            order_desc,
+            order_type,
+            project_type,
+            student: '' + student,
+            subject_id: this.classLs[2],
+            teacher: '' + teacher
+          });
           orderEstablish(f).then(resp => {
             console.log(resp);
             this.goback();

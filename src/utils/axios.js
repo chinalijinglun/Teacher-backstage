@@ -43,7 +43,7 @@ baseAxios.interceptors.response.use(resp => {
   }, 50)
   if(error.response) {
     if(error.response && error.response.data) {
-      Message.error(error.response.data.error);
+      Message.error(error.response.data.error || error.response.data.message || '系统异常！');
     }
     if(error.response.status === 401) {
       router.push('/login');
