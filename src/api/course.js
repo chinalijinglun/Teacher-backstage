@@ -52,6 +52,7 @@ export const courseMember = course_id => baseAxios.post('/course/member', {
 
 export const courseStudent = ({course_id, page_no = 1}) => baseAxios.post('/manger/orders', {
   course_id,
+  payment_state: "2",
   page_limit: 10,
   page_no
 });
