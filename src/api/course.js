@@ -49,3 +49,14 @@ export const courseMember = course_id => baseAxios.post('/course/member', {
   page_limit: 1,
   page_no: 1
 });
+
+export const courseStudent = ({course_id, page_no = 1}) => baseAxios.post('/manger/orders', {
+  course_id,
+  page_limit: 10,
+  page_no
+});
+
+export const addStudent = ({course_id, student_id}) => baseAxios.post('/course/add_student_schedule', {
+  course_id,
+  student_id
+})

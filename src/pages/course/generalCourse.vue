@@ -57,10 +57,13 @@
             {{scope.row | stateZh}}
           </template>
         </el-table-column>
-        <el-table-column fixed="right" label="操作" style="width: 15%;">
+        <el-table-column fixed="right" label="操作" width="250px">
           <template slot-scope="scope">
             <el-button size="mini" v-if="!scope.row.start" @click="toSetSchedule(scope.row.id)">排课</el-button>
-            <el-button size="mini" v-else @click="toCourseDetail(scope.row.id)">查看详情</el-button>
+            <template  v-else>
+              <el-button size="mini" @click="toCourseDetail(scope.row.id)">查看详情</el-button>
+              <el-button size="mini" @click="addStudent(scope.row.id)">增加学生</el-button>
+            </template>
           </template>
         </el-table-column>
       </el-table>
@@ -74,19 +77,23 @@
         </el-pagination>
       </el-row>
     </div>
-
+    <course-student :visible.sync="courseStudentVisible" :course-id="curId" @chose="choseStudent" @close="curId = '';"></course-student>
   </div>
 </template>
 <script>
   import {
-    courseCommon
+    courseCommon,
+    addStudent
   } from '@/api/course'
   import {
     getCourseTime
   } from '@/utils'
+  import CourseStudent from './dialog/CourseStudent'
   export default {
     data() {
       return {
+        courseStudentVisible: false,
+        curId: '',
         tableData: [],
         total: 0,
         form: {
@@ -143,7 +150,23 @@
           path: '/course/courseDetail',
           query: {id, blkname: 'list'}
         })
+      },
+      addStudent(id) {
+        this.curId = id;
+        this.$nextTick(_=>{
+          this.courseStudentVisible = true;
+        })
+      },
+      choseStudent({student_id, course_id}) {
+        return addStudent({student_id, course_id}).then(resp => {
+          console.log(resp);
+          this.$message.success('添加成功！');
+          this.query();
+        })
       }
+    },
+    components: {
+      CourseStudent
     }
   }
 </script>

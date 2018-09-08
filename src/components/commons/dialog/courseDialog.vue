@@ -1,5 +1,5 @@
 <template>
-  <el-dialog title="选择教师" :visible.sync="dialogVisible">
+  <el-dialog title="选择课程" :visible.sync="dialogVisible">
     <el-row>
       <el-form :inline="true">
         <el-form-item>

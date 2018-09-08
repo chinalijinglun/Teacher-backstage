@@ -1,20 +1,8 @@
 <template>
-  <el-dialog title="选择学生" :visible.sync="dialogVisible">
-    <el-row>
-      <el-form :inline="true">
-        <el-form-item>
-          <el-input size="mini" placeholder="输入学生姓名、用户名或ID" v-model="queryStr"></el-input>
-        </el-form-item>
-        <el-form-item>
-          <el-button size="mini" @click="getStudent">查询</el-button>
-        </el-form-item>
-      </el-form>
-    </el-row>
-    <el-table :data="studentLs">
-      <el-table-column property="id" label="id" width="150"></el-table-column>
-      <el-table-column label="姓名" property="name" width="200">
-      </el-table-column>
-      <el-table-column property="username" label="用户名"></el-table-column>
+  <el-dialog title="选择学生" width="800px" @close="handleClose" @open="open" :visible.sync="dialogVisible">
+    <el-table :data="studentLs" border>
+      <el-table-column property="student_id" label="id"></el-table-column>
+      <el-table-column property="student_name" label="学生姓名"></el-table-column>
       <el-table-column label="操作">
         <template slot-scope="scope">
           <el-button type="text" size="small" @click="choseStudent(scope.row)">选择</el-button>
@@ -34,8 +22,8 @@
 </template>
 <script>
   import {
-    studentGet
-  } from "@/api/student";
+    courseStudent
+  } from "@/api/course";
 
   import dialogContainer from '@/components/commons/mixins/dialogContainer'
   export default {
@@ -44,8 +32,7 @@
       return {
         studentLs: [],
         page: 1,
-        total: 0,
-        queryStr: ''
+        total: 0
       }
     },
     mixins: [dialogContainer],
@@ -53,22 +40,21 @@
       visible: {
         type: Boolean,
         default: false
-      }
-    },
-    created() {
-      this.getStudent();
+      },
+      courseId: {}
     },
     methods: {
+      open() {
+        this.getStudent();
+      },
       handleCurrentChange(p) {
         this.page = p;
         this.getStudent()
       },
       getStudent() {
-        const filter = this.$json2filter({
-          'id|name|first_name|username': this.queryStr
-        });
-        return studentGet(filter, {
-          page: this.page
+        return courseStudent({
+          course_id: this.courseId,
+          page_no: this.page
         }).then(resp => {
           this.studentLs = resp.data.objects;
           this.total = resp.data.num_results;
@@ -76,11 +62,14 @@
         });
       },
       choseStudent(student) {
-        this.$emit('chose', student);
+        this.$emit('chose', {...student, course_id: this.courseId});
         this.close();
       },
       close() {
         this.$emit('update:visible', false);
+      },
+      handleClose() {
+        this.$emit('close')
       }
     }
   }

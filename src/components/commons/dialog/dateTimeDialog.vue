@@ -19,6 +19,8 @@
         <div class="item-time-picker">
           <el-time-picker
             is-range
+            format="HH:mm"
+            :default-value="[new Date(2018,1,1,0,0),new Date(2018,1,1,23,59,59)]"
             v-model="item.timeRange"
             size="mini"
             placeholder="选择时间范围">

@@ -51,7 +51,7 @@
         })
       },
       sure() {
-        this.$emit('onSure', this.start, this.end);
+        this.$emit('onSure', new Date(this.start), new Date(this.end));
       },
       reDate() {
         this.$emit('onReDate');
