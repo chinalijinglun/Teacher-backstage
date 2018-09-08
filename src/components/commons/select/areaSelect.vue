@@ -74,9 +74,9 @@
         })
       },
       getCountry() {
-        return getCountry().then(resp => {
-          this.countryLs = resp.data.objects;
-          return resp.data.objects;
+        return getCountry().then(data => {
+          this.countryLs = data;
+          return data;
         })
       },
       getProvince(id) {

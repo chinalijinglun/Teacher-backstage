@@ -1,4 +1,4 @@
-import { baseAxios } from '@/utils/axios';
+import { baseAxios, axios } from '@/utils/axios';
 import { DELETE_FLAG, COUNTRY_IDS } from "../utils/enums";
 import { json2filter } from "../utils/json2filter";
 
@@ -16,6 +16,20 @@ export const regionBareGetById = (id) => baseAxios.get(`/api/v1/_bare/region/${i
 
 export const mangerStaffQuery = form => baseAxios.post('/manger/staff_query', form);
 
-export const getCountry = () => regionBareGet(json2filter({id: COUNTRY_IDS}));
+// export const getCountry = () => regionBareGet(json2filter({id: COUNTRY_IDS}));
 
 export const getRegionByPid = (id) => regionBareGet(json2filter({pid: [id]}));
+
+export const getCountry = axios.get('/static/country.json').then(resp => resp.data.sort((a, b) => {
+  if(COUNTRY_IDS.indexOf(a.id) !== -1) {
+    return -1
+  } else if(this.$COUNTRY_IDS.indexOf(b.id) !== -1) {
+    return 1
+  } else if(a.name < b.name) {
+    return -1
+  } else if(a.name === b.name) {
+    return 0
+  } else {
+    return 1
+  }
+}));

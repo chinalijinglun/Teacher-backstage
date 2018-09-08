@@ -51,7 +51,7 @@
     </div>
     <div class="table-list">
       <el-table :data="tableData" style="width: 100%;margin-top:20px;">
-        <el-table-column fixed prop="course_id" label="编号" style="width: 15%;">
+        <el-table-column fixed prop="id" label="编号" style="width: 15%;">
         </el-table-column>
         <el-table-column prop="username" label="教师姓名" style="width: 15%;">
         </el-table-column>
@@ -80,8 +80,8 @@
         </el-table-column>
         <el-table-column fixed="right" label="操作" style="width: 15%;">
           <template slot-scope="scope">
-            <el-button size="mini" v-if="scope.row.end">回放</el-button>
-            <el-button size="mini" v-if="!scope.row.end">进入教室</el-button>
+            <el-button size="mini" v-if="new Date(scope.row.end)<=new Date()">回放</el-button>
+            <el-button size="mini" v-if="new Date(scope.row.end)>new Date()">进入教室</el-button>
           </template>
         </el-table-column>
       </el-table>

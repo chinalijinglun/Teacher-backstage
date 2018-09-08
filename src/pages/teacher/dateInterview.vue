@@ -58,7 +58,7 @@
 						{{$INTERVIEW[scope.row.interview_state]}}
 					</template>
 				</el-table-column>
-				<el-table-column fixed="right" label="操作">
+				<el-table-column fixed="right" label="操作" width="200px">
 					<template slot-scope="scope">
 						<el-button 
 						@click="dateInterviewDialogOpen(scope.row.interview_id)" 
@@ -111,7 +111,8 @@ import {
 	mangerThacherApponit
 } from '@/api/teacher';
 import {
-	interviewPutByinterviewid
+	interviewPutByinterviewid,
+	acceptInterview
 } from '@/api/interview';
 import {
 	actionEventPost
@@ -212,12 +213,14 @@ export default {
 			this.interview_id = row.interview_id;
 			this.sureDialog = true;
 		},
-		handleSureTime() {
-			teacherPutByTeacherid(this.teacher_id, {
-				state: 'WAIT_FOR_INTERVIEW'
+		handleSureTime(interview_at_start, interview_at_end) {
+			acceptInterview({
+				interview_id: this.interview_id,
+				interview_at_start,
+				interview_at_end
 			}).then(resp => {
-				return interviewPutByinterviewid(this.interview_id, {
-					state: 2
+				return teacherPutByTeacherid(this.teacher_id, {
+					state: 'WAIT_FOR_INTERVIEW'
 				})
 			}).then(resp => {
 				this.$message.success('确认成功！');

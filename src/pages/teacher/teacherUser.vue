@@ -206,9 +206,9 @@ export default {
 			this.query()
 		},
 		countryClick(){
-			return getCountry().then((data)=>{
-				this.countryData = data.data.objects;
-				this.curCountryData = data.data.objects;
+			return getCountry().then(data=>{
+				this.countryData = data;
+				this.curCountryData = data;
 			})
 		},
 		proviceClick(id){

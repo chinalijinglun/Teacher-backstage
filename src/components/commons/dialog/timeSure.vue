@@ -10,7 +10,7 @@
     </div>
     <div class="sure-time-range">
       <p class="title">老师方便的时间</p>
-      <p>{{`${start} - ${end}`}}</p>
+      <p>{{start | courseScheduleTime(end)}}</p>
     </div>
     <div class="btn-contain">
       <el-button size="mini" type="primary" @click="sure">确认</el-button>
@@ -51,7 +51,7 @@
         })
       },
       sure() {
-        this.$emit('onSure');
+        this.$emit('onSure', this.start, this.end);
       },
       reDate() {
         this.$emit('onReDate');

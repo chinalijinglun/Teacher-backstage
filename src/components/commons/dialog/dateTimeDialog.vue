@@ -3,6 +3,7 @@
     class="no-header-dialog"
     :visible.sync="dialogVisible"
     @open="open"
+    width="830px"
     @close="handlerClose"
     :show-close="false">
     <div class="date-time-dialog">

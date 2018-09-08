@@ -93,7 +93,7 @@
           <el-table-column
             label="是否报名试听">
             <template slot-scope="{row}">
-              {{ {0: '未报名', 1: '已报名'}[row.enroll_type]|| '未报名' }}
+              {{ {0: '未报名', 1: '已报名'}[row.enroll_type]|| '已报名' }}
             </template>
           </el-table-column>
           <el-table-column
