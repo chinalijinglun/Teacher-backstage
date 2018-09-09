@@ -136,1381 +136,1381 @@ export const NATIONAL_CODE = [
   {
     name_zh: "美国/加拿大",
     name: "U.S.A/Canada",
-    code: "+1",
+    code: "1",
     time: "-13.00"
   },
   {
     name_zh: "澳大利亚",
     name: "Australia",
-    code: "+61",
+    code: "61",
     time: "2.00"
   },
   {
     name_zh: "中国",
     name: "China",
-    code: "+86",
+    code: "86",
     time: "0"
   },
   {
     name_zh: "阿富汗",
     name: "Afghanistan",
-    code: "+93",
+    code: "93",
     time: "-3.50"
   },
   {
     name_zh: "阿拉斯加",
     name: "Alaska(U.S.A)",
-    code: "+1907",
+    code: "1907",
     time: "3.00"
   },
   {
     name_zh: "阿尔巴尼亚",
     name: "Albania",
-    code: "+355",
+    code: "355",
     time: "-7.00"
   },
   {
     name_zh: "阿尔及利亚",
     name: "Algeria",
-    code: "+213",
+    code: "213",
     time: "-8.00"
   },
   {
     name_zh: "安道尔",
     name: "Andorra",
-    code: "+376",
+    code: "376",
     time: "-8.00"
   },
   {
     name_zh: "安哥拉",
     name: "Angola",
-    code: "+244",
+    code: "244",
     time: "-7.00"
   },
   {
     name_zh: "安圭拉岛(英)",
     name: "Anguilla I.",
-    code: "+1264",
+    code: "1264",
     time: "-12.00"
   },
   {
     name_zh: "安提瓜和巴布达",
     name: "Antigua and Barbuda",
-    code: "+1268",
+    code: "1268",
     time: "-12.00"
   },
   {
     name_zh: "阿根廷",
     name: "Argentina",
-    code: "+54",
+    code: "54",
     time: "-11.00"
   },
   {
     name_zh: "亚美尼亚",
     name: "Armenia",
-    code: "+374",
+    code: "374",
     time: "0.00"
   },
   {
     name_zh: "阿鲁巴岛",
     name: "Aruba I.",
-    code: "+297",
+    code: "297",
     time: "-12.00"
   },
   {
     name_zh: "阿森松(英)",
     name: "Ascension",
-    code: "+247",
+    code: "247",
     time: "-8.00"
   },
   {
     name_zh: "奥地利",
     name: "Austria",
-    code: "+43",
+    code: "43",
     time: "-7.00"
   },
   {
     name_zh: "阿塞拜疆",
     name: "Azerbaijan",
-    code: "+994",
+    code: "994",
     time: "-5.00"
   },
   {
     name_zh: "巴林",
     name: "Bahrain",
-    code: "+973",
+    code: "973",
     time: "-5.00"
   },
   {
     name_zh: "孟加拉国",
     name: "Bangladesh",
-    code: "+880",
+    code: "880",
     time: "-2.00"
   },
   {
     name_zh: "巴巴多斯",
     name: "Barbados",
-    code: "+1246",
+    code: "1246",
     time: "-12.00"
   },
   {
     name_zh: "白俄罗斯",
     name: "Belarus",
-    code: "+375",
+    code: "375",
     time: "-5.00"
   },
   {
     name_zh: "比利时",
     name: "Belgium",
-    code: "+32",
+    code: "32",
     time: "-7.00"
   },
   {
     name_zh: "伯利兹",
     name: "Belize",
-    code: "+501",
+    code: "501",
     time: "-14.00"
   },
   {
     name_zh: "贝宁",
     name: "Benin",
-    code: "+229",
+    code: "229",
     time: "-7.00"
   },
   {
     name_zh: "百慕大群岛(英)",
     name: "Bermuda Is.",
-    code: "+1441",
+    code: "1441",
     time: "-12.00"
   },
   {
     name_zh: "不丹",
     name: "Bhutan",
-    code: "+975",
+    code: "975",
     time: "0.00"
   },
   {
     name_zh: "玻利维亚",
     name: "Bolivia",
-    code: "+591",
+    code: "591",
     time: "-12.00"
   },
   {
     name_zh: "波斯尼亚和黑塞哥维那",
     name: "Bosnia And Herzegovina",
-    code: "+387",
+    code: "387",
     time: "0.00"
   },
   {
     name_zh: "博茨瓦纳",
     name: "Botswana",
-    code: "+267",
+    code: "267",
     time: "-6.00"
   },
   {
     name_zh: "巴西",
     name: "Brazil",
-    code: "+55",
+    code: "55",
     time: "-11.00"
   },
   {
     name_zh: "保加利亚",
     name: "Bulgaria",
-    code: "+359",
+    code: "359",
     time: "-6.00"
   },
   {
     name_zh: "布基纳法索",
     name: "Burkina Faso",
-    code: "+226",
+    code: "226",
     time: "-8.00"
   },
   {
     name_zh: "布隆迪",
     name: "Burundi",
-    code: "+257",
+    code: "257",
     time: "-6.00"
   },
   {
     name_zh: "喀麦隆",
     name: "Cameroon",
-    code: "+237",
+    code: "237",
     time: "-7.00"
   },
   {
     name_zh: "加那利群岛",
     name: "Canaries Is.",
-    code: "+34",
+    code: "34",
     time: "-8.00"
   },
   {
     name_zh: "佛得角",
     name: "Cape Verde",
-    code: "+238",
+    code: "238",
     time: "-9.00"
   },
   {
     name_zh: "开曼群岛(英)",
     name: "Cayman Is.",
-    code: "+1345",
+    code: "1345",
     time: "-13.00"
   },
   {
     name_zh: "中非",
     name: "Central Africa",
-    code: "+236",
+    code: "236",
     time: "-7.00"
   },
   {
     name_zh: "乍得",
     name: "Chad",
-    code: "+235",
+    code: "235",
     time: "-7.00"
   },
   {
     name_zh: "智利",
     name: "Chile",
-    code: "+56",
+    code: "56",
     time: "-12.00"
   },
   {
     name_zh: "圣诞岛",
     name: "Christmas I.",
-    code: "+61 9164",
+    code: "61 9164",
     time: "-1.30"
   },
   {
     name_zh: "科科斯岛",
     name: "Cocos I.",
-    code: "+61 9162",
+    code: "61 9162",
     time: "-13.00"
   },
   {
     name_zh: "哥伦比亚",
     name: "Colombia",
-    code: "+57",
+    code: "57",
     time: "0.00"
   },
   {
     name_zh: "巴哈马国",
     name: "Commonwealth of The Bahamas",
-    code: "+1809",
+    code: "1809",
     time: "0.00"
   },
   {
     name_zh: "多米尼克国",
     name: "Commonwealth of Dominica",
-    code: "+1809",
+    code: "1809",
     time: "0.00"
   },
   {
     name_zh: "科摩罗",
     name: "Comoro",
-    code: "+269",
+    code: "269",
     time: "-5.00"
   },
   {
     name_zh: "刚果",
     name: "Congo",
-    code: "+242",
+    code: "242",
     time: "-7.00"
   },
   {
     name_zh: "科克群岛(新)",
     name: "Cook IS.",
-    code: "+682",
+    code: "682",
     time: "-18.30"
   },
   {
     name_zh: "哥斯达黎加",
     name: "Costa Rica",
-    code: "+506",
+    code: "506",
     time: "-14.00"
   },
   {
     name_zh: "克罗地亚",
     name: "Croatia",
-    code: "+383 385",
+    code: "383 385",
     time: "-7.00"
   },
   {
     name_zh: "古巴",
     name: "Cuba",
-    code: "+53",
+    code: "53",
     time: "-13.00"
   },
   {
     name_zh: "塞浦路斯",
     name: "Cyprus",
-    code: "+357",
+    code: "357",
     time: "-6.00"
   },
   {
     name_zh: "捷克",
     name: "Czech",
-    code: "+420",
+    code: "420",
     time: "-7.00"
   },
   {
     name_zh: "丹麦",
     name: "Denmark",
-    code: "+45",
+    code: "45",
     time: "-7.00"
   },
   {
     name_zh: "迪戈加西亚岛",
     name: "Diego Garcia I.",
-    code: "+246",
+    code: "246",
     time: "0.00"
   },
   {
     name_zh: "吉布提",
     name: "Djibouti",
-    code: "+253",
+    code: "253",
     time: "-5.00"
   },
   {
     name_zh: "多米尼加共和国",
     name: "Dominican Rep.",
-    code: "+1809",
+    code: "1809",
     time: "-13.00"
   },
   {
     name_zh: "厄瓜多尔",
     name: "Ecuador",
-    code: "+593",
+    code: "593",
     time: "-13.00"
   },
   {
     name_zh: "埃及",
     name: "Egypt",
-    code: "+20",
+    code: "20",
     time: "-6.00"
   },
   {
     name_zh: "萨尔瓦多",
     name: "El Salvador",
-    code: "+503",
+    code: "503",
     time: "-14.00"
   },
   {
     name_zh: "赤道几内亚",
     name: "Equatorial Guinea",
-    code: "+240",
+    code: "240",
     time: "-8.00"
   },
   {
     name_zh: "厄立特里亚",
     name: "Eritrea",
-    code: "+291",
+    code: "291",
     time: "0.00"
   },
   {
     name_zh: "爱沙尼亚",
     name: "Estonia",
-    code: "+372",
+    code: "372",
     time: "-5.00"
   },
   {
     name_zh: "埃塞俄比亚",
     name: "Ethiopia",
-    code: "+251",
+    code: "251",
     time: "-5.00"
   },
   {
     name_zh: "福克兰群岛",
     name: "Falkland Is.",
-    code: "+500",
+    code: "500",
     time: "-11.00"
   },
   {
     name_zh: "法罗群岛(丹)",
     name: "Faroe Is.",
-    code: "+298",
+    code: "298",
     time: "0.00"
   },
   {
     name_zh: "斐济",
     name: "Fiji",
-    code: "+679",
+    code: "679",
     time: "4.00"
   },
   {
     name_zh: "芬兰",
     name: "Finland",
-    code: "+358",
+    code: "358",
     time: "-6.00"
   },
   {
     name_zh: "法国",
     name: "France",
-    code: "+33",
+    code: "33",
     time: "-8.00"
   },
   {
     name_zh: "法属圭亚那",
     name: "French Guiana",
-    code: "+594",
+    code: "594",
     time: "-12.00"
   },
   {
     name_zh: "法属波里尼西亚",
     name: "French Polynesia",
-    code: "+689",
+    code: "689",
     time: "3.00"
   },
   {
     name_zh: "加蓬",
     name: "Gabon",
-    code: "+241",
+    code: "241",
     time: "-7.00"
   },
   {
     name_zh: "冈比亚",
     name: "Gambia",
-    code: "+220",
+    code: "220",
     time: "-8.00"
   },
   {
     name_zh: "格鲁吉亚",
     name: "Georgia",
-    code: "+995",
+    code: "995",
     time: "0.00"
   },
   {
     name_zh: "德国",
     name: "Germany",
-    code: "+49",
+    code: "49",
     time: "-7.00"
   },
   {
     name_zh: "加纳",
     name: "Ghana",
-    code: "+233",
+    code: "233",
     time: "-8.00"
   },
   {
     name_zh: "直布罗陀(英)",
     name: "Gibraltar",
-    code: "+350",
+    code: "350",
     time: "-8.00"
   },
   {
     name_zh: "希腊",
     name: "Greece",
-    code: "+30",
+    code: "30",
     time: "-6.00"
   },
   {
     name_zh: "格陵兰岛",
     name: "Greenland",
-    code: "+299",
+    code: "299",
     time: "0.00"
   },
   {
     name_zh: "格林纳达",
     name: "Grenada",
-    code: "+1809",
+    code: "1809",
     time: "-14.00"
   },
   {
     name_zh: "瓜德罗普岛(法)",
     name: "Guadeloupe I.",
-    code: "+590",
+    code: "590",
     time: "0.00"
   },
   {
     name_zh: "关岛(美)",
     name: "Guam",
-    code: "+671",
+    code: "671",
     time: "2.00"
   },
   {
     name_zh: "危地马拉",
     name: "Guatemala",
-    code: "+502",
+    code: "502",
     time: "-14.00"
   },
   {
     name_zh: "几内亚",
     name: "Guinea",
-    code: "+224",
+    code: "224",
     time: "-8.00"
   },
   {
     name_zh: "几内亚比绍",
     name: "Guinea-Bissau",
-    code: "+245",
+    code: "245",
     time: "0.00"
   },
   {
     name_zh: "圭亚那",
     name: "Guyana",
-    code: "+592",
+    code: "592",
     time: "-11.00"
   },
   {
     name_zh: "海地",
     name: "Haiti",
-    code: "+509",
+    code: "509",
     time: "-13.00"
   },
   {
     name_zh: "夏威夷",
     name: "Hawaii",
-    code: "+1808",
+    code: "1808",
     time: "0.00"
   },
   {
     name_zh: "洪都拉斯",
     name: "Honduras",
-    code: "+504",
+    code: "504",
     time: "-14.00"
   },
   {
     name_zh: "匈牙利",
     name: "Hungary",
-    code: "+36",
+    code: "36",
     time: "-7.00"
   },
   {
     name_zh: "冰岛",
     name: "Iceland",
-    code: "+354",
+    code: "354",
     time: "-9.00"
   },
   {
     name_zh: "印度",
     name: "India",
-    code: "+91",
+    code: "91",
     time: "-2.30"
   },
   {
     name_zh: "印度尼西亚",
     name: "Indonesia",
-    code: "+62",
+    code: "62",
     time: "-0.30"
   },
   {
     name_zh: "伊朗",
     name: "Iran",
-    code: "+98",
+    code: "98",
     time: "-4.30"
   },
   {
     name_zh: "伊拉克",
     name: "Iraq",
-    code: "+964",
+    code: "964",
     time: "-5.00"
   },
   {
     name_zh: "爱尔兰",
     name: "Ireland",
-    code: "+353",
+    code: "353",
     time: "-8.00"
   },
   {
     name_zh: "以色列",
     name: "Israel",
-    code: "+972",
+    code: "972",
     time: "-6.00"
   },
   {
     name_zh: "意大利",
     name: "Italy",
-    code: "+39",
+    code: "39",
     time: "-7.00"
   },
   {
     name_zh: "科特迪瓦",
     name: "Ivory Coast",
-    code: "+225",
+    code: "225",
     time: "-8.00"
   },
   {
     name_zh: "牙买加",
     name: "Jamaica",
-    code: "+1876",
+    code: "1876",
     time: "-12.00"
   },
   {
     name_zh: "日本",
     name: "Japan",
-    code: "+81",
+    code: "81",
     time: "1.00"
   },
   {
     name_zh: "约旦",
     name: "Jordan",
-    code: "+962",
+    code: "962",
     time: "-6.00"
   },
   {
     name_zh: "柬埔寨",
     name: "Kampuchea",
-    code: "+855",
+    code: "855",
     time: "-1.00"
   },
   {
     name_zh: "哈萨克斯坦",
     name: "Kazakhstan",
-    code: "+7",
+    code: "7",
     time: "-5.00"
   },
   {
     name_zh: "肯尼亚",
     name: "Kenya",
-    code: "+254",
+    code: "254",
     time: "-5.00"
   },
   {
     name_zh: "基里巴斯",
     name: "Kiribati",
-    code: "+686",
+    code: "686",
     time: "4.00"
   },
   {
     name_zh: "朝鲜",
     name: "Korea(dpr of)",
-    code: "+85",
+    code: "85",
     time: "1.00"
   },
   {
     name_zh: "韩国",
     name: "Korea(republic of)",
-    code: "+82",
+    code: "82",
     time: "1.00"
   },
   {
     name_zh: "科威特",
     name: "Kuwait",
-    code: "+965",
+    code: "965",
     time: "-5.00"
   },
   {
     name_zh: "吉尔吉斯斯坦",
     name: "Kyrgyzstan",
-    code: "+996",
+    code: "996",
     time: "-5.00"
   },
   {
     name_zh: "老挝",
     name: "Laos",
-    code: "+856",
+    code: "856",
     time: "-1.00"
   },
   {
     name_zh: "拉脱维亚",
     name: "Latvia",
-    code: "+371",
+    code: "371",
     time: "-5.00"
   },
   {
     name_zh: "黎巴嫩",
     name: "Lebanon",
-    code: "+961",
+    code: "961",
     time: "-6.00"
   },
   {
     name_zh: "莱索托",
     name: "Lesotho",
-    code: "+266",
+    code: "266",
     time: "-6.00"
   },
   {
     name_zh: "利比里亚",
     name: "Liberia",
-    code: "+231",
+    code: "231",
     time: "-8.00"
   },
   {
     name_zh: "利比亚",
     name: "Libya",
-    code: "+218",
+    code: "218",
     time: "-6.00"
   },
   {
     name_zh: "列支敦士登",
     name: "Liechtenstein",
-    code: "+41 75",
+    code: "41 75",
     time: "-7.00"
   },
   {
     name_zh: "立陶宛",
     name: "Lithuania",
-    code: "+370",
+    code: "370",
     time: "-5.00"
   },
   {
     name_zh: "卢森堡",
     name: "Luxembourg",
-    code: "+352",
+    code: "352",
     time: "-7.00"
   },
   {
     name_zh: "马其顿",
     name: "Macedonia",
-    code: "+389",
+    code: "389",
     time: "0.00"
   },
   {
     name_zh: "马达加斯加",
     name: "Madagascar",
-    code: "+261",
+    code: "261",
     time: "-5.00"
   },
   {
     name_zh: "马拉维",
     name: "Malawi",
-    code: "+265",
+    code: "265",
     time: "-6.00"
   },
   {
     name_zh: "马来西亚",
     name: "Malaysia",
-    code: "+60",
+    code: "60",
     time: "-0.30"
   },
   {
     name_zh: "马尔代夫",
     name: "Maldive",
-    code: "+960",
+    code: "960",
     time: "-2.30"
   },
   {
     name_zh: "马里",
     name: "Mali",
-    code: "+223",
+    code: "223",
     time: "-8.00"
   },
   {
     name_zh: "马耳他",
     name: "Malta",
-    code: "+356",
+    code: "356",
     time: "-7.00"
   },
   {
     name_zh: "马里亚纳群岛",
     name: "Mariana Is.",
-    code: "+670",
+    code: "670",
     time: "2.00"
   },
   {
     name_zh: "马绍尔群岛",
     name: "Marshall Is.",
-    code: "+692",
+    code: "692",
     time: "4.00"
   },
   {
     name_zh: "马提尼克(法)",
     name: "Martinique",
-    code: "+596",
+    code: "596",
     time: "-12.00"
   },
   {
     name_zh: "毛里塔尼亚",
     name: "Mauritania",
-    code: "+222",
+    code: "222",
     time: "0.00"
   },
   {
     name_zh: "毛里求斯",
     name: "Mauritius",
-    code: "+230",
+    code: "230",
     time: "-4.00"
   },
   {
     name_zh: "马约特岛",
     name: "Mayotte I.",
-    code: "+269",
+    code: "269",
     time: "0.00"
   },
   {
     name_zh: "墨西哥",
     name: "Mexico",
-    code: "+52",
+    code: "52",
     time: "-15.00"
   },
   {
     name_zh: "密克罗尼西亚(美)",
     name: "Micronesia",
-    code: "+691",
+    code: "691",
     time: "1.00"
   },
   {
     name_zh: "中途岛(美)",
     name: "Midway I.",
-    code: "+1808",
+    code: "1808",
     time: "-19.00"
   },
   {
     name_zh: "摩尔多瓦",
     name: "Moldova",
-    code: "+373",
+    code: "373",
     time: "-5.00"
   },
   {
     name_zh: "摩纳哥",
     name: "Monaco",
-    code: "+377",
+    code: "377",
     time: "-7.00"
   },
   {
     name_zh: "蒙古",
     name: "Mongolia",
-    code: "+976",
+    code: "976",
     time: "0.00"
   },
   {
     name_zh: "蒙特塞拉特岛(英)",
     name: "Montserrat I.",
-    code: "+1664",
+    code: "1664",
     time: "-12.00"
   },
   {
     name_zh: "摩洛哥",
     name: "Morocco",
-    code: "+212",
+    code: "212",
     time: "-6.00"
   },
   {
     name_zh: "莫桑比克",
     name: "Mozambique",
-    code: "+258",
+    code: "258",
     time: "-6.00"
   },
   {
     name_zh: "缅甸",
     name: "Myanmar",
-    code: "+95",
+    code: "95",
     time: "-1.30"
   },
   {
     name_zh: "纳米比亚",
     name: "Namibia",
-    code: "+264",
+    code: "264",
     time: "-7.00"
   },
   {
     name_zh: "瑙鲁",
     name: "Nauru",
-    code: "+674",
+    code: "674",
     time: "4.00"
   },
   {
     name_zh: "尼泊尔",
     name: "Nepal",
-    code: "+977",
+    code: "977",
     time: "-2.30"
   },
   {
     name_zh: "荷兰",
     name: "Netherlands",
-    code: "+31",
+    code: "31",
     time: "-7.00"
   },
   {
     name_zh: "荷属安的列斯群岛",
     name: "Netherlandsantilles Is.",
-    code: "+599",
+    code: "599",
     time: "-12.00"
   },
   {
     name_zh: "新喀里多尼亚群岛(法)",
     name: "New Caledonia Is.",
-    code: "+687",
+    code: "687",
     time: "3.00"
   },
   {
     name_zh: "新西兰",
     name: "New Zealand",
-    code: "+64",
+    code: "64",
     time: "4.00"
   },
   {
     name_zh: "尼加拉瓜",
     name: "Nicaragua",
-    code: "+505",
+    code: "505",
     time: "-14.00"
   },
   {
     name_zh: "尼日尔",
     name: "Niger",
-    code: "+227",
+    code: "227",
     time: "-8.00"
   },
   {
     name_zh: "尼日利亚",
     name: "Nigeria",
-    code: "+234",
+    code: "234",
     time: "-7.00"
   },
   {
     name_zh: "纽埃岛(新)",
     name: "Niue I.",
-    code: "+683",
+    code: "683",
     time: "-19.00"
   },
   {
     name_zh: "诺福克岛(澳)",
     name: "Norfolk I,",
-    code: "+6723",
+    code: "6723",
     time: "3.30"
   },
   {
     name_zh: "挪威",
     name: "Norway",
-    code: "+47",
+    code: "47",
     time: "-7.00"
   },
   {
     name_zh: "阿曼",
     name: "Oman",
-    code: "+968",
+    code: "968",
     time: "-4.00"
   },
   {
     name_zh: "帕劳(美)",
     name: "Palau",
-    code: "+680",
+    code: "680",
     time: "0.00"
   },
   {
     name_zh: "巴拿马",
     name: "Panama",
-    code: "+507",
+    code: "507",
     time: "-13.00"
   },
   {
     name_zh: "巴布亚新几内亚",
     name: "Papua New Guinea",
-    code: "+675",
+    code: "675",
     time: "2.00"
   },
   {
     name_zh: "巴拉圭",
     name: "Paraguay",
-    code: "+595",
+    code: "595",
     time: "-12.00"
   },
   {
     name_zh: "秘鲁",
     name: "Peru",
-    code: "+51",
+    code: "51",
     time: "-13.00"
   },
   {
     name_zh: "菲律宾",
     name: "Philippines",
-    code: "+63",
+    code: "63",
     time: "0.00"
   },
   {
     name_zh: "波兰",
     name: "Poland",
-    code: "+48",
+    code: "48",
     time: "-7.00"
   },
   {
     name_zh: "葡萄牙",
     name: "Portugal",
-    code: "+351",
+    code: "351",
     time: "-8.00"
   },
   {
     name_zh: "巴基斯坦",
     name: "Pakistan",
-    code: "+92",
+    code: "92",
     time: "-2.30"
   },
   {
     name_zh: "波多黎各(美)",
     name: "Puerto Rico",
-    code: "+1787",
+    code: "1787",
     time: "-12.00"
   },
   {
     name_zh: "卡塔尔",
     name: "Qatar",
-    code: "+974",
+    code: "974",
     time: "-5.00"
   },
   {
     name_zh: "留尼汪岛",
     name: "Reunion I.",
-    code: "+262",
+    code: "262",
     time: "-4.00"
   },
   {
     name_zh: "罗马尼亚",
     name: "Romania",
-    code: "+40",
+    code: "40",
     time: "-6.00"
   },
   {
     name_zh: "俄罗斯",
     name: "Russia",
-    code: "+7",
+    code: "7",
     time: "-5.00"
   },
   {
     name_zh: "卢旺达",
     name: "Rwanda",
-    code: "+250",
+    code: "250",
     time: "-6.00"
   },
   {
     name_zh: "东萨摩亚(美)",
     name: "Samoa,Eastern",
-    code: "+684",
+    code: "684",
     time: "-19.00"
   },
   {
     name_zh: "西萨摩亚",
     name: "Samoa,Western",
-    code: "+685",
+    code: "685",
     time: "-19.00"
   },
   {
     name_zh: "圣马力诺",
     name: "San.Marino",
-    code: "+378",
+    code: "378",
     time: "-7.00"
   },
   {
     name_zh: "圣皮埃尔岛及密克隆岛",
     name: "San.Pierre And Miquelon I.",
-    code: "+508",
+    code: "508",
     time: "-2.00"
   },
   {
     name_zh: "圣多美和普林西比",
     name: "San.Tome And Principe",
-    code: "+239",
+    code: "239",
     time: "-8.00"
   },
   {
     name_zh: "沙特阿拉伯",
     name: "Saudi Arabia",
-    code: "+966",
+    code: "966",
     time: "-5.00"
   },
   {
     name_zh: "塞内加尔",
     name: "Senegal",
-    code: "+221",
+    code: "221",
     time: "-8.00"
   },
   {
     name_zh: "塞舌尔",
     name: "Seychelles",
-    code: "+248",
+    code: "248",
     time: "-4.00"
   },
   {
     name_zh: "新加坡",
     name: "Singapore",
-    code: "+65",
+    code: "65",
     time: "0.30"
   },
   {
     name_zh: "斯洛伐克",
     name: "Slovak",
-    code: "+421",
+    code: "421",
     time: "-7.00"
   },
   {
     name_zh: "斯洛文尼亚",
     name: "Slovenia",
-    code: "+386",
+    code: "386",
     time: "-7.00"
   },
   {
     name_zh: "所罗门群岛",
     name: "Solomon Is.",
-    code: "+677",
+    code: "677",
     time: "3.00"
   },
   {
     name_zh: "索马里",
     name: "Somali",
-    code: "+252",
+    code: "252",
     time: "-5.00"
   },
   {
     name_zh: "南非",
     name: "South Africa",
-    code: "+27",
+    code: "27",
     time: "-6.00"
   },
   {
     name_zh: "西班牙",
     name: "Spain",
-    code: "+34",
+    code: "34",
     time: "-8.00"
   },
   {
     name_zh: "斯里兰卡",
     name: "Sri Lanka",
-    code: "+94",
+    code: "94",
     time: "0.00"
   },
   {
     name_zh: "圣克里斯托弗和尼维斯",
     name: "St.Christopher and Nevis",
-    code: "+1809",
+    code: "1809",
     time: "-12.30"
   },
   {
     name_zh: "圣赫勒拿",
     name: "St.Helena",
-    code: "+290",
+    code: "290",
     time: "-8.00"
   },
   {
     name_zh: "圣卢西亚",
     name: "St.Lucia",
-    code: "+1758",
+    code: "1758",
     time: "-12.00"
   },
   {
     name_zh: "圣文森特岛(英)",
     name: "St.Vincent I.",
-    code: "+1784",
+    code: "1784",
     time: "-12.00"
   },
   {
     name_zh: "苏丹",
     name: "Sudan",
-    code: "+249",
+    code: "249",
     time: "-6.00"
   },
   {
     name_zh: "苏里南",
     name: "Suriname",
-    code: "+597",
+    code: "597",
     time: "-11.30"
   },
   {
     name_zh: "斯威士兰",
     name: "Swaziland",
-    code: "+268",
+    code: "268",
     time: "-6.00"
   },
   {
     name_zh: "瑞典",
     name: "Sweden",
-    code: "+46",
+    code: "46",
     time: "-7.00"
   },
   {
     name_zh: "瑞士",
     name: "Switzerland",
-    code: "+41",
+    code: "41",
     time: "-7.00"
   },
   {
     name_zh: "叙利亚",
     name: "Syria",
-    code: "+963",
+    code: "963",
     time: "-6.00"
   },
   {
     name_zh: "塔吉克斯坦",
     name: "Tajikistan",
-    code: "+992",
+    code: "992",
     time: "-5.00"
   },
   {
     name_zh: "坦桑尼亚",
     name: "Tanzania",
-    code: "+255",
+    code: "255",
     time: "-5.00"
   },
   {
     name_zh: "泰国",
     name: "Thailand",
-    code: "+66",
+    code: "66",
     time: "-1.00"
   },
   {
     name_zh: "阿拉伯联合酋长国",
     name: "The United Arab Emirates",
-    code: "+971",
+    code: "971",
     time: "-5.00"
   },
   {
     name_zh: "多哥",
     name: "Togo",
-    code: "+228",
+    code: "228",
     time: "-8.00"
   },
   {
     name_zh: "托克劳群岛(新)",
     name: "Tokelau Is.",
-    code: "+690",
+    code: "690",
     time: "-19.00"
   },
   {
     name_zh: "汤加",
     name: "Tonga",
-    code: "+676",
+    code: "676",
     time: "5.00"
   },
   {
     name_zh: "特立尼达和多巴哥",
     name: "Trinidad and Tobago",
-    code: "+1809",
+    code: "1809",
     time: "-12.00"
   },
   {
     name_zh: "突尼斯",
     name: "Tunisia",
-    code: "+216",
+    code: "216",
     time: "-7.00"
   },
   {
     name_zh: "土耳其",
     name: "Turkey",
-    code: "+90",
+    code: "90",
     time: "-6.00"
   },
   {
     name_zh: "土库曼斯坦",
     name: "Turkmenistan",
-    code: "+993",
+    code: "993",
     time: "-5.00"
   },
   {
     name_zh: "特克斯和凯科斯群岛",
     name: "Turks and Caicos Is.",
-    code: "+1809",
+    code: "1809",
     time: "-13.00"
   },
   {
     name_zh: "图瓦卢",
     name: "Tuvalu",
-    code: "+688",
+    code: "688",
     time: "4.00"
   },
   {
     name_zh: "乌干达",
     name: "Uganda",
-    code: "+256",
+    code: "256",
     time: "-5.00"
   },
   {
     name_zh: "乌克兰",
     name: "Ukraine",
-    code: "+380",
+    code: "380",
     time: "-5.00"
   },
   {
     name_zh: "英国",
     name: "United Kingdom",
-    code: "+44",
+    code: "44",
     time: "-8.00"
   },
   {
     name_zh: "乌拉圭",
     name: "Uruguay",
-    code: "+598",
+    code: "598",
     time: "-10.30"
   },
   {
     name_zh: "乌兹别克斯坦",
     name: "Uzbekistan",
-    code: "+998",
+    code: "998",
     time: "-5.00"
   },
   {
     name_zh: "瓦努阿图",
     name: "Vanuatu",
-    code: "+678",
+    code: "678",
     time: "3.00"
   },
   {
     name_zh: "梵蒂冈",
     name: "Vatican",
-    code: "+379",
+    code: "379",
     time: "-7.00"
   },
   {
     name_zh: "委内瑞拉",
     name: "Venezuela",
-    code: "+58",
+    code: "58",
     time: "-12.30"
   },
   {
     name_zh: "越南",
     name: "Vietnam",
-    code: "+84",
+    code: "84",
     time: "-1.00"
   },
   {
     name_zh: "维尔京群岛(英)",
     name: "Virgin Is.",
-    code: "+1809",
+    code: "1809",
     time: "-12.00"
   },
   {
     name_zh: "维尔京群岛和圣罗克伊",
     name: "Virgin Is. and St.Croix I.",
-    code: "+1809",
+    code: "1809",
     time: "0.00"
   },
   {
     name_zh: "威克岛(美)",
     name: "Wake I.",
-    code: "+1808",
+    code: "1808",
     time: "4.00"
   },
   {
     name_zh: "瓦里斯和富士那群岛",
     name: "Wallis And Futuna Is.",
-    code: "+681",
+    code: "681",
     time: "4.00"
   },
   {
     name_zh: "西撒哈拉",
     name: "Western sahara",
-    code: "+967",
+    code: "967",
     time: "0.00"
   },
   {
     name_zh: "也门",
     name: "Yemen",
-    code: "+967",
+    code: "967",
     time: "-5.00"
   },
   {
     name_zh: "南斯拉夫",
     name: "Yugoslavia",
-    code: "+381",
+    code: "381",
     time: "-7.00"
   },
   {
     name_zh: "扎伊尔",
     name: "Zaire",
-    code: "+243",
+    code: "243",
     time: "-7.00"
   },
   {
     name_zh: "赞比亚",
     name: "Zambia",
-    code: "+260",
+    code: "260",
     time: "-6.00"
   },
   {
     name_zh: "桑给巴尔",
     name: "Zanzibar",
-    code: "+259",
+    code: "259",
     time: "0.00"
   },
   {
     name_zh: "津巴布韦",
     name: "Zimbabwe",
-    code: "+263",
+    code: "263",
     time: "-6.00"
   }
 ]

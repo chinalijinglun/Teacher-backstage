@@ -124,7 +124,7 @@ export default {
 			// })
 			const filter = this.getFilters()
 			return teacherGet(filter, {
-				page: 1
+				page: this.page
 			}).then(resp => {
 				this.tableData = resp.data.objects;
 				this.total = resp.data.num_results;
@@ -231,7 +231,10 @@ export default {
 				op: 'eq',
 				val: 'IN_FORCE'
 			})
-			return {filters};
+			return {
+				filters,
+				order_by: [{"field": "updated_at", "direction": "desc"}]
+			};
 		},
 		toSign(row) {
 			this.$router.push({

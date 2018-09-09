@@ -5,7 +5,7 @@
       text-color="#fff" unique-opened>
       <el-submenu v-for="(item,index) in menulist" :index='index+""' :key='index'>
         <template slot="title">{{item.name}}</template>
-        <el-menu-item-group v-for="(items,subindex) in item.children" :key='subindex'>
+        <el-menu-item-group v-for="(items,subindex) in item.children" :key="index + '-' +subindex">
           <el-menu-item :index='subindex+""' @click="$router.push(items.parent_url + '/' + items.url)" class="nav-link">{{items.menu_name_zh}}</el-menu-item>
         </el-menu-item-group>
       </el-submenu>

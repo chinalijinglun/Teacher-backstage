@@ -80,8 +80,8 @@
         </el-table-column>
         <el-table-column fixed="right" label="操作" style="width: 15%;">
           <template slot-scope="scope">
-            <el-button size="mini" v-if="new Date(scope.row.end)<=new Date()">回放</el-button>
-            <el-button size="mini" v-if="new Date(scope.row.end)>new Date()">进入教室</el-button>
+            <el-button size="mini" @click="toRoom(scope.row.course_schedule_id)" v-if="new Date(scope.row.end)<=new Date()">回放</el-button>
+            <el-button size="mini" @click="toRoom(scope.row.course_schedule_id)" v-if="new Date(scope.row.end)>new Date()">进入教室</el-button>
           </template>
         </el-table-column>
       </el-table>
@@ -125,6 +125,15 @@
       this.query();
     },
     methods: {
+      toRoom(id) {
+
+        this.$router.push({
+          path: '/room',
+          query: {
+            id
+          }
+        })
+      },
       handleCurrentChange(val) {
         this.page_no = val;
         this.query();
