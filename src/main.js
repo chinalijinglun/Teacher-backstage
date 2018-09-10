@@ -9,9 +9,11 @@ import axios from 'axios';
 import selfComponents from './components';
 import utils from './utils';
 import store from './store';
+import api from './api';
 
 Vue.config.productionTip = false;
 Vue.prototype.axios = axios;
+Vue.prototype.$api = api;
 
 Vue.use(ElementUI);
 Vue.use(selfComponents);

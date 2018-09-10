@@ -6,6 +6,7 @@ export const authSmsverifyPost = form => baseAxios.post('/auth/smsverify',form);
 export const authEmailverifyPost = form => baseAxios.post('/auth/emailverify',form);
 
 export const authLoginPost = form => baseAxios.post('/auth/login',form).then(resp => {
+  console.log('success1')
   store.commit('auth/setUserName', form.username);
   store.commit('auth/setAuthorization', resp.data.Authorization);
   store.commit('auth/setUserId', resp.data.id);

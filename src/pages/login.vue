@@ -137,12 +137,13 @@ export default {
 		onLogin() {
 			this.$refs.loginForm.validate(valid => {
 				if(valid) {
-					authLoginPost(this.loginForm).then(resp => {
-						this.$message({
-							message: '登录成功！',
-							type: 'success'
-						})
-						this.$router.push('/main');
+					this.$api.dispatch('authLoginPost', this.loginForm).then(resp => {
+  					console.log('success2')
+						// this.$message({
+						// 	message: '登录成功！',
+						// 	type: 'success'
+						// })
+						// this.$router.push('/main');
 					});
 				}
 			});
