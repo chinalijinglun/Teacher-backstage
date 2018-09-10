@@ -12,7 +12,7 @@ class ApiShell {
       return Promise.reject(`Api named ${name} dose not exist`);
     }
     const api = this.apiMap[name];
-    const chain = [api(config), undefined];
+    const chain = [api, undefined];
     const promise = Promise.resolve(config);
     this.interaptors.request.forEach(item => {
       chain.unshift(...item);
