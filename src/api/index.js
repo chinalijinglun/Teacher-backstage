@@ -7,10 +7,12 @@ const apiShell = new ApiShell({
     ...auth
   }
 })
-apiShell.addRequestInteraptor(function() {
+apiShell.addRequestInteraptor(function(config) {
   console.log('pre fetch')
+  return config;
 })
-apiShell.addReponseInteraptor(function() {
+apiShell.addResponseInteraptor(function(resp) {
   console.log('after fetch')
+  return resp
 })
 export default apiShell;
