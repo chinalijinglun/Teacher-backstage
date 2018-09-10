@@ -10,4 +10,7 @@ const apiShell = new ApiShell({
 apiShell.addRequestInteraptor(function() {
   console.log('pre fetch')
 })
+apiShell.addReponseInteraptor(function() {
+  console.log('after fetch')
+})
 export default apiShell;
