@@ -31,7 +31,7 @@
               <el-row class="table-btn-row" v-if="scope.row.schedule_type !== 'CANCEL' && scope.row.schedule_type !== 'TROUBLE_CLASS'">
                 <el-button size="mini" v-if="scope.row.state !== 3" @click="toRoom(scope.row.id)">进入教室</el-button>
                 <el-button size="mini" v-if="scope.row.state === 3" @click="toRoom(scope.row.id)">回放</el-button>
-                <el-button size="mini" @click="seeCourseWare(scope.row)">课件管理</el-button>
+                <el-button size="mini" @click="seeCourseWare(scope.row.id)">课件管理</el-button>
                 <!--未上课-->
                 <!--已上课-->
               </el-row>
@@ -74,7 +74,7 @@
 		primaryTableName="course_schedule" 
 		:actionEventType="1" />
     <add-schedule :visible.sync="addScheduleShow" :id="form.course_id" :row="curRow"></add-schedule>
-    <course-ware :visible.sync="courseWareShow" :id="form.course_id" :row="curRow"></course-ware>
+    <course-ware :visible.sync="courseWareShow" :id="curId"></course-ware>
   </el-row>
 </template>
 <script>
@@ -118,6 +118,7 @@
         addScheduleShow: false,
         courseWareShow: false,
         curRow: {},
+        curId: '',
         modifyType: ''
       };
     },
@@ -126,8 +127,8 @@
       this.query();
     },
     methods: {
-      seeCourseWare(row) {
-        this.curRow = row;
+      seeCourseWare(curId) {
+        this.curId = curId;
         this.$nextTick(_=>{this.courseWareShow = true;})
       },
       toRoom(id) {

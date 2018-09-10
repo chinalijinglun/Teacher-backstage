@@ -13,6 +13,9 @@
             <el-form-item label="教师姓名：">
               <el-input size="mini" v-model="form.teacher_name" placeholder="" type="text" class="placehold" />
             </el-form-item>
+            <el-form-item label="学生姓名：">
+              <el-input size="mini" v-model="form.student_name" placeholder="" type="text" class="placehold" />
+            </el-form-item>
             <el-form-item label="上课时间：">
               <el-date-picker size="mini" v-model="form.class_at" placeholder="上课时间"></el-date-picker>
             </el-form-item>
@@ -27,9 +30,9 @@
             </el-form-item>
             <el-form-item label="课件：">
               <el-select size="mini" v-model="form.courseware_state" name="" id="">
-                <el-option value="">所有状态</el-option>
-                <el-option :value="1">已上传</el-option>
-                <el-option :value="0">未上传</el-option>
+                <el-option value="" label="所有状态"></el-option>
+                <el-option value="1" label="已上传"></el-option>
+                <el-option value="0" label="未上传"></el-option>
               </el-select>
             </el-form-item>
           </el-row>
@@ -43,8 +46,7 @@
       <el-table :data="tableData" style="width: 100%;margin-top:20px;">
         <el-table-column fixed prop="id" label="编号">
         </el-table-column>
-        <el-table-column label="试讲课程名称">
-          <template slot-scope="scope">试听课程</template>
+        <el-table-column label="试讲课程名称" prop="course_name">
         </el-table-column>
         <el-table-column prop="teacher_name" label="教师姓名">
         </el-table-column>
@@ -54,17 +56,15 @@
         </el-table-column>
         <el-table-column prop="coursewareState" label="课件">
         </el-table-column>
-        <el-table-column prop="courseStateText" label="类型">
-        </el-table-column>
         <el-table-column prop="state_text" label="状态">
         </el-table-column>
         <el-table-column fixed="right" label="操作" width="220px">
           <template slot-scope="scope">
             <template v-if="scope.row.course_schedule_state !== 'CANCEL'">
               <el-row class="table-btn-row" v-if="scope.row.course_schedule_state !== 'CANCEL'">
-                <el-button size="mini" v-if="scope.row.state !== 3">进入教室</el-button>
-                <el-button size="mini" v-if="scope.row.state === 3">回放</el-button>
-                <el-button size="mini">课件管理</el-button>
+                <el-button size="mini" @click="toRoom(scope.row.course_schedule_id)" v-if="scope.row.state !== 3">进入教室</el-button>
+                <el-button size="mini" @click="toRoom(scope.row.course_schedule_id)" v-if="scope.row.state === 3">回放</el-button>
+                <el-button size="mini" @click="seeCourseWare(scope.row.course_schedule_id)">课件管理</el-button>
                 <!--未上课-->
                 <!--已上课-->
               </el-row>
@@ -104,11 +104,13 @@
 		:afterState="$COURSE_SCHEDULE_STATE_NUMBER[modifyType]" 
 		primaryTableName="course_schedule" 
 		:actionEventType="1" />
+    <course-ware :visible.sync="courseWareShow" :id="curId"></course-ware>
   </div>
 </template>
 <script>
   import editTime from '@/components/course/dialog/editTime';
   import reasonDialog from '@/components/course/dialog/reasonDialog';
+  import courseWare from '@/components/course/dialog/courseWare';
   import {
     studentTryout
   } from '@/api/course';
@@ -133,6 +135,7 @@
   export default {
     data() {
       return {
+        courseWareShow: false,
         tableData: [],
         total: 0,
         form: {
@@ -141,12 +144,14 @@
           teacher_name: '',
           class_at: '',
           course_schedule_state: '',
-          courseware_state: ''
+          courseware_state: '',
+          student_name: ''
         },
         visible: false,
         reasonVisible: false,
         reasonReviewShow: false,
         curRow: {},
+        curId: '',
         modifyType: ''
       }
     },
@@ -154,6 +159,14 @@
       this.query();
     },
     methods: {
+      toRoom(id) {
+        this.$router.push({
+          path: '/room',
+          query: {
+            id
+          }
+        })
+      },
       toHomework(row) {
         this.$router.push({
           path:'/course/scheduleHomework',
@@ -219,6 +232,10 @@
           this.total = resp.data.num_results;
         })
       },
+      seeCourseWare(curId) {
+        this.curId = curId;
+        this.$nextTick(_=>{this.courseWareShow = true;})
+      },
       modifyTime(row) {
         this.curRow = row;
         this.$nextTick(_=>{
@@ -262,7 +279,8 @@
     },
     components: {
       editTime,
-      reasonDialog
+      reasonDialog,
+      courseWare
     }
   }
 </script>

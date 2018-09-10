@@ -31,11 +31,11 @@ export default {
       coursewareLs: []
     }
   },
-  props: ['row', 'id'],
+  props: ['id'],
   methods: {
     handlerOpen() {
-      const filter = this.$json2filter({course_schedule_id: [this.row.id]})
-      coursewareBareGet(filter).then(resp => {
+      const filter = this.$json2filter({course_schedule_id: [this.id]})
+      coursewareBareGet(filter, {page: 1}).then(resp => {
         this.coursewareLs = resp.data.objects
       })
     },
