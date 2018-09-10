@@ -138,12 +138,11 @@ export default {
 			this.$refs.loginForm.validate(valid => {
 				if(valid) {
 					this.$api.dispatch('authLoginPost', this.loginForm).then(resp => {
-  					console.log('success2')
-						// this.$message({
-						// 	message: '登录成功！',
-						// 	type: 'success'
-						// })
-						// this.$router.push('/main');
+						this.$message({
+							message: '登录成功！',
+							type: 'success'
+						})
+						this.$router.push('/main');
 					});
 				}
 			});
