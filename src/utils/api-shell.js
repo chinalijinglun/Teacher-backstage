@@ -13,7 +13,7 @@ class ApiShell {
     }
     const api = this.apiMap[name];
     const chain = [api, undefined];
-    const promise = Promise.resolve(config);
+    let promise = Promise.resolve(config);
     this.interaptors.request.forEach(item => {
       chain.unshift(...item);
     });
@@ -22,7 +22,7 @@ class ApiShell {
     })
 
     while(chain.length) {
-      promise.then(chain.shift(), chain.shift());
+      promise = promise.then(chain.shift(), chain.shift());
     }
     return promise;
   }
