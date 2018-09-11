@@ -119,7 +119,10 @@ import {
 } from '@/api/action_event';
 import {
 	teacherPutByTeacherid
-} from '@/api/teacher'
+} from '@/api/teacher';
+import {
+	mapState
+} from 'vuex';
 export default {
   data() {
     return {
@@ -144,6 +147,11 @@ export default {
 	},
 	created() {
 		this.query()
+	},
+	computed: {
+		...mapState({
+			userId: state => state.auth.userId
+		})
 	},
   methods: {
 		query() {
@@ -174,6 +182,7 @@ export default {
 			interviewPutByinterviewid(this.interview_id, {
 				state: 6,
 				result: '',
+				interviewer_id: this.userId,
 				set_time: JSON.stringify(timeRange)
 			}).then(resp => {
 				this.$message.success('预约成功！');
