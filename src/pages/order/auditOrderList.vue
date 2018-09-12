@@ -55,10 +55,6 @@
             label="课程包名称">
           </el-table-column>
           <el-table-column
-            prop="order_amount"
-            label="课节数">
-          </el-table-column>
-          <el-table-column
             label="订单类型">
             <template slot-scope="scope">
               {{ $ORDER_TYPE[scope.row.order_type] }}
