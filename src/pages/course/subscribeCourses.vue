@@ -306,8 +306,8 @@
         const [hourEnd, minutesEnd] = this.dateEdit.end.split(':');
         const fmtStr = this.fmtRangeItem({year, month, day, hourStart, minutesStart, hourEnd, minutesEnd});
         this.tableData[index].edit = false;
-        this.tableData[index].date = fmtStr
-        this.tableData[index].datedetail = {fmtStr, year, month, day, hourStart, minutesStart, hourEnd, minutesEnd};
+        this.tableData[index].date = fmtStr;
+        this.tableData[index].dateDetail = {fmtStr, year, month, day, hourStart, minutesStart, hourEnd, minutesEnd};
         this.dateEdit.date = '';
         this.dateEdit.start = '';
         this.dateEdit.end = '';
@@ -324,7 +324,7 @@
           return item.check;
         });
         // 给一个初始值 排除当天
-        let dateTmp = this.$dateFactory(startTime.getDayStart().getTime()+1);
+        let dateTmp = this.$dateFactory(startTime.getDayStart().getTime());
         let list = [];
         let totalNum = this.totleNum;
         let tmpNum = this.totleNum;
