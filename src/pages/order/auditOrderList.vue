@@ -27,9 +27,9 @@
           <el-form-item label="状态：">
             <el-select v-model="form.payment_state" placeholder="请选择" size="mini">
               <el-option label="所有状态" value=""></el-option>
-              <el-option label="待审核" value="4"></el-option>
-              <el-option label="审核通过" value="5"></el-option>
-              <el-option label="审核驳回" value="6"></el-option>
+              <el-option label="申请退款" value="4"></el-option>
+              <el-option label="退款审核通过" value="5"></el-option>
+              <el-option label="退款审核驳回" value="6"></el-option>
               <el-option label="已退款" value="7"></el-option>
             </el-select>
           </el-form-item>
