@@ -68,7 +68,16 @@
       },
       getTeacher() {
         const filter = this.$json2filter({
-          'id|username|first_name|middle_name|last_name': this.queryStr
+          'id|username|first_name|middle_name|last_name': this.queryStr,
+          state: [
+            'CONTRACTOR',
+            'WAIT_FOR_TRAIN',
+            'TRAIN_PASS',
+            'TRAIN_ERROR',
+            'WORKING',
+            'NO_WORK',
+            'INVALID'
+          ]
         });
         return teacherGet(filter, {
           page: this.page
