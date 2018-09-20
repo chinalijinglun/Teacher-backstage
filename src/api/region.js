@@ -20,16 +20,18 @@ export const mangerStaffQuery = form => baseAxios.post('/manger/staff_query', fo
 
 export const getRegionByPid = (id) => regionBareGet(json2filter({pid: [id]}));
 
-export const getCountry = axios.get('/static/country.json').then(resp => resp.data.sort((a, b) => {
-  if(COUNTRY_IDS.indexOf(a.id) !== -1) {
-    return -1
-  } else if(COUNTRY_IDS.indexOf(b.id) !== -1) {
-    return 1
-  } else if(a.name < b.name) {
-    return -1
-  } else if(a.name === b.name) {
-    return 0
-  } else {
-    return 1
-  }
-}));
+export const getCountry = () => axios.get('/static/country.json').then(resp => {
+  return resp.data.sort((a, b) => {
+    if(COUNTRY_IDS.indexOf(a.id) !== -1) {
+      return -1
+    } else if(COUNTRY_IDS.indexOf(b.id) !== -1) {
+      return 1
+    } else if(a.name_zh < b.name_zh) {
+      return -1
+    } else if(a.name_zh === b.name_zh) {
+      return 0
+    } else {
+      return 1
+    }
+  })
+});

@@ -24,9 +24,11 @@ export default {
   },
 	methods: {
 		initData(form) {
-      channelBareGetById(form.channel_id).then(resp=>{
-        this.channel_name = resp.data.channel_name;
-      })
+      if(form.channel_id) {
+        channelBareGetById(form.channel_id).then(resp=>{
+          this.channel_name = resp.data.channel_name;
+        })
+      }
     }
 	}
 };

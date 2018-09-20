@@ -59,7 +59,7 @@
     methods: {
       onInit() {
         const [country, province, city] = this.value;
-        this.getCountry().then(data => {
+        this.getCountrys().then(data => {
           if(country) {
             this.form.country = country;
             this.getProvince(country).then(resp => {
@@ -73,7 +73,7 @@
           }
         })
       },
-      getCountry() {
+      getCountrys() {
         return getCountry().then(data => {
           this.countryLs = data;
           return data;
