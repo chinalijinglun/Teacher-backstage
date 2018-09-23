@@ -9,6 +9,9 @@
           <el-form-item label="学生姓名：">
             <el-input v-model="form.student_name" size="mini"></el-input>
           </el-form-item>
+          <el-form-item label="学生账号：">
+            <el-input v-model="form.account" size="mini"></el-input>
+          </el-form-item>
           <el-form-item label="年级：">
             <el-select v-model="form.gender" placeholder="请选择" size="mini">
               <el-option label="全部" value=""></el-option>
@@ -157,6 +160,7 @@
           student_id: '',
           student_name: '',
           enroll_type: '',
+          account: '',
           page: 1
         },
         totalCount: 0,
@@ -190,6 +194,7 @@
           student_id,
           student_name,
           enroll_type,
+          account,
           page
         } = this.form;
         const form = this.$deleteEmptyProps({
@@ -203,6 +208,7 @@
           parent_mobile,
           student_id,
           enroll_type,
+          account,
           student_name
         })
         mangerStudents({
