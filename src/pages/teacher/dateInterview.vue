@@ -95,7 +95,7 @@
 				</el-pagination>
 			</el-row>
 		</div>
-		<date-time-dialog :visible.sync="timeDialogShow" :id="interview_id" :isEdit="isEdit" @onSubmit="dateInterview"></date-time-dialog>
+		<date-time-dialog tips="面试时间不能小于30分钟，不能大于300分钟" :visible.sync="timeDialogShow" :id="interview_id" :isEdit="isEdit" @onSubmit="dateInterview"></date-time-dialog>
 		<order-reason-dialog :visible.sync="reasonDilogShow" @onSubmit="toWait"></order-reason-dialog>
 		<action-event-review 
 		:visible.sync="reasonReviewShow" 

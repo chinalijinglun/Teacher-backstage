@@ -7,6 +7,7 @@
     @close="handlerClose"
     :show-close="false">
     <div class="date-time-dialog">
+      <p class="tips">{{tips}}</p>
       <div class="time-item" v-for="(item, index) in form.timeLs" :key="index">
         <div class="item-date-picker">
           <el-date-picker
@@ -53,7 +54,7 @@
         }
       };
     },
-    props: ['id','isEdit'],
+    props: ['id','isEdit', 'tips'],
     methods: {
       open() {
         if(this.isEdit) {
@@ -98,6 +99,10 @@
   }
 </script>
 <style>
+  .tips {
+    font-size: 12px;
+    color: #999;
+  }
   .btn-container{
     text-align: center;
   }
