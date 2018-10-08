@@ -220,8 +220,12 @@
         }
       },
       query() {
+        const student_id = this.$route.query.student_id;
         const f = this.$deleteEmptyProps(this.form);
-        studentTryout(f).then(resp => {
+        studentTryout({
+          student_id,
+          ...f
+        }).then(resp => {
           this.tableData = resp.data.objects.map(item => ({
             ...item,
             ...this.stateFilter(item),

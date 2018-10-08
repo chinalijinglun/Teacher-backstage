@@ -60,7 +60,7 @@
 
 			<p> SECTION 3 – COMPENSATION</p>
 
-			<p> 3.1 Compensation. In consideration of all services to be rendered by Contractor to the Company, the Company shall pay to the Contractor the sum of ${{salary}} per hour worked as defined in Section 1.2. Said compensation shall be paid on a bi-weekly basis. (Ref. ATT 1)</p>
+			<p> 3.1 Compensation. In consideration of all services to be rendered by Contractor to the Company, the Company shall pay to the Contractor the sum of <span class="red-span">${{salary}}</span> per hour worked as defined in Section 1.2. Said compensation shall be paid on a bi-weekly basis. (Ref. ATT 1)</p>
 
 			<p> 3.2 Withholding; Other Benefits. Compensation paid pursuant to this Agreement shall not subject to the customary withholding of income taxes and other employment taxes. Contractor shall be solely responsible for reporting and paying any such taxes. The Company shall not provide Contractor with any coverage or participation in the Company’s accident and health insurance, life insurance, disability income insurance, medical expense reimbursement, wage continuation plans, or other fringe benefits provided to regular employees.</p>
 
@@ -135,5 +135,8 @@ p {
   margin: 0 auto;
   width: 120px;
   display: block;
+}
+.red-span{
+	color: red;
 }
 </style>
