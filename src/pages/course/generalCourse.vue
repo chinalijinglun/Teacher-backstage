@@ -130,9 +130,11 @@
         this.query();
       },
       query() {
+        const student_id = this.$route.query.student_id;
         const f = this.$deleteEmptyProps(this.form);
         return courseCommon({
           ...f,
+          student_id,
           page_limit: 10
         }).then(resp => {
           this.total = resp.data.num_results;

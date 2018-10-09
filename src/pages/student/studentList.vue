@@ -82,7 +82,7 @@
             label="学生姓名">
           </el-table-column>
           <el-table-column
-            prop="gender"
+            prop="grade"
             label="年级">
           </el-table-column>
           <el-table-column
