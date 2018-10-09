@@ -35,6 +35,7 @@ baseAxios.interceptors.response.use(resp => {
   }, 50)
   return resp;
 }, error => {
+  console.log(error)
   setTimeout(_ => {
     requestCount--;
     if (requestCount <= 0) {
@@ -50,7 +51,7 @@ baseAxios.interceptors.response.use(resp => {
       return Promise.reject(error);
     }
   } else {
-    Message.error('系统异常！');
+    return router.push('/login');
   }
   return Promise.reject(error);
 });
