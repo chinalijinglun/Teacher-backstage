@@ -67,6 +67,9 @@
         <el-table-column prop="interview_name" label="面试人" style="width: 10%;">
         </el-table-column>
         <el-table-column prop="start" label="面试时间" style="width: 10%;">
+          <template slot-scope="{row}">
+            {{ row.start | hasTime }}
+          </template>
         </el-table-column>
         <el-table-column prop="" label="课件" style="width: 15%;">
           <template slot-scope="scope">
