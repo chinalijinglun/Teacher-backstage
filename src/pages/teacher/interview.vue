@@ -26,8 +26,7 @@
               <el-form-item label="状态：">
                 <el-select v-model="form.state" placeholder="请选择" size="mini">
                   <el-option label="所有状态" value=""></el-option>
-                  <el-option label="有效" value="1"></el-option>
-                  <el-option label="无效" value="1"></el-option>
+                  <el-option v-for="(item, key) in INTERVIEW_STATUS_ENUMS" :key="key" :label="item" :value="key"></el-option>
                 </el-select>
               </el-form-item>
             </el-row>
@@ -66,7 +65,10 @@
         </el-table-column>
         <el-table-column prop="interview_name" label="面试人" style="width: 10%;">
         </el-table-column>
-        <el-table-column prop="start" label="面试时间" style="width: 10%;">
+        <el-table-column label="面试时间" style="width: 10%;">
+          <template slot-scope="{row}">
+            {{row.start | hasTime}}
+          </template>
         </el-table-column>
         <el-table-column prop="" label="课件" style="width: 15%;">
           <template slot-scope="scope">
@@ -103,11 +105,15 @@
   import {
     mangerThacherInterview
   } from '@/api/teacher'
+  import {
+    INTERVIEW_STATUS_ENUMS
+  } from '@/utils/enums'
   export default {
     data() {
       return {
         tableData: [],
         total: 0,
+        INTERVIEW_STATUS_ENUMS,
         startDate: null, //开始时间
         endDate: null, //结束时间
         form: {
@@ -126,7 +132,6 @@
     },
     methods: {
       toRoom(id) {
-
         this.$router.push({
           path: '/room',
           query: {

@@ -1817,3 +1817,18 @@ export const COURSE_SCHEDULE_STATE_NUMBER = {
 }
 
 
+export const INTERVIEW_STATUS_ENUMS = {
+  1: '待预约',
+  2: '未面试',
+  3: '已经面试',
+  4: '取消',
+  5: '未完成',
+  6: '等待答复',
+  7: '等待确认时间',
+  8: '待定',
+  9: '面试结果通过',
+  10: '面试结果失败',
+  98: '有效',
+  99: '无效'
+}
+

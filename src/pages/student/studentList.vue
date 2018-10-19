@@ -76,6 +76,13 @@
             prop="created_at"
             label="注册时间"
             width="180">
+            <template slot-scope="{row}">
+              {{row.created_at | hasTime}}
+            </template>
+          </el-table-column>
+          <el-table-column
+            prop="account_number"
+            label="学生账号">
           </el-table-column>
           <el-table-column
             prop="username"
