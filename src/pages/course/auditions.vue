@@ -160,12 +160,7 @@
     },
     methods: {
       toRoom(id) {
-        this.$router.push({
-          path: '/room',
-          query: {
-            id
-          }
-        })
+			  window.open(`#/room?id=${id}`)
       },
       toHomework(row) {
         this.$router.push({

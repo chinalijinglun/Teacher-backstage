@@ -129,13 +129,7 @@
     },
     methods: {
       toRoom(id) {
-
-        this.$router.push({
-          path: '/room',
-          query: {
-            id
-          }
-        })
+			  window.open(`#/room?id=${id}`)
       },
       handleCurrentChange(val) {
         this.page_no = val;
