@@ -104,6 +104,9 @@
 				<el-table-column fixed prop="id" label="ID" style="width: 10%;">
 				</el-table-column>
 				<el-table-column prop="created_at" label="注册时间" style="width: 10%;">
+					<template slot-scope="{row}">
+						{{row.created_at | hasTime}}
+					</template>
 				</el-table-column>
 				<el-table-column prop="username" label="教师姓名" style="width: 10%;">
 				</el-table-column>

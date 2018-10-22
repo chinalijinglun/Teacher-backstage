@@ -23,3 +23,5 @@ export const modifyScheduleType = form => baseAxios.post('/course/edit_course_sc
 
 // view_homework
 export const viewHomework = form => baseAxios.post('/manger/view_homework', form);
+// modifyInterviewTime
+export const modifyInterviewTime = form => baseAxios.post('/teacher/edit_interview', form);

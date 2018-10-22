@@ -80,10 +80,13 @@
             {{ $INTERVIEW[scope.row.integerview_state] }}
           </template>
         </el-table-column>
-        <el-table-column fixed="right" label="操作" style="width: 15%;">
+        <el-table-column fixed="right" label="操作" width="200px;">
           <template slot-scope="scope">
-            <el-button size="mini" @click="toRoom(scope.row.course_schedule_id)" v-if="new Date(scope.row.end)<=new Date()">回放</el-button>
-            <el-button size="mini" @click="toRoom(scope.row.course_schedule_id)" v-if="new Date(scope.row.end)>new Date()">进入教室</el-button>
+            <el-button size="mini" v-if="scope.row.integerview_state === 2" @click="modifyTime(scope.row)">修改时间</el-button>
+            <template v-if="scope.row.course_schedule_id">
+              <el-button size="mini" @click="toRoom(scope.row.course_schedule_id)" v-if="new Date(scope.row.end)<=new Date()">回放</el-button>
+              <el-button size="mini" @click="toRoom(scope.row.course_schedule_id)" v-if="new Date(scope.row.end)>new Date()">进入教室</el-button>
+            </template>
           </template>
         </el-table-column>
       </el-table>
@@ -97,7 +100,7 @@
         </el-pagination>
       </el-row>
     </div>
-
+    <edit-time :visible.sync="visible" :id="curRow.id" @onClose="query"></edit-time>
   </div>
 </template>
 
@@ -108,12 +111,15 @@
   import {
     INTERVIEW_STATUS_ENUMS
   } from '@/utils/enums'
+  import editTime from '@/components/teacher/editTime';
   export default {
     data() {
       return {
         tableData: [],
         total: 0,
         INTERVIEW_STATUS_ENUMS,
+        curRow: {},
+        visible: false,
         startDate: null, //开始时间
         endDate: null, //结束时间
         form: {
@@ -132,12 +138,7 @@
     },
     methods: {
       toRoom(id) {
-        this.$router.push({
-          path: '/room',
-          query: {
-            id
-          }
-        })
+			  window.open(`#/room?id=${id}`)
       },
       handleCurrentChange(val) {
         this.page_no = val;
@@ -153,8 +154,17 @@
           this.tableData = resp.data.objects;
           this.total = resp.data.num_results;
         })
+      },
+      modifyTime(row) {
+        this.curRow = row;
+        this.$nextTick(_=>{
+          this.visible = true;
+        })
       }
     },
+    components: {
+      editTime
+    }
   }
 </script>
 
