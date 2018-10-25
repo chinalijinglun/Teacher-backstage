@@ -34,7 +34,7 @@
 				</el-table-column>
 				<el-table-column prop="created_at" label="报名时间" style="width: 15%;">
 					<template slot-scope="{row}">
-						{{row.created_at}}
+						{{row.created_at | hasTime}}
 					</template>
 				</el-table-column>
 				<el-table-column prop="student_name" label="学生姓名" style="width: 10%;">
