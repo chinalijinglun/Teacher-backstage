@@ -44,6 +44,9 @@
 			<el-table-column prop="email" label="联系邮箱" style="width: 10%;">
 			</el-table-column>
 			<el-table-column prop="created_at" label="注册时间" style="width: 10%;">
+        <template slot-scope="{row}">
+          {{row.created_at | hasTime}}
+        </template>
 			</el-table-column>
 			<el-table-column label="状态" style="width: 15%;">
         <template slot-scope="scope">

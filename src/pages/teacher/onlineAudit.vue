@@ -53,6 +53,9 @@
 			<el-table-column prop="email" label="联系邮箱" style="width: 10%;">
 			</el-table-column>
 			<el-table-column prop="updated_at" label="操作时间" style="width: 10%;">
+        <template slot-scope="{row}">
+          {{row.updated_at | hasTime}}
+        </template>
 			</el-table-column>
 			<el-table-column label="状态" style="width: 15%;">
 				<template slot-scope="scope">

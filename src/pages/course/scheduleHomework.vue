@@ -24,6 +24,9 @@
         <el-table-column
           prop="created_at"
           label="上传时间">
+          <template slot-scope="{row}">
+            {{row.created_at | hasTime}}
+          </template>
         </el-table-column>
         <el-table-column label="操作">
           <template slot-scope="scope">

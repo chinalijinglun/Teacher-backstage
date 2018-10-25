@@ -53,6 +53,9 @@
 				<el-table-column prop="teacher_name" label="教师名称">
 				</el-table-column>
 				<el-table-column prop="created_at" label="课件上传时间">
+					<template slot-scope="{row}">
+						{{row.created_at | hasTime}}
+					</template>
 				</el-table-column>
 				<el-table-column label="状态">
 					<template slot-scope="scope">

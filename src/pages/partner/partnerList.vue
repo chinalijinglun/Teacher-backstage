@@ -64,6 +64,9 @@
           <el-table-column
             prop="created_at"
             label="加入时间">
+            <template slot-scope="{row}">
+              {{row.created_at | hasTime}}
+            </template>
           </el-table-column>
           <el-table-column
             label="状态">

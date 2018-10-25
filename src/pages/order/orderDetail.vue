@@ -76,6 +76,9 @@
         <el-table-column
           prop="created_at"
           label="时间">
+          <template slot-scope="{row}">
+            {{row.created_at | hasTime}}
+          </template>
         </el-table-column>
         <el-table-column
           prop="updated_by"
