@@ -43,7 +43,7 @@
           <el-table-column
             label="学生姓名">
             <template slot-scope="scope">
-              {{scope.row.first_name || ''}}
+              {{scope.row.name || ''}}
             </template>
           </el-table-column>
           <el-table-column
@@ -57,6 +57,9 @@
           <el-table-column
             prop="created_at"
             label="注册时间">
+            <template slot-scope="{row}">
+              {{row.created_at | hasTime}}
+            </template>
           </el-table-column>
           <el-table-column
             label="状态">

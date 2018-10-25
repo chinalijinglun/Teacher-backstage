@@ -73,7 +73,7 @@
 		:afterState="$COURSE_SCHEDULE_STATE_NUMBER[modifyType]" 
 		primaryTableName="course_schedule" 
 		:actionEventType="1" />
-    <add-schedule :visible.sync="addScheduleShow" :id="form.course_id" :row="curRow"></add-schedule>
+    <add-schedule :visible.sync="addScheduleShow" :id="form.course_id" :row="curRow" @onClose="query"></add-schedule>
     <course-ware :visible.sync="courseWareShow" :id="curId"></course-ware>
   </el-row>
 </template>

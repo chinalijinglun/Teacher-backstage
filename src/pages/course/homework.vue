@@ -41,7 +41,7 @@
 </template>
 <script>
   import {
-    homeworkBareGetById
+    homeworkBareGet
   } from '@/api/homework'
   export default {
     name: 'homework',
@@ -60,12 +60,14 @@
     },
     methods: {
       getHomeworkInfo(id) {
-        return homeworkBareGetById(id).then(resp => {
-          this.homeworkInfo.question_name = resp.data.question_name;
-          this.homeworkInfo.question_text = resp.data.question_text;
-          this.homeworkInfo.question_attachment_url = resp.data.question_attachment_url?JSON.parse(resp.data.question_attachment_url):[];
-          if(resp.data.evaluation) {
-            this.homeworkInfo.evaluation = JSON.parse(resp.data.evaluation)
+        const filter = this.$json2filter({homework_id: id})
+        return homeworkBareGet(filter).then(resp => {
+          const homework = resp.data.objects[0]
+          this.homeworkInfo.question_name = homework.question_name;
+          this.homeworkInfo.question_text = homework.question_text;
+          this.homeworkInfo.question_attachment_url = homework.question_attachment_url?JSON.parse(homework.question_attachment_url):[];
+          if(homework.evaluation) {
+            this.homeworkInfo.evaluation = JSON.parse(homework.evaluation)
           }
         })
       }
