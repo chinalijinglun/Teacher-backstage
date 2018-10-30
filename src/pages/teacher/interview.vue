@@ -100,7 +100,7 @@
         </el-pagination>
       </el-row>
     </div>
-    <edit-time :visible.sync="visible" :id="curRow.id" @onClose="query"></edit-time>
+    <edit-time :visible.sync="visible" :id="curRow.interview_id" @onClose="query"></edit-time>
   </div>
 </template>
 
