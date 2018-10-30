@@ -80,7 +80,7 @@
             {{ $INTERVIEW[scope.row.integerview_state] }}
           </template>
         </el-table-column>
-        <el-table-column fixed="right" label="操作" width="200px;">
+        <el-table-column fixed="right" label="操作" width="250px;">
           <template slot-scope="scope">
             <el-button size="mini" v-if="scope.row.integerview_state === 2" @click="modifyTime(scope.row)">修改时间</el-button>
             <template v-if="scope.row.course_schedule_id">
