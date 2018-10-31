@@ -110,10 +110,12 @@ export default {
 	},
   methods: {
     handleSizeChange(val) {
-      console.log(`每页 ${val} 条`);
+			this.form.page_limit = val
+			this.query()
     },
     handleCurrentChange(val) {
-      console.log(`当前页: ${val}`);
+			this.form.page_no = val
+			this.query()
 		},
 		audit(id) {
 			this.$router.push({
