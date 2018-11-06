@@ -37,51 +37,6 @@
       </div>
     </el-main>
   </el-container>
-  <div>
-    <el-table :data="tableData" style="width: 100%;margin-top:20px;">
-      <el-table-column fixed prop="id" label="编号" style="width: 10%;">
-      </el-table-column>
-      <el-table-column prop="course_name" label="课程包名称" style="width: 15%;">
-      </el-table-column>
-      <el-table-column prop="teacher_name" label="教师" style="width: 10%;">
-      </el-table-column>
-      <el-table-column prop="student_name" label="学生" style="width: 10%;">
-      </el-table-column>
-      <el-table-column prop="start" label="上课时间" width="200">
-        <template slot-scope="scope">
-          {{scope.row | courseTime}}
-        </template>
-      </el-table-column>
-      <el-table-column prop="courseware_num" label="课程进度" style="width: 10%;">
-        <template slot-scope="scope">
-          {{`${scope.row.finish}/${scope.row.classes_number}`}}
-        </template>
-      </el-table-column>
-      <el-table-column prop="course_schedule_state" label="课程包状态" style="width: 10%;">
-        <template slot-scope="scope">
-          {{scope.row | stateZh}}
-        </template>
-      </el-table-column>
-      <el-table-column fixed="right" label="操作" width="250px">
-        <template slot-scope="scope">
-          <el-button size="mini" v-if="!scope.row.start" @click="toSetSchedule(scope.row.id)">排课</el-button>
-          <template  v-else>
-            <el-button size="mini" @click="toCourseDetail(scope.row.id)">查看详情</el-button>
-            <el-button size="mini" @click="addStudent(scope.row.id)">增加学生</el-button>
-          </template>
-        </template>
-      </el-table-column>
-    </el-table>
-    <el-row class="block">
-      <el-pagination
-        @current-change="handleCurrentChange"
-        :current-page="form.page_no"
-        :page-size="10"
-        layout="total, prev, pager, next, jumper"
-        :total="total">
-      </el-pagination>
-    </el-row>
-  </div>
 </div>
 </template>
 <script>

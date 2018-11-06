@@ -18,10 +18,6 @@
           label="作业名称">
         </el-table-column>
         <el-table-column
-          prop="question_text"
-          label="描述">
-        </el-table-column>
-        <el-table-column
           prop="created_at"
           label="上传时间">
           <template slot-scope="{row}">
