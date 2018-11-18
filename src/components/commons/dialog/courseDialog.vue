@@ -15,6 +15,11 @@
       <el-table-column label="课程名" property="course_name" width="200">
       </el-table-column>
       <el-table-column property="course_name_zh" label="课程中文名"></el-table-column>
+      <el-table-column label="教师姓名">
+        <template slot-scope="{row}">
+          {{row.primary_teacher | teacherName}}
+        </template>
+      </el-table-column>
       <el-table-column label="操作">
         <template slot-scope="scope">
           <el-button type="text" size="small" @click="choseCourse(scope.row)">选择</el-button>

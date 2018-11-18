@@ -65,7 +65,7 @@
 				</el-table-column>
 				<el-table-column label="状态">
           <template slot-scope="scope">
-            {{{98: '有效', 99: '无效'}[scope.row.course_state]}}
+            {{{98: '有效', 99: '无效'}[scope.row.state]}}
           </template>
 				</el-table-column>
 				<el-table-column prop="updated_by" label="创建人">

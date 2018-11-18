@@ -134,7 +134,8 @@
           }
           if(resp.data.primary_teacher_id) {
             teacherGetBareByTeacherid(resp.data.primary_teacher_id).then(resp => {
-              this.form.teacher_name = resp.data.username;
+              const teacher = resp.data;
+              this.form.teacher_name = [teacher.first_name, teacher.middle_name, teacher.last_name].filter(item => item).join(' ')
             })
           }
           this.$nextTick(_=>{
@@ -178,7 +179,7 @@
       },
       handlerChoseTeacher(teacher) {
         this.form.primary_teacher_id = teacher.id;
-        this.form.teacher_name = teacher.username;
+        this.form.teacher_name = [teacher.first_name, teacher.middle_name, teacher.last_name].filter(item => item).join(' ')
       },
       addCourse(form) {
         return coursePost(form).then(resp => {
