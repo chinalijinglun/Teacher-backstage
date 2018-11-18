@@ -58,6 +58,8 @@
 				</el-table-column>
 				<el-table-column prop="id" label="课程包ID">
 				</el-table-column>
+				<el-table-column prop="teacher_name" label="教师姓名">
+				</el-table-column>
 				<el-table-column label="类型">
           <template slot-scope="scope">
             {{{1:'全部',2:'线上课程',3:'公开课'}[scope.row.course_type]}}
