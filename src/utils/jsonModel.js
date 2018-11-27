@@ -4,7 +4,7 @@ import {
 } from './date';
 export class DateTimeVo {
   constructor({date, timeRange} = { date: '', timeRange: null }) {
-    this.date = date&&new Date(date);
+    this.date = date && dateFmt(new Date(date), 'yyyy-MM-dd');
     this.timeRange = timeRange;
   }
   valid() {
