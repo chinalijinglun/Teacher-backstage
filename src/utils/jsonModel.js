@@ -5,7 +5,10 @@ import {
 export class DateTimeVo {
   constructor({date, timeRange} = { date: '', timeRange: null }) {
     this.date = date && dateFmt(new Date(date), 'yyyy-MM-dd');
-    this.timeRange = timeRange;
+    this.timeRange = (timeRange || []).map(item => {
+      const time = new Date(item).toISOString().split('T')[1]
+      return new Date(this.date + 'T' + time);
+    });
   }
   valid() {
     if(!this.date) {
