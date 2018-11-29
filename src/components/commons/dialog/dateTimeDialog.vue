@@ -80,7 +80,7 @@
           }
         }
         if(valid) {
-          this.$emit('onSubmit',this.form.timeLs);
+          this.$emit('onSubmit',this.form.timeLs.map(item => new DateTimeVo(item)));
         } else {
           this.$message.error(msg);
         }
